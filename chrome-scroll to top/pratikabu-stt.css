@@ -1,0 +1,15 @@
+#pratikabuSTTArrowUp {
+    position: fixed;
+    height: auto;
+    width: auto;
+    right: 10px;
+    top: 10px;
+    z-index: 2147483647;
+    cursor: pointer;
+    display: block;
+    opacity: .50;
+}
+
+#pratikabuSTTArrowUp:hover {
+    opacity: .80;
+}

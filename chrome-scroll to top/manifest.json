@@ -1,0 +1,23 @@
+{
+  "name": "Scroll To Top",
+  "version": "1.0",
+  "manifest_version": 2,
+  "description": "A plugin to scroll to top of a window.",
+  "homepage_url": "http://pratikabu.users.sourceforge.net",
+  
+  "icons": {"16": "icons/pratikabu-stt-16.png",
+      "48": "icons/pratikabu-stt-48.png",
+      "128": "icons/pratikabu-stt-128.png"},
+	
+  "content_scripts": [
+    { "css": [ "pratikabu-stt.css" ], "matches": ["<all_urls>"], "js": ["content_script.js"], "all_frames": true }
+  ],
+  
+  "permissions": [
+	"tabs"
+  ],
+  
+  "web_accessible_resources": [
+    "icons/pratikabu-stt-48.png"
+  ]
+}
