@@ -1,0 +1,45 @@
+<html>
+	<head>
+		<title>Scroll To Top - Settings</title>
+		<link rel="stylesheet" href="options.css" type="text/css">
+		<script type="text/javascript" src="options.js"></script>
+	</head>
+	<body>
+		<div align="center" width="100%" class="myFonts">
+			<span class="myHeader" title="Scroll To Top">Scroll To Top</span>
+			<table cellSpacing="15px" class="tableClass">
+				<tr>
+					<td align="center" colspan="2">Choose the location of the Icon :</td>
+				</tr>
+				<tr>
+					<td align="right">Vertical Location:</td>
+					<td>
+						<select id="imgVerticalLocation" class="mySelect">
+							<option value="b">Bottom</option>
+							<option value="t">Top</option>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td align="right">Horizontal Location:</td>
+					<td>
+						<select id="imgHorizontalLocation" class="mySelect">
+							<option value="r">Right</option>
+							<option value="l">Left</option>
+						</select>
+					</td>
+				</tr>
+			</table>
+			<table cellSpacing="15px" class="tableClass">
+				<tr>
+					<td align="center">Choose Icon Size :</td>
+				</tr>
+				<tr>
+					<td align="center"><input id="imgSmallSize" type="checkbox" name="imgSmallSizeName">Use 32 px small icon instead of 48 px</td>
+				</tr>
+			</table>
+			<input type="button" id="saveSettings" value="Save" class="mybutton small red" style="margin-bottom: 20px;" />
+			<div id="status" style="color: RED;"></div>
+		</div>
+	</body>
+</html>				
