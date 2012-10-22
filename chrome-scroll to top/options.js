@@ -1,4 +1,14 @@
-// Save this script as `options.js`
+// Saves options to localStorage.
+function default_options() {
+	localStorage["vertical_location"] = "bottom";
+	localStorage["horizontal_location"] = "right";
+	localStorage["image_size"] = "48";
+	
+	restore_options();
+
+	// Update status to let user know options were defaulted.
+	show_message("Restored to defaults.");
+}
 
 // Saves options to localStorage.
 function save_options() {
@@ -9,19 +19,19 @@ function save_options() {
 	select = document.getElementById("imgHorizontalLocation");
 	var hLoc = select.children[select.selectedIndex].value;
 	localStorage["horizontal_location"] = hLoc;
+	
+	localStorage["image_size"] = myForm.elements["imgSize"].value;
 
 	// Update status to let user know options were saved.
-	var status = document.getElementById("status");
-	status.innerHTML = "Settings have been successfully save.";
-	setTimeout(function() {
-		status.innerHTML = "";
-	}, 2000);
+	show_message("Settings have been successfully save.");
 }
 
 // Restores select box state to saved value from localStorage.
 function restore_options() {
 	restore_state("vertical_location", "imgVerticalLocation");
 	restore_state("horizontal_location", "imgHorizontalLocation");
+	
+	myForm.elements["imgSize"].value = localStorage["image_size"];
 }
 
 function restore_state(key, id) {
@@ -39,8 +49,17 @@ function restore_state(key, id) {
 	}
 }
 
+function show_message(msg) {
+	var status = document.getElementById("status");
+	status.innerHTML = msg;
+	setTimeout(function() {
+		status.innerHTML = "";
+	}, 3000);
+}
+
 //document.addEventListener('DOMContentReady', restore_options);
 document.addEventListener('DOMContentLoaded', function () {
 	restore_options();
 	document.querySelector('#saveSettings').addEventListener('click', save_options);
+	document.querySelector('#defaultBut').addEventListener('click', default_options);
 });

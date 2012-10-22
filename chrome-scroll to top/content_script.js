@@ -10,15 +10,13 @@ $(document).ready(function() {// when page is ready do the below mentioned steps
     var pratikabu_stt_imgScrollUp = document.createElement("img");
     pratikabu_stt_imgScrollUp.id = "pratikabuSTTArrowUp";
     pratikabu_stt_imgScrollUp.title = "Scroll to Top of the page.";
-	pratikabu_stt_imgScrollUp.src = chrome.extension.getURL("icons/pratikabu-stt-48.png");
     
     // add to the body tag. it will be the first item.
     $('body').prepend(pratikabu_stt_imgScrollUp);
     $("#pratikabuSTTArrowUp").hide();// hide it for the first time
     
     // write the logic to set the location
-	$("#pratikabuSTTArrowUp").css("right", "10px");
-	$("#pratikabuSTTArrowUp").css("top", "10px");
+	pratikabustt.loadFromPreference();
 
     // add the scroll up logic
     $("#pratikabuSTTArrowUp").click(function() {
@@ -53,18 +51,17 @@ var pratikabustt = {
     },
     
     loadFromPreference: function(data) {
-        // set the vertical alignment of the image
-        var location = "top";
-        if(true == data.buttonAtBottom) {
-            location = "bottom";
-        }
-        $("#pratikabuSTTArrowUp").css(location, "10px");
-        
-        // set the horizontal alignment of the image
-        location = "right";
-        if(true == data.buttonAtLeft) {
-            location = "left";
-        }
-        $("#pratikabuSTTArrowUp").css(location, "10px");
+		// Asks background.html for [LocalStorage] settings from Options Page and assigns them to variables
+		chrome.extension.sendRequest({method: "getSettings"}, function(response) {
+			if(!response) {
+				return;
+			}
+			$("#pratikabuSTTArrowUp").css(response.vLoc, "10px");// set the vertical alignment of the image
+			$("#pratikabuSTTArrowUp").css(response.hLoc, "10px");// set the horizontal alignment of the image
+			
+			// set the image
+			var imgUrl = "icons/pratikabu-stt-" + response.iconSize + ".png";
+			$("#pratikabuSTTArrowUp").attr("src", chrome.extension.getURL(imgUrl));
+		});
     }
 }

@@ -5,6 +5,10 @@
   "description": "A plugin to scroll to top of a window.",
   "homepage_url": "http://pratikabu.users.sourceforge.net/extensions/scrolltotop",
   "options_page": "options.html",
+  "background": {
+    "scripts": ["background.js"],
+    "persistent": false
+  },
   
   "icons": {"16": "icons/pratikabu-stt-16.png",
       "48": "icons/pratikabu-stt-48.png",

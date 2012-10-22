@@ -42,12 +42,27 @@
 	-webkit-border-radius: 5px;
 	text-shadow: 1px 1px #666;
 	text-decoration: none;
+	margin-right: 5px;
 }
 .mybutton:hover {
 	background-position: 0 -48px;
 }
 
 .mybutton.red { background-color: #e50000; }
+.mybutton.green { background-color: #58aa00; }
 .mybutton.small { font-size: 16px; padding: 3px 7px; }
 .mybutton.small:hover { background-position: 0 -50px; }
 .mybutton.small:active {background-position: 0 top; }
+
+a:link {
+	color: blue;
+	text-decoration: none;
+}
+a:visited {
+	color: blue;
+	text-decoration: none;
+}
+a:hover {
+	color: #9B2D2D;
+	text-decoration: underline;
+}
