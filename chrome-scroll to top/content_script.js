@@ -24,11 +24,9 @@ var pratikabustt = {
 		// add the scroll up logic
 		$("#pratikabuSTTArrowUp").click(function() {
 			if($(this).attr("src").lastIndexOf("pause") == -1) {// identify up arrow
-				var imgUrl = pratikabu_stt_fixed + "pause-" + pratikabu_stt_iconSize + ".png";
-				$(this).attr("src", chrome.extension.getURL(imgUrl));
-				
+				pratikabustt.showPauseImage();
 				$("html, body").stop(true, true).animate({ scrollTop: 0 }, pratikabu_stt_delay, function() {
-					$("#pratikabuSTTArrowUp").attr("src", chrome.extension.getURL(pratikabu_stt_fixed + pratikabu_stt_iconSize + ".png"));
+					pratikabustt.showUpArrowImage();
 				});
 			} else {
 				var imgUrl = pratikabu_stt_fixed + pratikabu_stt_iconSize + ".png";
@@ -41,12 +39,10 @@ var pratikabustt = {
 		
 		// add the scroll down logic
 		$("#pratikabuSTTArrowDown").click(function() {
-			var imgUrl = pratikabu_stt_fixed + "pause-" + pratikabu_stt_iconSize + ".png";
-			$("#pratikabuSTTArrowUp").attr("src", chrome.extension.getURL(imgUrl));
-				
+			pratikabustt.showPauseImage();
 			$("html, body").stop(true, true).animate({ scrollTop: $(document).height() }, pratikabu_stt_delay, function() {
-					$("#pratikabuSTTArrowUp").attr("src", chrome.extension.getURL(pratikabu_stt_fixed + pratikabu_stt_iconSize + ".png"));
-				});
+				pratikabustt.showUpArrowImage();
+			});
 			return false;
 		});
 		
@@ -80,6 +76,15 @@ var pratikabustt = {
 			});
 	},
 	
+	showPauseImage: function() {
+		var imgUrl = pratikabu_stt_fixed + "pause-" + pratikabu_stt_iconSize + ".png";
+		$("#pratikabuSTTArrowUp").attr("src", chrome.extension.getURL(imgUrl));
+	},
+	
+	showUpArrowImage: function() {
+		$("#pratikabuSTTArrowUp").attr("src", chrome.extension.getURL(pratikabu_stt_fixed + pratikabu_stt_iconSize + ".png"));
+	},
+	
 	hideOrShowButton: function() {
 		var scrollTop = $(document).scrollTop();
 		
@@ -101,8 +106,7 @@ var pratikabustt = {
 			$("#pratikabuSTTDiv").css(response.hLoc, "20px");// set the horizontal alignment of the image
 			
 			// set the image
-			var imgUrl = pratikabu_stt_fixed + response.iconSize + ".png";
-			$("#pratikabuSTTArrowUp").attr("src", chrome.extension.getURL(imgUrl));
+			pratikabustt.showUpArrowImage();
 			
 			var downPixel = 16;
 			if("48" == response.iconSize) {
