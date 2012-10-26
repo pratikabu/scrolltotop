@@ -23,7 +23,7 @@ function save_options() {
 	localStorage["image_size"] = myForm.elements["imgSize"].value;
 
 	// Update status to let user know options were saved.
-	show_message("Settings have been successfully save.");
+	show_message("Settings have been successfully saved.");
 }
 
 // Restores select box state to saved value from localStorage.

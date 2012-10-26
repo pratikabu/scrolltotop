@@ -24,6 +24,9 @@
   
   "web_accessible_resources": [
 	"icons/pratikabu-stt-32.png",
-    "icons/pratikabu-stt-48.png"
+    "icons/pratikabu-stt-48.png",
+	"icons/pratikabu-stt-clear.png",
+	"icons/pratikabu-stt-down-24.png",
+	"icons/pratikabu-stt-down-16.png"
   ]
 }
