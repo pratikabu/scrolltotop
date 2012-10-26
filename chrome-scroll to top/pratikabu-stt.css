@@ -1,11 +1,11 @@
 #pratikabuSTTDiv {
-	z-index: 2147483647;
-	background: rgba(245, 245, 245, 0.2);
-	position: fixed;
+    z-index: 2147483647 !important;
+	background: rgba(245, 245, 245, 0.2) !important;
+	position: fixed !important;
 	display: none;
-	border: 1px SOLID rgba(197, 197, 197, 0.2);
-	border-radius: 5px;
-	padding: 3px;
+	border: 1px SOLID rgba(197, 197, 197, 0.2) !important;
+	border-radius: 5px !important;
+	padding: 3px !important;
 	width: 72px;
-	line-height: 0;
+	line-height: 0 !important;
 }

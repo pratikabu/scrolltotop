@@ -29,15 +29,13 @@ var pratikabustt = {
 					pratikabustt.showUpArrowImage();
 				});
 			} else {
-				var imgUrl = pratikabu_stt_fixed + pratikabu_stt_iconSize + ".png";
-				$(this).attr("src", chrome.extension.getURL(imgUrl));
-				
+				pratikabustt.showUpArrowImage();
 				$("html, body").stop();
 			}
 			return false;
 		});
 		
-		// add the scroll down logic
+		// add the remove div logic
 		$("#pratikabuSTTArrowDown").click(function() {
 			pratikabustt.showPauseImage();
 			$("html, body").stop(true, true).animate({ scrollTop: $(document).height() }, pratikabu_stt_delay, function() {
@@ -94,7 +92,7 @@ var pratikabustt = {
 			: pratikabu_stt_bVisibility && ($("#pratikabuSTTDiv").stop(true, true).fadeTo("slow", 0, function() {if(!pratikabu_stt_bVisibility) $("#pratikabuSTTDiv").hide();}), false);
 	},
 	
-	loadFromPreference: function(data) {
+	loadFromPreference: function() {
 		// Asks background.html for [LocalStorage] settings from Options Page and assigns them to variables
 		chrome.extension.sendRequest({method: "getSettings"}, function(response) {
 			if(!response) {

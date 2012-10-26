@@ -15,13 +15,12 @@ pageMod.PageMod({
     onAttach: function onAttach(worker) {// attaching the worker so as to do the communication with contentscript file
         worker.port.on('getPrefs', function() {
             // load the saved image
-            var imgSize = 48;
+            var imgSize = "48";
             if(true == sp.prefs.smallSizeButton) {
-                imgSize = 32;
+                imgSize = "32";
             }
-            var imageName = "pratikabu-stt-" + imgSize +".png";
             worker.port.emit("prefsValue", {// send the image url, bottom preference and the left preference
-                imgUrl: data.url(imageName),
+                iconSize: imgSize,
     			buttonAtBottom: sp.prefs.buttonAtBottom,
                 buttonAtLeft: sp.prefs.buttonAtLeft
     		});

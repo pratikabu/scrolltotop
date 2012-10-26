@@ -1,13 +1,11 @@
-#pratikabuSTTArrowUp {
-    position: fixed;
-    height: auto;
-    width: auto;
-    z-index: 2147483647;
-    cursor: pointer;
-    opacity: .50;
-    display: none;
-}
-
-#pratikabuSTTArrowUp:hover {
-    opacity: .80;
+#pratikabuSTTDiv {
+    z-index: 2147483647 !important;
+	background: rgba(245, 245, 245, 0.2) !important;
+	position: fixed !important;
+	display: none;
+	border: 1px SOLID rgba(197, 197, 197, 0.2) !important;
+	border-radius: 5px !important;
+	padding: 3px !important;
+	width: 72px;
+	line-height: 0 !important;
 }
