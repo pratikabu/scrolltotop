@@ -5,7 +5,7 @@ var pratikabu_stt_delay = 1200;// variable used to reduce the delay in scrolling
 var pratikabu_stt_maxScrollAmount = 5;// the offset of the scroll bar
 var pratikabu_stt_bVisibility = false;// variable to check whether the button is already visible or hidden
 var pratikabu_stt_fadeSpeed = 300;
-var pratikabu_stt_hoverOpacity = 0.8;
+var pratikabu_stt_hoverOpacity = 1;
 
 var pratikabustt = {
 	createButton: function() {
@@ -37,7 +37,7 @@ var pratikabustt = {
 		
 		// add the scroll down logic
 		$("#pratikabuSTTClear").click(function() {
-			$("#pratikabuSTTDiv").fadeTo("slow", 0, function() {
+			$("#pratikabuSTTDiv").stop(true, true).fadeTo("slow", 0, function() {
 				$("#pratikabuSTTDiv").hide();
 				pratikabu_stt_bVisibility = false;
 				$(window).unbind('scroll', scrollHandler);
@@ -50,14 +50,14 @@ var pratikabustt = {
 	
 	hoverEffect: function(varId, idleOpacity) {
 		$(varId).hide();
-		$(varId).fadeTo(pratikabu_stt_fadeSpeed, idleOpacity);
+		$(varId).stop(true, true).fadeTo(pratikabu_stt_fadeSpeed, idleOpacity);
 		$(varId).css("cursor", "pointer");
 		$(varId).hover(
 			function() {
-				$(varId).fadeTo(pratikabu_stt_fadeSpeed, pratikabu_stt_hoverOpacity);
+				$(varId).stop(true, true).fadeTo(pratikabu_stt_fadeSpeed, pratikabu_stt_hoverOpacity);
 			},
 			function() {
-				$(varId).fadeTo(pratikabu_stt_fadeSpeed, idleOpacity);
+				$(varId).stop(true, true).fadeTo(pratikabu_stt_fadeSpeed, idleOpacity);
 			});
 	},
 	
@@ -67,8 +67,8 @@ var pratikabustt = {
 		// show the icon if it satisfies this condition
 		console.log("came in");
 		pratikabu_stt_bVisibility = scrollTop > pratikabu_stt_maxScrollAmount ?
-		pratikabu_stt_bVisibility || ($("#pratikabuSTTDiv").fadeTo("slow", 1), true)
-			: pratikabu_stt_bVisibility && ($("#pratikabuSTTDiv").fadeTo("slow", 0, function() {if(!pratikabu_stt_bVisibility) $("#pratikabuSTTDiv").hide();}), false);
+		pratikabu_stt_bVisibility || ($("#pratikabuSTTDiv").stop(true, true).fadeTo("slow", 1), true)
+			: pratikabu_stt_bVisibility && ($("#pratikabuSTTDiv").stop(true, true).fadeTo("slow", 0, function() {if(!pratikabu_stt_bVisibility) $("#pratikabuSTTDiv").hide();}), false);
 	},
 	
 	loadFromPreference: function(data) {
