@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>DefaultValue</key>
+		<string>right</string>
+		<key>Key</key>
+		<string>hLoc</string>
+		<key>Secure</key>
+		<false/>
+		<key>Title</key>
+		<string>Horizontal Location</string>
+		<key>Titles</key>
+		<array>
+			<string>Right</string>
+			<string>Left</string>
+		</array>
+		<key>Type</key>
+		<string>ListBox</string>
+		<key>Values</key>
+		<array>
+			<string>right</string>
+			<string>left</string>
+		</array>
+	</dict>
+	<dict>
+		<key>DefaultValue</key>
+		<string>bottom</string>
+		<key>Key</key>
+		<string>vLoc</string>
+		<key>Title</key>
+		<string>Vertical Location</string>
+		<key>Titles</key>
+		<array>
+			<string>Bottom</string>
+			<string>Top</string>
+		</array>
+		<key>Type</key>
+		<string>ListBox</string>
+		<key>Values</key>
+		<array>
+			<string>bottom</string>
+			<string>top</string>
+		</array>
+	</dict>
+	<dict>
+		<key>DefaultValue</key>
+		<real>48</real>
+		<key>Key</key>
+		<string>iconSize</string>
+		<key>Title</key>
+		<string>Image Size</string>
+		<key>Titles</key>
+		<array>
+			<string>48px Images</string>
+			<string>32px Images</string>
+		</array>
+		<key>Type</key>
+		<string>RadioButtons</string>
+		<key>Values</key>
+		<array>
+			<real>48</real>
+			<real>32</real>
+		</array>
+	</dict>
+</array>
+</plist>

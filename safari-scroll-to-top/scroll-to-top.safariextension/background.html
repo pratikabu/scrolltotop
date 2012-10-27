@@ -1,0 +1,22 @@
+<script>
+	
+
+	// Message passer to give [LocalStorage] settings to content_script.js
+	function fetchSettings(event) {
+		if(!event) {
+			return;
+		}
+		
+		
+		//return to sender
+		event.target.page.dispatchMessage("preferences", {vLoc: safari.extension.settings.vLoc, hLoc: safari.extension.settings.hLoc, iconSize: safari.extension.settings.iconSize});
+	}
+	 
+	function respondToMessage(theMessageEvent) {
+		if(theMessageEvent.name === "requestSettings") {
+		   fetchSettings(theMessageEvent);
+		}
+	}
+ 
+    safari.application.addEventListener("message", respondToMessage, false);
+</script>
