@@ -13,6 +13,14 @@ var pratikabustt = {
     createButton: function() {
 		// create div tag
 		$('body').prepend('<div align="right" id="pratikabuSTTDiv"><img id="pratikabuSTTArrowUp" style="float: left;" /><img id="pratikabuSTTClear" /><img id="pratikabuSTTArrowDown" /></div>');
+		$("#pratikabuSTTDiv").hide();
+		
+		// check whether the css has been applied to the div tag or not, if not then remove it from DOM
+		// as it got added to a wrong iFrame
+		if("fixed" != $("#pratikabuSTTDiv").css("position")) {
+			$("#pratikabuSTTDiv").remove();
+			return;
+		}
 		
 		pratikabustt.hoverEffect("#pratikabuSTTArrowUp", 0.5);
 		pratikabustt.hoverEffect("#pratikabuSTTClear", 0.35);
