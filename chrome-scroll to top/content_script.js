@@ -28,6 +28,7 @@ var pratikabustt = {
 		pratikabustt.hoverEffect("#pratikabuSTTPageUp", 0.35);
 		pratikabustt.hoverEffect("#pratikabuSTTPageDown", 0.35);
 		
+		// #BrowserSpecific method call
 		// write the logic to set the location
 		pratikabustt.loadFromPreference();
 		
@@ -130,11 +131,11 @@ var pratikabustt = {
 	
 	showPauseImage: function() {
 		var imgUrl = pratikabu_stt_fixed + "pause-" + pratikabu_stt_iconSize + ".png";
-		$("#pratikabuSTTArrowUp").attr("src", chrome.extension.getURL(imgUrl));
+		$("#pratikabuSTTArrowUp").attr("src", pratikabustt.getBrowserSpecificUrl(imgUrl));
 	},
 	
 	showUpArrowImage: function() {
-		$("#pratikabuSTTArrowUp").attr("src", chrome.extension.getURL(pratikabu_stt_fixed + pratikabu_stt_iconSize + ".png"));
+		$("#pratikabuSTTArrowUp").attr("src", pratikabustt.getBrowserSpecificUrl(pratikabu_stt_fixed + pratikabu_stt_iconSize + ".png"));
 	},
 	
 	hideOrShowButton: function() {
@@ -147,6 +148,7 @@ var pratikabustt = {
 	},
 	
 	loadFromPreference: function() {
+		// #BrowserSpecific call
 		// Asks background.html for [LocalStorage] settings from Options Page and assigns them to variables
 		chrome.extension.sendRequest({method: "getSettings"}, function(response) {
 			if(!response) {
@@ -172,16 +174,16 @@ var pratikabustt = {
 			$("#pratikabuSTTDiv").css("width", divSize + "px");
 			
 			imgUrl = pratikabu_stt_fixed + "clear-" + otherImagesSize + ".png";
-			$("#pratikabuSTTClear").attr("src", chrome.extension.getURL(imgUrl));
+			$("#pratikabuSTTClear").attr("src", pratikabustt.getBrowserSpecificUrl(imgUrl));
 			
 			imgUrl = pratikabu_stt_fixed + "down-" + otherImagesSize + ".png";
-			$("#pratikabuSTTArrowDown").attr("src", chrome.extension.getURL(imgUrl));
+			$("#pratikabuSTTArrowDown").attr("src", pratikabustt.getBrowserSpecificUrl(imgUrl));
 			
 			// show/remove page up and page down buttons from settings
 			if("true" == response.showPageUp) {
 				imgUrl = pratikabu_stt_fixed + "pageup-" + otherImagesSize + ".png";
-				$("#pratikabuSTTPageUp").attr("src", chrome.extension.getURL(imgUrl));
-				$("#pratikabuSTTPageDown").attr("src", chrome.extension.getURL(imgUrl));
+				$("#pratikabuSTTPageUp").attr("src", pratikabustt.getBrowserSpecificUrl(imgUrl));
+				$("#pratikabuSTTPageDown").attr("src", pratikabustt.getBrowserSpecificUrl(imgUrl));
 				$("#pratikabuSTTPageDown").css("-webkit-transform", "rotate(180deg)");
 			} else {
 				$("#pratikabuSTTPageUp").remove();
@@ -201,6 +203,11 @@ var pratikabustt = {
 			
 			$("#pratikabuSTTArrowUp").css("float", pratikabu_stt_float);
 		});
+	},
+	
+	getBrowserSpecificUrl: function(imgUrl) {
+		// #BrowserSpecific method to get the resource
+		return chrome.extension.getURL(imgUrl);
 	}
 }
 

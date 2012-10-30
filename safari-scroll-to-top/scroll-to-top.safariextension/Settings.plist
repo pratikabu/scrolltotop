@@ -64,5 +64,29 @@
 			<real>32</real>
 		</array>
 	</dict>
+	<dict>
+		<key>DefaultValue</key>
+		<false/>
+		<key>FalseValue</key>
+		<false/>
+		<key>Key</key>
+		<string>showPager</string>
+		<key>Title</key>
+		<string>Show Pagers (Beta)</string>
+		<key>Titles</key>
+		<array>
+			<string>Show</string>
+			<string>Hide</string>
+		</array>
+		<key>TrueValue</key>
+		<true/>
+		<key>Type</key>
+		<string>CheckBox</string>
+		<key>Values</key>
+		<array>
+			<true/>
+			<false/>
+		</array>
+	</dict>
 </array>
 </plist>
