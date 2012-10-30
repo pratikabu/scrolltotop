@@ -1,6 +1,6 @@
 {
   "name": "Scroll To Top",
-  "version": "2.0",
+  "version": "2.5",
   "manifest_version": 2,
   "description": "A plugin to scroll to top and vice versa of a window.",
   "homepage_url": "http://pratikabu.users.sourceforge.net/extensions/scrolltotop",
@@ -30,6 +30,8 @@
 	"icons/pratikabu-stt-down-24.png",
 	"icons/pratikabu-stt-down-16.png",
 	"icons/pratikabu-stt-pause-48.png",
-	"icons/pratikabu-stt-pause-32.png"
+	"icons/pratikabu-stt-pause-32.png",
+	"icons/pratikabu-stt-pageup-24.png",
+	"icons/pratikabu-stt-pageup-16.png"
   ]
 }
