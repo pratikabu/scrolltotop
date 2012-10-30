@@ -150,10 +150,13 @@ var pratikabustt = {
 	loadFromPreference: function() {
 		// #BrowserSpecific call
 		// Asks background.html for [LocalStorage] settings from Options Page and assigns them to variables
-		chrome.extension.sendRequest({method: "getSettings"}, function(response) {
-			if(!response) {
+		chrome.extension.sendRequest({method: "getSettings"}, function(response_msg) {
+		// #BrowserSpecific this method is somewhat browser specific
+			if(!response_msg) {
 				return;
 			}
+			var response = pratikabustt.convertResponse(response_msg);
+			
 			pratikabu_stt_iconSize = response.iconSize;
 			
 			$("#pratikabuSTTDiv").css(response.vLoc, "20px");// set the vertical alignment of the image
@@ -184,7 +187,7 @@ var pratikabustt = {
 				imgUrl = pratikabu_stt_fixed + "pageup-" + otherImagesSize + ".png";
 				$("#pratikabuSTTPageUp").attr("src", pratikabustt.getBrowserSpecificUrl(imgUrl));
 				$("#pratikabuSTTPageDown").attr("src", pratikabustt.getBrowserSpecificUrl(imgUrl));
-				$("#pratikabuSTTPageDown").css("-webkit-transform", "rotate(180deg)");
+				$("#pratikabuSTTPageDown").css("-webkit-transform", "rotate(180deg)");// #BrowserSpecific css
 			} else {
 				$("#pratikabuSTTPageUp").remove();
 				$("#pratikabuSTTPageDown").remove();
@@ -208,6 +211,11 @@ var pratikabustt = {
 	getBrowserSpecificUrl: function(imgUrl) {
 		// #BrowserSpecific method to get the resource
 		return chrome.extension.getURL(imgUrl);
+	},
+	
+	convertResponse: function(rawResponse) {
+		// #BrowserSpecific method to convert response to single known format
+		return rawResponse;
 	}
 }
 

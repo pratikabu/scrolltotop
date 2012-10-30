@@ -6,6 +6,11 @@
 	border: 1px SOLID rgba(197, 197, 197, 0.2) !important;
 	border-radius: 5px !important;
 	padding: 3px !important;
-	width: 72px;
+	width: 96px;
 	line-height: 0 !important;
+}
+
+.pratikabuSTTImg {
+	padding: 0px !important;
+	margin: 0px !important;
 }

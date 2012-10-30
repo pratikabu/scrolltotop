@@ -153,7 +153,7 @@ var pratikabustt = {
 		if(!response_msg) {
 			return;
 		}
-		var response = pratikabustt.convertResponse(response_msg);// #BrowserSpecific created the response object for browser independency
+		var response = pratikabustt.convertResponse(response_msg);
 		
 		pratikabu_stt_iconSize = response.iconSize;
 		
@@ -185,7 +185,7 @@ var pratikabustt = {
 			imgUrl = pratikabu_stt_fixed + "pageup-" + otherImagesSize + ".png";
 			$("#pratikabuSTTPageUp").attr("src", pratikabustt.getBrowserSpecificUrl(imgUrl));
 			$("#pratikabuSTTPageDown").attr("src", pratikabustt.getBrowserSpecificUrl(imgUrl));
-			$("#pratikabuSTTPageDown").css("-webkit-transform", "rotate(180deg)");
+			$("#pratikabuSTTPageDown").css("-webkit-transform", "rotate(180deg)");// #BrowserSpecific css
 		} else {
 			$("#pratikabuSTTPageUp").remove();
 			$("#pratikabuSTTPageDown").remove();
