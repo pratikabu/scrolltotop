@@ -11,7 +11,7 @@ var pratikabu_stt_fixed = "pratikabu-stt-";
 
 var pratikabustt = {
     createButton: function() {
-		// create div tag
+    	// create div tag
 		$('body').prepend('<div align="right" id="pratikabuSTTDiv"><img id="pratikabuSTTArrowUp" style="float: left;" /><img id="pratikabuSTTPageUp" /><img id="pratikabuSTTClear" /><img id="pratikabuSTTPageDown" /><img id="pratikabuSTTArrowDown" /></div>');
 		$("#pratikabuSTTDiv").hide();
 		
@@ -219,7 +219,7 @@ var pratikabustt = {
 			vLoc: true == rawResponse.buttonAtBottom ? "bottom" : "top" ,
 			hLoc: true == rawResponse.buttonAtLeft ? "left" : "right" ,
 			iconSize: rawResponse.iconSize,
-			showPageUp: "true"
+			showPageUp: (rawResponse.showPager + "")
 		};
 		return response;
 	}
