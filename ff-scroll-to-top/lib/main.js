@@ -22,7 +22,8 @@ pageMod.PageMod({
             worker.port.emit("prefsValue", {// send the image url, bottom preference and the left preference
                 iconSize: imgSize,
     			buttonAtBottom: sp.prefs.buttonAtBottom,
-                buttonAtLeft: sp.prefs.buttonAtLeft
+                buttonAtLeft: sp.prefs.buttonAtLeft,
+                showPager: sp.prefs.showPager
     		});
         });
     }
