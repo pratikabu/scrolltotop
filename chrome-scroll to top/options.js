@@ -3,7 +3,7 @@ function default_options() {
 	localStorage["vertical_location"] = "bottom";
 	localStorage["horizontal_location"] = "right";
 	localStorage["image_size"] = "48";
-	localStorage["show_page_up"] = "false";
+	localStorage["show_page_up_new"] = "true";
 	
 	restore_options();
 
@@ -23,7 +23,7 @@ function save_options() {
 	
 	localStorage["image_size"] = myForm.elements["imgSize"].value;
 	
-	localStorage["show_page_up"] = myForm.elements["showPageUp"].checked;
+	localStorage["show_page_up_new"] = myForm.elements["showPageUp"].checked;
 
 	// Update status to let user know options were saved.
 	show_message("Settings have been successfully saved.");
@@ -35,7 +35,7 @@ function restore_options() {
 	restore_state("horizontal_location", "imgHorizontalLocation");
 	
 	myForm.elements["imgSize"].value = localStorage["image_size"];
-	if("true" == localStorage["show_page_up"]) {
+	if("true" == localStorage["show_page_up_new"]) {
 		myForm.elements["showPageUp"].checked = true;
 	}
 }

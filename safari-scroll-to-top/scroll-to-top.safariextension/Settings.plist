@@ -66,13 +66,13 @@
 	</dict>
 	<dict>
 		<key>DefaultValue</key>
-		<false/>
+		<true/>
 		<key>FalseValue</key>
 		<false/>
 		<key>Key</key>
-		<string>showPager</string>
+		<string>showPagerNew</string>
 		<key>Title</key>
-		<string>Show Pagers (Beta)</string>
+		<string>Show Pagers</string>
 		<key>Titles</key>
 		<array>
 			<string>Show</string>

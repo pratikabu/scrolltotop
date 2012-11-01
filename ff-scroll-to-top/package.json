@@ -1,1 +1,22 @@
-{"description": "This plugin will add one image at the bottom right corner of your page once you scroll your page to some extent. Click on the image and it will scroll you to the top of the page with beautiful animation. You can configure the location of the icon using options page.", "contributors": [], "icon64": "data/pratikabu-stt-64.png", "dependencies": ["api-utils", "addon-kit"], "lib": "lib", "fullName": "Scroll To Top", "id": "jid0-gRmSxW9ByuHwGjLhtXJg27YnZRs", "icon": "data/pratikabu-stt-48.png", "preferences": [{"name": "buttonAtBottom", "type": "bool", "description": "If checked then the arrow icon will be shown at the bottom or else at the top of the page. You need to refresh page to see changes.", "value": true, "title": "Show button at the bottom"}, {"name": "buttonAtLeft", "type": "bool", "description": "If checked then the arrow icon will be shown at the left side or else at the right side of the page. You need to refresh page to see changes.", "value": false, "title": "Show button at the Left"}, {"name": "smallSizeButton", "type": "bool", "description": "Use a 32 pixel image instead of 48 pixel. You need to refresh page to see changes.", "value": false, "title": "Use small icon"}, {"name": "showPager", "type": "bool", "description": "Turn page-up and page-down functionality. Currently in BETA. It may be suppressed in future releases.", "value": false, "title": "Show Pager (Beta)"}], "license": "", "author": "pratikabu", "url": "", "name": "scroll-to-top", "version": "initial.rev272", "main": "main", "homepage": "http://pratikabu.users.sourceforge.net/extensions/scrolltotop"}
+{
+	"description": "This plugin will add one image at the bottom right corner of your page once you scroll your page to some extent. Click on the image and it will scroll you to the top of the page with beautiful animation. You can configure the location of the icon using options page. And there are lot more other options.",
+	"contributors": [],
+	"icon": "data/pratikabu-stt-48.png",
+	"icon64": "data/pratikabu-stt-64.png",
+	"dependencies": ["api-utils", "addon-kit"],
+	"lib": "lib",
+	"fullName": "Scroll To Top",
+	"id": "jid0-gRmSxW9ByuHwGjLhtXJg27YnZRs",
+	"preferences": [
+		{"name": "buttonAtBottom", "type": "bool", "description": "If checked then the arrow icon will be shown at the bottom or else at the top of the page. You need to refresh page to see changes.", "value": true, "title": "Show button at the bottom"},
+		{"name": "buttonAtLeft", "type": "bool", "description": "If checked then the arrow icon will be shown at the left side or else at the right side of the page. You need to refresh page to see changes.", "value": false, "title": "Show button at the Left"},
+		{"name": "smallSizeButton", "type": "bool", "description": "Use a 32 pixel image instead of 48 pixel. You need to refresh page to see changes.", "value": false, "title": "Use small icon"},
+		{"name": "showPagerNew", "type": "bool", "description": "Turn page-up and page-down functionality.", "value": true, "title": "Show Pager"}],
+	"license": "",
+	"author": "Pratik Soni",
+	"url": "http://pratikabu.users.sourceforge.net",
+	"name": "scroll-to-top",
+	"version": "3.0",
+	"main": "main",
+	"homepage": "http://pratikabu.users.sourceforge.net/extensions/scrolltotop"
+}

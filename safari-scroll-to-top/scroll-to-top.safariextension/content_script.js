@@ -7,12 +7,13 @@ var pratikabu_stt_bVisibility = false;// variable to check whether the button is
 var pratikabu_stt_fadeSpeed = 300;
 var pratikabu_stt_hoverOpacity = 1;
 var pratikabu_stt_iconSize = 48;
-var pratikabu_stt_fixed = safari.extension.baseURI + "icons/pratikabu-stt-";
+var pratikabu_stt_showPager = "true";
+var pratikabu_stt_otherDefaultFade = 0.35;
 
 var pratikabustt = {
 	createButton: function() {
 		// create div tag
-		$('body').prepend('<div align="right" id="pratikabuSTTDiv"><img id="pratikabuSTTArrowUp" style="float: left;" /><img id="pratikabuSTTPageUp" /><img id="pratikabuSTTClear" /><img id="pratikabuSTTPageDown" /><img id="pratikabuSTTArrowDown" /></div>');
+		$('body').prepend('<div id="pratikabuSTTDiv"><img id="pratikabuSTTArrowUp" style="float: left;" /><div id="pratikabuSTTDiv2"><img id="pratikabuSTTPageUp" /><img id="pratikabuSTTClear" /><img id="pratikabuSTTPageDown" /><img id="pratikabuSTTArrowDown" /></div></div>');
 		$("#pratikabuSTTDiv").hide();
 		
 		// check whether the css has been applied to the div tag or not, if not then remove it from DOM
@@ -23,15 +24,22 @@ var pratikabustt = {
 		}
 		
 		pratikabustt.hoverEffect("#pratikabuSTTArrowUp", 0.5);
-		pratikabustt.hoverEffect("#pratikabuSTTClear", 0.35);
-		pratikabustt.hoverEffect("#pratikabuSTTArrowDown", 0.35);
-		pratikabustt.hoverEffect("#pratikabuSTTPageUp", 0.35);
-		pratikabustt.hoverEffect("#pratikabuSTTPageDown", 0.35);
+		pratikabustt.hoverEffect("#pratikabuSTTClear", pratikabu_stt_otherDefaultFade);
+		pratikabustt.hoverEffect("#pratikabuSTTArrowDown", pratikabu_stt_otherDefaultFade);
+		pratikabustt.hoverEffect("#pratikabuSTTPageUp", pratikabu_stt_otherDefaultFade);
+		pratikabustt.hoverEffect("#pratikabuSTTPageDown", pratikabu_stt_otherDefaultFade);
 		
-		// #BrowserSpecific method call
-		// logic to set the location
-		safari.self.addEventListener("message", pratikabustt.loadFromPreference, false);
-		safari.self.tab.dispatchMessage("requestSettings");
+		// add the main div hover effects
+		$("#pratikabuSTTDiv").hover(
+			function() {
+				pratikabustt.mainDivHover(true)
+			},
+			function() {
+				pratikabustt.mainDivHover(false)
+			});
+		
+		// fetch preferences
+		pratikabustt.fetchPreferences();
 		
 		// add the scroll up logic
 		$("#pratikabuSTTArrowUp").click(function() {
@@ -131,12 +139,12 @@ var pratikabustt = {
 	},
 	
 	showPauseImage: function() {
-		var imgUrl = pratikabu_stt_fixed + "pause-" + pratikabu_stt_iconSize + ".png";
+		var imgUrl = pratikabustt.getFixedLocation() + "pause-" + pratikabu_stt_iconSize + ".png";
 		$("#pratikabuSTTArrowUp").attr("src", pratikabustt.getBrowserSpecificUrl(imgUrl));
 	},
 	
 	showUpArrowImage: function() {
-		$("#pratikabuSTTArrowUp").attr("src", pratikabustt.getBrowserSpecificUrl(pratikabu_stt_fixed + pratikabu_stt_iconSize + ".png"));
+		$("#pratikabuSTTArrowUp").attr("src", pratikabustt.getBrowserSpecificUrl(pratikabustt.getFixedLocation() + pratikabu_stt_iconSize + ".png"));
 	},
 	
 	hideOrShowButton: function() {
@@ -148,14 +156,40 @@ var pratikabustt = {
 			: pratikabu_stt_bVisibility && ($("#pratikabuSTTDiv").stop(true, true).fadeTo("slow", 0, function() {if(!pratikabu_stt_bVisibility) $("#pratikabuSTTDiv").hide();}), false);
 	},
 	
-	loadFromPreference: function(response_msg) {
-		// #BrowserSpecific this method is somewhat browser specific
-		if(!response_msg) {
-			return;
+	mainDivHover: function(hoverIn) {
+		if(hoverIn) {
+			$("#pratikabuSTTDiv2").stop(true, true);// to execute the fading out method
+			
+			var otherImagesSize = pratikabustt.getOtherImageSize();
+			var divSize = pratikabu_stt_iconSize + otherImagesSize;
+			if("true" == pratikabu_stt_showPager) {// check whether the page up is shown or not
+				divSize += otherImagesSize;// add pixels based on the settings
+			}
+			$("#pratikabuSTTDiv").css("width", divSize + "px");
+			
+			$("#pratikabuSTTDiv2").fadeTo("slow", pratikabu_stt_hoverOpacity);
+		} else {
+			$("#pratikabuSTTDiv2").stop(true, true).fadeTo("slow", 0, function() {
+					$("#pratikabuSTTDiv2").hide();
+					
+					var divSize = pratikabu_stt_iconSize;
+					$("#pratikabuSTTDiv").css("width", divSize + "px");
+				});
 		}
-		var response = pratikabustt.convertResponse(response_msg);
+	},
+	
+	getOtherImageSize: function() {
+		var otherImagesSize = 16;
+		if(48 == pratikabu_stt_iconSize) {
+			otherImagesSize = 24;
+		}
 		
-		pratikabu_stt_iconSize = response.iconSize;
+		return otherImagesSize;
+	},
+	
+	loadFromResponse: function(response) {// load the images, css, include/remove elements
+		pratikabu_stt_iconSize = parseInt(response.iconSize);
+		pratikabu_stt_showPager = response.showPageUp;
 		
 		$("#pratikabuSTTDiv").css(response.vLoc, "20px");// set the vertical alignment of the image
 		$("#pratikabuSTTDiv").css(response.hLoc, "20px");// set the horizontal alignment of the image
@@ -163,46 +197,71 @@ var pratikabustt = {
 		// set the image
 		pratikabustt.showUpArrowImage();
 		
-		var otherImagesSize = 16;
-		var divSize = 48;
-		if("48" == response.iconSize) {
-			otherImagesSize = 24;
-			divSize = 72;
-		}
-		if("true" == response.showPageUp) {// check whether the page up is shown or not
-			divSize += (divSize == 72 ? 24 : 16);// add pixels based on the settings
-		}
-		$("#pratikabuSTTDiv").css("width", divSize + "px");
+		var otherImagesSize = pratikabustt.getOtherImageSize();
 		
-		imgUrl = pratikabu_stt_fixed + "clear-" + otherImagesSize + ".png";
+		var divSize = otherImagesSize;
+		if("true" == pratikabu_stt_showPager) {// check whether the page up is shown or not
+			divSize += otherImagesSize;// add pixels based on the settings
+		}
+		$("#pratikabuSTTDiv2").css("width", divSize + "px");
+		
+		imgUrl = pratikabustt.getFixedLocation() + "clear-" + otherImagesSize + ".png";
 		$("#pratikabuSTTClear").attr("src", pratikabustt.getBrowserSpecificUrl(imgUrl));
 		
-		imgUrl = pratikabu_stt_fixed + "down-" + otherImagesSize + ".png";
+		imgUrl = pratikabustt.getFixedLocation() + "down-" + otherImagesSize + ".png";
 		$("#pratikabuSTTArrowDown").attr("src", pratikabustt.getBrowserSpecificUrl(imgUrl));
 		
 		// show/remove page up and page down buttons from settings
-		if("true" == response.showPageUp) {
-			imgUrl = pratikabu_stt_fixed + "pageup-" + otherImagesSize + ".png";
+		if("true" == pratikabu_stt_showPager) {
+			imgUrl = pratikabustt.getFixedLocation() + "pageup-" + otherImagesSize + ".png";
 			$("#pratikabuSTTPageUp").attr("src", pratikabustt.getBrowserSpecificUrl(imgUrl));
 			$("#pratikabuSTTPageDown").attr("src", pratikabustt.getBrowserSpecificUrl(imgUrl));
-			$("#pratikabuSTTPageDown").css("-webkit-transform", "rotate(180deg)");// #BrowserSpecific css
+			$("#pratikabuSTTPageDown").css(pratikabustt.getRotationCssName(), "rotate(180deg)");
 		} else {
 			$("#pratikabuSTTPageUp").remove();
 			$("#pratikabuSTTPageDown").remove();
 		}
 		
 		// change the location of the main image
-		var pratikabu_stt_float = "left";
-		if("left" == response.hLoc) {// replace the locations of the icons
-			pratikabu_stt_float = "right";
-			
-			if("true" == response.showPageUp) {
+		var pratikabu_stt_float = response.hLoc;
+		if("right" == response.hLoc) {// replace the locations of the icons
+			if("true" == pratikabu_stt_showPager) {
 				$("#pratikabuSTTPageUp").before($("#pratikabuSTTClear"));
 				$("#pratikabuSTTPageDown").before($("#pratikabuSTTArrowDown"));
 			}
+			$("#pratikabuSTTDiv2").css("marginLeft", 0 + "px");
+		} else {
+			$("#pratikabuSTTDiv2").css("marginLeft", pratikabu_stt_iconSize + "px");
 		}
 		
 		$("#pratikabuSTTArrowUp").css("float", pratikabu_stt_float);
+	},
+	
+	///////////////// #BrowserSpecific methods /////////////////////
+	///////////////// OVERRIDE them accordingly ////////////////////
+	getFixedLocation : function() {
+		// #BrowserSpecific location
+		return safari.extension.baseURI + "icons/pratikabu-stt-";
+	},
+	
+	fetchPreferences: function() {
+		// #BrowserSpecific method call
+		// logic to set the location
+		safari.self.addEventListener("message", pratikabustt.loadFromPreference, false);
+		safari.self.tab.dispatchMessage("requestSettings");
+	},
+	
+	loadFromPreference: function(data) {
+		// #BrowserSpecific this method is somewhat browser specific
+		if(!data) {
+			return;
+		}
+		pratikabustt.loadFromResponse(pratikabustt.convertResponse(data));
+	},
+	
+	getRotationCssName: function() {
+		// #BrowserSpecific css
+		return "-webkit-transform";
 	},
 	
 	getBrowserSpecificUrl: function(imgUrl) {
