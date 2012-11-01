@@ -23,7 +23,7 @@ pageMod.PageMod({
                 iconSize: imgSize,
     			buttonAtBottom: sp.prefs.buttonAtBottom,
                 buttonAtLeft: sp.prefs.buttonAtLeft,
-                showPager: sp.prefs.showPager
+                showPager: sp.prefs.showPagerNew
     		});
         });
     }
