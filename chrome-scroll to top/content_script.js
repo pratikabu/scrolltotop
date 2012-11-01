@@ -13,7 +13,7 @@ var pratikabu_stt_otherDefaultFade = 0.35;
 var pratikabustt = {
 	createButton: function() {
 		// create div tag
-		$('body').prepend('<div id="pratikabuSTTDiv"><img id="pratikabuSTTArrowUp" style="float: left;" /><div id="pratikabuSTTDiv2"><img id="pratikabuSTTPageUp" /><img id="pratikabuSTTClear" /><img id="pratikabuSTTPageDown" /><img id="pratikabuSTTArrowDown" /></div></div>');
+		$('body').prepend('<div id="pratikabuSTTDiv" tabIndex="-1"><img id="pratikabuSTTArrowUp" style="float: left;" /><div id="pratikabuSTTDiv2"><img id="pratikabuSTTPageUp" /><img id="pratikabuSTTClear" /><img id="pratikabuSTTPageDown" /><img id="pratikabuSTTArrowDown" /></div></div>');
 		$("#pratikabuSTTDiv").hide();
 		
 		// check whether the css has been applied to the div tag or not, if not then remove it from DOM
