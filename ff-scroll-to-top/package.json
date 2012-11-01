@@ -12,7 +12,6 @@
 		{"name": "buttonAtLeft", "type": "bool", "description": "If checked then the arrow icon will be shown at the left side or else at the right side of the page. You need to refresh page to see changes.", "value": false, "title": "Show button at the Left"},
 		{"name": "smallSizeButton", "type": "bool", "description": "Use a 32 pixel image instead of 48 pixel. You need to refresh page to see changes.", "value": false, "title": "Use small icon"},
 		{"name": "showPagerNew", "type": "bool", "description": "Turn page-up and page-down functionality.", "value": true, "title": "Show Pager"}],
-	"license": "",
 	"author": "Pratik Soni",
 	"url": "http://pratikabu.users.sourceforge.net",
 	"name": "scroll-to-top",

@@ -282,7 +282,7 @@ var pratikabustt = {
 		};
 		return response;
 	}
-}
+};
 
 pratikabustt.createButton();
 

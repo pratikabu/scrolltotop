@@ -276,7 +276,7 @@ var pratikabustt = {
 		// #BrowserSpecific method to convert response to single known format
 		return rawResponse;
 	}
-}
+};
 
 pratikabustt.createButton();
 

@@ -275,7 +275,7 @@ var pratikabustt = {
 		response.showPageUp = response.showPageUp + "";
 		return response;
 	}
-}
+};
 
 pratikabustt.createButton();
 
