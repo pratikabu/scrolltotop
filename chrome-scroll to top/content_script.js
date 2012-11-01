@@ -7,7 +7,6 @@ var pratikabu_stt_bVisibility = false;// variable to check whether the button is
 var pratikabu_stt_fadeSpeed = 300;
 var pratikabu_stt_hoverOpacity = 1;
 var pratikabu_stt_iconSize = 48;
-var pratikabu_stt_fixed = "icons/pratikabu-stt-";// #BrowserSpecific location
 var pratikabu_stt_showPager = "true";
 var pratikabu_stt_otherDefaultFade = 0.35;
 
@@ -140,12 +139,12 @@ var pratikabustt = {
 	},
 	
 	showPauseImage: function() {
-		var imgUrl = pratikabu_stt_fixed + "pause-" + pratikabu_stt_iconSize + ".png";
+		var imgUrl = pratikabustt.getFixedLocation() + "pause-" + pratikabu_stt_iconSize + ".png";
 		$("#pratikabuSTTArrowUp").attr("src", pratikabustt.getBrowserSpecificUrl(imgUrl));
 	},
 	
 	showUpArrowImage: function() {
-		$("#pratikabuSTTArrowUp").attr("src", pratikabustt.getBrowserSpecificUrl(pratikabu_stt_fixed + pratikabu_stt_iconSize + ".png"));
+		$("#pratikabuSTTArrowUp").attr("src", pratikabustt.getBrowserSpecificUrl(pratikabustt.getFixedLocation() + pratikabu_stt_iconSize + ".png"));
 	},
 	
 	hideOrShowButton: function() {
@@ -206,15 +205,15 @@ var pratikabustt = {
 		}
 		$("#pratikabuSTTDiv2").css("width", divSize + "px");
 		
-		imgUrl = pratikabu_stt_fixed + "clear-" + otherImagesSize + ".png";
+		imgUrl = pratikabustt.getFixedLocation() + "clear-" + otherImagesSize + ".png";
 		$("#pratikabuSTTClear").attr("src", pratikabustt.getBrowserSpecificUrl(imgUrl));
 		
-		imgUrl = pratikabu_stt_fixed + "down-" + otherImagesSize + ".png";
+		imgUrl = pratikabustt.getFixedLocation() + "down-" + otherImagesSize + ".png";
 		$("#pratikabuSTTArrowDown").attr("src", pratikabustt.getBrowserSpecificUrl(imgUrl));
 		
 		// show/remove page up and page down buttons from settings
 		if("true" == pratikabu_stt_showPager) {
-			imgUrl = pratikabu_stt_fixed + "pageup-" + otherImagesSize + ".png";
+			imgUrl = pratikabustt.getFixedLocation() + "pageup-" + otherImagesSize + ".png";
 			$("#pratikabuSTTPageUp").attr("src", pratikabustt.getBrowserSpecificUrl(imgUrl));
 			$("#pratikabuSTTPageDown").attr("src", pratikabustt.getBrowserSpecificUrl(imgUrl));
 			$("#pratikabuSTTPageDown").css(pratikabustt.getRotationCssName(), "rotate(180deg)");
@@ -240,6 +239,11 @@ var pratikabustt = {
 	
 	///////////////// #BrowserSpecific methods /////////////////////
 	///////////////// OVERRIDE them accordingly ////////////////////
+	getFixedLocation : function() {
+		// #BrowserSpecific location
+		return "icons/pratikabu-stt-";
+	},
+	
 	fetchPreferences: function() {
 		// #BrowserSpecific method call
 		// write the logic to set the location
