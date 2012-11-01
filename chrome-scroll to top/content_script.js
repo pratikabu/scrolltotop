@@ -151,7 +151,8 @@ var pratikabustt = {
 		var scrollTop = $(document).scrollTop();
 		
 		// show the icon if it satisfies this condition
-		pratikabu_stt_bVisibility = $(document).height() > ($(window).height() + 50) ?// offset is added so that it will not come on all the pages
+		pratikabu_stt_bVisibility = ($(document).height() > ($(window).height() + 50) ||
+				(10 < scrollTop)) ?// offset is added so that it will not come on all the pages
 		pratikabu_stt_bVisibility || ($("#pratikabuSTTDiv").stop(true, true).fadeTo("slow", 1), true)
 			: pratikabu_stt_bVisibility && ($("#pratikabuSTTDiv").stop(true, true).fadeTo("slow", 0, function() {if(!pratikabu_stt_bVisibility) $("#pratikabuSTTDiv").hide();}), false);
 	},
