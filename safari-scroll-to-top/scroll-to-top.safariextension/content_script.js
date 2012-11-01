@@ -57,7 +57,7 @@ var pratikabustt = {
 		
 		// add the remove div logic
 		$("#pratikabuSTTArrowDown").click(function() {
-			var location = ($(document).height() - $(window).height());
+			var location = ($(document).height() - pratikabustt.getWindowHeight());
 			if($(document).scrollTop() == location) {
 				return false;
 			}
@@ -106,7 +106,7 @@ var pratikabustt = {
 		var speed = 344;
 		var location = 0;
 		var scrollTop = $(document).scrollTop();
-		var winHeight = $(window).height();
+		var winHeight = pratikabustt.getWindowHeight();
 		var docHeight = $(document).height() - winHeight;
 		
 		if(0 > direction) {// page down
@@ -122,6 +122,20 @@ var pratikabustt = {
 		}
 		
 		pratikabustt.scrollPageTo(speed, location, false);
+	},
+	
+	getWindowHeight: function() {
+		var winHeight = $(window).height();
+		var docHeight = $(document).height();
+		
+		if(winHeight == docHeight && $(frameElement)) {
+			var frameHeight = $(frameElement).height();
+			if(0 < frameHeight) {
+				winHeight = frameHeight;
+			}
+		}
+		
+		return winHeight;
 	},
 	
 	hoverEffect: function(varId, idleOpacity) {
@@ -151,7 +165,7 @@ var pratikabustt = {
 		var scrollTop = $(document).scrollTop();
 		
 		// show the icon if it satisfies this condition
-		pratikabu_stt_bVisibility = $(document).height() > ($(window).height() + 50) ?// offset is added so that it will not come on all the pages
+		pratikabu_stt_bVisibility = $(document).height() > (pratikabustt.getWindowHeight() + 50) ? // offset is added so that it will not come on all the pages
 		pratikabu_stt_bVisibility || ($("#pratikabuSTTDiv").stop(true, true).fadeTo("slow", 1), true)
 			: pratikabu_stt_bVisibility && ($("#pratikabuSTTDiv").stop(true, true).fadeTo("slow", 0, function() {if(!pratikabu_stt_bVisibility) $("#pratikabuSTTDiv").hide();}), false);
 	},
@@ -236,6 +250,19 @@ var pratikabustt = {
 		
 		$("#pratikabuSTTArrowUp").css("float", pratikabu_stt_float);
 	},
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	///////////////// #BrowserSpecific methods /////////////////////
 	///////////////// OVERRIDE them accordingly ////////////////////
