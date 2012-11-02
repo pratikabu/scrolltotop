@@ -8,8 +8,11 @@ Scrolling on pages is really a tiring experience. Specially if the page is reall
 [Official website](http://pratikabu.users.sourceforge.net/extensions/scrolltotop), [Donate Now](https://addons.mozilla.org/en-US/firefox/addon/scroll-to-top/developers)
 
 Get Scroll To Top for your browser:
+
 Download for [Mozilla Firefox](http://addons.mozilla.org/en-US/firefox/addon/scroll-to-top?src=external-git)
+
 Download for [Google Chrome](http://chrome.google.com/webstore/detail/scroll-to-top/hegiignepmecppikdlbohnnbfjdoaghj)
+
 Download for [Apple Safari](http://pratikabu.users.sourceforge.net/extensions/scrolltotop/safaridownload.php)
 
 Changes in Version 3.0:
