@@ -7,7 +7,7 @@ Scrolling on pages is really a tiring experience. Specially if the page is reall
 
 [Official website](http://pratikabu.users.sourceforge.net/extensions/scrolltotop), [Donate Now](https://addons.mozilla.org/en-US/firefox/addon/scroll-to-top/developers)
 
-Get Scroll To Top for your browser:
+### Get Scroll To Top for your browser:
 
 Download for [Mozilla Firefox](http://addons.mozilla.org/en-US/firefox/addon/scroll-to-top?src=external-git)
 
