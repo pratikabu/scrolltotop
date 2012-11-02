@@ -28,7 +28,7 @@
 			<key>End</key>
 			<array>
 				<string>jquery-1.8.2.pratikabu.js</string>
-				<string>pratikabustt-chrome-impl.js</string>
+				<string>pratikabustt-browser-impl.js</string>
 				<string>content_script.js</string>
 			</array>
 		</dict>

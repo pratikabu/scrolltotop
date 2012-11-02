@@ -1,5 +1,6 @@
 /*****************************************
-	********** Variables ****************
+************** This file contains code which is browser independent ****************
+************** Write browser dependent code in the specific browser dependent js file. *********
 ******************************************/
 var pratikabu_stt_delay = 1200;// variable used to reduce the delay in scrolling
 var pratikabu_stt_maxScrollAmount = 5;// the offset of the scroll bar
@@ -39,7 +40,7 @@ var pratikabustt = {
 			});
 		
 		// fetch preferences
-		pratikabustt.fetchPreferences();
+		pratikabustt_browser_impl.fetchPreferences();
 		
 		// add the scroll up logic
 		$("#pratikabuSTTArrowUp").click(function() {
@@ -130,7 +131,7 @@ var pratikabustt = {
 		
 		if(winHeight == docHeight && $(frameElement)) {
 			var frameHeight = $(frameElement).height();
-			if(0 < frameHeight) {
+			if(frameHeight && 0 < frameHeight) {
 				winHeight = frameHeight;
 			}
 		}
@@ -153,12 +154,12 @@ var pratikabustt = {
 	},
 	
 	showPauseImage: function() {
-		var imgUrl = pratikabustt.getFixedLocation() + "pause-" + pratikabu_stt_iconSize + ".png";
-		$("#pratikabuSTTArrowUp").attr("src", pratikabustt.getBrowserSpecificUrl(imgUrl));
+		var imgUrl = pratikabustt_browser_impl.getFixedLocation() + "pause-" + pratikabu_stt_iconSize + ".png";
+		$("#pratikabuSTTArrowUp").attr("src", pratikabustt_browser_impl.getBrowserSpecificUrl(imgUrl));
 	},
 	
 	showUpArrowImage: function() {
-		$("#pratikabuSTTArrowUp").attr("src", pratikabustt.getBrowserSpecificUrl(pratikabustt.getFixedLocation() + pratikabu_stt_iconSize + ".png"));
+		$("#pratikabuSTTArrowUp").attr("src", pratikabustt_browser_impl.getBrowserSpecificUrl(pratikabustt_browser_impl.getFixedLocation() + pratikabu_stt_iconSize + ".png"));
 	},
 	
 	hideOrShowButton: function() {
@@ -219,18 +220,18 @@ var pratikabustt = {
 		}
 		$("#pratikabuSTTDiv2").css("width", divSize + "px");
 		
-		imgUrl = pratikabustt.getFixedLocation() + "clear-" + otherImagesSize + ".png";
-		$("#pratikabuSTTClear").attr("src", pratikabustt.getBrowserSpecificUrl(imgUrl));
+		imgUrl = pratikabustt_browser_impl.getFixedLocation() + "clear-" + otherImagesSize + ".png";
+		$("#pratikabuSTTClear").attr("src", pratikabustt_browser_impl.getBrowserSpecificUrl(imgUrl));
 		
-		imgUrl = pratikabustt.getFixedLocation() + "down-" + otherImagesSize + ".png";
-		$("#pratikabuSTTArrowDown").attr("src", pratikabustt.getBrowserSpecificUrl(imgUrl));
+		imgUrl = pratikabustt_browser_impl.getFixedLocation() + "down-" + otherImagesSize + ".png";
+		$("#pratikabuSTTArrowDown").attr("src", pratikabustt_browser_impl.getBrowserSpecificUrl(imgUrl));
 		
 		// show/remove page up and page down buttons from settings
 		if("true" == pratikabu_stt_showPager) {
-			imgUrl = pratikabustt.getFixedLocation() + "pageup-" + otherImagesSize + ".png";
-			$("#pratikabuSTTPageUp").attr("src", pratikabustt.getBrowserSpecificUrl(imgUrl));
-			$("#pratikabuSTTPageDown").attr("src", pratikabustt.getBrowserSpecificUrl(imgUrl));
-			$("#pratikabuSTTPageDown").css(pratikabustt.getRotationCssName(), "rotate(180deg)");
+			imgUrl = pratikabustt_browser_impl.getFixedLocation() + "pageup-" + otherImagesSize + ".png";
+			$("#pratikabuSTTPageUp").attr("src", pratikabustt_browser_impl.getBrowserSpecificUrl(imgUrl));
+			$("#pratikabuSTTPageDown").attr("src", pratikabustt_browser_impl.getBrowserSpecificUrl(imgUrl));
+			$("#pratikabuSTTPageDown").css(pratikabustt_browser_impl.getRotationCssName(), "rotate(180deg)");
 		} else {
 			$("#pratikabuSTTPageUp").remove();
 			$("#pratikabuSTTPageDown").remove();
@@ -249,65 +250,6 @@ var pratikabustt = {
 		}
 		
 		$("#pratikabuSTTArrowUp").css("float", pratikabu_stt_float);
-	},
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	///////////////// #BrowserSpecific methods /////////////////////
-	///////////////// OVERRIDE them accordingly ////////////////////
-	getFixedLocation : function() {
-		// #BrowserSpecific location
-		return "pratikabu-stt-";
-	},
-	
-	fetchPreferences: function() {
-		// #BrowserSpecific method call
-		// prefsValue listner
-    	self.port.on("prefsValue", function(data) {
-			// load the css and image source from preference
-			pratikabustt.loadFromPreference(data);
-		});
-		self.port.emit("getPrefs");// method to communicate to main.js
-	},
-	
-	loadFromPreference: function(data) {
-		// #BrowserSpecific this method is somewhat browser specific
-		if(!data) {
-			return;
-		}
-		pratikabustt.loadFromResponse(pratikabustt.convertResponse(data));
-	},
-	
-	getRotationCssName: function() {
-		// #BrowserSpecific css
-		return "-moz-transform";
-	},
-	
-	getBrowserSpecificUrl: function(imgUrl) {
-		// #BrowserSpecific method to get the resource
-		return "resource://jid0-grmsxw9byuhwgjlhtxjg27ynzrs-at-jetpack/scroll-to-top/data/" + imgUrl;
-	},
-	
-	convertResponse: function(rawResponse) {
-		// #BrowserSpecific method to convert response to single known format
-		var response = {
-			vLoc: true == rawResponse.buttonAtBottom ? "bottom" : "top" ,
-			hLoc: true == rawResponse.buttonAtLeft ? "left" : "right" ,
-			iconSize: rawResponse.iconSize,
-			showPageUp: (rawResponse.showPager + "")
-		};
-		return response;
 	}
 };
 

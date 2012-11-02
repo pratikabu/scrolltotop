@@ -11,7 +11,7 @@ pageMod.PageMod({
     include: "*", // for all pages, as it will give the scrolling for all pages
     contentStyleFile: data.url("pratikabu-stt.css"),
     contentScriptFile: [data.url("jquery-1.8.2.pratikabu.js"),
-        data.url("pratikabu-stt.js")],
+        data.url("pratikabustt-browser-impl.js"), data.url("pratikabu-stt.js")],
     onAttach: function onAttach(worker) {// attaching the worker so as to do the communication with contentscript file
         worker.port.on('getPrefs', function() {
             // load the saved image
