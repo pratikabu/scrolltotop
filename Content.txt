@@ -1,0 +1,15 @@
+Scrolling on pages is really a tiring experience. Specially if the page is really big one. This plugin tries to minify this tiring experience. With this plugin it will be more fun than just scroll. It adds images at bottom-right corner of the page to give you one click scrolling to top and vice-versa with beautiful animation. You can configure the location of the icon using options page. Moreover you can stop the scrolling in-between.
+
+New features includes nice animation on mouse over, now the widget takes even lesser space until you move your mouse over it.
+
+Official website: http://pratikabu.users.sourceforge.net/extensions/scrolltotop
+
+Firefox Version: http://addons.mozilla.org/en-us/firefox/addon/scroll-to-top
+Chrome Version: http://chrome.google.com/webstore/detail/scroll-to-top/hegiignepmecppikdlbohnnbfjdoaghj
+Safari Version: http://pratikabu.users.sourceforge.net/extensions/scrolltotop/safaridownload.php
+Opera Version: https://addons.opera.com/en/extensions/details/scroll-to-top
+
+Consider Donation (It helps): https://addons.mozilla.org/en-US/firefox/addon/scroll-to-top/developers
+
+Why Chrome warns me about browser data and history?
+Its a standard Chrome warning. Nothing to worry at all.. :)
