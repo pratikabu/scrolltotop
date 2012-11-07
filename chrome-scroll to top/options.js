@@ -3,7 +3,9 @@ function default_options() {
 	localStorage["vertical_location"] = "bottom";
 	localStorage["horizontal_location"] = "right";
 	localStorage["image_size"] = "48";
-	localStorage["show_page_up_new"] = "true";
+	localStorage["scrolling_speed"] = "1200";
+	localStorage["visibility_behavior"] = "alwaysshow";
+	localStorage["control_options"] = "pager";
 	
 	restore_options();
 
@@ -13,17 +15,12 @@ function default_options() {
 
 // Saves options to localStorage.
 function save_options() {
-	var select = document.getElementById("imgVerticalLocation");
-	var vLoc = select.children[select.selectedIndex].value;
-	localStorage["vertical_location"] = vLoc;
-	
-	select = document.getElementById("imgHorizontalLocation");
-	var hLoc = select.children[select.selectedIndex].value;
-	localStorage["horizontal_location"] = hLoc;
-	
-	localStorage["image_size"] = myForm.elements["imgSize"].value;
-	
-	localStorage["show_page_up_new"] = myForm.elements["showPageUp"].checked;
+	localStorage["vertical_location"] = $('#imgVerticalLocation').val();
+	localStorage["horizontal_location"] = $('#imgHorizontalLocation').val();
+	localStorage["image_size"] = $('input:radio[name=imgSize]:checked').val();
+	localStorage["scrolling_speed"] = $('#scrollSpeed').val();
+	localStorage["visibility_behavior"] = $('#visbilityBehavior').val();
+	localStorage["control_options"] = $('#controlOptions').val();
 
 	// Update status to let user know options were saved.
 	show_message("Settings have been successfully saved.");
@@ -31,28 +28,12 @@ function save_options() {
 
 // Restores select box state to saved value from localStorage.
 function restore_options() {
-	restore_state("vertical_location", "imgVerticalLocation");
-	restore_state("horizontal_location", "imgHorizontalLocation");
-	
-	myForm.elements["imgSize"].value = localStorage["image_size"];
-	if("true" == localStorage["show_page_up_new"]) {
-		myForm.elements["showPageUp"].checked = true;
-	}
-}
-
-function restore_state(key, id) {
-	var sValue = localStorage[key];
-	if (!sValue) {
-		return;
-	}
-	var select = document.getElementById(id);
-	for (var i = 0; i < select.children.length; i++) {
-		var child = select.children[i];
-		if (child.value == sValue) {
-			child.selected = "true";
-			break;
-		}
-	}
+	$("#imgVerticalLocation option[value=" + localStorage["vertical_location"] +"]").attr("selected", "selected");
+	$("#imgHorizontalLocation option[value=" + localStorage["horizontal_location"] +"]").attr("selected", "selected");
+	$('input:radio[name=imgSize]').filter('[value=' + localStorage["image_size"] + ']').attr('checked', true);
+	$("#scrollSpeed option[value=" + localStorage["scrolling_speed"] +"]").attr("selected", "selected");
+	$("#visbilityBehavior option[value=" + localStorage["visibility_behavior"] +"]").attr("selected", "selected");
+	$("#controlOptions option[value=" + localStorage["control_options"] +"]").attr("selected", "selected");
 }
 
 function show_message(msg) {
@@ -63,8 +44,24 @@ function show_message(msg) {
 	}, 3000);
 }
 
+function getParameterByName(name) {
+	name = name.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
+	var regexS = "[\\?&]" + name + "=([^&#]*)";
+	var regex = new RegExp(regexS);
+	var results = regex.exec(window.location.search);
+	if(results == null)
+		return "";
+	else
+		return decodeURIComponent(results[1].replace(/\+/g, " "));
+}
+
 //document.addEventListener('DOMContentReady', restore_options);
 document.addEventListener('DOMContentLoaded', function () {
+	var updated = getParameterByName("updated");
+	if("true" == updated) {
+		var updateDiv = '<div id="updateDiv" align="center" style="width: 100%;">Congratulations Scroll To Top has been updated to the latest version. See <a href="http://github.com/pratikabu/scrolltotop/wiki/Release-Notes">Release Notes</a>.</div>';
+		$('body').prepend(updateDiv);
+	}
 	restore_options();
 	document.querySelector('#saveSettings').addEventListener('click', save_options);
 	document.querySelector('#defaultBut').addEventListener('click', default_options);

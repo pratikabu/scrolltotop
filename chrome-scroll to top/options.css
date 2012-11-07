@@ -5,7 +5,7 @@
 }
 
 .mySelect {
-	width: 100px;
+	width: 135px;
 	border: 1px solid #2094F0;
 	padding: 4px;
 }
@@ -65,4 +65,12 @@ a:visited {
 a:hover {
 	color: #9B2D2D;
 	text-decoration: underline;
+}
+
+#updateDiv {
+	margin-top: 20px;
+	margin-bottom: 10px;
+	font-size: 20px;
+	color: #9B2D2D;
+	font-family: Arial,Helvetica,sans-serif;
 }
