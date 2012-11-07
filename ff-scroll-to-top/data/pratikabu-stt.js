@@ -8,8 +8,12 @@ var pratikabu_stt_bVisibility = false;// variable to check whether the button is
 var pratikabu_stt_fadeSpeed = 300;
 var pratikabu_stt_hoverOpacity = 1;
 var pratikabu_stt_iconSize = 48;
-var pratikabu_stt_showPager = "true";
 var pratikabu_stt_otherDefaultFade = 0.35;
+var pratikabu_stt_visibilityBehavior = "autohide";
+var pratikabu_stt_controlOption = "pager";
+var pratikabu_stt_preferencesLoaded = "false";
+var pratikabu_stt_triggerHideOrShow = "true";
+var pratikabu_stt_firstAlwaysShow = "true";
 
 var pratikabustt = {
 	createButton: function() {
@@ -163,21 +167,40 @@ var pratikabustt = {
 	},
 	
 	hideOrShowButton: function() {
-		var scrollTop = $(document).scrollTop();
+		var boolShow = false;
+		var vScrollTop = $(document).scrollTop();
+		
+		if("autohide" == pratikabu_stt_visibilityBehavior) {
+			boolShow = vScrollTop > pratikabu_stt_maxScrollAmount;
+		} else {
+			boolShow = $(document).height() > (pratikabustt.getWindowHeight() + 50);
+			
+			if(0 < vScrollTop) {
+				pratikabu_stt_firstAlwaysShow = "false";
+			}
+			
+			if(0 == vScrollTop && "true" == pratikabu_stt_firstAlwaysShow) {
+				boolShow = false;
+			}
+		}
 		
 		// show the icon if it satisfies this condition
-		pratikabu_stt_bVisibility = $(document).height() > (pratikabustt.getWindowHeight() + 50) ? // offset is added so that it will not come on all the pages
+		pratikabu_stt_bVisibility = boolShow ? // offset is added so that it will not come on all the pages
 		pratikabu_stt_bVisibility || ($("#pratikabuSTTDiv").stop(true, true).fadeTo("slow", 1), true)
 			: pratikabu_stt_bVisibility && ($("#pratikabuSTTDiv").stop(true, true).fadeTo("slow", 0, function() {if(!pratikabu_stt_bVisibility) $("#pratikabuSTTDiv").hide();}), false);
 	},
 	
 	mainDivHover: function(hoverIn) {
+		if("none" == pratikabu_stt_controlOption) {
+			return;
+		}
+		
 		if(hoverIn) {
 			$("#pratikabuSTTDiv2").stop(true, true);// to execute the fading out method
 			
 			var otherImagesSize = pratikabustt.getOtherImageSize();
 			var divSize = pratikabu_stt_iconSize + otherImagesSize;
-			if("true" == pratikabu_stt_showPager) {// check whether the page up is shown or not
+			if("pager" == pratikabu_stt_controlOption) {// check whether the page up is shown or not
 				divSize += otherImagesSize;// add pixels based on the settings
 			}
 			$("#pratikabuSTTDiv").css("width", divSize + "px");
@@ -203,8 +226,10 @@ var pratikabustt = {
 	},
 	
 	loadFromResponse: function(response) {// load the images, css, include/remove elements
+		pratikabu_stt_delay = parseInt(response.scrSpeed);
 		pratikabu_stt_iconSize = parseInt(response.iconSize);
-		pratikabu_stt_showPager = response.showPageUp;
+		pratikabu_stt_visibilityBehavior = response.visibilityBehav;
+		pratikabu_stt_controlOption = response.controlOption;
 		
 		$("#pratikabuSTTDiv").css(response.vLoc, "20px");// set the vertical alignment of the image
 		$("#pratikabuSTTDiv").css(response.hLoc, "20px");// set the horizontal alignment of the image
@@ -215,7 +240,7 @@ var pratikabustt = {
 		var otherImagesSize = pratikabustt.getOtherImageSize();
 		
 		var divSize = otherImagesSize;
-		if("true" == pratikabu_stt_showPager) {// check whether the page up is shown or not
+		if("pager" == pratikabu_stt_controlOption) {// check whether the page up is shown or not
 			divSize += otherImagesSize;// add pixels based on the settings
 		}
 		$("#pratikabuSTTDiv2").css("width", divSize + "px");
@@ -227,7 +252,7 @@ var pratikabustt = {
 		$("#pratikabuSTTArrowDown").attr("src", pratikabustt_browser_impl.getBrowserSpecificUrl(imgUrl));
 		
 		// show/remove page up and page down buttons from settings
-		if("true" == pratikabu_stt_showPager) {
+		if("pager" == pratikabu_stt_controlOption) {
 			imgUrl = pratikabustt_browser_impl.getFixedLocation() + "pageup-" + otherImagesSize + ".png";
 			$("#pratikabuSTTPageUp").attr("src", pratikabustt_browser_impl.getBrowserSpecificUrl(imgUrl));
 			$("#pratikabuSTTPageDown").attr("src", pratikabustt_browser_impl.getBrowserSpecificUrl(imgUrl));
@@ -240,7 +265,7 @@ var pratikabustt = {
 		// change the location of the main image
 		var pratikabu_stt_float = response.hLoc;
 		if("right" == response.hLoc) {// replace the locations of the icons
-			if("true" == pratikabu_stt_showPager) {
+			if("pager" == pratikabu_stt_controlOption) {
 				$("#pratikabuSTTPageUp").before($("#pratikabuSTTClear"));
 				$("#pratikabuSTTPageDown").before($("#pratikabuSTTArrowDown"));
 			}
@@ -250,14 +275,23 @@ var pratikabustt = {
 		}
 		
 		$("#pratikabuSTTArrowUp").css("float", pratikabu_stt_float);
+		
+		pratikabu_stt_preferencesLoaded = "true";// enable functioning document.ready function
+		if("true" == pratikabu_stt_triggerHideOrShow) {
+			pratikabustt.hideOrShowButton();
+		}
 	}
 };
 
 pratikabustt.createButton();
 
 $(document).ready(function() {// when page is ready do the below mentioned steps
-	// hide or show the button based on the current location, because a page can be loaded scrolled..
-	pratikabustt.hideOrShowButton();
+	if("true" == pratikabu_stt_preferencesLoaded) {
+		// hide or show the button based on the current location, because a page can be loaded scrolled..
+		pratikabustt.hideOrShowButton();
+	} else {
+		pratikabu_stt_triggerHideOrShow = "true";
+	}
 });
 
 $(window).resize(function() {// when window is resized do the below mentioned steps

@@ -34,9 +34,42 @@
 						</select>
 					</td>
 				</tr>
+			</table>
+			<table cellSpacing="15px" class="tableClass">
 				<tr>
-					<td align="right" width="50%">Show Pager :</td>
-					<td width="50%"><input type="checkbox" name="showPageUp"></td>
+					<td align="center" colspan="2">Choose other options :</td>
+				</tr>
+				<tr>
+					<td align="right" width="50%">Scrolling Speed :</td>
+					<td width="50%">
+						<select id="scrollSpeed" class="mySelect">
+							<option value="0">Immediate</option>
+							<option value="400">Fastest</option>
+							<option value="800">Faster</option>
+							<option value="1200">Normal</option>
+							<option value="1500">Slower</option>
+							<option value="2000">Slowest</option>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td align="right" width="50%">Visibility Behavior :</td>
+					<td width="50%">
+						<select id="visbilityBehavior" class="mySelect">
+							<option value="autohide">Auto Hide</option>
+							<option value="alwaysshow">Always Show</option>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td align="right" width="50%">Controls Options :</td>
+					<td width="50%">
+						<select id="controlOptions" class="mySelect">
+							<option value="none">None</option>
+							<option value="simple">Simple</option>
+							<option value="pager">With Pager</option>
+						</select>
+					</td>
 				</tr>
 			</table>
 			<table cellSpacing="15px" class="tableClass">
@@ -45,8 +78,8 @@
 				</tr>
 				<tr>
 					<td align="center" style="vertical-align: middle;">
-						<input type="radio" name="imgSize" value="32"><img src="icons/pratikabu-stt-32.png" />
-						<input type="radio" name="imgSize" value="48"><img src="icons/pratikabu-stt-48.png" />
+						<input type="radio" name="imgSize" value="32"><img id="iconSizeOp1" src="icons/pratikabu-stt-32.png" />
+						<input type="radio" name="imgSize" value="48"><img id="iconSizeOp2" src="icons/pratikabu-stt-48.png" />
 					</td>
 				</tr>
 			</table>

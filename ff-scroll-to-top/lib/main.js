@@ -8,38 +8,24 @@ var tabs = require("tabs");// to open the options page
 var ss = require("simple-storage"); // to store user specific settings
 
 var checkForInitialize = function() {
-	var valuesNotInitialized = false;
 	if(!ss.storage.icon_size) {
-		valuesNotInitialized = true;
-		var imgSize = "48";
-		if(sp.prefs.smallSizeButton && true == sp.prefs.smallSizeButton) {// copy older settings
-			imgSize = "32";
-		}
-		ss.storage.icon_size = imgSize;
+		ss.storage.icon_size = "48";
 	}
 	if(!ss.storage.vertical_location) {
-		var vLoc = "bottom";
-		if(sp.prefs.buttonAtBottom && false == sp.prefs.buttonAtBottom) {// copy older settings
-			vLoc = "top";
-		}
-		ss.storage.vertical_location = vLoc;
+		ss.storage.vertical_location = "bottom";
 	}
 	if(!ss.storage.horizontal_location) {
-		var hLoc = "right";
-		if(sp.prefs.buttonAtBottom && true == sp.prefs.buttonAtLeft) {// copy older settings
-			hLoc = "left";
-		}
-		ss.storage.horizontal_location = hLoc;
+		ss.storage.horizontal_location = "right";
 	}
-	if(!ss.storage.showPager) {
-		var showPageup = "true";
-		if(sp.prefs.showPager && false == sp.prefs.showPager) {// copy older settings
-			showPageup = "false";
-		}
-		ss.storage.showPager = showPageup;
+	if(!ss.storage.scrolling_speed) {
+		ss.storage.scrolling_speed = "1200";
 	}
-	
-	return valuesNotInitialized;
+	if(!ss.storage.visibility_behavior) {
+		ss.storage.visibility_behavior = "alwaysshow";
+	}
+	if(!ss.storage.control_options) {
+		ss.storage.control_options = "pager";
+	}
 };
 
 // initialize settings
@@ -49,7 +35,10 @@ var forceInitializeSettings = function() {
 	delete ss.storage.icon_size;
 	delete ss.storage.vertical_location;
 	delete ss.storage.horizontal_location;
-	delete ss.storage.showPager;
+	delete ss.storage.scrolling_speed;
+	delete ss.storage.visibility_behavior;
+	delete ss.storage.control_options;
+	
 	checkForInitialize();
 };
 
@@ -66,15 +55,32 @@ pageMod.PageMod({
 				iconSize: ss.storage.icon_size,
 				vLoc: ss.storage.vertical_location,
 				hLoc: ss.storage.horizontal_location,
-				showPageUp: ss.storage.showPager
+				scrSpeed: ss.storage.scrolling_speed,
+				visibilityBehav: ss.storage.visibility_behavior,
+				controlOption: ss.storage.control_options
 			});
 		});
     }
 });
 
-var openOptioinPage = function() {
+var openOptioinPage = function(updated) {
+	// don't open the option page if it is already open
+	var optionPageUrl = data.url("options.html");
+	for each (var openTab in tabs) {
+		if(openTab.url.toLowerCase().indexOf(optionPageUrl.toLowerCase()) != -1) {
+			// page is already open
+			openTab.activate();
+			return;
+		}
+	}
+	
+	if(updated) {
+		updated = "?updated=true";
+	} else {
+		updated = "";
+	}
     tabs.open({
-		url: data.url("options.html"),
+		url: data.url("options.html" + updated),
 		onReady: runScript
 	});
 	function runScript(tab) {
@@ -87,7 +93,9 @@ var openOptioinPage = function() {
 				iconSize: ss.storage.icon_size,
 				vLoc: ss.storage.vertical_location,
 				hLoc: ss.storage.horizontal_location,
-				showPageUp: ss.storage.showPager
+				scrSpeed: ss.storage.scrolling_speed,
+				visibilityBehav: ss.storage.visibility_behavior,
+				controlOption: ss.storage.control_options
 			});
 		});
 		
@@ -95,7 +103,9 @@ var openOptioinPage = function() {
 			ss.storage.icon_size = data.iconSize;
 			ss.storage.vertical_location = data.vLoc;
 			ss.storage.horizontal_location = data.hLoc;
-			ss.storage.showPager = data.showPager;
+			ss.storage.scrolling_speed = data.scrSpeed;
+			ss.storage.visibility_behavior = data.visibilityBehav;
+			ss.storage.control_options = data.controlOption;
 			
 			tabWorker.port.emit("saveStatus", {// send the status of the step
 				status: "Saved perfectly."
@@ -115,7 +125,8 @@ var openOptioinPage = function() {
 sp.on("myButtonPref", openOptioinPage);
 
 // open option page on initial in this version
-if(!ss.storage.firstTimeLoad) {
-	ss.storage.firstTimeLoad = "never load again";
-	openOptioinPage();
+var currentVersion = 1;// this variable should be incremented with every update so that, add-on update message can be shown
+if(!ss.storage.versionInfo || currentVersion > ss.storage.versionInfo) {
+	ss.storage.versionInfo = currentVersion;
+	openOptioinPage("updated");
 }
