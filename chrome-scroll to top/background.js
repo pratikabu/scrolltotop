@@ -27,3 +27,10 @@ chrome.extension.onRequest.addListener(
 			sendResponse({}); // snub them.
 		}
 	});
+
+// open option page on initial in this version
+var currentVersion = 1;// this variable should be incremented with every update so that, add-on update message can be shown
+if(!localStorage["version_info"] || currentVersion > localStorage["version_info"]) {
+	localStorage["version_info"] = currentVersion;
+	chrome.tabs.create({url: "options.html?updated=true"});
+}
