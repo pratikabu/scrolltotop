@@ -23,10 +23,9 @@ function restore_options() {
 }
 
 function show_message(msg) {
-	var status = document.getElementById("status");
-	status.innerHTML = msg;
+	$("#status").html(msg);
 	setTimeout(function() {
-		status.innerHTML = "";
+		$("#status").html("");
 	}, 3000);
 }
 
