@@ -72,7 +72,7 @@ pageMod.PageMod({
     }
 });
 
-sp.on("myButtonPref", function() {
+var openOptioinPage = function() {
     tabs.open({
 		url: data.url("options.html"),
 		onReady: runScript
@@ -110,4 +110,12 @@ sp.on("myButtonPref", function() {
 			});
 		});
 	}
-});
+};
+
+sp.on("myButtonPref", openOptioinPage);
+
+// open option page on initial in this version
+if(!ss.storage.firstTimeLoad) {
+	ss.storage.firstTimeLoad = "never load again";
+	openOptioinPage();
+}
