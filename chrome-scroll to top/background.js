@@ -22,7 +22,7 @@ if (!localStorage["control_options"]) {
 chrome.extension.onRequest.addListener(
 	function(request, sender, sendResponse) {
 		if (request.method == "getSettings") {
-			sendResponse({vLoc: localStorage["vertical_location"], hLoc: localStorage["horizontal_location"], iconSize: localStorage["image_size"], showPageUp: localStorage["show_page_up_new"], scrSpeed: localStorage["scrolling_speed"], visibilityBehav: localStorage["visibility_behavior"], controlOption: localStorage["control_options"]});
+			sendResponse({vLoc: localStorage["vertical_location"], hLoc: localStorage["horizontal_location"], iconSize: localStorage["image_size"], scrSpeed: localStorage["scrolling_speed"], visibilityBehav: localStorage["visibility_behavior"], controlOption: localStorage["control_options"]});
 		} else {
 			sendResponse({}); // snub them.
 		}

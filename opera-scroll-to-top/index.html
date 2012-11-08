@@ -1,0 +1,82 @@
+<html>
+	<head>
+		<script>
+			// Creates options defaults in case user hasn't set them yet
+			if (!localStorage["vertical_location"]) {
+				localStorage["vertical_location"] = "bottom";
+			}
+			if (!localStorage["horizontal_location"]) {
+				localStorage["horizontal_location"] = "right";
+			}
+			if (!localStorage["image_size"]) {
+				localStorage["image_size"] = "48";
+			}
+			if (!localStorage["scrolling_speed"]) {
+				localStorage["scrolling_speed"] = "1200";
+			}
+			if (!localStorage["visibility_behavior"]) {
+				localStorage["visibility_behavior"] = "alwaysshow";
+			}
+			if (!localStorage["control_options"]) {
+				localStorage["control_options"] = "pager";
+			}
+			
+			opera.extension.onmessage = function(event) {
+				var requestFor = event.data.requestFor;
+				if("getPrefs" == requestFor) {
+					event.source.postMessage({responseFor: "getPrefs", vLoc: localStorage["vertical_location"], hLoc: localStorage["horizontal_location"], iconSize: localStorage["image_size"], scrSpeed: localStorage["scrolling_speed"], visibilityBehav: localStorage["visibility_behavior"], controlOption: localStorage["control_options"]});
+				}
+			}
+			
+			var openTabFunc = function(updated) {
+				opera.postError("updated: " + updated);
+				if("true" == updated) {
+					updated = "?updated=true";
+				} else {
+					updated = "";
+				}
+				
+				// Create a tab with the specified URL
+				var tab;
+				
+				var optionPageUrl = "pratikabu-stt-options.html" + updated;
+				var tabs = opera.extension.tabs.getAll();
+				for (var i = 0; i < tabs.length; i++) {
+					var openTab = tabs[i];
+					if(openTab.url.indexOf('widget://') != -1 && openTab.url.indexOf(optionPageUrl) != -1) {
+						// page is already open
+						tab = openTab;
+						break;
+					}
+				}
+				
+				if(!tab) {
+					tab = opera.extension.tabs.create({url: optionPageUrl});
+				}
+				
+				// Give focus to the new tab
+				tab.focus();
+			}
+			
+			var properties = {
+				disabled: false,
+				title: "Scroll To Top Options",
+				icon: "icons/pratikabu-stt-16.png",
+				onclick: openTabFunc
+			};
+			
+			// Create and add the button to the toolbar
+			var button = opera.contexts.toolbar.createItem(properties);
+			opera.contexts.toolbar.addItem(button);
+			
+			// open option page on initial in this version
+			var currentVersion = 1;// this variable should be incremented with every update so that, add-on update message can be shown
+			if(!localStorage["version_info"] || currentVersion > localStorage["version_info"]) {
+				localStorage["version_info"] = currentVersion;
+				openTabFunc("true");
+			}
+		</script>
+	</head>
+	<body>
+	</body>
+</html>
