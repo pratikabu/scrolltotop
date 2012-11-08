@@ -15,6 +15,14 @@ Download for [Google Chrome](http://chrome.google.com/webstore/detail/scroll-to-
 
 Download for [Apple Safari](http://pratikabu.users.sourceforge.net/extensions/scrolltotop/safaridownload.php)
 
+Changes in Version 3.5:
+------------
+- multiple stability changes for iFrames
+- new intelligent logic for the icon
+- totally new options page for settings
+- customizable scrolling speed, visibility, and control options
+- refactoring and other fixes
+
 Changes in Version 3.0:
 ------------
 - Reworked on the UI, now only single icon will appear until user moves his/her mouse over it.
