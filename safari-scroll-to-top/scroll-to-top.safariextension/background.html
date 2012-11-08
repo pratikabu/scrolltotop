@@ -9,7 +9,7 @@
 		
 		
 		//return to sender
-		event.target.page.dispatchMessage("preferences", {vLoc: safari.extension.settings.vLoc, hLoc: safari.extension.settings.hLoc, iconSize: safari.extension.settings.iconSize, showPageUp: safari.extension.settings.showPagerNew});
+		event.target.page.dispatchMessage("preferences", {vLoc: safari.extension.settings.vLoc, hLoc: safari.extension.settings.hLoc, iconSize: safari.extension.settings.iconSize, scrSpeed: safari.extension.settings.scrollingSpeed, visibilityBehav: safari.extension.settings.visibilityBehavior, controlOption: safari.extension.settings.controlOption});
 	}
 	 
 	function respondToMessage(theMessageEvent) {

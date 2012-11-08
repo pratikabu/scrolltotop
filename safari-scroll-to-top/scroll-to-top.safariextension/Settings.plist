@@ -46,6 +46,76 @@
 	</dict>
 	<dict>
 		<key>DefaultValue</key>
+		<string>1200</string>
+		<key>Key</key>
+		<string>scrollingSpeed</string>
+		<key>Title</key>
+		<string>Scrolling Speed</string>
+		<key>Titles</key>
+		<array>
+			<string>Immediate</string>
+			<string>Fastest</string>
+			<string>Faster</string>
+			<string>Normal</string>
+			<string>Slower</string>
+			<string>Slowest</string>
+		</array>
+		<key>Type</key>
+		<string>ListBox</string>
+		<key>Values</key>
+		<array>
+			<string>0</string>
+			<string>400</string>
+			<string>800</string>
+			<string>1200</string>
+			<string>1500</string>
+			<string>2000</string>
+		</array>
+	</dict>
+	<dict>
+		<key>DefaultValue</key>
+		<string>alwaysshow</string>
+		<key>Key</key>
+		<string>visibilityBehavior</string>
+		<key>Title</key>
+		<string>Visibility Behavior</string>
+		<key>Titles</key>
+		<array>
+			<string>Auto Hide</string>
+			<string>Always Show</string>
+		</array>
+		<key>Type</key>
+		<string>ListBox</string>
+		<key>Values</key>
+		<array>
+			<string>autohide</string>
+			<string>alwaysshow</string>
+		</array>
+	</dict>
+	<dict>
+		<key>DefaultValue</key>
+		<string>pager</string>
+		<key>Key</key>
+		<string>controlOption</string>
+		<key>Title</key>
+		<string>Control Options</string>
+		<key>Titles</key>
+		<array>
+			<string>None</string>
+			<string>Simple</string>
+			<string>With Pager</string>
+		</array>
+		<key>Type</key>
+		<string>ListBox</string>
+		<key>Values</key>
+		<array>
+			<string>none</string>
+			<string>simple</string>
+			<string>pager</string>
+		</array>
+	</dict>
+	<dict>
+		<key>DefaultValue</key>
 		<real>48</real>
 		<key>Key</key>
 		<string>iconSize</string>
@@ -62,30 +132,6 @@
 		<array>
 			<real>48</real>
 			<real>32</real>
-		</array>
-	</dict>
-	<dict>
-		<key>DefaultValue</key>
-		<true/>
-		<key>FalseValue</key>
-		<false/>
-		<key>Key</key>
-		<string>showPagerNew</string>
-		<key>Title</key>
-		<string>Show Pagers</string>
-		<key>Titles</key>
-		<array>
-			<string>Show</string>
-			<string>Hide</string>
-		</array>
-		<key>TrueValue</key>
-		<true/>
-		<key>Type</key>
-		<string>CheckBox</string>
-		<key>Values</key>
-		<array>
-			<true/>
-			<false/>
 		</array>
 	</dict>
 </array>
