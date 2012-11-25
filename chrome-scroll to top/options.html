@@ -92,8 +92,6 @@
 						<input type="radio" name="iconLib" value="32"><img style="vertical-align: middle;" id="iconSizeOp1" src="icons/pratikabu-stt-48.png" />
 						<input type="radio" name="iconLib" value="32"><img style="vertical-align: middle;" id="iconSizeOp1" src="icons/pratikabu-stt-48.png" />
 						<input type="radio" name="iconLib" value="32"><img style="vertical-align: middle;" id="iconSizeOp1" src="icons/pratikabu-stt-48.png" />
-						<input type="radio" name="iconLib" value="32"><img style="vertical-align: middle;" id="iconSizeOp1" src="icons/pratikabu-stt-48.png" />
-						<input type="radio" name="iconLib" value="32"><img style="vertical-align: middle;" id="iconSizeOp1" src="icons/pratikabu-stt-48.png" />
 					</td>
 				</tr>
 				<tr>
@@ -104,15 +102,11 @@
 							1. Visibility will be set to Auto Hide.<br/>
 							2. Control Options will be set to None.
 						</p>
-						<script>
-							$("#useMyIcon").click(function() {
-							});
-						</script>
 					</td>
 				</tr>
 				<tr>
-					<td align="center" style="vertical-align: middle;">
-						<input type="textbox" id="useMyIconTextBox" class="mySelect" style="width: 90%;">
+					<td align="left" style="vertical-align: middle;">
+						<input type="textbox" id="useMyIconTextBox" class="mySelect" style="width: 100%;">
 						<script>
 							$("#useMyIconTextBox").blur(function() {
 								$('#userIcon').attr('src', 'data:image/png;base64,' + $('#useMyIconTextBox').val());
