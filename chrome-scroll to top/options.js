@@ -94,8 +94,6 @@ document.addEventListener('DOMContentLoaded', function () {
 	
 	$("#useMyIconTextBox").change(function() { $('#previewIcon').attr('src', 'data:image/png;base64,' + $('#useMyIconTextBox').val()); });
 	$("#useMyIconTextBox").focus(function() {
-		//$('input:radio[name=iconLib]').filter('[value=myIcon]').attr('checked', true);
-		//$('input:radio[name=iconLib]').change();
 		this.select();
 		
 		// Work around Chrome's little problem
@@ -110,7 +108,8 @@ document.addEventListener('DOMContentLoaded', function () {
 		if(true === firstTime) {
 			firstTime = false;
 		} else {
-			save_options();
+			$('input:radio[name=iconLib]').filter('[value=myIcon]').attr('checked', true);
+			$('input:radio[name=iconLib]').change();
 		}
 	});
 	$("#previewIcon").error(function() {

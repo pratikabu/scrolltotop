@@ -105,11 +105,12 @@ var pratikabustt = {
 		var otherImagesSize = pratikabustt.getOtherImageSize();
 		
 		var showPagerButtons;
-		if("pager" == pratikabu_stt_controlOption &&
-			$(document).height() != pratikabustt.getWindowHeight()) {
-			showPagerButtons = "true";
-		} else {
-			pratikabu_stt_controlOption = "simple";// set the control option to simple
+		if("pager" == pratikabu_stt_controlOption) {
+			if($(document).height() != pratikabustt.getWindowHeight()) {
+				showPagerButtons = "true";
+			} else {
+				pratikabu_stt_controlOption = "simple";// set the control option to simple
+			}
 		}
 		
 		var divSize = otherImagesSize;
