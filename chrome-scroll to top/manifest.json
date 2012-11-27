@@ -11,7 +11,7 @@
   },
   
   "icons": {"16": "icons/pratikabu-stt-16.png",
-      "48": "icons/pratikabu-stt-48.png",
+      "48": "icons/pratikabu-stt-48-1.png",
       "128": "icons/pratikabu-stt-128.png"},
 	
   "content_scripts": [
@@ -23,8 +23,13 @@
   ],
   
   "web_accessible_resources": [
-	"icons/pratikabu-stt-32.png",
-    "icons/pratikabu-stt-48.png",
+	"icons/pratikabu-stt-32-1.png",
+    "icons/pratikabu-stt-48-1.png",
+	"icons/pratikabu-stt-32-2.png",
+    "icons/pratikabu-stt-48-2.png",
+	"icons/pratikabu-stt-32-3.png",
+    "icons/pratikabu-stt-48-3.png",
+	
 	"icons/pratikabu-stt-clear-16.png",
 	"icons/pratikabu-stt-clear-24.png",
 	"icons/pratikabu-stt-down-24.png",

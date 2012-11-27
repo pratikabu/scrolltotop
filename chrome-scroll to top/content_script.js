@@ -20,7 +20,7 @@ var pratikabu_stt_onceVisible = "false";// this variable will be used for the sp
 
 var pratikabustt = {
 	pratikabu_stt_scrollHandler: function () {
-		pratikabustt.hideOrShowButton();
+		pratikabustt.callHideOrShowOnceAfterInit();
 	},
 	
 	createButton: function() {
@@ -148,6 +148,8 @@ var pratikabustt = {
 		}
 		
 		$("#pratikabuSTTArrowUp").css("float", pratikabu_stt_float);
+		$("#pratikabuSTTArrowUp").css("width", pratikabu_stt_iconSize + "px");
+		$("#pratikabuSTTArrowUp").css("height", pratikabu_stt_iconSize + "px");
 		
 		return "true";// successfully created
 	},
@@ -226,7 +228,15 @@ var pratikabustt = {
 	},
 	
 	showUpArrowImage: function() {
-		$("#pratikabuSTTArrowUp").attr("src", pratikabustt_browser_impl.getBrowserSpecificUrl(pratikabustt_browser_impl.getFixedLocation() + pratikabu_stt_iconSize + ".png"));
+		var imgSource;
+		
+		if("myIcon" == pratikabu_stt_prefs.iconLib) {
+			imgSource = "data:image/png;base64," + pratikabu_stt_prefs.userIcon;
+		} else {
+			imgSource = pratikabustt_browser_impl.getBrowserSpecificUrl(pratikabustt_browser_impl.getFixedLocation() + pratikabu_stt_iconSize + "-" + pratikabu_stt_prefs.iconLib + ".png");
+		}
+		
+		$("#pratikabuSTTArrowUp").attr("src", imgSource);
 	},
 	
 	hideOrShowButton: function() {
@@ -330,8 +340,7 @@ var pratikabustt = {
 	},
 	
 	callHideOrShowOnceAfterInit: function() {// function to handle the call to hideOrShowButton
-		if("true" == pratikabu_stt_documentLoaded && // check whether the window is loaded or not
-			"true" == pratikabu_stt_preferencesLoaded) {// check whether the preferences have been loaded or not
+		if("true" == pratikabu_stt_preferencesLoaded) {// check whether the preferences have been loaded or not
 			// hide or show the button based on the current location, because a page can be loaded scrolled..
 			pratikabustt.hideOrShowButton();
 		}
@@ -352,6 +361,6 @@ $(document).ready(function() {// when page is ready do the below mentioned steps
 $(window).resize(function() {// when window is resized do the below mentioned steps
 	if(!pratikabu_stt_buttonCreated || "true" == pratikabu_stt_buttonCreated) {
 		// hide or show the button based on the current location, because a page can be loaded scrolled..
-		pratikabustt.hideOrShowButton();
+		pratikabustt.callHideOrShowOnceAfterInit();
 	}
 });

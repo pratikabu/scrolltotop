@@ -66,18 +66,12 @@
 					</td>
 				</tr>
 				<tr>
-					<td align="right" width="50%">Choose Icon Size :</td>
+					<td align="right" width="50%">Icon Size :</td>
 					<td align="left" style="vertical-align: middle;" width="50%">
-						<input type="radio" name="imgSize" value="32"><img style="vertical-align: middle;" id="iconSizeOp1" src="icons/pratikabu-stt-32.png" />
-						<input type="radio" name="imgSize" value="48"><img style="vertical-align: middle;" id="iconSizeOp2" src="icons/pratikabu-stt-48.png" />
-						<script>
-							$("#iconSizeOp1").click(function() {
-								$('input:radio[name=imgSize]').filter('[value=32]').attr('checked', true);
-							});
-							$("#iconSizeOp2").click(function() {
-								$('input:radio[name=imgSize]').filter('[value=48]').attr('checked', true);
-							});
-						</script>
+						<select id="iconSize" class="mySelect">
+							<option value="48">48px</option>
+							<option value="32">32px</option>
+						</select>
 					</td>
 				</tr>
 			</table>
@@ -89,46 +83,53 @@
 				</tr>
 				<tr>
 					<td align="left">
-						<input type="radio" name="iconLib" value="32"><img style="vertical-align: middle;" id="iconSizeOp1" src="icons/pratikabu-stt-48.png" />
-						<input type="radio" name="iconLib" value="32"><img style="vertical-align: middle;" id="iconSizeOp1" src="icons/pratikabu-stt-48.png" />
-						<input type="radio" name="iconLib" value="32"><img style="vertical-align: middle;" id="iconSizeOp1" src="icons/pratikabu-stt-48.png" />
+						<input type="radio" name="iconLib" value="1"><img style="vertical-align: middle;" id="iconGal1" src="icons/pratikabu-stt-48-1.png" />
+						<input type="radio" name="iconLib" value="2"><img style="vertical-align: middle;" id="iconGal2" src="icons/pratikabu-stt-48-2.png" />
+						<input type="radio" name="iconLib" value="3"><img style="vertical-align: middle;" id="iconGal3" src="icons/pratikabu-stt-48-3.png" />
 					</td>
 				</tr>
 				<tr>
 					<td align="left">
-						<input type="radio" name="iconLib" value="ownIcon"><span id="useMyIcon">Use my icon</span>
+						<input type="radio" name="iconLib" value="myIcon"><span id="useMyIcon">Use my icon</span>
 						<p align="justify" style="font-size: 12px;">
-							Note: If you enable Use My Icon, then following restriction will get applied:<br/>
-							1. Visibility will be set to Auto Hide.<br/>
-							2. Control Options will be set to None.
+							Note: If you enable Use My Icon, then icon size will be restricted to either 32 or 48 pixels as per the selection in Icon Size combo.
 						</p>
 					</td>
 				</tr>
 				<tr>
 					<td align="left" style="vertical-align: middle;">
 						<input type="textbox" id="useMyIconTextBox" class="mySelect" style="width: 100%;">
-						<script>
-							$("#useMyIconTextBox").blur(function() {
-								$('#userIcon').attr('src', 'data:image/png;base64,' + $('#useMyIconTextBox').val());
-							});
-					</script>
 					</td>
 				</tr>
 				<tr>
 					<td align="center" width="100%">
-						<img style="vertical-align: middle;" id="userIcon" src="icons/pratikabu-stt-48.png" />
+						<img style="vertical-align: middle; width: 48px; height: 48px;" id="previewIcon" alt="Preview" title="Preview of your uploaded icon." />
 						<br/>
 						<p align="justify" style="font-size: 12px;">
 							To upload your own icon. Follow these steps:<br/>
-							1. Get base64 encoded string of your image. <a href="http://www.base64-image.de/step-1.php" title="">Click here</a> and follow the steps.<br/>
+							1. Get base64 encoded string of your image. <a href="http://www.base64-image.de/step-1.php" target="_blank">Click here</a> and follow the steps.<br/>
 							2. Paste the base64 encoded string in the above text box.<br/>
+							3. Thats it!! Your image should appear in the preview box above.
 						</p>
 					</td>
 				</tr>
 			</table>
-			<input type="button" id="saveSettings" value="Save" class="mybutton small red" style="margin-bottom: 20px;" /><input type="button" id="defaultBut" value="Defaults" class="mybutton small green" style="margin-bottom: 20px;" />
-			<p><a class="tableClass" style="padding: 5px;" href="https://addons.mozilla.org/en-US/firefox/addon/scroll-to-top/developers"><b>Donate Now</b></a></p>
-			<div id="status" style="color: RED;"></div>
+			<input type="button" id="defaultBut" value="Restore to Defaults" class="mybutton small green" /><br/><br/>
 		</div></form>
+		
+		<div id="donateContainer" title="Support Development!" class="actionDiv">
+			<form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+				<input type="hidden" name="cmd" value="_donations">
+				<input type="hidden" name="business" value="pratikabu@gmail.com">
+				<input type="hidden" name="lc" value="US">
+				<input type="hidden" name="item_name" value="Support development for Scroll To Top">
+				<input type="hidden" name="no_note" value="0">
+				<input type="hidden" name="currency_code" value="USD">
+				<input type="hidden" name="bn" value="PP-DonationsBF:btn_donateCC_LG.gif:NonHostedGuest">
+				<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+				<img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+			</form>
+		</div>
+		<div id="status" class="actionDiv myFonts" title="All statuses will appear here." style="color: RED; top: 50%; margin-top: -70px;">&nbsp;</div>
 	</body>
 </html>				
