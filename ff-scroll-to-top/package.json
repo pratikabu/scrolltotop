@@ -1,7 +1,7 @@
 {
 	"description": "This plugin will add one image at the bottom right corner of your page once you scroll your page to some extent. Click on the image and it will scroll you to the top of the page with beautiful animation. You can configure the location of the icon using options page. And there are lot more other options.",
 	"contributors": [],
-	"icon": "data/icons/pratikabu-stt-48.png",
+	"icon": "data/icons/pratikabu-stt-48-1.png",
 	"icon64": "data/icons/pratikabu-stt-64.png",
 	"dependencies": ["api-utils", "addon-kit"],
 	"lib": "lib",
@@ -11,7 +11,7 @@
 	"author": "Pratik Soni",
 	"url": "http://pratikabu.users.sourceforge.net",
 	"name": "scroll-to-top",
-	"version": "3.5.1",
+	"version": "3.6",
 	"main": "main",
 	"homepage": "http://pratikabu.users.sourceforge.net/extensions/scrolltotop"
 }

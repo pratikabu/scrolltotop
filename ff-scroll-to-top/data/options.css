@@ -18,8 +18,20 @@
 	margin-bottom: 20px;
 }
 
+.actionDiv {
+	position: fixed;
+	right: 0px;
+	top: 50%;
+	margin-top: -20px;
+	border: 1px SOLID #2094F0;
+	border-radius: 5px 0 0 5px;
+	border-right: 0px;
+	background: WHITESMOKE;
+	padding: 10px;
+}
+
 .myHeader {
-	background: url(icons/pratikabu-stt-48.png) no-repeat;
+	background: url(icons/pratikabu-stt-48-1.png) no-repeat;
 	text-indent: 60px;
 	display: inline-block;
 	line-height: 50px;
@@ -73,4 +85,8 @@ a:hover {
 	font-size: 20px;
 	color: #9B2D2D;
 	font-family: Arial,Helvetica,sans-serif;
+}
+
+form {
+	margin-bottom: 0px;
 }

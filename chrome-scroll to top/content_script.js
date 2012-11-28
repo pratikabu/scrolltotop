@@ -80,7 +80,7 @@ var pratikabustt = {
 		// add the scroll down logic
 		$("#pratikabuSTTClear").click(function() {
 			$("#pratikabuSTTDiv").stop(true, true).fadeTo("slow", 0, function() {
-				$("#pratikabuSTTDiv").hide();
+				$("#pratikabuSTTDiv").remove();
 				pratikabu_stt_bVisibility = false;
 				$(window).unbind('scroll', pratikabustt.pratikabu_stt_scrollHandler);
 			});
@@ -265,7 +265,7 @@ var pratikabustt = {
 		
 		ignoreCreation = boolShow ? "false" : "true";// ignoreCreation if boolShow is false
 		
-		if(!pratikabu_stt_buttonCreated && "true" == ignoreCreation) {
+		if(!pratikabu_stt_buttonCreated && ("true" == ignoreCreation || window != window.top)) {// ignore any iFrame/frame, work only for top window
 			// since the page doesnot satisfies the height criteria, ignore the creation and hide logic
 			// this logic can create an icon once user resizes the window
 			return;
