@@ -13,11 +13,24 @@
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleShortVersionString</key>
-	<string>3.5</string>
+	<string>3.6</string>
 	<key>CFBundleVersion</key>
-	<string>3.5</string>
+	<string>3.6</string>
 	<key>Chrome</key>
 	<dict>
+		<key>Context Menu Items</key>
+		<array>
+			<dict>
+				<key>Command</key>
+				<string>openOptionPage</string>
+				<key>Identifier</key>
+				<string>configureSTT</string>
+				<key>Title</key>
+				<string>Configure Scroll To Top</string>
+			</dict>
+		</array>
+		<key>Database Quota</key>
+		<real>1048576</real>
 		<key>Global Page</key>
 		<string>background.html</string>
 	</dict>

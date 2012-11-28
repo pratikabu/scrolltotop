@@ -32,7 +32,6 @@ var pratikabustt_browser_impl = {
 	convertResponse: function(rawResponse) {
 		// #BrowserSpecific method to convert response to single known format
 		var response = rawResponse.message;
-		response.showPageUp = response.showPageUp + "";
 		return response;
 	}
 };

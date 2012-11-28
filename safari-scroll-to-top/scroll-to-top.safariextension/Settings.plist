@@ -4,135 +4,37 @@
 <array>
 	<dict>
 		<key>DefaultValue</key>
-		<string>right</string>
-		<key>Key</key>
-		<string>hLoc</string>
-		<key>Secure</key>
-		<false/>
-		<key>Title</key>
-		<string>Horizontal Location</string>
-		<key>Titles</key>
-		<array>
-			<string>Right</string>
-			<string>Left</string>
-		</array>
-		<key>Type</key>
-		<string>ListBox</string>
-		<key>Values</key>
-		<array>
-			<string>right</string>
-			<string>left</string>
-		</array>
-	</dict>
-	<dict>
-		<key>DefaultValue</key>
-		<string>bottom</string>
-		<key>Key</key>
-		<string>vLoc</string>
-		<key>Title</key>
-		<string>Vertical Location</string>
-		<key>Titles</key>
-		<array>
-			<string>Bottom</string>
-			<string>Top</string>
-		</array>
-		<key>Type</key>
-		<string>ListBox</string>
-		<key>Values</key>
-		<array>
-			<string>bottom</string>
-			<string>top</string>
-		</array>
-	</dict>
-	<dict>
-		<key>DefaultValue</key>
-		<string>1200</string>
-		<key>Key</key>
-		<string>scrollingSpeed</string>
-		<key>Title</key>
-		<string>Scrolling Speed</string>
-		<key>Titles</key>
-		<array>
-			<string>Immediate</string>
-			<string>Fastest</string>
-			<string>Faster</string>
-			<string>Normal</string>
-			<string>Slower</string>
-			<string>Slowest</string>
-		</array>
-		<key>Type</key>
-		<string>ListBox</string>
-		<key>Values</key>
-		<array>
-			<string>0</string>
-			<string>400</string>
-			<string>800</string>
-			<string>1200</string>
-			<string>1500</string>
-			<string>2000</string>
-		</array>
-	</dict>
-	<dict>
-		<key>DefaultValue</key>
-		<string>alwaysshow</string>
-		<key>Key</key>
-		<string>visibilityBehavior</string>
-		<key>Title</key>
-		<string>Visibility Behavior</string>
-		<key>Titles</key>
-		<array>
-			<string>Auto Hide</string>
-			<string>Always Show</string>
-		</array>
-		<key>Type</key>
-		<string>ListBox</string>
-		<key>Values</key>
-		<array>
-			<string>autohide</string>
-			<string>alwaysshow</string>
-		</array>
-	</dict>
-	<dict>
-		<key>DefaultValue</key>
-		<string>pager</string>
-		<key>Key</key>
-		<string>controlOption</string>
-		<key>Title</key>
-		<string>Control Options</string>
-		<key>Titles</key>
-		<array>
-			<string>None</string>
-			<string>Simple</string>
-			<string>With Pager</string>
-		</array>
-		<key>Type</key>
-		<string>ListBox</string>
-		<key>Values</key>
-		<array>
-			<string>none</string>
-			<string>simple</string>
-			<string>pager</string>
-		</array>
-	</dict>
-	<dict>
-		<key>DefaultValue</key>
 		<real>48</real>
 		<key>Key</key>
 		<string>iconSize</string>
 		<key>Title</key>
-		<string>Image Size</string>
+		<string>To configure Scroll To Top right-click on the web page.</string>
 		<key>Titles</key>
 		<array>
 			<string>48px Images</string>
 			<string>32px Images</string>
 		</array>
 		<key>Type</key>
-		<string>RadioButtons</string>
+		<string>Group</string>
 		<key>Values</key>
 		<array>
 			<real>48</real>
 			<real>32</real>
 		</array>
+	</dict>
+	<dict>
+		<key>Type</key>
+		<string>Separator</string>
+	</dict>
+	<dict>
+		<key>Title</key>
+		<string>Select the Configure Scroll To Top button from the menu.</string>
+		<key>Type</key>
+		<string>Group</string>
+	</dict>
+	<dict>
+		<key>Type</key>
+		<string>Separator</string>
 	</dict>
 </array>
 </plist>
