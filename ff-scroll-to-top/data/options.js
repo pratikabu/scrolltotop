@@ -1,8 +1,10 @@
 var requestCount = 0;
-var firstTime = true;
+var ignoreImgLoad = true;
 
 // Saves options to localStorage.
 function default_options() {
+	ignoreImgLoad = true;// ignore the image load method as it will reset myIcon in the radio button
+	
 	self.port.emit("resetPrefs");// method to communicate to main.js
 }
 
@@ -86,8 +88,8 @@ document.addEventListener('DOMContentLoaded', function () {
 	});
 	
 	$("#previewIcon").load(function() {
-		if(true === firstTime) {
-			firstTime = false;
+		if(true === ignoreImgLoad) {
+			ignoreImgLoad = false;
 		} else {
 			$('input:radio[name=iconLib]').filter('[value=myIcon]').attr('checked', true);
 			$('input:radio[name=iconLib]').change();
