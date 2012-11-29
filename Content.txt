@@ -7,7 +7,7 @@ Chrome Version: http://chrome.google.com/webstore/detail/scroll-to-top/hegiignep
 Safari Version: http://pratikabu.users.sourceforge.net/extensions/scrolltotop/safaridownload.php
 Opera Version: https://addons.opera.com/en/extensions/details/scroll-to-top
 
-Consider Donation (It helps): https://addons.mozilla.org/en-US/firefox/addon/scroll-to-top/developers
+Consider Donation (It helps): http://pratikabu.users.sourceforge.net/extensions/scrolltotop/donate.php
 
 Why Chrome warns me about browser data and history?
 Its a standard Chrome warning. Nothing to worry at all.. :)
