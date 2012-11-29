@@ -15,6 +15,8 @@ Download for [Google Chrome](http://chrome.google.com/webstore/detail/scroll-to-
 
 Download for [Apple Safari](http://pratikabu.users.sourceforge.net/extensions/scrolltotop/safaridownload.php)
 
+Download for [Opera](http://addons.opera.com/en/extensions/details/scroll-to-top)
+
 Changes in Version 3.6:
 ------------
 - added icon gallery to choose other icons
