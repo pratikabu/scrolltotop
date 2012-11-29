@@ -1,7 +1,7 @@
 Scroll To Top
 =============
 
-It is a browser add-on available for Firefox, Chrome and Safari.
+It is a browser add-on available for Firefox, Chrome, Safari and Opera.
 
 Scrolling on pages is really a tiring experience. Specially if the page is really big one. This plugin tries to minify this tiring experience. With this plugin it will be more fun than just scroll. It adds images at bottom-right corner of the page to give you one click scrolling to top and vice-versa with beautiful animation. You can configure the location of the icon using options page. Moreover you can stop the scrolling in-between.
 
@@ -26,6 +26,8 @@ Changes in Version 3.6:
 - new options page for Safari browser
 - lots of other stability fixes
 - code refactoring
+
+See [blog post](http://pratikabu.blogspot.com/2012/11/scroll-to-top-version-36-released.html) for discussions.
 
 Changes in Version 3.5:
 ------------
