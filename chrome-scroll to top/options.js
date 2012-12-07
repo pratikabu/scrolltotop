@@ -70,10 +70,20 @@ function getParameterByName(name) {
 		return decodeURIComponent(results[1].replace(/\+/g, " "));
 }
 
+function execute() {
+	$('#vehicleChkBox').change(function(){
+		if($(this).attr('checked')) {
+			$(this).val('TRUE');
+		} else {
+			$(this).val('FALSE');
+		}
+	});
+}
+
 document.addEventListener('DOMContentLoaded', function () {
 	var updated = getParameterByName("updated");
 	if("true" == updated) {
-		var updateDiv = '<div id="updateDiv" align="center" style="width: 100%;">Congratulations Scroll To Top has been updated to the latest version. See <a href="http://github.com/pratikabu/scrolltotop/wiki/Release-Notes">Release Notes</a>.</div>';
+		var updateDiv = '<div id="updateDiv" align="center" style="width: 100%;">Congratulations Scroll To Top has been updated to the latest version. See <a href="http://github.com/pratikabu/scrolltotop/wiki/Release-Notes">What&quot;s New</a>.</div>';
 		$('body').prepend(updateDiv);
 	}
 	

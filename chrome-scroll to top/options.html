@@ -13,8 +13,9 @@
 					<td align="right" width="50%">Vertical Location :</td>
 					<td width="50%">
 						<select id="imgVerticalLocation" class="mySelect">
-							<option value="bottom">Bottom</option>
 							<option value="top">Top</option>
+							<option value="middle">Middle</option>
+							<option value="bottom">Bottom</option>
 						</select>
 					</td>
 				</tr>
@@ -22,8 +23,9 @@
 					<td align="right" width="50%">Horizontal Location :</td>
 					<td width="50%">
 						<select id="imgHorizontalLocation" class="mySelect">
-							<option value="right">Right</option>
 							<option value="left">Left</option>
+							<option value="middle">Middle</option>
+							<option value="right">Right</option>
 						</select>
 					</td>
 				</tr>
@@ -55,6 +57,7 @@
 						<select id="controlOptions" class="mySelect">
 							<option value="none">None</option>
 							<option value="simple">Simple</option>
+							<option value="none">Dual Direction</option>
 							<option value="pager">With Pager</option>
 						</select>
 					</td>
@@ -66,6 +69,13 @@
 							<option value="48">48px</option>
 							<option value="32">32px</option>
 						</select>
+					</td>
+				</tr>
+				<tr>
+					<td align="right" width="50%">Toggle Pause</td>
+					<td align="left" style="vertical-align: middle;" width="50%">
+						<input type="radio" name="togglePause" value="y">Yes
+						<input type="radio" name="togglePause" value="n">No
 					</td>
 				</tr>
 			</table>
@@ -116,7 +126,11 @@
 			<a id="donateButton" target="_blank" title="It helps in many ways, including financial support. :)" href="http://pratikabu.users.sourceforge.net/extensions/scrolltotop/donate.php"><b>Donate Now</b></a><br/>
 			<a target="_blank" href="http://pratikabu.users.sourceforge.net/extensions/scrolltotop" style="font-size: 12px;" title="Scroll To Top Home Page">Home Page</a><br/>
 			<a target="_blank" href="https://github.com/pratikabu/scrolltotop/issues" style="font-size: 12px;" title="Report an Issue / Request a Feature">Report Issue</a><br/>
-			<a target="_blank" href="http://pratikabu.users.sourceforge.net" style="font-size: 12px;" title="Developer's Home Page">Developer's Page</a><br/>
+			<a target="_blank" href="http://pratikabu.users.sourceforge.net" style="font-size: 12px;" title="Developer's Home Page">Developer's Page</a>
+			<hr/>
+			<span style="font-size: 12px;">Version: 3.7</span><br/>
+			<a target="_blank" href="http://github.com/pratikabu/scrolltotop/wiki/Release-Notes" style="font-size: 12px;" title="See what's new and exciting.">What's New</a><br/>
+			<a target="_blank" href="http://github.com/pratikabu/scrolltotop/wiki/Release-Notes" style="font-size: 12px;" title="See if any new version available.">Check Updates</a>
 		</div>
 		<div id="status" class="actionDiv myFonts" title="All statuses will appear here." style="color: RED; top: 50%; margin-top: -70px;">&nbsp;</div>
 	</body>

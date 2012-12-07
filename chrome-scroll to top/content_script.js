@@ -197,14 +197,14 @@ var pratikabustt = {
 	
 	getWindowHeight: function() {
 		var winHeight = $(window).height();
-		var docHeight = $(document).height();
+		/**var docHeight = $(document).height();
 		
 		if(winHeight == docHeight && $(frameElement)) {
 			var frameHeight = $(frameElement).height();
 			if(frameHeight && 0 < frameHeight) {
 				winHeight = frameHeight;
 			}
-		}
+		}*/
 		
 		return winHeight;
 	},
