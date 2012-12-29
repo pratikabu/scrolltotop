@@ -1,13 +1,13 @@
-Scrolling on pages is really a tiring experience. Specially if the page is really big one. This plugin tries to minify this tiring experience. With this plugin it will be more fun than just scroll. It adds images at bottom-right corner of the page to give you one click scrolling to top and vice-versa with beautiful animation. There are lot other features and lots of customization.
+Scrolling on pages is really a tiring experience. Specially if the page is really big one. This plugin tries to minify this tiring experience. With this plugin it will be more fun than just scroll. It adds an image at bottom-right corner of the page to give you one click scrolling to top and vice-versa with beautiful animation. There are lot other features and lots of customization.
 
-Official website: http://pratikabu.users.sourceforge.net/extensions/scrolltotop
+Official website: http://goo.gl/JtR42
 
-Firefox Version: http://addons.mozilla.org/en-us/firefox/addon/scroll-to-top
-Chrome Version: http://chrome.google.com/webstore/detail/scroll-to-top/hegiignepmecppikdlbohnnbfjdoaghj
-Safari Version: http://pratikabu.users.sourceforge.net/extensions/scrolltotop/safaridownload.php
-Opera Version: https://addons.opera.com/en/extensions/details/scroll-to-top
+Firefox Version: http://goo.gl/HarJX
+Chrome Version: http://goo.gl/VTh5j
+Safari Version: http://goo.gl/RaBrw
+Opera Version: http://goo.gl/HMNnD
 
-Consider Donation (It helps): http://pratikabu.users.sourceforge.net/extensions/scrolltotop/donate.php
+Consider Donation (It helps): http://goo.gl/8Nl3M
 
 Why Chrome warns me about browser data and history?
 Its a standard Chrome warning. Nothing to worry at all.. :)
