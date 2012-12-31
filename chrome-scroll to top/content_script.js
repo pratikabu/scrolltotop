@@ -17,6 +17,7 @@ var pratikabu_stt_firstAlwaysShow = "true";
 var pratikabu_stt_buttonCreated;// this variable will tell whether the button is created or not on this page also whether this page is eligible for the button or not it will be initialzied once during load
 var pratikabu_stt_prefs;// this variable holds the preferences
 var pratikabu_stt_onceVisible = "false";// this variable will be used for the special case in which document and window height are same. it will be used to identify the always on property so that visibility of the icon can be persisted.
+var pratikabu_stt_pauseActive = false;
 
 var pratikabustt = {
 	pratikabu_stt_scrollHandler: function () {
@@ -55,7 +56,7 @@ var pratikabustt = {
 			if($(document).scrollTop() == 0) {
 				return false;
 			}
-			if($(this).attr("src").lastIndexOf("pause") == -1) {// identify up arrow
+			if(!pratikabu_stt_pauseActive) {// identify up arrow
 				pratikabustt.scrollPageTo(pratikabu_stt_delay, 0, pratikabu_stt_prefs.togglePause);
 			} else {
 				pratikabustt.showUpArrowImage();
@@ -239,6 +240,7 @@ var pratikabustt = {
 	},
 	
 	showPauseImage: function() {
+		pratikabu_stt_pauseActive = true;
 		var imgUrl = pratikabustt_browser_impl.getFixedLocation() + "pause-" + pratikabu_stt_iconSize + ".png";
 		$("#pratikabuSTTArrowUp").attr("src", pratikabustt_browser_impl.getBrowserSpecificUrl(imgUrl));
 	},
@@ -246,6 +248,7 @@ var pratikabustt = {
 	showUpArrowImage: function() {
 		var imgSource;
 		
+		pratikabu_stt_pauseActive = false;
 		if("myIcon" == pratikabu_stt_prefs.iconLib) {
 			imgSource = "data:image/png;base64," + pratikabu_stt_prefs.userIcon;
 		} else {
