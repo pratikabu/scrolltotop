@@ -56,7 +56,7 @@ var pratikabustt = {
 				return false;
 			}
 			if($(this).attr("src").lastIndexOf("pause") == -1) {// identify up arrow
-				pratikabustt.scrollPageTo(pratikabu_stt_delay, 0, true);
+				pratikabustt.scrollPageTo(pratikabu_stt_delay, 0, pratikabu_stt_prefs.togglePause);
 			} else {
 				pratikabustt.showUpArrowImage();
 				$("html, body").stop();
@@ -73,7 +73,7 @@ var pratikabustt = {
 			if($(document).scrollTop() == location) {
 				return false;
 			}
-			pratikabustt.scrollPageTo(pratikabu_stt_delay, location, true);
+			pratikabustt.scrollPageTo(pratikabu_stt_delay, location, pratikabu_stt_prefs.togglePause);
 			return false;
 		});
 		
@@ -96,8 +96,23 @@ var pratikabustt = {
 		});
 		
 		// populate from preferences
-		$("#pratikabuSTTDiv").css(pratikabu_stt_prefs.vLoc, "20px");// set the vertical alignment of the image
-		$("#pratikabuSTTDiv").css(pratikabu_stt_prefs.hLoc, "20px");// set the horizontal alignment of the image
+		var vloc = pratikabu_stt_prefs.vLoc;
+		var vlocVal = "20px";
+		var hloc = pratikabu_stt_prefs.hLoc;
+		var hlocVal = "20px";
+		
+		if("middle" == vloc) {
+			vloc = "top";
+			vlocVal = "50%";
+		}
+		
+		if("middle" == hloc) {
+			hloc = "left";
+			hlocVal = "50%";
+		}
+		
+		$("#pratikabuSTTDiv").css(vloc, vlocVal);// set the vertical alignment of the image
+		$("#pratikabuSTTDiv").css(hloc, hlocVal);// set the horizontal alignment of the image
 		
 		// set the image
 		pratikabustt.showUpArrowImage();
@@ -330,6 +345,7 @@ var pratikabustt = {
 	
 	loadFromResponse: function(response) {// load the images, css, include/remove elements
 		pratikabu_stt_prefs = response;
+		pratikabu_stt_prefs.togglePause = pratikabu_stt_prefs.togglePause == "true" ? true : false;
 		
 		pratikabu_stt_delay = parseInt(pratikabu_stt_prefs.scrSpeed);
 		pratikabu_stt_iconSize = parseInt(pratikabu_stt_prefs.iconSize);
