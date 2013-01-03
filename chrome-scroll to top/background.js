@@ -29,15 +29,12 @@ if (!localStorage["toggle_pause"]) {
 if (!localStorage["arrow_type"]) {
 	localStorage["arrow_type"] = "1";
 }
-if (!localStorage["dcontrol_options"]) {
-	localStorage["dcontrol_options"] = "none";
-}
 
 // Message passer to give [LocalStorage] settings to content_script.js
 chrome.extension.onRequest.addListener(
 	function(request, sender, sendResponse) {
 		if (request.method == "getSettings") {
-			sendResponse({vLoc: localStorage["vertical_location"], hLoc: localStorage["horizontal_location"], iconSize: localStorage["image_size"], scrSpeed: localStorage["scrolling_speed"], visibilityBehav: localStorage["visibility_behavior"], controlOption: localStorage["control_options"], iconLib: localStorage["icon_library"], userIcon: localStorage["user_saved_icon"], togglePause: localStorage["toggle_pause"], arrowType: localStorage["arrow_type"], dControlOption: localStorage["dcontrol_options"]});
+			sendResponse({vLoc: localStorage["vertical_location"], hLoc: localStorage["horizontal_location"], iconSize: localStorage["image_size"], scrSpeed: localStorage["scrolling_speed"], visibilityBehav: localStorage["visibility_behavior"], controlOption: localStorage["control_options"], iconLib: localStorage["icon_library"], userIcon: localStorage["user_saved_icon"], togglePause: localStorage["toggle_pause"], arrowType: localStorage["arrow_type"]});
 		} else {
 			sendResponse({}); // snub them.
 		}

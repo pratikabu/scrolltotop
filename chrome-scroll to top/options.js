@@ -17,7 +17,6 @@ function default_options() {
 	
 	localStorage["toggle_pause"] = "false";
 	localStorage["arrow_type"] = "1";
-	localStorage["dcontrol_options"] = "none";
 	
 	ignoreForDefaults = true;
 	restore_options();
@@ -38,8 +37,6 @@ function save_options() {
 	localStorage["icon_library"] = $('input:radio[name=iconLib]:checked').val();
 	localStorage["user_saved_icon"] = $('#useMyIconTextBox').val();
 	localStorage["toggle_pause"] = $('#togglePause').is(':checked');
-	
-	localStorage["dcontrol_options"] = $('input:radio[name=dControlOptions]:checked').val();
 
 	// Update status to let user know options were saved.
 	show_message("Saved successfully.");
@@ -61,8 +58,6 @@ function restore_options() {
 	$('input:radio[name=iconSize]').filter('[value=' + localStorage["image_size"] + ']').attr('checked', true);
 	$('input:radio[name=iconLib]').filter('[value=' + localStorage["icon_library"] + ']').attr('checked', true);
 	$('#useMyIconTextBox').val(localStorage["user_saved_icon"]);
-	
-	$('input:radio[name=dControlOptions]').filter('[value=' + localStorage["dcontrol_options"] + ']').attr('checked', true);
 	
 	$("#useMyIconTextBox").change();// load the image
 }
@@ -189,9 +184,6 @@ function makeElementsSelactable() {
 	selectableRadioContent("iconSizeOp1", "iconSize", "32");
 	selectableRadioContent("iconSizeOp2", "iconSize", "48");
 	
-	selectableRadioContent("dcoNone", "dControlOptions", "none");
-	selectableRadioContent("dcoPager", "dControlOptions", "pager");
-	
 	selectableRadioContent("useMyIcon", "iconLib", "myIcon");
 	
 	$("#tpToggle").css("cursor", "default");
@@ -238,7 +230,6 @@ document.addEventListener('DOMContentLoaded', function () {
 	$('input:radio[name=controlOptions]').change(function() { isRightChangedEvent("controlOptions", $(this).val()); });
 	$("#togglePause").change(function() { save_options(); });
 	$('input:radio[name=iconLib]').change(function() { isRightChangedEvent("iconLib", $(this).val()); });
-	$('input:radio[name=dControlOptions]').change(function() { isRightChangedEvent("dControlOptions", $(this).val()); });
 	
 	$('input:radio[name=arrowType]').change(function() {
 		if(isRightChangedEvent("arrowType", $(this).val())) {
