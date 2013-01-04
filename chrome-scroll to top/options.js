@@ -234,6 +234,14 @@ document.addEventListener('DOMContentLoaded', function () {
 	$('input:radio[name=arrowType]').change(function() {
 		if(isRightChangedEvent("arrowType", $(this).val())) {
 			swapAdvancedOptions($(this).val());
+			
+			$('input:radio[name=imgHorizontalLocation]').filter('[value=right]').attr('checked', true);
+			if("1" == $(this).val()) {
+				$('input:radio[name=imgVerticalLocation]').filter('[value=bottom]').attr('checked', true);
+			} else {
+				$('input:radio[name=imgVerticalLocation]').filter('[value=middle]').attr('checked', true);
+			}
+			save_options();
 		}
 	});
 	

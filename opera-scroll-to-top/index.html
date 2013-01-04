@@ -71,9 +71,8 @@
 				onclick: openTabFunc
 			};
 			
-			// Create and add the button to the toolbar
-			var button = opera.contexts.toolbar.createItem(properties);
-			opera.contexts.toolbar.addItem(button);
+			var item = opera.contexts.menu.createItem(properties);
+			opera.contexts.menu.addItem(item);
 			
 			// open option page on initial in this version
 			var currentVersion = 2;// this variable should be incremented with every update so that, add-on update message can be shown

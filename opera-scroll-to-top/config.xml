@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <widget xmlns="http://www.w3.org/ns/widgets" version="3.7" id="http://pratikabu.users.sourceforge.net/extensions/scrolltotop" href="http://pratikabu.users.sourceforge.net/extensions/scrolltotop">
 	<name>Scroll To Top</name>
-	<description>A plugin to scroll to top and vice-versa of a window.</description>
+	<description>A plugin to scroll to top and vice-versa of a window. Right-click on any tab to configure the settings.</description>
 	<author href="http://pratikabu.users.sourceforge.net" email="pratikabu@gmail.com">Pratik Soni</author>
 	<icon src="icons/pratikabu-stt-128.png"/>
 	<icon src="icons/pratikabu-stt-48-1.png"/>
 	<icon src="icons/pratikabu-stt-32.png"/>
+	<feature name="opera:contextmenus"/>
 </widget>
