@@ -17,6 +17,19 @@ Download for [Apple Safari](http://pratikabu.users.sourceforge.net/extensions/sc
 
 Download for [Opera](http://addons.opera.com/en/extensions/details/scroll-to-top)
 
+Changes in Version 3.7:
+------------
+- Dual Arrow Support
+- New and refreshing icons in the library
+- Middle position added for locations
+- Revamped interface of Options page
+- More options in the Options page
+- Multiple stability fixes
+- Bug fixes
+- Code refactoring
+
+See [blog post](http://pratikabu.blogspot.in/2013/01/scroll-to-top-version-37-released.html) for discussions.
+
 Changes in Version 3.6:
 ------------
 - added icon gallery to choose other icons
