@@ -14,7 +14,7 @@
 	border: 1px SOLID #2094F0;
 	border-radius: 5px;
 	background: WHITESMOKE;
-	width: 400px;
+	width: 600px;
 	margin-bottom: 20px;
 }
 
@@ -115,4 +115,12 @@ a#donateButton {
 a#donateButton:active {
 	-moz-box-shadow: none;
 	-webkit-box-shadow: none;
+}
+
+.groupHeader {
+	font-size: 13px;
+	font-weight: bold;
+	width: 100%;
+	border-bottom: 1px SOLID #CBCBCB;
+	padding-bottom: 5px;
 }

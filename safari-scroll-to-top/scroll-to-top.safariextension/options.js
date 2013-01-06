@@ -86,8 +86,6 @@ function respondMessage(theMessageEvent) {
 
 safari.self.addEventListener("message", respondMessage, false);
 
-
-
 function populateSliderSpeedOnText(scrollSpeed) {
 	var speed = 2400 - scrollSpeed;
 	
