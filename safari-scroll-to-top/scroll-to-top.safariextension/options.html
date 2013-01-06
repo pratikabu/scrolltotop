@@ -2,88 +2,117 @@
 	<head>
 		<title>Scroll To Top - Settings</title>
 		<link rel="stylesheet" href="options.css" type="text/css">
+		<link rel="stylesheet" href="pratikabustt-slider.css" type="text/css">
 		<script type="text/javascript" src="jquery-1.8.2.pratikabu.js"></script>
+		<script type="text/javascript" src="pratikabustt-slider.js"></script>
 		<script type="text/javascript" src="options.js"></script>
 	</head>
 	<body>
 		<form name="myForm"><div align="center" width="100%" class="myFonts">
 			<a target="_blank" href="http://pratikabu.users.sourceforge.net/extensions/scrolltotop"><span class="myHeader" title="Scroll To Top - Home page">Scroll To Top</span></a>
-			<table cellSpacing="15px" class="tableClass">
+			<table id="commonSettings" cellSpacing="15px" class="tableClass">
 				<tr>
-					<td align="right" width="50%">Vertical Location :</td>
-					<td width="50%">
-						<select id="imgVerticalLocation" class="mySelect">
-							<option value="bottom">Bottom</option>
-							<option value="top">Top</option>
-						</select>
+					<td align="left" colSpan=2>
+						<div class="groupHeader">Common Settings</div>
 					</td>
 				</tr>
 				<tr>
-					<td align="right" width="50%">Horizontal Location :</td>
-					<td width="50%">
-						<select id="imgHorizontalLocation" class="mySelect">
-							<option value="right">Right</option>
-							<option value="left">Left</option>
-						</select>
+					<td align="right" width="35%">Vertical Location :</td>
+					<td width="65%">
+						<input type="radio" name="imgVerticalLocation" value="top"><span id="vlTop">Top</span>
+						<input type="radio" name="imgVerticalLocation" value="middle"><span id="vlMiddle">Middle</span>
+						<input type="radio" name="imgVerticalLocation" value="bottom"><span id="vlBottom">Bottom</span>
 					</td>
 				</tr>
 				<tr>
-					<td align="right" width="50%">Scrolling Speed :</td>
-					<td width="50%">
-						<select id="scrollSpeed" class="mySelect">
-							<option value="0">Immediate</option>
-							<option value="400">Fastest</option>
-							<option value="800">Faster</option>
-							<option value="1200">Normal</option>
-							<option value="1500">Slower</option>
-							<option value="2000">Slowest</option>
-						</select>
+					<td align="right">Horizontal Location :</td>
+					<td>
+						<input type="radio" name="imgHorizontalLocation" value="left"><span id="hlLeft">Left</span>
+						<input type="radio" name="imgHorizontalLocation" value="middle"><span id="hlMiddle">Middle</span>
+						<input type="radio" name="imgHorizontalLocation" value="right"><span id="hlRight">Right</span>
 					</td>
 				</tr>
 				<tr>
-					<td align="right" width="50%">Visibility Behavior :</td>
-					<td width="50%">
-						<select id="visbilityBehavior" class="mySelect">
-							<option value="autohide">Auto Hide</option>
-							<option value="alwaysshow">Always Show</option>
-						</select>
+					<td align="right">Scrolling Speed :</td>
+					<td style="padding-left: 5px;">
+						<div class="pratikabustt" style="width: 75%; display: inline-block;"><div id="scrollSpeed" style="font-size: 12px;"></div></div>
+						<div id="currentSpeed" style="font-size: 11px; display: inline-block; margin-left: 10px; vertical-align: middle;"></div>
 					</td>
 				</tr>
 				<tr>
-					<td align="right" width="50%">Control Options :</td>
-					<td width="50%">
-						<select id="controlOptions" class="mySelect">
-							<option value="none">None</option>
-							<option value="simple">Simple</option>
-							<option value="pager">With Pager</option>
-						</select>
-					</td>
-				</tr>
-				<tr>
-					<td align="right" width="50%">Icon Size :</td>
-					<td align="left" style="vertical-align: middle;" width="50%">
-						<select id="iconSize" class="mySelect">
-							<option value="48">48px</option>
-							<option value="32">32px</option>
-						</select>
+					<td align="right">Visibility Behavior :</td>
+					<td>
+						<input type="radio" name="visbilityBehavior" value="autohide"><span id="vbAutoHide">Auto Hide</span>
+						<input type="radio" name="visbilityBehavior" value="alwaysshow"><span id="vbAlwaysShow">Always Show</span>
 					</td>
 				</tr>
 			</table>
-			<table cellSpacing="15px" class="tableClass">
+			
+			<table id="arrowTypeSelector" cellSpacing="15px" class="tableClass" style="background: none;">
 				<tr>
-					<td align="left">
+					<td align="center">
+						Choose Arrow Type :
+						<input type="radio" name="arrowType" value="1"><span id="atSingle">Single Arrow</span>
+						<input type="radio" name="arrowType" value="2"><span id="atDual">Dual Arrow</span>
+					</td>
+				</tr>
+			</table>
+			
+			<table id="singleArrowSettings" cellSpacing="15px" class="tableClass">
+				<tr>
+					<td align="left" colSpan=2>
+						<div class="groupHeader">Basic Settings</div>
+					</td>
+				</tr>
+				<tr>
+					<td align="right" width="35%">Control Options :</td>
+					<td width="65%">
+						<input type="radio" name="controlOptions" value="none"><span id="coNone">None</span>
+						<input type="radio" name="controlOptions" value="simple"><span id="coSimple">Simple</span>
+						<input type="radio" name="controlOptions" value="pager"><span id="coPager">With Pager</span>
+					</td>
+				</tr>
+				<tr>
+					<td align="right">Icon Size :</td>
+					<td align="left" style="vertical-align: middle;">
+						<input type="radio" name="iconSize" value="32"><img style="vertical-align: middle;" id="iconSizeOp1" src="icons/pratikabu-stt-32-1.png" title="Small Icon (32px)" />
+						<input type="radio" name="iconSize" value="48"><img style="vertical-align: middle;" id="iconSizeOp2" src="icons/pratikabu-stt-48-1.png" title="Large Icon (48px)" />
+					</td>
+				</tr>
+				<tr>
+					<td align="right">&nbsp;</td>
+					<td align="left" style="vertical-align: middle;">
+						<input id="togglePause" type="checkbox" /><span id="tpToggle">Toggle Pause</span>
+					</td>
+				</tr>
+				<tr>
+					<td align="left" colSpan=2>
+						<div class="groupHeader">Icons & Library Settings</div>
+					</td>
+				</tr>
+				<tr>
+					<td align="left" colSpan=2>
 						Choose Icon from Library:
 					</td>
 				</tr>
 				<tr>
-					<td align="left">
+					<td align="left" colSpan=2>
 						<input type="radio" name="iconLib" value="1"><img style="vertical-align: middle;" id="iconGal1" src="icons/pratikabu-stt-48-1.png" />
 						<input type="radio" name="iconLib" value="2"><img style="vertical-align: middle;" id="iconGal2" src="icons/pratikabu-stt-48-2.png" />
 						<input type="radio" name="iconLib" value="3"><img style="vertical-align: middle;" id="iconGal3" src="icons/pratikabu-stt-48-3.png" />
+						<input type="radio" name="iconLib" value="4"><img style="vertical-align: middle;" id="iconGal4" src="icons/pratikabu-stt-48-4.png" />
+						<input type="radio" name="iconLib" value="5"><img style="vertical-align: middle;" id="iconGal5" src="icons/pratikabu-stt-48-5.png" />
+						<input type="radio" name="iconLib" value="6"><img style="vertical-align: middle;" id="iconGal6" src="icons/pratikabu-stt-48-6.png" />
+						<input type="radio" name="iconLib" value="7"><img style="vertical-align: middle;" id="iconGal7" src="icons/pratikabu-stt-48-7.png" />
+						<br />
+						<input type="radio" name="iconLib" value="8"><img style="vertical-align: middle;" id="iconGal8" src="icons/pratikabu-stt-48-8.png" />
+						<input type="radio" name="iconLib" value="9"><img style="vertical-align: middle;" id="iconGal9" src="icons/pratikabu-stt-48-9.png" />
+						<input type="radio" name="iconLib" value="10"><img style="vertical-align: middle;" id="iconGal10" src="icons/pratikabu-stt-48-10.png" />
+						<input type="radio" name="iconLib" value="11"><img style="vertical-align: middle;" id="iconGal11" src="icons/pratikabu-stt-48-11.png" />
 					</td>
 				</tr>
 				<tr>
-					<td align="left">
+					<td align="left" colSpan=2>
 						<input type="radio" name="iconLib" value="myIcon"><span id="useMyIcon">Use my icon</span>
 						<p align="justify" style="font-size: 12px;">
 							Note: If you enable Use My Icon, then icon size will be restricted to either 32 or 48 pixels as per the selection in Icon Size combo.
@@ -91,12 +120,12 @@
 					</td>
 				</tr>
 				<tr>
-					<td align="left" style="vertical-align: middle;">
+					<td align="left" style="vertical-align: middle;" colSpan=2>
 						<input type="textbox" id="useMyIconTextBox" class="mySelect" style="width: 100%;">
 					</td>
 				</tr>
 				<tr>
-					<td align="center" width="100%">
+					<td align="center" colSpan=2>
 						<img style="vertical-align: middle; width: 48px; height: 48px;" id="previewIcon" alt="Preview" title="Preview of your uploaded icon." />
 						<br/>
 						<p align="justify" style="font-size: 12px;">
@@ -109,15 +138,35 @@
 					</td>
 				</tr>
 			</table>
+			
+			<table id="dualArrowSettings" cellSpacing="15px" class="tableClass">
+				<tr>
+					<td align="left">
+						<div class="groupHeader">Basic Settings</div>
+					</td>
+				</tr>
+				<tr>
+					<td align="center">
+						<img src="images/dualArrow.png" /><br/>
+						<a href="http://pratikabu.blogspot.in/2013/01/dual-arrow-feature-request.html">Suggest a Feature</a>
+					</td>
+					
+				</tr>
+			</table>
+			
 			<input type="button" id="defaultBut" value="Restore to Defaults" class="mybutton small green" /><br/><br/>
 		</div></form>
 		
 		<div id="donateContainer" align="center" class="actionDiv myFonts">
-			<a id="donateButton" target="_blank" title="It helps in many ways, including financial support. :)" href="http://pratikabu.users.sourceforge.net/extensions/scrolltotop/donate.php"><b>Donate Now</b></a><br/>
+			<a id="donateButton" target="_blank" title="Scroll To Top is free software, if you like it you can support its progress." href="http://pratikabu.users.sourceforge.net/extensions/scrolltotop/donate.php"><b>Donate Now</b></a><br/>
 			<a target="_blank" href="http://pratikabu.users.sourceforge.net/extensions/scrolltotop" style="font-size: 12px;" title="Scroll To Top Home Page">Home Page</a><br/>
 			<a target="_blank" href="https://github.com/pratikabu/scrolltotop/issues" style="font-size: 12px;" title="Report an Issue / Request a Feature">Report Issue</a><br/>
-			<a target="_blank" href="http://pratikabu.users.sourceforge.net" style="font-size: 12px;" title="Developer's Home Page">Developer's Page</a><br/>
+			<a target="_blank" href="http://pratikabu.users.sourceforge.net" style="font-size: 12px;" title="Developer's Home Page">Developer's Page</a>
+			<hr/>
+			<span style="font-size: 12px;">Version: 3.7</span><br/>
+			<a target="_blank" href="http://pratikabu.users.sourceforge.net/extensions/scrolltotop/release.html" style="font-size: 12px;" title="See what's new and exciting.">What's New</a><br/>
+			<a target="_blank" href="http://pratikabu.users.sourceforge.net/extensions/scrolltotop/latest.html?v=3.7" style="font-size: 12px;" title="See if any new version available.">Check Updates</a>
 		</div>
 		<div id="status" class="actionDiv myFonts" title="All statuses will appear here." style="color: RED; top: 50%; margin-top: -70px;">&nbsp;</div>
 	</body>
-</html>				
+</html>

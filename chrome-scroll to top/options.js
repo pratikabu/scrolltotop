@@ -83,16 +83,6 @@ function getParameterByName(name) {
 		return decodeURIComponent(results[1].replace(/\+/g, " "));
 }
 
-function execute() {
-	$('#vehicleChkBox').change(function(){
-		if($(this).attr('checked')) {
-			$(this).val('TRUE');
-		} else {
-			$(this).val('FALSE');
-		}
-	});
-}
-
 function populateSliderSpeedOnText(scrollSpeed) {
 	var speed = 2400 - scrollSpeed;
 	
@@ -159,9 +149,9 @@ function selectableRadioContent(id, name, value) {
 	for all radio button's content to be selecatable
 */
 function makeElementsSelactable() {
-	selectableRadioContent("iconGal1", "iconLib", "1");
-	selectableRadioContent("iconGal2", "iconLib", "2");
-	selectableRadioContent("iconGal3", "iconLib", "3");
+	for(var i = 1; i <= 11; i++) {
+		selectableRadioContent("iconGal" + i, "iconLib", "" + i);
+	}
 	
 	selectableRadioContent("vlTop", "imgVerticalLocation", "top");
 	selectableRadioContent("vlMiddle", "imgVerticalLocation", "middle");
@@ -214,7 +204,7 @@ function isRightChangedEvent(name, val) {
 document.addEventListener('DOMContentLoaded', function () {
 	var updated = getParameterByName("updated");
 	if("true" == updated) {
-		var updateDiv = '<div id="updateDiv" align="center" style="width: 100%;">Congratulations Scroll To Top has been updated to the latest version. See <a href="http://github.com/pratikabu/scrolltotop/wiki/Release-Notes">What&quot;s New</a>.</div>';
+		var updateDiv = '<div id="updateDiv" align="center" style="width: 100%;">Congratulations Scroll To Top has been updated to the latest version. See <a href="http://github.com/pratikabu/scrolltotop/wiki/Release-Notes">What&apos;s New</a>.</div>';
 		$('body').prepend(updateDiv);
 	}
 	
@@ -240,6 +230,7 @@ document.addEventListener('DOMContentLoaded', function () {
 				$('input:radio[name=imgVerticalLocation]').filter('[value=bottom]').attr('checked', true);
 			} else {
 				$('input:radio[name=imgVerticalLocation]').filter('[value=middle]').attr('checked', true);
+				$('input:radio[name=visbilityBehavior]').filter('[value=alwaysshow]').attr('checked', true);
 			}
 			save_options();
 		}
