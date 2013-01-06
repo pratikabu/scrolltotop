@@ -209,7 +209,7 @@ function isRightChangedEvent(name, val) {
 document.addEventListener('DOMContentLoaded', function () {
 	var updated = getParameterByName("updated");
 	if("true" == updated) {
-		var updateDiv = '<div id="updateDiv" align="center" style="width: 100%;">Congratulations Scroll To Top has been updated to the latest version. See <a href="http://github.com/pratikabu/scrolltotop/wiki/Release-Notes">What&apos;s New</a>.</div>';
+		var updateDiv = '<div id="updateDiv" align="center" style="width: 100%;">Congratulations Scroll To Top has been updated to the latest version. See <a href="http://pratikabu.users.sourceforge.net/extensions/scrolltotop/release.html">What&apos;s New</a>.</div>';
 		$('body').prepend(updateDiv);
 	}
 	
