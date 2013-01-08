@@ -32,6 +32,12 @@ var checkForInitialize = function() {
 	if(!ss.storage.user_saved_icon) {
 		ss.storage.user_saved_icon = "/9j/4AAQSkZJRgABAQEASABIAAD//gAUQ3JlYXRlZCB3aXRoIEdJTVAA/9sAQwACAQECAQECAgICAgICAgMFAwMDAwMGBAQDBQcGBwcHBgcHCAkLCQgICggHBwoNCgoLDAwMDAcJDg8NDA4LDAwM/9sAQwECAgIDAwMGAwMGDAgHCAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwM/8AAEQgAMAAwAwEiAAIRAQMRAf/EAB8AAAEFAQEBAQEBAAAAAAAAAAABAgMEBQYHCAkKC//EALUQAAIBAwMCBAMFBQQEAAABfQECAwAEEQUSITFBBhNRYQcicRQygZGhCCNCscEVUtHwJDNicoIJChYXGBkaJSYnKCkqNDU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6g4SFhoeIiYqSk5SVlpeYmZqio6Slpqeoqaqys7S1tre4ubrCw8TFxsfIycrS09TV1tfY2drh4uPk5ebn6Onq8fLz9PX29/j5+v/EAB8BAAMBAQEBAQEBAQEAAAAAAAABAgMEBQYHCAkKC//EALURAAIBAgQEAwQHBQQEAAECdwABAgMRBAUhMQYSQVEHYXETIjKBCBRCkaGxwQkjM1LwFWJy0QoWJDThJfEXGBkaJicoKSo1Njc4OTpDREVGR0hJSlNUVVZXWFlaY2RlZmdoaWpzdHV2d3h5eoKDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uLj5OXm5+jp6vLz9PX29/j5+v/aAAwDAQACEQMRAD8A/J/TdPBK/LwRita10oEpxn5efypNItw5GAcg963bW33FcDGB1ps0KqaMrJgDOR1ol0vMpBUAEc10FtY7duMABc4/KmSaeefMJJ+gHGaQHJX2kgKTgcDnHWsbU7EBcYwxHFdpe2JizgFt2cE96wdWtwc8EGmmB1/wV8eJ8NPFUGo3Hhzwz4ssgR9o0zXLL7RbXKem5SskZ9GjcHpkMOD+wX7Nf7Mn7Ov7S3wQ8P8AjjRPhP4YtLPXIGd7WWJmksp43aOaFiGAYpIjgNgbgAwADAV+LGh3gRQZPlPy4+b72f8A69e8/B79ur4s/BPwRY+G/CvjG60TQtPeV7e0hsbR0RpJGlcsXiZnJZmPzE44AwAAEJo+4fip/wAEXbHxV8fm1fw9remaD4C1F99zpKQyJd6X+62lbUgMki+YA4DlNoJX5sZK/Cn/AIIvWHhT4/rrHiLWtM1/wHpsjSWmkPDI91qX7raq3TYVEAclyEL7toX5Qcji/wBjj/gsF4ou/H2leHvip/ZuqaVq1wlqNct7ZLO50+R2Cq8yRgRPCCRu2ojKCWy2Nhb+15/wWF8Tr481PQPhadN0nRtLne1/tye1S7utRdGKtJEkgMUcJIO3cjsww2UztALU+gf2mv2av2d/2aPgdr/jjW/hP4YvbXQ4VaO0iiZJL2eR1jhhVix275HUFsHau5sHbivx7+NPj5PiR4ruNRg8O+GfC1mW/caZoVj9ntrZc/d3MWkkPT5pHY9cbRxXrXxk/bk+K3xr8DXvhvxZ4yu9a0O/eOSe1msrRFLRuJEZWSJWQhlH3SM8g5BIPgmqEbTk7sE/jQNIqabcjK/y6Gug069UR7TnHAIzXFaZf7QM5xitux1IYzn8+lNoZ1dvqY2k8le/PPT0p0t/kcEjjj2rnk1XYCFbntTZdX6fMOfWkBe1C9Bz8xz9frWDql0DuwefrUl1qIAP5etYV/qe7crAAcYyRzVJAf/Z";
 	}
+	if (!ss.storage.toggle_pause) {
+		ss.storage.toggle_pause = "false";
+	}	
+	if (!ss.storage.arrow_type) {
+		ss.storage.arrow_type = "1";
+	}
 };
 
 // initialize settings
@@ -46,6 +52,8 @@ var forceInitializeSettings = function() {
 	delete ss.storage.control_options;
 	delete ss.storage.icon_library;
 	delete ss.storage.user_saved_icon;
+	delete ss.storage.toggle_pause;
+	delete ss.storage.arrow_type;
 	
 	checkForInitialize();
 };
@@ -67,7 +75,9 @@ pageMod.PageMod({
 				visibilityBehav: ss.storage.visibility_behavior,
 				controlOption: ss.storage.control_options,
 				iconLib: ss.storage.icon_library,
-				userIcon: ss.storage.user_saved_icon
+				userIcon: ss.storage.user_saved_icon,
+				arrowType: ss.storage.arrow_type,
+				togglePause: ss.storage.toggle_pause
 			});
 		});
     }
@@ -95,7 +105,7 @@ var openOptioinPage = function(updated) {
 	});
 	function runScript(tab) {
 		tabWorker = tab.attach({
-			contentScriptFile: [data.url("jquery-1.8.2.pratikabu.js"), data.url("options.js")]
+			contentScriptFile: [data.url("jquery-1.8.2.pratikabu.js"), data.url("pratikabustt-slider.js"), data.url("options.js")]
 		});
 		
 		tabWorker.port.on('getPrefs', function() {
@@ -107,7 +117,9 @@ var openOptioinPage = function(updated) {
 				visibilityBehav: ss.storage.visibility_behavior,
 				controlOption: ss.storage.control_options,
 				iconLib: ss.storage.icon_library,
-				userIcon: ss.storage.user_saved_icon
+				userIcon: ss.storage.user_saved_icon,
+				arrowType: ss.storage.arrow_type,
+				togglePause: ss.storage.toggle_pause
 			});
 		});
 		
@@ -120,6 +132,8 @@ var openOptioinPage = function(updated) {
 			ss.storage.control_options = data.controlOption;
 			ss.storage.icon_library = data.iconLib;
 			ss.storage.user_saved_icon = data.userIcon;
+			ss.storage.arrow_type = data.arrowType;
+			ss.storage.toggle_pause = data.togglePause;
 			
 			tabWorker.port.emit("saveStatus", {// send the status of the step
 				status: "Saved perfectly."
@@ -139,7 +153,7 @@ var openOptioinPage = function(updated) {
 sp.on("myButtonPref", openOptioinPage);
 
 // open option page on initial in this version
-var currentVersion = 2;// this variable should be incremented with every update so that, add-on update message can be shown
+var currentVersion = 4;// this variable should be incremented with every update so that, add-on update message can be shown
 if(!ss.storage.versionInfo || currentVersion > ss.storage.versionInfo) {
 	ss.storage.versionInfo = currentVersion;
 	openOptioinPage("updated");

@@ -1,6 +1,6 @@
 {
   "name": "Scroll To Top",
-  "version": "3.6",
+  "version": "3.7",
   "manifest_version": 2,
   "description": "A plugin to scroll to top and vice versa of a window.",
   "homepage_url": "http://pratikabu.users.sourceforge.net/extensions/scrolltotop",
@@ -23,12 +23,33 @@
   ],
   
   "web_accessible_resources": [
-	"icons/pratikabu-stt-32-1.png",
     "icons/pratikabu-stt-48-1.png",
-	"icons/pratikabu-stt-32-2.png",
     "icons/pratikabu-stt-48-2.png",
+	"icons/pratikabu-stt-48-3.png",
+	"icons/pratikabu-stt-48-4.png",
+	"icons/pratikabu-stt-48-5.png",
+	"icons/pratikabu-stt-48-6.png",
+	"icons/pratikabu-stt-48-7.png",
+	"icons/pratikabu-stt-48-8.png",
+	"icons/pratikabu-stt-48-9.png",
+	"icons/pratikabu-stt-48-10.png",
+	"icons/pratikabu-stt-48-11.png",
+
+	"icons/pratikabu-stt-32-1.png",
+	"icons/pratikabu-stt-32-2.png",
 	"icons/pratikabu-stt-32-3.png",
-    "icons/pratikabu-stt-48-3.png",
+	"icons/pratikabu-stt-32-4.png",
+	"icons/pratikabu-stt-32-5.png",
+	"icons/pratikabu-stt-32-6.png",
+	"icons/pratikabu-stt-32-7.png",
+	"icons/pratikabu-stt-32-8.png",
+	"icons/pratikabu-stt-32-9.png",
+	"icons/pratikabu-stt-32-10.png",
+	"icons/pratikabu-stt-32-11.png",
+
+	
+	
+    "icons/pratikabu-stt-dual.png",
 	
 	"icons/pratikabu-stt-clear-16.png",
 	"icons/pratikabu-stt-clear-24.png",
