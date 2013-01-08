@@ -5,6 +5,6 @@
 	<author href="http://pratikabu.users.sourceforge.net" email="pratikabu@gmail.com">Pratik Soni</author>
 	<icon src="icons/pratikabu-stt-128.png"/>
 	<icon src="icons/pratikabu-stt-48-1.png"/>
-	<icon src="icons/pratikabu-stt-32.png"/>
+	<icon src="icons/pratikabu-stt-32-1.png"/>
 	<feature name="opera:contextmenus"/>
 </widget>
