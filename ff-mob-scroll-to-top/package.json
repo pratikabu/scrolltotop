@@ -1,0 +1,16 @@
+{
+	"description": "A plugin to scroll to top in a window.",
+	"contributors": [],
+	"icon": "data/pratikabu-stt-48.png",
+	"icon64": "data/pratikabu-stt-64.png",
+	"dependencies": ["api-utils", "addon-kit"],
+	"lib": "lib",
+	"fullName": "Scroll To Top",
+	"id": "jid0-gRmSxW9ByuHwGjLhtXJg27YnZRs",
+	"author": "Pratik Soni",
+	"url": "http://pratikabu.users.sourceforge.net",
+	"name": "scroll-to-top",
+	"version": "3.7",
+	"main": "main",
+	"homepage": "http://pratikabu.users.sourceforge.net/extensions/scrolltotop"
+}

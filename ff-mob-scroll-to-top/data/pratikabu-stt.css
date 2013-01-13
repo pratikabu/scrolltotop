@@ -1,0 +1,15 @@
+#pratikabuSTTArrowUp {
+    position: fixed !important;
+    height: auto !important;
+    width: auto !important;
+    right: 10px !important;
+    bottom: 10px !important;
+    z-index: 2147483647 !important;
+    cursor: pointer !important;
+    display: block !important;
+    opacity: .50 !important;
+	border: none !important;
+	background: none !important;
+	padding: 0px !imporatnat;
+	margin: 0px !imporatnat;
+}
