@@ -1,3 +1,10 @@
+Mobile Version:
+------------------
+Mobile version of this add-on is optimized for mobile devices, I've taken into consideration the valuable real-estate available on mobile devices. This add-on will not add any UI element on your browser until you scroll in upward direction. As soon as you scroll in upward direction, an icon will come at the bottom-right corner of the screen, clicking on that icon will take you to the top of the page. Believe me it is going to save a lot of time and efforts for you. :)
+
+
+Desktop Version:
+------------------
 Everyday scrolling on long pages can be a tiring experience specially on those sites which provides infinite scrolling (like facebook, twitter, Google+, etc). You will keep scrolling using your mouse to see more and more updates and then when you want to go up to the top of the page, you might move your hand from your mouse to keyboard to search for Home key or you will drag the scroll bar to the top.
 
 Scroll To Top tries to minimize this effort by providing an intuitive icon at the bottom-right corner of each page so that with one click you will be at the top of the page with beautiful animation. No more searching for Home key on your keyboard and no more dragging of the scroll bar. It will be just fun and ergonomic to use it.
