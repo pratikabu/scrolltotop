@@ -1,18 +1,25 @@
 var pratikabustt_bAppended = false;
 var pratikabustt_arrow_up;
 var pratikabustt_lastScrollLoc = 0;
+var pratikabustt_data = null;// it will hold the preferences fetched from main.js
 
 var pratikabustt = {
-	middleLoc : 0,
+	middleLoc: 0,
 	
 	loadIcon : function() {
 		pratikabustt_arrow_up = document.createElement("img");
 		pratikabustt_arrow_up.id = "pratikabuSTTArrowUp";
-		pratikabustt_arrow_up.src = "resource://jid0-grmsxw9byuhwgjlhtxjg27ynzrs-at-jetpack/scroll-to-top/data/pratikabu-stt-48.png";
+		pratikabustt_arrow_up.src = self.options.sttIcon;
 		pratikabustt_arrow_up.onclick = function() { pratikabustt.scrolltotop(); };
 		
-		pratikabustt_lastScrollLoc = document.documentElement.scrollTop || document.body.scrollTop;
-		//console.log("last Location: " + pratikabustt_lastScrollLoc);
+		pratikabustt_lastScrollLoc = pratikabustt.currentLocation();
+		
+		// fetch the icon from settings
+		self.port.on("prefsValue", function(data) {
+			// load the css and image source from preference
+			pratikabustt.loadFromPreference(data);
+		});
+		self.port.emit("getPrefs");// method to communicate to main.js
 	},
 	
 	scrollHandler : function() {
@@ -21,8 +28,7 @@ var pratikabustt = {
 			return;
 		}
 		
-		var nVScroll = document.documentElement.scrollTop || document.body.scrollTop;
-		//console.log("last Location: " + pratikabustt_lastScrollLoc + ", nvscroll: " + nVScroll);
+		var nVScroll = pratikabustt.currentLocation();
 		//pratikabustt_bAppended = nVScroll > 10 ?
 		pratikabustt_bAppended = (nVScroll != 0 && pratikabustt_lastScrollLoc > nVScroll) ?
 			pratikabustt_bAppended || (document.body.appendChild(pratikabustt_arrow_up), true)
@@ -32,9 +38,48 @@ var pratikabustt = {
 	},
 	
 	scrolltotop: function() {
-		window.scrollTo(0, 0);
+		if(null != pratikabustt_data && pratikabustt_data.animatedScrolling) {
+			middleLoc = pratikabustt.currentLocation() / 2;
+			pratikabustt.smoothScroll();
+		} else {// immediate
+			window.scrollTo(0, 0);
+		}
+	},
+	
+	loadFromPreference: function(data) {
+		pratikabustt_data = data;
+		pratikabustt_arrow_up.src = data.imgUrl;
+	},
+	
+	// its a beta feature, will see any other better implementation in the next release
+	smoothScroll: function() {
+		var currentLocation = pratikabustt.currentLocation();
+		var offset = middleLoc - currentLocation;
+		if(offset <= 0) {
+			offset = middleLoc + offset;
+		} else {
+			offset = middleLoc - offset;
+		}
+
+		offset = offset / 10;
+		if(offset <= 0) {
+			offset = 10;
+		}
+
+		var scrollY = currentLocation - offset;
+		if(scrollY < 0) {
+			scrollY = 0;
+		}
+
+		window.scrollTo(0, scrollY);
+		if(scrollY > 0) {
+			setTimeout(pratikabustt.smoothScroll, 10);// its a beta feature, will see any other better implementation in the next release
+		}
+	},
+	
+	currentLocation: function() {
+		return document.documentElement.scrollTop || document.body.scrollTop;
 	}
 }
 
-//console.log("I came in");
 window.addEventListener('scroll', pratikabustt.scrollHandler, false);

@@ -1,6 +1,11 @@
 Mobile Version:
 ------------------
-Mobile version of this add-on is optimized for mobile devices, I've taken into consideration the valuable real-estate available on mobile devices. This add-on will not add any UI element on your browser until you scroll in upward direction. As soon as you scroll in upward direction, an icon will come at the bottom-right corner of the screen, clicking on that icon will take you to the top of the page. Believe me it is going to save a lot of time and efforts for you. :)
+This is the mobile version of vastly used desktop version of Scroll To Top.
+The link can be found here: http://goo.gl/HarJX
+
+Mobile version of this add-on is optimized for mobile devices, I've taken into consideration the valuable real-estate available on mobile screen. This add-on will not add any UI element on your browser until you scroll in upward direction. As soon as you scroll in upward direction, an icon will come at the bottom-right corner of the screen, clicking on that icon will take you to the top of the page. And yeah to remove it from your screen you just have to scroll a bit downwards. Believe me it is going to save a lot of time and efforts for you. :)
+
+You can enable animated scrolling from the settings page.
 
 
 Desktop Version:
