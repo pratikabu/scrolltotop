@@ -13,7 +13,7 @@ var pratikabustt_browser_impl = {
 	loadFromPreference: function(data) {
 		// #BrowserSpecific call
 		// Asks background.html for [LocalStorage] settings from Options Page and assigns them to variables
-		chrome.extension.sendRequest({method: "getSettings"}, function(response_msg) {
+		chrome.extension.sendMessage({method: "getSettings"}, function(response_msg) {
 			// #BrowserSpecific this method is somewhat browser specific
 			if(!response_msg) {
 				return;
