@@ -195,11 +195,16 @@ function isRightChangedEvent(name, val) {
 document.addEventListener('DOMContentLoaded', function () {
 	var updated = getParameterByName("updated");
 	if("true" == updated) {
+		$('#maskDiv').fadeTo("slow", .8);
 		$('#updateDialog').fadeTo("slow", 1);
 
 		$('#okaygotit').click(function() {
 			$('#updateDialog').fadeTo("slow", 0, function() {
 				$("#updateDialog").remove();
+			});
+			
+			$('#maskDiv').fadeTo("slow", 0, function() {
+				$("#maskDiv").remove();
 			});
 		});
 	}
