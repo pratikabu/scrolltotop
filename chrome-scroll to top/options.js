@@ -195,8 +195,13 @@ function isRightChangedEvent(name, val) {
 document.addEventListener('DOMContentLoaded', function () {
 	var updated = getParameterByName("updated");
 	if("true" == updated) {
-		var updateDiv = '<div id="updateDiv" align="center" style="width: 100%;">Congratulations Scroll To Top has been updated to the latest version. See <a href="http://pratikabu.users.sourceforge.net/extensions/scrolltotop/release.html">What&apos;s New</a>.</div>';
-		$('body').prepend(updateDiv);
+		$('#updateDialog').fadeTo("slow", 1);
+
+		$('#okaygotit').click(function() {
+			$('#updateDialog').fadeTo("slow", 0, function() {
+				$("#updateDialog").remove();
+			});
+		});
 	}
 	
 	// add all events

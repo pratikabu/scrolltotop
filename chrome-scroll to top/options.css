@@ -91,7 +91,7 @@ form {
 	margin-bottom: 0px;
 }
 
-a#donateButton {
+a.donateButton {
 	font: bold 16px Arial,Helvetica,sans-serif;
 	text-shadow: 0 -1px 1px rgba(0,0,0,0.25), -2px 0 1px rgba(0,0,0,0.25);
 	border-radius: 5px;
@@ -112,7 +112,7 @@ a#donateButton {
 	margin-bottom: 5px;
 }
 
-a#donateButton:active {
+a.donateButton:active {
 	-moz-box-shadow: none;
 	-webkit-box-shadow: none;
 }

@@ -152,7 +152,7 @@
 		</div></form>
 		
 		<div id="donateContainer" align="center" class="actionDiv myFonts">
-			<a id="donateButton" target="_blank" title="Scroll To Top is free software, if you like it you can support its progress." href="http://pratikabu.users.sourceforge.net/extensions/scrolltotop/donate.php"><b>Donate Now</b></a><br/>
+			<a id="donateButtonId" class="donateButton" target="_blank" title="Scroll To Top is free software, if you like it you can support its progress." href="http://pratikabu.users.sourceforge.net/extensions/scrolltotop/donate.php"><b>Donate Now</b></a><br/>
 			<a target="_blank" href="http://pratikabu.users.sourceforge.net/extensions/scrolltotop" style="font-size: 12px;" title="Scroll To Top Home Page">Home Page</a><br/>
 			<a target="_blank" href="https://github.com/pratikabu/scrolltotop/issues" style="font-size: 12px;" title="Report an Issue / Request a Feature">Report Issue</a><br/>
 			<a target="_blank" href="http://pratikabu.users.sourceforge.net" style="font-size: 12px;" title="Developer's Home Page">Developer's Page</a>
@@ -162,5 +162,22 @@
 			<a target="_blank" href="http://pratikabu.users.sourceforge.net/extensions/scrolltotop/latest.html?v=4.0" style="font-size: 12px;" title="See if any new version available.">Check Updates</a>
 		</div>
 		<div id="status" class="actionDiv myFonts" title="All statuses will appear here." style="color: RED; top: 50%; margin-top: -70px;">&nbsp;</div>
+		
+		<!-- DialogBox -->
+		<div id="updateDialog" class="tableClass myFonts" style="width: 600px; padding: 10px; z-index: 40; background: #E4FFDF; position: fixed; top: 50%; left: 50%; margin-left: -311px; margin-top: -120px; display: none;">
+			<div id="header" class="groupHeader">Congratulations! Scroll To Top has been updated.</div>
+			<div id="content" style="margin-top: 10px; margin-bottom: 20px;">
+				<p style="line-height: 0;">Here is the .</p>
+				<ul id="mentionUpdates">
+					<li>Flip between Scroll Up and Scroll Down based on the current location.</li>
+					<li>New Icon Gallery for Dual Arrow.</li>
+					<li>Pause anywhere by clicking on the same icon when scrolling.</li>
+					<li>Open Settings page right from the add-on.</li>
+					<li>Refactored the code to give faster performence.</li>
+				</ul>
+				<p style="line-height: 0;">See <a href="http://pratikabu.users.sourceforge.net/extensions/scrolltotop/release.html">Release Notes</a> for discussions.</p>
+			</div>
+			<div id="commands" align="center"><a id="okaygotit" class="donateButton">Okay Got it</a></div>
+		</div>
 	</body>
 </html>
