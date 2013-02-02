@@ -35,6 +35,8 @@ chrome.extension.onMessage.addListener(
 	function(request, sender, sendResponse) {
 		if (request.method == "getSettings") {
 			sendResponse({vLoc: localStorage["vertical_location"], hLoc: localStorage["horizontal_location"], iconSize: localStorage["image_size"], scrSpeed: localStorage["scrolling_speed"], visibilityBehav: localStorage["visibility_behavior"], controlOption: localStorage["control_options"], iconLib: localStorage["icon_library"], userIcon: localStorage["user_saved_icon"], arrowType: localStorage["arrow_type"]});
+		} else if (request.method == "openOptionPage") {
+			chrome.tabs.create({url: "options.html"});
 		} else {
 			sendResponse({}); // snub them.
 		}

@@ -30,5 +30,10 @@ var pratikabustt_browser_impl = {
 	convertResponse: function(rawResponse) {
 		// #BrowserSpecific method to convert response to single known format
 		return rawResponse;
+	},
+	
+	openOptionPage: function() {
+		// #BrowserSpecific method to open the option page
+		chrome.extension.sendMessage({method: "openOptionPage"});
 	}
 };

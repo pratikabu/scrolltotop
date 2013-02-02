@@ -27,17 +27,17 @@ var pratikabustt = {
 		if(!pratikabu_stt_dualArrow && "true" == pratikabu_stt_buttonCreated && "autohide" != pratikabu_stt_visibilityBehavior) {
 			if(pratikabu_stt_maxScrollAmount > $(document).scrollTop()) {// you are at the top rotate arrows to original state
 				pratikabu_stt_flipScrolling = true;
-				pratikabustt.rotateIcons(180, 180);
+				$("#pratikabuSTTArrowUp").rotate({ animateTo: 180 });
 			} else {
 				pratikabu_stt_flipScrolling = false;
-				pratikabustt.rotateIcons(0, 0);
+				$("#pratikabuSTTArrowUp").rotate({ animateTo: 0 });
 			}
 		}
 	},
 	
 	createButton: function() {
 		// create div tag
-		$('body').prepend('<div id="pratikabuSTTDiv"><img id="pratikabuSTTArrowUp" style="float: left;" /><div id="pratikabuSTTDiv2"><img id="pratikabuSTTPageUp" /><img id="pratikabuSTTClear" /><img id="pratikabuSTTPageDown" /><img id="pratikabuSTTArrowDown" /></div></div>');
+		$('body').prepend('<div id="pratikabuSTTDiv"><img id="pratikabuSTTArrowUp" style="float: left;" /><div id="pratikabuSTTDiv2"><img id="pratikabuSTTPageUp" /><img id="pratikabuSTTClear" /><img id="pratikabuSTTPageDown" /><img id="pratikabuSTTSettings" /></div></div>');
 		$("#pratikabuSTTDiv").hide();
 		
 		// check whether the css has been applied to the div tag or not, if not then remove it from DOM
@@ -49,7 +49,7 @@ var pratikabustt = {
 		
 		pratikabustt.hoverEffect("#pratikabuSTTArrowUp", 0.5);
 		pratikabustt.hoverEffect("#pratikabuSTTClear", pratikabu_stt_otherDefaultFade);
-		pratikabustt.hoverEffect("#pratikabuSTTArrowDown", pratikabu_stt_otherDefaultFade);
+		pratikabustt.hoverEffect("#pratikabuSTTSettings", pratikabu_stt_otherDefaultFade);
 		pratikabustt.hoverEffect("#pratikabuSTTPageUp", pratikabu_stt_otherDefaultFade);
 		pratikabustt.hoverEffect("#pratikabuSTTPageDown", pratikabu_stt_otherDefaultFade);
 		
@@ -74,15 +74,19 @@ var pratikabustt = {
 		});
 		
 		// add the scroll down logic
-		$("#pratikabuSTTArrowDown").click(function() {
-			if(pratikabu_stt_flipScrolling) {
-				pratikabustt.scrollToTop();
-			} else {
-				pratikabustt.scrollToBottom();
-			}
-			
+		$("#pratikabuSTTSettings").click(function() {
+			pratikabustt_browser_impl.openOptionPage();
 			return false;
 		});
+		
+		// add rotation for scrolling down
+		$("#pratikabuSTTSettings").hover(
+			function() {
+				$(this).rotate({ animateTo: 180 });
+			},
+			function() {
+				$(this).rotate({ animateTo: 0 });
+			});
 		
 		// add the remove div logic
 		$("#pratikabuSTTClear").click(function() {
@@ -144,8 +148,8 @@ var pratikabustt = {
 		imgUrl = pratikabustt_browser_impl.getFixedLocation() + "clear-" + otherImagesSize + ".png";
 		$("#pratikabuSTTClear").attr("src", pratikabustt_browser_impl.getBrowserSpecificUrl(imgUrl));
 		
-		imgUrl = pratikabustt_browser_impl.getFixedLocation() + "down-" + otherImagesSize + ".png";
-		$("#pratikabuSTTArrowDown").attr("src", pratikabustt_browser_impl.getBrowserSpecificUrl(imgUrl));
+		imgUrl = pratikabustt_browser_impl.getFixedLocation() + "settings-" + otherImagesSize + ".png";
+		$("#pratikabuSTTSettings").attr("src", pratikabustt_browser_impl.getBrowserSpecificUrl(imgUrl));
 		
 		// show/remove page up and page down buttons from settings
 		if(showPagerButtons) {
@@ -163,7 +167,7 @@ var pratikabustt = {
 		if("right" == pratikabu_stt_prefs.hLoc) {// replace the locations of the icons
 			if(showPagerButtons) {
 				$("#pratikabuSTTPageUp").before($("#pratikabuSTTClear"));
-				$("#pratikabuSTTPageDown").before($("#pratikabuSTTArrowDown"));
+				$("#pratikabuSTTPageDown").before($("#pratikabuSTTSettings"));
 			}
 			$("#pratikabuSTTDiv2").css("marginLeft", 0 + "px");
 		} else {
@@ -303,11 +307,6 @@ var pratikabustt = {
 		}
 		
 		pratikabustt.scrollPageTo(speed, location);
-	},
-	
-	rotateIcons: function(upArrowDeg, bottomArrowDeg) {
-		$("#pratikabuSTTArrowUp").rotate({ animateTo: upArrowDeg });
-		$("#pratikabuSTTArrowDown").rotate({ animateTo: bottomArrowDeg });
 	},
 	
 	getWindowHeight: function() {
