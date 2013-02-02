@@ -15,11 +15,7 @@
       "128": "icons/pratikabu-stt-128.png"},
 	
   "content_scripts": [
-    { "css": [ "pratikabu-stt.css" ], "matches": ["<all_urls>"], "js": ["jquery-1.8.2.pratikabu.js", "pratikabustt-browser-impl.js", "content_script.js"], "all_frames": true }
-  ],
-  
-  "permissions": [
-	"tabs"
+    { "css": [ "pratikabu-stt.css" ], "matches": ["<all_urls>"], "js": ["jquery-1.8.2.pratikabu.js", "jQueryRotate.js", "pratikabustt-browser-impl.js", "content_script.js"] }
   ],
   
   "web_accessible_resources": [
@@ -55,8 +51,8 @@
 	"icons/pratikabu-stt-clear-24.png",
 	"icons/pratikabu-stt-down-24.png",
 	"icons/pratikabu-stt-down-16.png",
-	"icons/pratikabu-stt-pause-48.png",
-	"icons/pratikabu-stt-pause-32.png",
+	"icons/pratikabu-stt-settings-24.png",
+	"icons/pratikabu-stt-settings-16.png",
 	"icons/pratikabu-stt-pageup-24.png",
 	"icons/pratikabu-stt-pageup-16.png"
   ]

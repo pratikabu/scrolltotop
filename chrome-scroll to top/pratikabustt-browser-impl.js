@@ -22,11 +22,6 @@ var pratikabustt_browser_impl = {
 		});
 	},
 	
-	getRotationCssName: function() {
-		// #BrowserSpecific css
-		return "-webkit-transform";
-	},
-	
 	getBrowserSpecificUrl: function(imgUrl) {
 		// #BrowserSpecific method to get the resource
 		return chrome.extension.getURL(imgUrl);

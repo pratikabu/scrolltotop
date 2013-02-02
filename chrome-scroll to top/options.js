@@ -15,7 +15,6 @@ function default_options() {
 	localStorage["icon_library"] = "1";
 	localStorage["user_saved_icon"] = "/9j/4AAQSkZJRgABAQEASABIAAD//gAUQ3JlYXRlZCB3aXRoIEdJTVAA/9sAQwACAQECAQECAgICAgICAgMFAwMDAwMGBAQDBQcGBwcHBgcHCAkLCQgICggHBwoNCgoLDAwMDAcJDg8NDA4LDAwM/9sAQwECAgIDAwMGAwMGDAgHCAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwM/8AAEQgAMAAwAwEiAAIRAQMRAf/EAB8AAAEFAQEBAQEBAAAAAAAAAAABAgMEBQYHCAkKC//EALUQAAIBAwMCBAMFBQQEAAABfQECAwAEEQUSITFBBhNRYQcicRQygZGhCCNCscEVUtHwJDNicoIJChYXGBkaJSYnKCkqNDU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6g4SFhoeIiYqSk5SVlpeYmZqio6Slpqeoqaqys7S1tre4ubrCw8TFxsfIycrS09TV1tfY2drh4uPk5ebn6Onq8fLz9PX29/j5+v/EAB8BAAMBAQEBAQEBAQEAAAAAAAABAgMEBQYHCAkKC//EALURAAIBAgQEAwQHBQQEAAECdwABAgMRBAUhMQYSQVEHYXETIjKBCBRCkaGxwQkjM1LwFWJy0QoWJDThJfEXGBkaJicoKSo1Njc4OTpDREVGR0hJSlNUVVZXWFlaY2RlZmdoaWpzdHV2d3h5eoKDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uLj5OXm5+jp6vLz9PX29/j5+v/aAAwDAQACEQMRAD8A/J/TdPBK/LwRita10oEpxn5efypNItw5GAcg963bW33FcDGB1ps0KqaMrJgDOR1ol0vMpBUAEc10FtY7duMABc4/KmSaeefMJJ+gHGaQHJX2kgKTgcDnHWsbU7EBcYwxHFdpe2JizgFt2cE96wdWtwc8EGmmB1/wV8eJ8NPFUGo3Hhzwz4ssgR9o0zXLL7RbXKem5SskZ9GjcHpkMOD+wX7Nf7Mn7Ov7S3wQ8P8AjjRPhP4YtLPXIGd7WWJmksp43aOaFiGAYpIjgNgbgAwADAV+LGh3gRQZPlPy4+b72f8A69e8/B79ur4s/BPwRY+G/CvjG60TQtPeV7e0hsbR0RpJGlcsXiZnJZmPzE44AwAAEJo+4fip/wAEXbHxV8fm1fw9remaD4C1F99zpKQyJd6X+62lbUgMki+YA4DlNoJX5sZK/Cn/AIIvWHhT4/rrHiLWtM1/wHpsjSWmkPDI91qX7raq3TYVEAclyEL7toX5Qcji/wBjj/gsF4ou/H2leHvip/ZuqaVq1wlqNct7ZLO50+R2Cq8yRgRPCCRu2ojKCWy2Nhb+15/wWF8Tr481PQPhadN0nRtLne1/tye1S7utRdGKtJEkgMUcJIO3cjsww2UztALU+gf2mv2av2d/2aPgdr/jjW/hP4YvbXQ4VaO0iiZJL2eR1jhhVix275HUFsHau5sHbivx7+NPj5PiR4ruNRg8O+GfC1mW/caZoVj9ntrZc/d3MWkkPT5pHY9cbRxXrXxk/bk+K3xr8DXvhvxZ4yu9a0O/eOSe1msrRFLRuJEZWSJWQhlH3SM8g5BIPgmqEbTk7sE/jQNIqabcjK/y6Gug069UR7TnHAIzXFaZf7QM5xitux1IYzn8+lNoZ1dvqY2k8le/PPT0p0t/kcEjjj2rnk1XYCFbntTZdX6fMOfWkBe1C9Bz8xz9frWDql0DuwefrUl1qIAP5etYV/qe7crAAcYyRzVJAf/Z";
 	
-	localStorage["toggle_pause"] = "false";
 	localStorage["arrow_type"] = "1";
 	
 	ignoreForDefaults = true;
@@ -36,7 +35,6 @@ function save_options() {
 	localStorage["image_size"] = $('input:radio[name=iconSize]:checked').val();
 	localStorage["icon_library"] = $('input:radio[name=iconLib]:checked').val();
 	localStorage["user_saved_icon"] = $('#useMyIconTextBox').val();
-	localStorage["toggle_pause"] = $('#togglePause').is(':checked');
 
 	// Update status to let user know options were saved.
 	show_message("Saved successfully.");
@@ -54,7 +52,6 @@ function restore_options() {
 	swapAdvancedOptions(localStorage["arrow_type"]);
 	
 	$('input:radio[name=controlOptions]').filter('[value=' + localStorage["control_options"] + ']').attr('checked', true);
-	$("#togglePause").attr('checked', localStorage["toggle_pause"] == "true" ? true : false);
 	$('input:radio[name=iconSize]').filter('[value=' + localStorage["image_size"] + ']').attr('checked', true);
 	$('input:radio[name=iconLib]').filter('[value=' + localStorage["icon_library"] + ']').attr('checked', true);
 	$('#useMyIconTextBox').val(localStorage["user_saved_icon"]);
@@ -175,12 +172,6 @@ function makeElementsSelactable() {
 	selectableRadioContent("iconSizeOp2", "iconSize", "48");
 	
 	selectableRadioContent("useMyIcon", "iconLib", "myIcon");
-	
-	$("#tpToggle").css("cursor", "default");
-	$('#tpToggle').click(function() {
-		$("#togglePause").attr('checked', !$('#togglePause').is(':checked'));
-		$("#togglePause").change();
-	});
 }
 
 function swapAdvancedOptions(selectedValue) {
@@ -218,7 +209,6 @@ document.addEventListener('DOMContentLoaded', function () {
 	$('input:radio[name=iconSize]').change(function() { isRightChangedEvent("iconSize", $(this).val()); });
 	$('input:radio[name=visbilityBehavior]').change(function() { isRightChangedEvent("visbilityBehavior", $(this).val()); });
 	$('input:radio[name=controlOptions]').change(function() { isRightChangedEvent("controlOptions", $(this).val()); });
-	$("#togglePause").change(function() { save_options(); });
 	$('input:radio[name=iconLib]').change(function() { isRightChangedEvent("iconLib", $(this).val()); });
 	
 	$('input:radio[name=arrowType]').change(function() {

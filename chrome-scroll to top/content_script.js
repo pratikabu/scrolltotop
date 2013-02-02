@@ -11,18 +11,28 @@ var pratikabu_stt_iconSize = 48;
 var pratikabu_stt_otherDefaultFade = 0.35;
 var pratikabu_stt_visibilityBehavior = "autohide";
 var pratikabu_stt_controlOption = "simple";
-var pratikabu_stt_preferencesLoaded = "false";
-var pratikabu_stt_documentLoaded = "false";
-var pratikabu_stt_firstAlwaysShow = "true";
+var pratikabu_stt_preferencesLoaded = false;
+var pratikabu_stt_firstAlwaysShow = true;
 var pratikabu_stt_buttonCreated;// this variable will tell whether the button is created or not on this page also whether this page is eligible for the button or not it will be initialzied once during load
 var pratikabu_stt_prefs;// this variable holds the preferences
-var pratikabu_stt_onceVisible = "false";// this variable will be used for the special case in which document and window height are same. it will be used to identify the always on property so that visibility of the icon can be persisted.
-var pratikabu_stt_pauseActive = false;
+var pratikabu_stt_onceVisible = false;// this variable will be used for the special case in which document and window height are same. it will be used to identify the always on property so that visibility of the icon can be persisted.
 var pratikabu_stt_dualArrow = false;
+var pratikabu_stt_flipScrolling = false;
+var pratikabu_stt_scrollingInProgress = false;
 
 var pratikabustt = {
 	pratikabu_stt_scrollHandler: function () {
 		pratikabustt.callHideOrShowOnceAfterInit();
+		
+		if(!pratikabu_stt_dualArrow && "true" == pratikabu_stt_buttonCreated && "autohide" != pratikabu_stt_visibilityBehavior) {
+			if(pratikabu_stt_maxScrollAmount > $(document).scrollTop()) {// you are at the top rotate arrows to original state
+				pratikabu_stt_flipScrolling = true;
+				pratikabustt.rotateIcons(180, 180);
+			} else {
+				pratikabu_stt_flipScrolling = false;
+				pratikabustt.rotateIcons(0, 0);
+			}
+		}
 	},
 	
 	createButton: function() {
@@ -54,28 +64,23 @@ var pratikabustt = {
 		
 		// add the scroll up logic
 		$("#pratikabuSTTArrowUp").click(function() {
-			if($(document).scrollTop() == 0) {
-				return false;
-			}
-			if(!pratikabu_stt_pauseActive) {// identify up arrow
-				pratikabustt.scrollPageTo(pratikabu_stt_delay, 0, pratikabu_stt_prefs.togglePause);
+			if(pratikabu_stt_flipScrolling) {
+				pratikabustt.scrollToBottom();
 			} else {
-				pratikabustt.showUpArrowImage();
-				$("html, body").stop();
+				pratikabustt.scrollToTop();
 			}
+			
 			return false;
 		});
 		
 		// add the scroll down logic
 		$("#pratikabuSTTArrowDown").click(function() {
-			var location = ($(document).height() - pratikabustt.getWindowHeight());
-			if(0 == location) {// this should never happen, but it gives this result on some pages
-				location = $(document).height();
+			if(pratikabu_stt_flipScrolling) {
+				pratikabustt.scrollToTop();
+			} else {
+				pratikabustt.scrollToBottom();
 			}
-			if($(document).scrollTop() == location) {
-				return false;
-			}
-			pratikabustt.scrollPageTo(pratikabu_stt_delay, location, pratikabu_stt_prefs.togglePause);
+			
 			return false;
 		});
 		
@@ -121,10 +126,10 @@ var pratikabustt = {
 		
 		var otherImagesSize = pratikabustt.getOtherImageSize();
 		
-		var showPagerButtons;
+		var showPagerButtons = false;
 		if("pager" == pratikabu_stt_controlOption) {
 			if($(document).height() != pratikabustt.getWindowHeight()) {
-				showPagerButtons = "true";
+				showPagerButtons = true;
 			} else {
 				pratikabu_stt_controlOption = "simple";// set the control option to simple
 			}
@@ -147,7 +152,7 @@ var pratikabustt = {
 			imgUrl = pratikabustt_browser_impl.getFixedLocation() + "pageup-" + otherImagesSize + ".png";
 			$("#pratikabuSTTPageUp").attr("src", pratikabustt_browser_impl.getBrowserSpecificUrl(imgUrl));
 			$("#pratikabuSTTPageDown").attr("src", pratikabustt_browser_impl.getBrowserSpecificUrl(imgUrl));
-			$("#pratikabuSTTPageDown").css(pratikabustt_browser_impl.getRotationCssName(), "rotate(180deg)");
+			$("#pratikabuSTTPageDown").rotate(180);
 		} else {
 			$("#pratikabuSTTPageUp").remove();
 			$("#pratikabuSTTPageDown").remove();
@@ -192,7 +197,7 @@ var pratikabustt = {
 			if($(document).scrollTop() == 0) {
 				return false;
 			}
-			pratikabustt.scrollPageTo(pratikabu_stt_delay, 0, false);
+			pratikabustt.scrollPageTo(pratikabu_stt_delay, 0);
 			return false;
 		});
 		
@@ -205,7 +210,7 @@ var pratikabustt = {
 			if($(document).scrollTop() == location) {
 				return false;
 			}
-			pratikabustt.scrollPageTo(pratikabu_stt_delay, location, false);
+			pratikabustt.scrollPageTo(pratikabu_stt_delay, location);
 			return false;
 		});
 		
@@ -233,19 +238,41 @@ var pratikabustt = {
 		
 		imgUrl = pratikabustt_browser_impl.getFixedLocation() + "dual.png";
 		$("#pratikabuSTTArrowDown").attr("src", pratikabustt_browser_impl.getBrowserSpecificUrl(imgUrl));
-		$("#pratikabuSTTArrowDown").css(pratikabustt_browser_impl.getRotationCssName(), "rotate(180deg)");
+		$("#pratikabuSTTArrowDown").rotate(180);
 		
 		return "true";// successfully created
 	},
 	
-	scrollPageTo: function(delay, location, showPause) {
-		if(showPause) {
-			pratikabustt.showPauseImage();
+	scrollToTop: function() {
+		if($(document).scrollTop() == 0) {
+			return false;
 		}
+		
+		pratikabustt.scrollPageTo(pratikabu_stt_delay, 0);
+	},
+	
+	scrollToBottom: function() {
+		var location = ($(document).height() - pratikabustt.getWindowHeight());
+		if(0 == location) {// this should never happen, but it gives this result on some pages
+			location = $(document).height();
+		}
+		if($(document).scrollTop() == location) {
+			return false;
+		}
+		pratikabustt.scrollPageTo(pratikabu_stt_delay, location);
+	},
+	
+	scrollPageTo: function(delay, location) {
+		if(pratikabu_stt_scrollingInProgress) {// pause any scroll when scrolling is in progress
+			$("html, body").stop();
+			pratikabu_stt_scrollingInProgress = false;
+			return;
+		}
+		
+		pratikabu_stt_scrollingInProgress = true;
+		
 		$("html, body").stop(true, true).animate({ scrollTop: location }, delay, function() {
-			if(showPause) {
-				pratikabustt.showUpArrowImage();
-			}
+			pratikabu_stt_scrollingInProgress = false;
 		});
 	},
 	
@@ -275,7 +302,12 @@ var pratikabustt = {
 			}
 		}
 		
-		pratikabustt.scrollPageTo(speed, location, false);
+		pratikabustt.scrollPageTo(speed, location);
+	},
+	
+	rotateIcons: function(upArrowDeg, bottomArrowDeg) {
+		$("#pratikabuSTTArrowUp").rotate({ animateTo: upArrowDeg });
+		$("#pratikabuSTTArrowDown").rotate({ animateTo: bottomArrowDeg });
 	},
 	
 	getWindowHeight: function() {
@@ -306,16 +338,9 @@ var pratikabustt = {
 			});
 	},
 	
-	showPauseImage: function() {
-		pratikabu_stt_pauseActive = true;
-		var imgUrl = pratikabustt_browser_impl.getFixedLocation() + "pause-" + pratikabu_stt_iconSize + ".png";
-		$("#pratikabuSTTArrowUp").attr("src", pratikabustt_browser_impl.getBrowserSpecificUrl(imgUrl));
-	},
-	
 	showUpArrowImage: function() {
 		var imgSource;
 		
-		pratikabu_stt_pauseActive = false;
 		if("myIcon" == pratikabu_stt_prefs.iconLib) {
 			imgSource = "data:image/png;base64," + pratikabu_stt_prefs.userIcon;
 		} else {
@@ -346,18 +371,16 @@ var pratikabustt = {
 		
 		// SPECIAL Handling STARTS
 		// this logic is solely for the special condition in which document and window height are same
-		if("false" == pratikabu_stt_onceVisible && true === boolShow) {
-			pratikabu_stt_onceVisible = "true";
+		if(!pratikabu_stt_onceVisible && boolShow) {
+			pratikabu_stt_onceVisible = true;
 		}
 		
-		if(false === boolShow && "true" == pratikabu_stt_onceVisible && "alwaysshow" == pratikabu_stt_visibilityBehavior) {
+		if(!boolShow && pratikabu_stt_onceVisible && "alwaysshow" == pratikabu_stt_visibilityBehavior) {
 			boolShow = true;
 		}
 		// SPECIAL Handling ENDS
 		
-		ignoreCreation = boolShow ? "false" : "true";// ignoreCreation if boolShow is false
-		
-		if(!pratikabu_stt_buttonCreated && ("true" == ignoreCreation || window != window.top)) {// ignore any iFrame/frame, work only for top window
+		if(!pratikabu_stt_buttonCreated && (!boolShow || window != window.top)) {// ignore any iFrame/frame, work only for top window. also ignore creation if boolShow is false
 			// since the page doesnot satisfies the height criteria, ignore the creation and hide logic
 			// this logic can create an icon once user resizes the window
 			return;
@@ -367,10 +390,10 @@ var pratikabustt = {
 			boolShow = vScrollTop > pratikabu_stt_maxScrollAmount;
 		} else {
 			if(0 < vScrollTop) {
-				pratikabu_stt_firstAlwaysShow = "false";
+				pratikabu_stt_firstAlwaysShow = false;
 			}
 			
-			if(0 == vScrollTop && "true" == pratikabu_stt_firstAlwaysShow) {
+			if(0 == vScrollTop && pratikabu_stt_firstAlwaysShow) {
 				boolShow = false;
 			}
 		}
@@ -426,7 +449,6 @@ var pratikabustt = {
 	
 	loadFromResponse: function(response) {// load the images, css, include/remove elements
 		pratikabu_stt_prefs = response;
-		pratikabu_stt_prefs.togglePause = pratikabu_stt_prefs.togglePause == "true" ? true : false;
 		
 		pratikabu_stt_delay = parseInt(pratikabu_stt_prefs.scrSpeed);
 		pratikabu_stt_iconSize = parseInt(pratikabu_stt_prefs.iconSize);
@@ -435,12 +457,12 @@ var pratikabustt = {
 		
 		pratikabu_stt_dualArrow = ("2" == pratikabu_stt_prefs.arrowType);
 		
-		pratikabu_stt_preferencesLoaded = "true";// enable functioning document.ready function
+		pratikabu_stt_preferencesLoaded = true;// enable functioning document.ready function
 		pratikabustt.callHideOrShowOnceAfterInit();
 	},
 	
 	callHideOrShowOnceAfterInit: function() {// function to handle the call to hideOrShowButton
-		if("true" == pratikabu_stt_preferencesLoaded) {// check whether the preferences have been loaded or not
+		if(pratikabu_stt_preferencesLoaded) {// check whether the preferences have been loaded or not
 			// hide or show the button based on the current location, because a page can be loaded scrolled..
 			pratikabustt.hideOrShowButton();
 		}
@@ -453,13 +475,8 @@ pratikabustt_browser_impl.fetchPreferences();
 // add the scroll handler on the page to hide and show the image
 $(window).scroll(pratikabustt.pratikabu_stt_scrollHandler);
 
-$(document).ready(function() {// when page is ready do the below mentioned steps
-	pratikabu_stt_documentLoaded = "true";
-	pratikabustt.callHideOrShowOnceAfterInit();
-});
-
 $(window).resize(function() {// when window is resized do the below mentioned steps
-	if(!pratikabu_stt_buttonCreated || "true" == pratikabu_stt_buttonCreated) {
+	if(!pratikabu_stt_buttonCreated || "true" == pratikabu_stt_buttonCreated) {// ??
 		// hide or show the button based on the current location, because a page can be loaded scrolled..
 		pratikabustt.callHideOrShowOnceAfterInit();
 	}
