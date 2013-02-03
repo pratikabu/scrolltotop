@@ -135,13 +135,45 @@
 			
 			<table id="dualArrowSettings" cellSpacing="15px" class="tableClass">
 				<tr>
-					<td align="left">
+					<td align="left" colSpan=2>
 						<div class="groupHeader">Basic Settings</div>
 					</td>
 				</tr>
 				<tr>
-					<td align="center">
-						<img src="images/dualArrow.png" /><br/>
+					<td align="right" width="35%">Icons Arrangement :</td>
+					<td width="65%">
+						<input type="radio" name="dIconArrangemnt" value="hr"><span id="diarrHr">Horizontal</span>
+						<input type="radio" name="dIconArrangemnt" value="vr"><span id="diarrVr">Vertical</span>
+					</td>
+				</tr>
+				<tr>
+					<td align="left" colSpan=2>
+						<div class="groupHeader">Icons & Library Settings</div>
+					</td>
+				</tr>
+				<tr>
+					<td align="left" colSpan=2>
+						Choose Icon from Library:
+					</td>
+				</tr>
+				<tr>
+					<td align="left" colSpan=2>
+						<input type="radio" name="iconLib" value="1"><img style="vertical-align: middle;" id="iconGal1" src="icons/pratikabu-stt-48-1.png" />
+						<input type="radio" name="iconLib" value="2"><img style="vertical-align: middle;" id="iconGal2" src="icons/pratikabu-stt-48-2.png" />
+						<input type="radio" name="iconLib" value="3"><img style="vertical-align: middle;" id="iconGal3" src="icons/pratikabu-stt-48-3.png" />
+						<input type="radio" name="iconLib" value="4"><img style="vertical-align: middle;" id="iconGal4" src="icons/pratikabu-stt-48-4.png" />
+						<input type="radio" name="iconLib" value="5"><img style="vertical-align: middle;" id="iconGal5" src="icons/pratikabu-stt-48-5.png" />
+						<input type="radio" name="iconLib" value="6"><img style="vertical-align: middle;" id="iconGal6" src="icons/pratikabu-stt-48-6.png" />
+						<input type="radio" name="iconLib" value="7"><img style="vertical-align: middle;" id="iconGal7" src="icons/pratikabu-stt-48-7.png" />
+						<br />
+						<input type="radio" name="iconLib" value="8"><img style="vertical-align: middle;" id="iconGal8" src="icons/pratikabu-stt-48-8.png" />
+						<input type="radio" name="iconLib" value="9"><img style="vertical-align: middle;" id="iconGal9" src="icons/pratikabu-stt-48-9.png" />
+						<input type="radio" name="iconLib" value="10"><img style="vertical-align: middle;" id="iconGal10" src="icons/pratikabu-stt-48-10.png" />
+						<input type="radio" name="iconLib" value="11"><img style="vertical-align: middle;" id="iconGal11" src="icons/pratikabu-stt-48-11.png" />
+					</td>
+				</tr>
+				<tr>
+					<td align="center" colSpan=2>
 						<a href="http://pratikabu.blogspot.in/2013/01/dual-arrow-feature-request.html">Suggest a Feature</a>
 					</td>
 					
@@ -172,6 +204,7 @@
 				<ul id="mentionUpdates">
 					<li>Flip between Scroll Up and Scroll Down based on the current location.</li>
 					<li>New Icon Gallery for Dual Arrow.</li>
+					<li>Arrange Dual Icons in Horizontal or Vertical arragement.
 					<li>Pause anywhere by clicking on the same icon when scrolling.</li>
 					<li>Open Settings page right from the add-on.</li>
 					<li>Refactored the code to give faster performence.</li>
