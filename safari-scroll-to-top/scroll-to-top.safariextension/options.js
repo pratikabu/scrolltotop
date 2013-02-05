@@ -1,7 +1,8 @@
 var requestCount = 0;
 var ignoreImgLoad = true;
+var dIgnoreImgLoad = true;
 var globalScrollSpeed;
-var ignoreForDefaults = false;
+var ignoreForDefaults = true;
 
 // Saves options to localStorage.
 function default_options() {
@@ -21,7 +22,9 @@ function save_options() {
 		iconLib: $('input:radio[name=iconLib]:checked').val(),
 		userIcon: $('#useMyIconTextBox').val(),
 		arrowType: $('input:radio[name=arrowType]:checked').val(),
-		togglePause: $('#togglePause').is(':checked')
+		dIconLib: $('input:radio[name=dIconLib]:checked').val(),
+		dUserIcon: $('#dUseMyIconTextBox').val(),
+		dArrang: $('input:radio[name=dIconArrangemnt]:checked').val()
 	}
 	safari.self.tab.dispatchMessage("saveSettings", data);
 }
@@ -72,12 +75,15 @@ function respondMessage(theMessageEvent) {
 		swapAdvancedOptions(data.arrowType);
 		
 		$('input:radio[name=controlOptions]').filter('[value=' + data.controlOption + ']').attr('checked', true);
-		$("#togglePause").attr('checked', data.togglePause == "true" ? true : false);
 		$('input:radio[name=iconSize]').filter('[value=' + data.iconSize + ']').attr('checked', true);
 		$('input:radio[name=iconLib]').filter('[value=' + data.iconLib + ']').attr('checked', true);
 		$('#useMyIconTextBox').val(data.userIcon);
-		
 		$("#useMyIconTextBox").change();// load the image
+		
+		$('input:radio[name=dIconLib]').filter('[value=' + data.dIconLib + ']').attr('checked', true);
+		$('#dUseMyIconTextBox').val(data.dUserIcon);
+		$("#dUseMyIconTextBox").change();// load the image
+		$('input:radio[name=dIconArrangemnt]').filter('[value=' + data.dArrang + ']').attr('checked', true);
 	} else if("saveCompleted" === theMessageEvent.name) {
 		// Update status to let user know options were saved.
 		show_message("Saved successfully.");
@@ -152,7 +158,7 @@ function selectableRadioContent(id, name, value) {
 	for all radio button's content to be selecatable
 */
 function makeElementsSelactable() {
-	for(var i = 1; i <= 11; i++) {
+	for(var i = 1; i <= 23; i++) {
 		selectableRadioContent("iconGal" + i, "iconLib", "" + i);
 	}
 	
@@ -179,11 +185,27 @@ function makeElementsSelactable() {
 	
 	selectableRadioContent("useMyIcon", "iconLib", "myIcon");
 	
-	$("#tpToggle").css("cursor", "default");
-	$('#tpToggle').click(function() {
-		$("#togglePause").attr('checked', !$('#togglePause').is(':checked'));
-		$("#togglePause").change();
-	});
+	//dual arrow selectors
+	
+	selectableRadioContent("diarrHr", "dIconArrangemnt", "hr");
+	selectableRadioContent("diarrVr", "dIconArrangemnt", "vr");
+	
+	// horizontal arrangement selector
+	for(var i = 1; i <= 6; i++) {
+		selectableRadioContent("dIconGal" + i, "dIconLib", "" + i);
+	}
+	
+	// vertical arrangement selector
+	for(var i = 21; i <= 23; i++) {
+		selectableRadioContent("dIconGal" + i, "dIconLib", "" + i);
+	}
+	
+	// dual icon's single icon selector
+	for(var i = 41; i <= 63; i++) {
+		selectableRadioContent("dIconGal" + i, "dIconLib", "" + i);
+	}
+	
+	selectableRadioContent("dUseMyIcon", "dIconLib", "myIcon");
 }
 
 function swapAdvancedOptions(selectedValue) {
@@ -207,8 +229,18 @@ function isRightChangedEvent(name, val) {
 document.addEventListener('DOMContentLoaded', function () {
 	var updated = getParameterByName("updated");
 	if("true" == updated) {
-		var updateDiv = '<div id="updateDiv" align="center" style="width: 100%;">Congratulations Scroll To Top has been updated to the latest version. See <a href="http://pratikabu.users.sourceforge.net/extensions/scrolltotop/release.html">What&apos;s New</a>.</div>';
-		$('body').prepend(updateDiv);
+		$('#maskDiv').fadeTo("slow", .8);
+		$('#updateDialog').fadeTo("slow", 1);
+
+		$('#okaygotit').click(function() {
+			$('#updateDialog').fadeTo("slow", 0, function() {
+				$("#updateDialog").remove();
+			});
+			
+			$('#maskDiv').fadeTo("slow", 0, function() {
+				$("#maskDiv").remove();
+			});
+		});
 	}
 	
 	// add all events
@@ -221,7 +253,6 @@ document.addEventListener('DOMContentLoaded', function () {
 	$('input:radio[name=iconSize]').change(function() { isRightChangedEvent("iconSize", $(this).val()); });
 	$('input:radio[name=visbilityBehavior]').change(function() { isRightChangedEvent("visbilityBehavior", $(this).val()); });
 	$('input:radio[name=controlOptions]').change(function() { isRightChangedEvent("controlOptions", $(this).val()); });
-	$("#togglePause").change(function() { save_options(); });
 	$('input:radio[name=iconLib]').change(function() { isRightChangedEvent("iconLib", $(this).val()); });
 	
 	$('input:radio[name=arrowType]').change(function() {
@@ -263,6 +294,46 @@ document.addEventListener('DOMContentLoaded', function () {
 		show_message("Error loading uploaded image.");
 		$('input:radio[name=iconLib]').focus();
 	});
+	
+	// dual arrow changes
+	$('input:radio[name=dIconLib]').change(function() {
+		if(isRightChangedEvent("dIconLib", $(this).val())) {
+			if(20 >= parseInt($(this).val())) {
+				$('input:radio[name=dIconArrangemnt]').filter('[value=hr]').attr('checked', true);
+			} else if(40 >= parseInt($(this).val())) {
+				$('input:radio[name=dIconArrangemnt]').filter('[value=vr]').attr('checked', true);
+			}
+			save_options();
+		}
+	});
+	
+	$("#dUseMyIconTextBox").change(function() { $('#dPreviewIcon').attr('src', 'data:image/png;base64,' + $('#dUseMyIconTextBox').val()); });
+	$("#dUseMyIconTextBox").focus(function() {
+		this.select();
+		
+		// Work around Chrome's little problem
+		$("#dUseMyIconTextBox").mouseup(function() {
+			// Prevent further mouseup intervention
+			$("#dUseMyIconTextBox").unbind("mouseup");
+			return false;
+		});
+	});
+	
+	$("#dPreviewIcon").load(function() {
+		if(true === dIgnoreImgLoad) {
+			dIgnoreImgLoad = false;
+		} else {
+			$('input:radio[name=dIconLib]').filter('[value=myIcon]').attr('checked', true);
+			$('input:radio[name=dIconLib]').change();
+		}
+	});
+	$("#dPreviewIcon").error(function() {
+		show_message("Error loading uploaded image.");
+		$('input:radio[name=dIconLib]').focus();
+	});
+	
+	$('input:radio[name=dIconArrangemnt]').change(function() { isRightChangedEvent("dIconArrangemnt", $(this).val()); });
+	// dual arrow settings ends
 	
 	makeElementsSelactable();
 	restore_options();

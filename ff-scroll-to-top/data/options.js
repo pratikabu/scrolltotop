@@ -324,7 +324,6 @@ document.addEventListener('DOMContentLoaded', function () {
 		swapAdvancedOptions(data.arrowType);
 		
 		$('input:radio[name=controlOptions]').filter('[value=' + data.controlOption + ']').attr('checked', true);
-		$("#togglePause").attr('checked', data.togglePause == "true" ? true : false);
 		$('input:radio[name=iconSize]').filter('[value=' + data.iconSize + ']').attr('checked', true);
 		$('input:radio[name=iconLib]').filter('[value=' + data.iconLib + ']').attr('checked', true);
 		$('#useMyIconTextBox').val(data.userIcon);
