@@ -36,5 +36,15 @@ var pratikabustt_browser_impl = {
 		// #BrowserSpecific method to convert response to single known format
 		var response = rawResponse;
 		return response;
+	},
+	
+	openOptionPage: function() {
+		// #BrowserSpecific method to open the option page
+		self.port.emit("optionPage");// method to communicate to main.js
+	},
+	
+	setImageForId: function(imgId, imageName) {
+		var imgUrl = pratikabustt_browser_impl.getFixedLocation() + imageName;
+		$("#" + imgId).attr("src", pratikabustt_browser_impl.getBrowserSpecificUrl(imgUrl));
 	}
 };

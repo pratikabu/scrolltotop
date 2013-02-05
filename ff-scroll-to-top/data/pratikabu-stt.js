@@ -11,23 +11,33 @@ var pratikabu_stt_iconSize = 48;
 var pratikabu_stt_otherDefaultFade = 0.35;
 var pratikabu_stt_visibilityBehavior = "autohide";
 var pratikabu_stt_controlOption = "simple";
-var pratikabu_stt_preferencesLoaded = "false";
-var pratikabu_stt_documentLoaded = "false";
-var pratikabu_stt_firstAlwaysShow = "true";
+var pratikabu_stt_preferencesLoaded = false;
+var pratikabu_stt_firstAlwaysShow = true;
 var pratikabu_stt_buttonCreated;// this variable will tell whether the button is created or not on this page also whether this page is eligible for the button or not it will be initialzied once during load
 var pratikabu_stt_prefs;// this variable holds the preferences
-var pratikabu_stt_onceVisible = "false";// this variable will be used for the special case in which document and window height are same. it will be used to identify the always on property so that visibility of the icon can be persisted.
-var pratikabu_stt_pauseActive = false;
+var pratikabu_stt_onceVisible = false;// this variable will be used for the special case in which document and window height are same. it will be used to identify the always on property so that visibility of the icon can be persisted.
 var pratikabu_stt_dualArrow = false;
+var pratikabu_stt_flipScrolling = false;
+var pratikabu_stt_scrollingInProgress = false;
 
 var pratikabustt = {
 	pratikabu_stt_scrollHandler: function () {
 		pratikabustt.callHideOrShowOnceAfterInit();
+		
+		if(!pratikabu_stt_dualArrow && "true" == pratikabu_stt_buttonCreated && "autohide" != pratikabu_stt_visibilityBehavior) {
+			if(pratikabu_stt_maxScrollAmount > $(document).scrollTop()) {// you are at the top rotate arrows to original state
+				pratikabu_stt_flipScrolling = true;
+				$("#pratikabuSTTArrowUp").rotate({ animateTo: 180 });
+			} else {
+				pratikabu_stt_flipScrolling = false;
+				$("#pratikabuSTTArrowUp").rotate({ animateTo: 0 });
+			}
+		}
 	},
 	
 	createButton: function() {
 		// create div tag
-		$('body').prepend('<div id="pratikabuSTTDiv"><img id="pratikabuSTTArrowUp" style="float: left;" /><div id="pratikabuSTTDiv2"><img id="pratikabuSTTPageUp" /><img id="pratikabuSTTClear" /><img id="pratikabuSTTPageDown" /><img id="pratikabuSTTArrowDown" /></div></div>');
+		$('body').prepend('<div id="pratikabuSTTDiv"><img id="pratikabuSTTArrowUp" style="float: left;" /><div id="pratikabuSTTDiv2"><img id="pratikabuSTTPageUp" /><img id="pratikabuSTTClear" /><img id="pratikabuSTTPageDown" /><img id="pratikabuSTTSettings" /></div></div>');
 		$("#pratikabuSTTDiv").hide();
 		
 		// check whether the css has been applied to the div tag or not, if not then remove it from DOM
@@ -39,7 +49,7 @@ var pratikabustt = {
 		
 		pratikabustt.hoverEffect("#pratikabuSTTArrowUp", 0.5);
 		pratikabustt.hoverEffect("#pratikabuSTTClear", pratikabu_stt_otherDefaultFade);
-		pratikabustt.hoverEffect("#pratikabuSTTArrowDown", pratikabu_stt_otherDefaultFade);
+		pratikabustt.hoverEffect("#pratikabuSTTSettings", pratikabu_stt_otherDefaultFade);
 		pratikabustt.hoverEffect("#pratikabuSTTPageUp", pratikabu_stt_otherDefaultFade);
 		pratikabustt.hoverEffect("#pratikabuSTTPageDown", pratikabu_stt_otherDefaultFade);
 		
@@ -54,31 +64,29 @@ var pratikabustt = {
 		
 		// add the scroll up logic
 		$("#pratikabuSTTArrowUp").click(function() {
-			if($(document).scrollTop() == 0) {
-				return false;
+			if(pratikabu_stt_flipScrolling) {
+				pratikabustt.scrollToBottom();
+			} else {
+				pratikabustt.scrollToTop();
 			}
 			
-			if(!pratikabu_stt_pauseActive) {// identify up arrow
-				pratikabustt.scrollPageTo(pratikabu_stt_delay, 0, pratikabu_stt_prefs.togglePause);
-			} else {
-				pratikabustt.showUpArrowImage();
-				$("html, body").stop();
-			}
 			return false;
 		});
 		
 		// add the scroll down logic
-		$("#pratikabuSTTArrowDown").click(function() {
-			var location = ($(document).height() - pratikabustt.getWindowHeight());
-			if(0 == location) {// this should never happen, but it gives this result on some pages
-				location = $(document).height();
-			}
-			if($(document).scrollTop() == location) {
-				return false;
-			}
-			pratikabustt.scrollPageTo(pratikabu_stt_delay, location, pratikabu_stt_prefs.togglePause);
+		$("#pratikabuSTTSettings").click(function() {
+			pratikabustt_browser_impl.openOptionPage();
 			return false;
 		});
+		
+		// add rotation for scrolling down
+		$("#pratikabuSTTSettings").hover(
+			function() {
+				$(this).rotate({ animateTo: 180 });
+			},
+			function() {
+				$(this).rotate({ animateTo: 0 });
+			});
 		
 		// add the remove div logic
 		$("#pratikabuSTTClear").click(function() {
@@ -122,10 +130,10 @@ var pratikabustt = {
 		
 		var otherImagesSize = pratikabustt.getOtherImageSize();
 		
-		var showPagerButtons;
+		var showPagerButtons = false;
 		if("pager" == pratikabu_stt_controlOption) {
 			if($(document).height() != pratikabustt.getWindowHeight()) {
-				showPagerButtons = "true";
+				showPagerButtons = true;
 			} else {
 				pratikabu_stt_controlOption = "simple";// set the control option to simple
 			}
@@ -137,18 +145,14 @@ var pratikabustt = {
 		}
 		$("#pratikabuSTTDiv2").css("width", divSize + "px");
 		
-		imgUrl = pratikabustt_browser_impl.getFixedLocation() + "clear-" + otherImagesSize + ".png";
-		$("#pratikabuSTTClear").attr("src", pratikabustt_browser_impl.getBrowserSpecificUrl(imgUrl));
-		
-		imgUrl = pratikabustt_browser_impl.getFixedLocation() + "down-" + otherImagesSize + ".png";
-		$("#pratikabuSTTArrowDown").attr("src", pratikabustt_browser_impl.getBrowserSpecificUrl(imgUrl));
+		pratikabustt_browser_impl.setImageForId("pratikabuSTTClear", "clear-" + otherImagesSize + ".png");
+		pratikabustt_browser_impl.setImageForId("pratikabuSTTSettings", "settings-" + otherImagesSize + ".png");
 		
 		// show/remove page up and page down buttons from settings
 		if(showPagerButtons) {
-			imgUrl = pratikabustt_browser_impl.getFixedLocation() + "pageup-" + otherImagesSize + ".png";
-			$("#pratikabuSTTPageUp").attr("src", pratikabustt_browser_impl.getBrowserSpecificUrl(imgUrl));
-			$("#pratikabuSTTPageDown").attr("src", pratikabustt_browser_impl.getBrowserSpecificUrl(imgUrl));
-			$("#pratikabuSTTPageDown").css(pratikabustt_browser_impl.getRotationCssName(), "rotate(180deg)");
+			pratikabustt_browser_impl.setImageForId("pratikabuSTTPageUp", "pageup-" + otherImagesSize + ".png");
+			pratikabustt_browser_impl.setImageForId("pratikabuSTTPageDown", "pageup-" + otherImagesSize + ".png");
+			$("#pratikabuSTTPageDown").rotate(180);
 		} else {
 			$("#pratikabuSTTPageUp").remove();
 			$("#pratikabuSTTPageDown").remove();
@@ -159,7 +163,7 @@ var pratikabustt = {
 		if("right" == pratikabu_stt_prefs.hLoc) {// replace the locations of the icons
 			if(showPagerButtons) {
 				$("#pratikabuSTTPageUp").before($("#pratikabuSTTClear"));
-				$("#pratikabuSTTPageDown").before($("#pratikabuSTTArrowDown"));
+				$("#pratikabuSTTPageDown").before($("#pratikabuSTTSettings"));
 			}
 			$("#pratikabuSTTDiv2").css("marginLeft", 0 + "px");
 		} else {
@@ -175,7 +179,12 @@ var pratikabustt = {
 	
 	createDualButton: function() {
 		// create div tag
-		$('body').prepend('<div id="pratikabuSTTDiv"><div class="otherDiv"><img id="pratikabuSTTArrowUp" /></div><div align="center" class="otherDiv"><img id="pratikabuSTTArrowDown" /></div></div>');
+		if("hr" == pratikabu_stt_prefs.dArrang) {
+			$('body').prepend('<div id="pratikabuSTTDiv"><img id="pratikabuSTTArrowUp" /><img id="pratikabuSTTArrowDown" /></div>');
+		} else if("vr" == pratikabu_stt_prefs.dArrang) {
+			//$('body').prepend('<div id="pratikabuSTTDiv"><div class="otherDiv"><img id="pratikabuSTTArrowUp" /></div><div align="center" class="otherDiv"><img id="pratikabuSTTArrowDown" /></div></div>');
+			$('body').prepend('<div id="pratikabuSTTDiv"><img id="pratikabuSTTArrowUp" style="display: block !important;" /><img id="pratikabuSTTArrowDown" style="display: block !important;" /></div>');
+		}
 		$("#pratikabuSTTDiv").hide();
 		
 		// check whether the css has been applied to the div tag or not, if not then remove it from DOM
@@ -193,7 +202,7 @@ var pratikabustt = {
 			if($(document).scrollTop() == 0) {
 				return false;
 			}
-			pratikabustt.scrollPageTo(pratikabu_stt_delay, 0, false);
+			pratikabustt.scrollPageTo(pratikabu_stt_delay, 0);
 			return false;
 		});
 		
@@ -206,7 +215,7 @@ var pratikabustt = {
 			if($(document).scrollTop() == location) {
 				return false;
 			}
-			pratikabustt.scrollPageTo(pratikabu_stt_delay, location, false);
+			pratikabustt.scrollPageTo(pratikabu_stt_delay, location);
 			return false;
 		});
 		
@@ -230,23 +239,41 @@ var pratikabustt = {
 		$("#pratikabuSTTDiv").css(hloc, hlocVal);// set the horizontal alignment of the image
 		
 		// set the image
-		pratikabustt.showUpArrowImage();
-		
-		imgUrl = pratikabustt_browser_impl.getFixedLocation() + "dual.png";
-		$("#pratikabuSTTArrowDown").attr("src", pratikabustt_browser_impl.getBrowserSpecificUrl(imgUrl));
-		$("#pratikabuSTTArrowDown").css(pratikabustt_browser_impl.getRotationCssName(), "rotate(180deg)");
+		pratikabustt.showDualArrowImage();
 		
 		return "true";// successfully created
 	},
 	
-	scrollPageTo: function(delay, location, showPause) {
-		if(showPause) {
-			pratikabustt.showPauseImage();
+	scrollToTop: function() {
+		if($(document).scrollTop() == 0) {
+			return false;
 		}
+		
+		pratikabustt.scrollPageTo(pratikabu_stt_delay, 0);
+	},
+	
+	scrollToBottom: function() {
+		var location = ($(document).height() - pratikabustt.getWindowHeight());
+		if(0 == location) {// this should never happen, but it gives this result on some pages
+			location = $(document).height();
+		}
+		if($(document).scrollTop() == location) {
+			return false;
+		}
+		pratikabustt.scrollPageTo(pratikabu_stt_delay, location);
+	},
+	
+	scrollPageTo: function(delay, location) {
+		if(pratikabu_stt_scrollingInProgress) {// pause any scroll when scrolling is in progress
+			$("html, body").stop();
+			pratikabu_stt_scrollingInProgress = false;
+			return;
+		}
+		
+		pratikabu_stt_scrollingInProgress = true;
+		
 		$("html, body").stop(true, true).animate({ scrollTop: location }, delay, function() {
-			if(showPause) {
-				pratikabustt.showUpArrowImage();
-			}
+			pratikabu_stt_scrollingInProgress = false;
 		});
 	},
 	
@@ -276,7 +303,7 @@ var pratikabustt = {
 			}
 		}
 		
-		pratikabustt.scrollPageTo(speed, location, false);
+		pratikabustt.scrollPageTo(speed, location);
 	},
 	
 	getWindowHeight: function() {
@@ -307,30 +334,39 @@ var pratikabustt = {
 			});
 	},
 	
-	showPauseImage: function() {
-		pratikabu_stt_pauseActive = true;
-		var imgUrl = pratikabustt_browser_impl.getFixedLocation() + "pause-" + pratikabu_stt_iconSize + ".png";
-		$("#pratikabuSTTArrowUp").attr("src", pratikabustt_browser_impl.getBrowserSpecificUrl(imgUrl));
+	showUpArrowImage: function() {
+		if("myIcon" == pratikabu_stt_prefs.iconLib) {
+			$("#pratikabuSTTArrowUp").attr("src", "data:image/png;base64," + pratikabu_stt_prefs.userIcon);
+		} else {
+			var suffixString = pratikabu_stt_iconSize + "-" + pratikabu_stt_prefs.iconLib;
+			pratikabustt_browser_impl.setImageForId("pratikabuSTTArrowUp", suffixString + ".png");
+		}
 	},
 	
-	showUpArrowImage: function() {
-		var imgSource;
-		
-		pratikabu_stt_pauseActive = false;
-		if("myIcon" == pratikabu_stt_prefs.iconLib) {
-			imgSource = "data:image/png;base64," + pratikabu_stt_prefs.userIcon;
+	showDualArrowImage: function() {
+		if("myIcon" == pratikabu_stt_prefs.dIconLib) {
+			var base64url = "data:image/png;base64," + pratikabu_stt_prefs.dUserIcon;
+			$("#pratikabuSTTArrowUp").attr("src", base64url);
+			$("#pratikabuSTTArrowDown").attr("src", base64url);
 		} else {
-			var suffixString = "";
-			if(pratikabu_stt_dualArrow) {
-				suffixString = "dual";
+			var iconNumber = parseInt(pratikabu_stt_prefs.dIconLib);
+			var iconName = "dual-";
+			if(20 >= iconNumber) {
+				iconName += "hr-";
+			} else if(40 >= iconNumber) {
+				iconNumber -= 20;
+				iconName += "vr-";
 			} else {
-				suffixString = pratikabu_stt_iconSize + "-" + pratikabu_stt_prefs.iconLib;
+				iconNumber -= 40;
+				iconName = pratikabu_stt_iconSize + "-";
 			}
 			
-			imgSource = pratikabustt_browser_impl.getBrowserSpecificUrl(pratikabustt_browser_impl.getFixedLocation() + suffixString + ".png");
+			var suffixString = iconName + iconNumber;
+			pratikabustt_browser_impl.setImageForId("pratikabuSTTArrowUp", suffixString + ".png");
+			pratikabustt_browser_impl.setImageForId("pratikabuSTTArrowDown", suffixString + ".png");
 		}
 		
-		$("#pratikabuSTTArrowUp").attr("src", imgSource);
+		$("#pratikabuSTTArrowDown").rotate(180);
 	},
 	
 	hideOrShowButton: function() {
@@ -347,18 +383,16 @@ var pratikabustt = {
 		
 		// SPECIAL Handling STARTS
 		// this logic is solely for the special condition in which document and window height are same
-		if("false" == pratikabu_stt_onceVisible && true === boolShow) {
-			pratikabu_stt_onceVisible = "true";
+		if(!pratikabu_stt_onceVisible && boolShow) {
+			pratikabu_stt_onceVisible = true;
 		}
 		
-		if(false === boolShow && "true" == pratikabu_stt_onceVisible && "alwaysshow" == pratikabu_stt_visibilityBehavior) {
+		if(!boolShow && pratikabu_stt_onceVisible && "alwaysshow" == pratikabu_stt_visibilityBehavior) {
 			boolShow = true;
 		}
 		// SPECIAL Handling ENDS
 		
-		ignoreCreation = boolShow ? "false" : "true";// ignoreCreation if boolShow is false
-		
-		if(!pratikabu_stt_buttonCreated && ("true" == ignoreCreation || window != window.top)) {// ignore any iFrame/frame, work only for top window
+		if(!pratikabu_stt_buttonCreated && (!boolShow || window != window.top)) {// ignore any iFrame/frame, work only for top window. also ignore creation if boolShow is false
 			// since the page doesnot satisfies the height criteria, ignore the creation and hide logic
 			// this logic can create an icon once user resizes the window
 			return;
@@ -368,10 +402,10 @@ var pratikabustt = {
 			boolShow = vScrollTop > pratikabu_stt_maxScrollAmount;
 		} else {
 			if(0 < vScrollTop) {
-				pratikabu_stt_firstAlwaysShow = "false";
+				pratikabu_stt_firstAlwaysShow = false;
 			}
 			
-			if(0 == vScrollTop && "true" == pratikabu_stt_firstAlwaysShow) {
+			if(0 == vScrollTop && pratikabu_stt_firstAlwaysShow) {
 				boolShow = false;
 			}
 		}
@@ -427,7 +461,6 @@ var pratikabustt = {
 	
 	loadFromResponse: function(response) {// load the images, css, include/remove elements
 		pratikabu_stt_prefs = response;
-		pratikabu_stt_prefs.togglePause = pratikabu_stt_prefs.togglePause == "true" ? true : false;
 		
 		pratikabu_stt_delay = parseInt(pratikabu_stt_prefs.scrSpeed);
 		pratikabu_stt_iconSize = parseInt(pratikabu_stt_prefs.iconSize);
@@ -436,12 +469,12 @@ var pratikabustt = {
 		
 		pratikabu_stt_dualArrow = ("2" == pratikabu_stt_prefs.arrowType);
 		
-		pratikabu_stt_preferencesLoaded = "true";// enable functioning document.ready function
+		pratikabu_stt_preferencesLoaded = true;// enable functioning document.ready function
 		pratikabustt.callHideOrShowOnceAfterInit();
 	},
 	
 	callHideOrShowOnceAfterInit: function() {// function to handle the call to hideOrShowButton
-		if("true" == pratikabu_stt_preferencesLoaded) {// check whether the preferences have been loaded or not
+		if(pratikabu_stt_preferencesLoaded) {// check whether the preferences have been loaded or not
 			// hide or show the button based on the current location, because a page can be loaded scrolled..
 			pratikabustt.hideOrShowButton();
 		}
@@ -454,13 +487,8 @@ pratikabustt_browser_impl.fetchPreferences();
 // add the scroll handler on the page to hide and show the image
 $(window).scroll(pratikabustt.pratikabu_stt_scrollHandler);
 
-$(document).ready(function() {// when page is ready do the below mentioned steps
-	pratikabu_stt_documentLoaded = "true";
-	pratikabustt.callHideOrShowOnceAfterInit();
-});
-
 $(window).resize(function() {// when window is resized do the below mentioned steps
-	if(!pratikabu_stt_buttonCreated || "true" == pratikabu_stt_buttonCreated) {
+	if(!pratikabu_stt_buttonCreated || "true" == pratikabu_stt_buttonCreated) {// ??
 		// hide or show the button based on the current location, because a page can be loaded scrolled..
 		pratikabustt.callHideOrShowOnceAfterInit();
 	}
