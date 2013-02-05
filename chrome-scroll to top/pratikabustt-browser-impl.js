@@ -35,5 +35,10 @@ var pratikabustt_browser_impl = {
 	openOptionPage: function() {
 		// #BrowserSpecific method to open the option page
 		chrome.extension.sendMessage({method: "openOptionPage"});
+	},
+	
+	setImageForId: function(imgId, imageName) {
+		var imgUrl = pratikabustt_browser_impl.getFixedLocation() + imageName;
+		$("#" + imgId).attr("src", pratikabustt_browser_impl.getBrowserSpecificUrl(imgUrl));
 	}
 };

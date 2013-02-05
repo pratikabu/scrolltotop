@@ -145,17 +145,13 @@ var pratikabustt = {
 		}
 		$("#pratikabuSTTDiv2").css("width", divSize + "px");
 		
-		imgUrl = pratikabustt_browser_impl.getFixedLocation() + "clear-" + otherImagesSize + ".png";
-		$("#pratikabuSTTClear").attr("src", pratikabustt_browser_impl.getBrowserSpecificUrl(imgUrl));
-		
-		imgUrl = pratikabustt_browser_impl.getFixedLocation() + "settings-" + otherImagesSize + ".png";
-		$("#pratikabuSTTSettings").attr("src", pratikabustt_browser_impl.getBrowserSpecificUrl(imgUrl));
+		pratikabustt_browser_impl.setImageForId("pratikabuSTTClear", "clear-" + otherImagesSize + ".png");
+		pratikabustt_browser_impl.setImageForId("pratikabuSTTSettings", "settings-" + otherImagesSize + ".png");
 		
 		// show/remove page up and page down buttons from settings
 		if(showPagerButtons) {
-			imgUrl = pratikabustt_browser_impl.getFixedLocation() + "pageup-" + otherImagesSize + ".png";
-			$("#pratikabuSTTPageUp").attr("src", pratikabustt_browser_impl.getBrowserSpecificUrl(imgUrl));
-			$("#pratikabuSTTPageDown").attr("src", pratikabustt_browser_impl.getBrowserSpecificUrl(imgUrl));
+			pratikabustt_browser_impl.setImageForId("pratikabuSTTPageUp", "pageup-" + otherImagesSize + ".png");
+			pratikabustt_browser_impl.setImageForId("pratikabuSTTPageDown", "pageup-" + otherImagesSize + ".png");
 			$("#pratikabuSTTPageDown").rotate(180);
 		} else {
 			$("#pratikabuSTTPageUp").remove();
@@ -183,7 +179,12 @@ var pratikabustt = {
 	
 	createDualButton: function() {
 		// create div tag
-		$('body').prepend('<div id="pratikabuSTTDiv"><div class="otherDiv"><img id="pratikabuSTTArrowUp" /></div><div align="center" class="otherDiv"><img id="pratikabuSTTArrowDown" /></div></div>');
+		if("hr" == pratikabu_stt_prefs.dArrang) {
+			$('body').prepend('<div id="pratikabuSTTDiv"><img id="pratikabuSTTArrowUp" /><img id="pratikabuSTTArrowDown" /></div>');
+		} else if("vr" == pratikabu_stt_prefs.dArrang) {
+			//$('body').prepend('<div id="pratikabuSTTDiv"><div class="otherDiv"><img id="pratikabuSTTArrowUp" /></div><div align="center" class="otherDiv"><img id="pratikabuSTTArrowDown" /></div></div>');
+			$('body').prepend('<div id="pratikabuSTTDiv"><img id="pratikabuSTTArrowUp" style="display: block !important;" /><img id="pratikabuSTTArrowDown" style="display: block !important;" /></div>');
+		}
 		$("#pratikabuSTTDiv").hide();
 		
 		// check whether the css has been applied to the div tag or not, if not then remove it from DOM
@@ -238,11 +239,7 @@ var pratikabustt = {
 		$("#pratikabuSTTDiv").css(hloc, hlocVal);// set the horizontal alignment of the image
 		
 		// set the image
-		pratikabustt.showUpArrowImage();
-		
-		imgUrl = pratikabustt_browser_impl.getFixedLocation() + "dual.png";
-		$("#pratikabuSTTArrowDown").attr("src", pratikabustt_browser_impl.getBrowserSpecificUrl(imgUrl));
-		$("#pratikabuSTTArrowDown").rotate(180);
+		pratikabustt.showDualArrowImage();
 		
 		return "true";// successfully created
 	},
@@ -338,22 +335,38 @@ var pratikabustt = {
 	},
 	
 	showUpArrowImage: function() {
-		var imgSource;
-		
 		if("myIcon" == pratikabu_stt_prefs.iconLib) {
-			imgSource = "data:image/png;base64," + pratikabu_stt_prefs.userIcon;
+			$("#pratikabuSTTArrowUp").attr("src", "data:image/png;base64," + pratikabu_stt_prefs.userIcon);
 		} else {
-			var suffixString = "";
-			if(pratikabu_stt_dualArrow) {
-				suffixString = "dual";
+			var suffixString = pratikabu_stt_iconSize + "-" + pratikabu_stt_prefs.iconLib;
+			pratikabustt_browser_impl.setImageForId("pratikabuSTTArrowUp", suffixString + ".png");
+		}
+	},
+	
+	showDualArrowImage: function() {
+		if("myIcon" == pratikabu_stt_prefs.dIconLib) {
+			var base64url = "data:image/png;base64," + pratikabu_stt_prefs.dUserIcon;
+			$("#pratikabuSTTArrowUp").attr("src", base64url);
+			$("#pratikabuSTTArrowDown").attr("src", base64url);
+		} else {
+			var iconNumber = parseInt(pratikabu_stt_prefs.dIconLib);
+			var iconName = "dual-";
+			if(20 >= iconNumber) {
+				iconName += "hr-";
+			} else if(40 >= iconNumber) {
+				iconNumber -= 20;
+				iconName += "vr-";
 			} else {
-				suffixString = pratikabu_stt_iconSize + "-" + pratikabu_stt_prefs.iconLib;
+				iconNumber -= 40;
+				iconName = pratikabu_stt_iconSize + "-";
 			}
 			
-			imgSource = pratikabustt_browser_impl.getBrowserSpecificUrl(pratikabustt_browser_impl.getFixedLocation() + suffixString + ".png");
+			var suffixString = iconName + iconNumber;
+			pratikabustt_browser_impl.setImageForId("pratikabuSTTArrowUp", suffixString + ".png");
+			pratikabustt_browser_impl.setImageForId("pratikabuSTTArrowDown", suffixString + ".png");
 		}
 		
-		$("#pratikabuSTTArrowUp").attr("src", imgSource);
+		$("#pratikabuSTTArrowDown").rotate(180);
 	},
 	
 	hideOrShowButton: function() {
