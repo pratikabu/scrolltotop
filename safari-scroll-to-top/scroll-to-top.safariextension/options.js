@@ -1,12 +1,12 @@
 var requestCount = 0;
-var ignoreImgLoad = true;
-var dIgnoreImgLoad = true;
+var ignoreImgLoadEvent = true;
+var dIgnoreImgLoadEvent = true;
 var globalScrollSpeed;
 var ignoreForDefaults = true;
 
 // Saves options to localStorage.
 function default_options() {
-	ignoreImgLoad = true;// ignore the image load method as it will reset myIcon in the radio button
+	ignoreForDefaults = true;
 	safari.self.tab.dispatchMessage("resetSettings");
 }
 
@@ -31,6 +31,9 @@ function save_options() {
 
 // Restores select box state to saved value from localStorage.
 function restore_options() {
+	ignoreImgLoadEvent = true;// ignore the image load method as it will reset myIcon in the radio button
+	dIgnoreImgLoadEvent = true;// ignore the image load method as it will reset myIcon in the radio button
+	
 	safari.self.tab.dispatchMessage("requestSettings");
 }
 
@@ -283,8 +286,8 @@ document.addEventListener('DOMContentLoaded', function () {
 	});
 	
 	$("#previewIcon").load(function() {
-		if(true === ignoreImgLoad) {
-			ignoreImgLoad = false;
+		if(ignoreImgLoadEvent) {
+			ignoreImgLoadEvent = false;
 		} else {
 			$('input:radio[name=iconLib]').filter('[value=myIcon]').attr('checked', true);
 			$('input:radio[name=iconLib]').change();
@@ -320,8 +323,8 @@ document.addEventListener('DOMContentLoaded', function () {
 	});
 	
 	$("#dPreviewIcon").load(function() {
-		if(true === dIgnoreImgLoad) {
-			dIgnoreImgLoad = false;
+		if(dIgnoreImgLoadEvent) {
+			dIgnoreImgLoadEvent = false;
 		} else {
 			$('input:radio[name=dIconLib]').filter('[value=myIcon]').attr('checked', true);
 			$('input:radio[name=dIconLib]').change();
