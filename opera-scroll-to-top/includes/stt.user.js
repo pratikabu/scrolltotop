@@ -359,8 +359,8 @@ var pratikabustt = {
 		pratikabustt.scrollPageTo(pratikabu_stt_delay, location);
 	},
 	
-	scrollPageTo: function(delay, location) {
-		if(pratikabu_stt_scrollingInProgress) {// pause any scroll when scrolling is in progress
+	scrollPageTo: function(delay, location, isPager) {
+		if(!isPager && pratikabu_stt_scrollingInProgress) {// pause any scroll when scrolling is in progress
 			$("html, body").stop();
 			pratikabu_stt_scrollingInProgress = false;
 			return;
@@ -399,7 +399,7 @@ var pratikabustt = {
 			}
 		}
 		
-		pratikabustt.scrollPageTo(speed, location);
+		pratikabustt.scrollPageTo(speed, location, true);
 	},
 	
 	getWindowHeight: function() {
