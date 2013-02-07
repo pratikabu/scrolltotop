@@ -24,7 +24,6 @@ function default_options() {
 	localStorage["d_user_saved_icon"] = commonIcon;
 	localStorage["d_arrangement"] = "hr";
 	
-	ignoreForDefaults = true;
 	restore_options();
 
 	// Update status to let user know options were defaulted.

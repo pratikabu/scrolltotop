@@ -22,11 +22,6 @@ var pratikabustt_browser_impl = {
 		pratikabustt.loadFromResponse(pratikabustt_browser_impl.convertResponse(data));
 	},
 	
-	getRotationCssName: function() {
-		// #BrowserSpecific css
-		return "-moz-transform";
-	},
-	
 	getBrowserSpecificUrl: function(imgUrl) {
 		// #BrowserSpecific method to get the resource
 		return "resource://jid0-grmsxw9byuhwgjlhtxjg27ynzrs-at-jetpack/scroll-to-top/data/icons/" + imgUrl;

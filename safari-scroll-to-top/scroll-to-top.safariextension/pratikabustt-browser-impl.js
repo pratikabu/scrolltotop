@@ -19,11 +19,6 @@ var pratikabustt_browser_impl = {
 		pratikabustt.loadFromResponse(pratikabustt_browser_impl.convertResponse(data));
 	},
 	
-	getRotationCssName: function() {
-		// #BrowserSpecific css
-		return "-webkit-transform";
-	},
-	
 	getBrowserSpecificUrl: function(imgUrl) {
 		// #BrowserSpecific method to get the resource
 		return imgUrl;
