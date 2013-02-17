@@ -22,6 +22,3 @@ Safari Version: http://goo.gl/RaBrw
 Opera Version: http://goo.gl/HMNnD
 
 Consider Donation (It helps): http://goo.gl/8Nl3M
-
-Why Chrome warns me about browser data and history?
-Its a standard Chrome warning. Nothing to worry at all.. :)
