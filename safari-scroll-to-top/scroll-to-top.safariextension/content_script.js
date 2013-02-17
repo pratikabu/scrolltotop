@@ -3,7 +3,7 @@
 ************** Write browser dependent code in the specific browser dependent js file. *********
 ******************************************/
 var pratikabu_stt_delay = 1200;// variable used to reduce the delay in scrolling
-var pratikabu_stt_maxScrollAmount = 50;// the offset of the scroll bar
+var pratikabu_stt_maxScrollAmount = 200;// the offset of the scroll bar
 var pratikabu_stt_bVisibility = false;// variable to check whether the button is already visible or hidden
 var pratikabu_stt_fadeSpeed = 300;
 var pratikabu_stt_hoverOpacity = 1;
@@ -12,26 +12,24 @@ var pratikabu_stt_otherDefaultFade = 0.35;
 var pratikabu_stt_visibilityBehavior = "autohide";
 var pratikabu_stt_controlOption = "simple";
 var pratikabu_stt_preferencesLoaded = false;
-var pratikabu_stt_firstAlwaysShow = true;
 var pratikabu_stt_buttonCreated;// this variable will tell whether the button is created or not on this page also whether this page is eligible for the button or not it will be initialzied once during load
 var pratikabu_stt_prefs;// this variable holds the preferences
-var pratikabu_stt_onceVisible = false;// this variable will be used for the special case in which document and window height are same. it will be used to identify the always on property so that visibility of the icon can be persisted.
 var pratikabu_stt_dualArrow = false;
 var pratikabu_stt_flipScrolling = false;
 var pratikabu_stt_scrollingInProgress = false;
 
 var pratikabustt = {
-	pratikabu_stt_scrollHandler: function () {
+	scrollHideShowHandler: function () {
 		pratikabustt.callHideOrShowOnceAfterInit();
-		
-		if(!pratikabu_stt_dualArrow && "true" == pratikabu_stt_buttonCreated && "autohide" != pratikabu_stt_visibilityBehavior) {
-			if(pratikabu_stt_maxScrollAmount > $(document).scrollTop()) {// you are at the top rotate arrows to original state
-				pratikabu_stt_flipScrolling = true;
-				$("#pratikabuSTTArrowUp").rotate({ animateTo: 180 });
-			} else {
-				pratikabu_stt_flipScrolling = false;
-				$("#pratikabuSTTArrowUp").rotate({ animateTo: 0 });
-			}
+	},
+	
+	scrollRotationHandler: function() {
+		if(pratikabu_stt_maxScrollAmount > $(document).scrollTop()) {// you are at the top rotate arrows to original state
+			pratikabu_stt_flipScrolling = true;
+			$("#pratikabuSTTArrowUp").rotate({ animateTo: 180 });
+		} else {
+			pratikabu_stt_flipScrolling = false;
+			$("#pratikabuSTTArrowUp").rotate({ animateTo: 0 });
 		}
 	},
 	
@@ -93,7 +91,7 @@ var pratikabustt = {
 			$("#pratikabuSTTDiv").stop(true, true).fadeTo("slow", 0, function() {
 				$("#pratikabuSTTDiv").remove();
 				pratikabu_stt_bVisibility = false;
-				$(window).unbind('scroll', pratikabustt.pratikabu_stt_scrollHandler);
+				$(window).unbind('scroll', pratikabustt.scrollHideShowHandler);
 			});
 		});
 		
@@ -253,10 +251,7 @@ var pratikabustt = {
 	},
 	
 	scrollToBottom: function() {
-		var location = ($(document).height() - pratikabustt.getWindowHeight());
-		if(0 == location) {// this should never happen, but it gives this result on some pages
-			location = $(document).height();
-		}
+		var location = $(document).height();
 		if($(document).scrollTop() == location) {
 			return false;
 		}
@@ -379,35 +374,27 @@ var pratikabustt = {
 		var vScrollTop = $(document).scrollTop();
 		var ignoreCreation = "false";// this variable will be turned on, iff the page dissatisfies the height check see below
 		
-		boolShow = $(document).height() > (pratikabustt.getWindowHeight() + pratikabu_stt_maxScrollAmount) || vScrollTop > pratikabu_stt_maxScrollAmount; // terminating condition
-		
-		// SPECIAL Handling STARTS
-		// this logic is solely for the special condition in which document and window height are same
-		if(!pratikabu_stt_onceVisible && boolShow) {
-			pratikabu_stt_onceVisible = true;
+		if("autohide" == pratikabu_stt_visibilityBehavior) {
+			boolShow = vScrollTop > pratikabu_stt_maxScrollAmount;
+		} else if("alwaysshow" == pratikabu_stt_visibilityBehavior) {
+			boolShow = $(document).height() > (pratikabustt.getWindowHeight() + pratikabu_stt_maxScrollAmount);
+			if(!boolShow) {// if the logic fails for the pages in which window.height and docuemnt.height is same then trigger the below logic
+				boolShow = vScrollTop > pratikabu_stt_maxScrollAmount;
+			}
+			
+			// once the bool is visible remove the scroll event as for alwaysshow its not required
+			if(boolShow) {// remove the scroll event
+				$(window).unbind('scroll', pratikabustt.scrollHideShowHandler);
+				if(!pratikabu_stt_dualArrow) {// skip this condition for dual arrows
+					$(window).scroll(pratikabustt.scrollRotationHandler);// bind the pollable handler
+				}
+			}
 		}
-		
-		if(!boolShow && pratikabu_stt_onceVisible && "alwaysshow" == pratikabu_stt_visibilityBehavior) {
-			boolShow = true;
-		}
-		// SPECIAL Handling ENDS
 		
 		if(!pratikabu_stt_buttonCreated && (!boolShow || window != window.top)) {// ignore any iFrame/frame, work only for top window. also ignore creation if boolShow is false
 			// since the page doesnot satisfies the height criteria, ignore the creation and hide logic
 			// this logic can create an icon once user resizes the window
 			return;
-		}
-		
-		if("autohide" == pratikabu_stt_visibilityBehavior) {
-			boolShow = vScrollTop > pratikabu_stt_maxScrollAmount;
-		} else {
-			if(0 < vScrollTop) {
-				pratikabu_stt_firstAlwaysShow = false;
-			}
-			
-			if(0 == vScrollTop && pratikabu_stt_firstAlwaysShow) {
-				boolShow = false;
-			}
 		}
 		
 		if(!pratikabu_stt_buttonCreated) {
@@ -416,6 +403,10 @@ var pratikabustt = {
 			} else {
 				pratikabu_stt_buttonCreated = pratikabustt.createButton();
 			}
+		}
+		
+		if(!pratikabu_stt_dualArrow && boolShow && "alwaysshow" == pratikabu_stt_visibilityBehavior) {
+			pratikabustt.scrollRotationHandler();// call this method to show the arrow in downward direction when the page loads
 		}
 		
 		// show the icon if it satisfies this condition
@@ -483,9 +474,9 @@ var pratikabustt = {
 
 // fetch preferences
 pratikabustt_browser_impl.fetchPreferences();
-		
+
 // add the scroll handler on the page to hide and show the image
-$(window).scroll(pratikabustt.pratikabu_stt_scrollHandler);
+$(window).scroll(pratikabustt.scrollHideShowHandler);
 
 $(window).resize(function() {// when window is resized do the below mentioned steps
 	if(!pratikabu_stt_buttonCreated || "true" == pratikabu_stt_buttonCreated) {// ??
