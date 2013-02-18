@@ -113,6 +113,7 @@ var pratikabu_stt_prefs;// this variable holds the preferences
 var pratikabu_stt_dualArrow = false;
 var pratikabu_stt_flipScrolling = false;
 var pratikabu_stt_scrollingInProgress = false;
+var pratikabu_stt_opera_handlerAdded = false;
 
 var pratikabustt = {
 	scrollHideShowHandler: function () {
@@ -481,8 +482,9 @@ var pratikabustt = {
 			// once the bool is visible remove the scroll event as for alwaysshow its not required
 			if(boolShow) {// remove the scroll event
 				$(window).unbind('scroll', pratikabustt.scrollHideShowHandler);
-				if(!pratikabu_stt_dualArrow) {// skip this condition for dual arrows
+				if(!pratikabu_stt_dualArrow && !pratikabu_stt_opera_handlerAdded) {// skip this condition for dual arrows
 					$(window).scroll(pratikabustt.scrollRotationHandler);// bind the pollable handler
+					pratikabu_stt_opera_handlerAdded = true;
 				}
 			}
 		}
@@ -570,6 +572,11 @@ var pratikabustt = {
 
 // fetch preferences
 pratikabustt_browser_impl.fetchPreferences();
+
+/** only for OPERA browser. DONT REMOVE. */
+$(document).ready(function() {// when page is ready do the below mentioned steps
+	pratikabustt.callHideOrShowOnceAfterInit();
+});
 
 // add the scroll handler on the page to hide and show the image
 $(window).scroll(pratikabustt.scrollHideShowHandler);
