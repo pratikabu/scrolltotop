@@ -17,6 +17,16 @@ Download for [Apple Safari](http://pratikabu.users.sourceforge.net/extensions/sc
 
 Download for [Opera](http://addons.opera.com/en/extensions/details/scroll-to-top)
 
+Changes in Version 4.0:
+------------
+- Flip between Scroll Up and Scroll Down based on the current location.
+- New Icon Gallery for Dual Arrow.
+- Arrange Dual Icons in Horizontal or Vertical arrangement.
+- New icons for Single arrow.
+- Pause anywhere by clicking on the same icon when scrolling.
+- Open Settings page in a convenient way.
+- Refactored the code to give faster performance.
+
 Changes in Version 3.7:
 ------------
 - Dual Arrow Support
