@@ -27,6 +27,8 @@ Changes in Version 4.0:
 - Open Settings page in a convenient way.
 - Refactored the code to give faster performance.
 
+See [blog post](http://pratikabu.blogspot.com/2013/02/scroll-to-top-version-40-released.html) for discussions.
+
 Changes in Version 3.7:
 ------------
 - Dual Arrow Support
