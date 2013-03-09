@@ -10,7 +10,7 @@
 	"author": "Pratik Soni",
 	"url": "http://pratikabu.users.sourceforge.net",
 	"name": "scroll-to-top-mobile",
-	"version": "1.0",
+	"version": "1.0.1",
 	"main": "main",
 	"homepage": "http://pratikabu.users.sourceforge.net/extensions/scrolltotop",
 	"preferences": [
