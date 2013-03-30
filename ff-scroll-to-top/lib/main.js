@@ -1,16 +1,16 @@
 // Import the page-mod API
-var pageMod = require("page-mod");
+var pageMod = require("sdk/page-mod");
 // Import the self API
-var data = require("self").data;
+var data = require("sdk/self").data;
 // import the preferences
-var sp = require("simple-prefs"); // to show the customize button
-var tabs = require("tabs");// to open the options page
-var ss = require("simple-storage"); // to store user specific settings
+var sp = require("sdk/simple-prefs"); // to show the customize button
+var tabs = require("sdk/tabs");// to open the options page
+var ss = require("sdk/simple-storage"); // to store user specific settings
 
 var checkForInitialize = function() {
 	if(!ss.storage.icon_size) {
 		ss.storage.icon_size = "48";
-	}
+		}
 	if(!ss.storage.vertical_location) {
 		ss.storage.vertical_location = "bottom";
 	}
