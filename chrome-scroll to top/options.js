@@ -47,7 +47,7 @@ function save_options() {
 	localStorage["d_arrangement"] = $('input:radio[name=dIconArrangemnt]:checked').val();
 
 	// Update status to let user know options were saved.
-	show_message("Saved successfully.");
+	show_message("Saved successfully. <a target='_blank' href='http://pratikabu.users.sourceforge.net/extensions/scrolltotop/release.html'>Preview your changes</a>.");
 }
 
 // Restores select box state to saved value from localStorage.
@@ -83,7 +83,7 @@ function show_message(msg) {
 		if(0 == --requestCount) {
 			$("#status").html("&nbsp;");
 		}
-	}, 3000);
+	}, 5000);
 }
 
 function getParameterByName(name) {
@@ -175,15 +175,22 @@ function makeElementsSelactable() {
 	selectableRadioContent("hlMiddle", "imgHorizontalLocation", "middle");
 	selectableRadioContent("hlRight", "imgHorizontalLocation", "right");
 	
-	selectableRadioContent("vbAutoHide", "visbilityBehavior", "autohide");
+	selectableRadioContent("vbHideAtTop", "visbilityBehavior", "hideattop");
 	selectableRadioContent("vbAlwaysShow", "visbilityBehavior", "alwaysshow");
+	selectableRadioContent("vbAutoHide", "visbilityBehavior", "autohide");
 	
 	selectableRadioContent("atSingle", "arrowType", "1");
 	selectableRadioContent("atDual", "arrowType", "2");
 	
+	selectableRadioContent("sdOn", "smartDirection", "true");
+	selectableRadioContent("sdOff", "smartDirection", "false");
+	
 	selectableRadioContent("coNone", "controlOptions", "none");
 	selectableRadioContent("coSimple", "controlOptions", "simple");
 	selectableRadioContent("coPager", "controlOptions", "pager");
+	
+	selectableRadioContent("ahcYes", "autoHideControls", "true");
+	selectableRadioContent("ahcNo", "autoHideControls", "false");
 	
 	selectableRadioContent("iconSizeOp1", "iconSize", "32");
 	selectableRadioContent("iconSizeOp2", "iconSize", "48");
@@ -231,6 +238,37 @@ function isRightChangedEvent(name, val) {
 	return rightEvent;
 }
 
+function activateAdvancedSettings() {
+	//$(".advancedProp").show();
+	$(".advancedProp").fadeTo(300, 1);
+	$("#advSettingsBut").remove();
+	$("html, body").scrollTop(0);
+}
+
+function validateDomainDataAndFix(textareaId) {
+	var ta = $('#' + textareaId);
+	var domains = ta.val();
+	domains = domains.replace(/\ /g, "");// remove all spaces
+	domains = domains.replace(/\*/g, "");// remove all *
+	ta.val(domains);// reset the value in the textarea
+	
+	save_options();// save these settings
+}
+
+function validateOffsetDataAndFix(textId) {
+	var t = $('#' + textId);
+	var value = t.val();
+	var intVal = 20;
+	if(!isNaN(value) && 0 != value.length) {// should be a number and shouldn't be empty
+		intVal = parseInt(value);
+		intVal = intVal < 0 ? intVal * -1 : intVal;// B-positive :)
+		intVal = intVal > 300 ? 300 : intVal;// not more than 300
+	}
+	t.val(intVal + "");// reset the value in the textbox
+	
+	save_options();// save these settings
+}
+
 document.addEventListener('DOMContentLoaded', function () {
 	var updated = getParameterByName("updated");
 	if("true" == updated) {
@@ -251,27 +289,44 @@ document.addEventListener('DOMContentLoaded', function () {
 	// add all events
 	
 	//document.querySelector('#saveSettings').addEventListener('click', save_options);
-	document.querySelector('#defaultBut').addEventListener('click', default_options);
+	$("#defaultBut").click(function() { default_options(); });
+	$("#advSettingsBut").click(function() { activateAdvancedSettings(); });
 	
+	// common settings starts
 	$('input:radio[name=imgVerticalLocation]').change(function() { isRightChangedEvent("imgVerticalLocation", $(this).val()); });
 	$('input:radio[name=imgHorizontalLocation]').change(function() { isRightChangedEvent("imgHorizontalLocation", $(this).val()); });
-	$('input:radio[name=iconSize]').change(function() { isRightChangedEvent("iconSize", $(this).val()); });
 	$('input:radio[name=visbilityBehavior]').change(function() { isRightChangedEvent("visbilityBehavior", $(this).val()); });
-	$('input:radio[name=controlOptions]').change(function() { isRightChangedEvent("controlOptions", $(this).val()); });
-	$('input:radio[name=iconLib]').change(function() { isRightChangedEvent("iconLib", $(this).val()); });
+	// common settings ends
 	
+	// arrow type settings starts
 	$('input:radio[name=arrowType]').change(function() {
-		if(isRightChangedEvent("arrowType", $(this).val())) {
+		if(isRightChangedEvent("arrowType", $(this).val())) {// auto set location of the icon as per the selection
 			swapAdvancedOptions($(this).val());
 			
 			$('input:radio[name=imgHorizontalLocation]').filter('[value=right]').attr('checked', true);
 			if("1" == $(this).val()) {
 				$('input:radio[name=imgVerticalLocation]').filter('[value=bottom]').attr('checked', true);
+				$('input:radio[name=visbilityBehavior]').filter('[value=autohide]').attr('checked', true);
 			} else {
 				$('input:radio[name=imgVerticalLocation]').filter('[value=middle]').attr('checked', true);
 				$('input:radio[name=visbilityBehavior]').filter('[value=alwaysshow]').attr('checked', true);
 			}
 			save_options();
+		}
+	});
+	// arrow type settings ends
+	
+	// single arrow settings starts
+	$('input:radio[name=controlOptions]').change(function() { isRightChangedEvent("controlOptions", $(this).val()); });
+	$('input:radio[name=autoHideControls]').change(function() { isRightChangedEvent("autoHideControls", $(this).val()); });
+	$('input:radio[name=iconSize]').change(function() { isRightChangedEvent("iconSize", $(this).val()); });
+	$('input:radio[name=iconLib]').change(function() { isRightChangedEvent("iconLib", $(this).val()); });
+	$('input:radio[name=smartDirection]').change(function() {
+		if(isRightChangedEvent("smartDirection", $(this).val())) {
+			if("true" == $(this).val()) {// auto set to visibility to autohide
+				$('input:radio[name=visbilityBehavior]').filter('[value=autohide]').attr('checked', true);
+				save_options();
+			}
 		}
 	});
 	
@@ -299,8 +354,9 @@ document.addEventListener('DOMContentLoaded', function () {
 		show_message("Error loading uploaded image.");
 		$('input:radio[name=iconLib]').focus();
 	});
+	// single arrow settings ends
 	
-	// dual arrow changes
+	// dual arrow changes starts
 	$('input:radio[name=dIconLib]').change(function() {
 		if(isRightChangedEvent("dIconLib", $(this).val())) {
 			if(20 >= parseInt($(this).val())) {
@@ -339,6 +395,14 @@ document.addEventListener('DOMContentLoaded', function () {
 	
 	$('input:radio[name=dIconArrangemnt]').change(function() { isRightChangedEvent("dIconArrangemnt", $(this).val()); });
 	// dual arrow settings ends
+	
+	// advanced settings starts
+	$("#hOffset").change(function() { validateOffsetDataAndFix('hOffset'); });
+	$("#vOffset").change(function() { validateOffsetDataAndFix('vOffset'); });
+	
+	$("#removedSites").change(function() { validateDomainDataAndFix('removedSites'); });
+	$("#frameSupportedSites").change(function() { validateDomainDataAndFix('frameSupportedSites'); });
+	// advanced settings ends
 	
 	makeElementsSelactable();
 	restore_options();

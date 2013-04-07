@@ -132,4 +132,5 @@ a.donateButton:active {
 }
 
 .advancedProp {
+	display: none;
 }

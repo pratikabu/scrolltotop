@@ -42,9 +42,9 @@
 				<tr>
 					<td align="right">Visibility Behavior :</td>
 					<td>
-						<input type="radio" name="visbilityBehavior" value="hideattop"><span id="vbAutoHide">Hide at Top</span>
+						<input type="radio" name="visbilityBehavior" value="hideattop"><span id="vbHideAtTop">Hide at Top</span>
 						<input type="radio" name="visbilityBehavior" value="alwaysshow"><span id="vbAlwaysShow">Always Show</span>
-						<input type="radio" name="visbilityBehavior" value="autohide"><span id="vbAutoHide">Auto Hide (3 seconds)</span>
+						<input type="radio" name="visbilityBehavior" value="autohide"><span id="vbAutoHide">Auto Hide (5 sec)</span>
 					</td>
 				</tr>
 			</table>
@@ -66,11 +66,25 @@
 					</td>
 				</tr>
 				<tr>
+					<td align="right" width="35%">Smart Direction Mode :</td>
+					<td width="65%">
+						<input type="radio" name="smartDirection" value="true"><span id="sdOn">On</span>
+						<input type="radio" name="smartDirection" value="false"><span id="sdOff">Off</span>
+					</td>
+				</tr>
+				<tr class="advancedProp">
 					<td align="right" width="35%">Control Options :</td>
 					<td width="65%">
 						<input type="radio" name="controlOptions" value="none"><span id="coNone">None</span>
 						<input type="radio" name="controlOptions" value="simple"><span id="coSimple">Simple</span>
 						<input type="radio" name="controlOptions" value="pager"><span id="coPager">With Pager</span>
+					</td>
+				</tr>
+				<tr class="advancedProp">
+					<td align="right" width="35%">Auto Hide Controls :</td>
+					<td width="65%">
+						<input type="radio" name="autoHideControls" value="true"><span id="ahcYes">Yes</span>
+						<input type="radio" name="autoHideControls" value="false"><span id="ahcNo">No</span>
 					</td>
 				</tr>
 				<tr>
@@ -80,17 +94,17 @@
 						<input type="radio" name="iconSize" value="48"><img style="vertical-align: middle;" id="iconSizeOp2" src="icons/pratikabu-stt-48-1.png" title="Large Icon (48px)" />
 					</td>
 				</tr>
-				<tr>
+				<tr class="advancedProp">
 					<td align="left" colSpan=2>
 						<div class="groupHeader">Icons & Library Settings</div>
 					</td>
 				</tr>
-				<tr>
+				<tr class="advancedProp">
 					<td align="left" colSpan=2>
 						Choose Icon from Library:
 					</td>
 				</tr>
-				<tr>
+				<tr class="advancedProp">
 					<td align="left" colSpan=2>
 						<input type="radio" name="iconLib" value="1"><img style="vertical-align: middle;" id="iconGal1" src="icons/pratikabu-stt-48-1.png" />
 						<input type="radio" name="iconLib" value="2"><img style="vertical-align: middle;" id="iconGal2" src="icons/pratikabu-stt-48-2.png" />
@@ -119,20 +133,20 @@
 						<input type="radio" name="iconLib" value="23"><img style="vertical-align: middle;" id="iconGal23" src="icons/pratikabu-stt-48-23.png" />
 					</td>
 				</tr>
-				<tr>
+				<tr class="advancedProp">
 					<td align="left" colSpan=2>
 						<input type="radio" name="iconLib" value="myIcon"><span id="useMyIcon">Use my icon</span>
 						<p align="justify" style="font-size: 12px;">
-							Note: If you enable Use My Icon, then icon size will be restricted to either 32 or 48 pixels as per the selection in Icon Size combo.
+							Note: If you enable Use My Icon, then icon size will be restricted to either 32 or 48 pixels as per the selected size.
 						</p>
 					</td>
 				</tr>
-				<tr>
+				<tr class="advancedProp">
 					<td align="left" style="vertical-align: middle;" colSpan=2>
 						<input type="textbox" id="useMyIconTextBox" class="mySelect" style="width: 100%;">
 					</td>
 				</tr>
-				<tr>
+				<tr class="advancedProp">
 					<td align="center" colSpan=2>
 						<img style="vertical-align: middle; width: 48px; height: 48px;" id="previewIcon" alt="Preview" title="Preview of your uploaded icon." />
 						<br/>
@@ -161,17 +175,17 @@
 					</td>
 				</tr>
 				
-				<tr>
+				<tr class="advancedProp">
 					<td align="left" colSpan=2>
 						<div class="groupHeader">Icons & Library Settings</div>
 					</td>
 				</tr>
-				<tr>
+				<tr class="advancedProp">
 					<td align="left" colSpan=2>
 						Horizontal Arrangement (recommended) :
 					</td>
 				</tr>
-				<tr>
+				<tr class="advancedProp">
 					<td align="left" colSpan=2>
 						<input type="radio" name="dIconLib" value="1"><img style="vertical-align: middle;" id="dIconGal1" src="icons/pratikabu-stt-dual-hr-1.png" />
 						<input type="radio" name="dIconLib" value="2"><img style="vertical-align: middle;" id="dIconGal2" src="icons/pratikabu-stt-dual-hr-2.png" />
@@ -182,12 +196,12 @@
 					</td>
 				</tr>
 				
-				<tr>
+				<tr class="advancedProp">
 					<td align="left" colSpan=2>
 						Vertical Arrangement (recommended) :
 					</td>
 				</tr>
-				<tr>
+				<tr class="advancedProp">
 					<td align="left" colSpan=2>
 						<input type="radio" name="dIconLib" value="21"><img style="vertical-align: middle;" id="dIconGal21" src="icons/pratikabu-stt-dual-vr-1.png" />
 						<input type="radio" name="dIconLib" value="22"><img style="vertical-align: middle;" id="dIconGal22" src="icons/pratikabu-stt-dual-vr-2.png" />
@@ -195,12 +209,12 @@
 					</td>
 				</tr>
 				
-				<tr>
+				<tr class="advancedProp">
 					<td align="left" colSpan=2>
 						Single Arrow Icons :
 					</td>
 				</tr>
-				<tr>
+				<tr class="advancedProp">
 					<td align="left" colSpan=2>
 						<input type="radio" name="dIconLib" value="41"><img style="vertical-align: middle;" id="dIconGal41" src="icons/pratikabu-stt-48-1.png" />
 						<input type="radio" name="dIconLib" value="42"><img style="vertical-align: middle;" id="dIconGal42" src="icons/pratikabu-stt-48-2.png" />
@@ -230,7 +244,7 @@
 					</td>
 				</tr>
 				
-				<tr>
+				<tr class="advancedProp">
 					<td align="left" colSpan=2>
 						<input type="radio" name="dIconLib" value="myIcon"><span id="dUseMyIcon">Use my icon</span>
 						<p align="justify" style="font-size: 12px;">
@@ -238,12 +252,12 @@
 						</p>
 					</td>
 				</tr>
-				<tr>
+				<tr class="advancedProp">
 					<td align="left" style="vertical-align: middle;" colSpan=2>
 						<input type="textbox" id="dUseMyIconTextBox" class="mySelect" style="width: 100%;">
 					</td>
 				</tr>
-				<tr>
+				<tr class="advancedProp">
 					<td align="center" colSpan=2>
 						<img style="vertical-align: middle; width: 48px; height: 48px;" id="dPreviewIcon" alt="Preview" title="Preview of your uploaded icon." />
 						<br/>
@@ -265,7 +279,7 @@
 				</tr>
 			</table>
 			
-			<table id="advancedSettings" cellSpacing="15px" class="tableClass">
+			<table id="advancedSettings" cellSpacing="15px" class="tableClass advancedProp">
 				<tr>
 					<td align="left" colSpan=2>
 						<div class="groupHeader">Advanced Settings</div>
@@ -275,7 +289,7 @@
 				<tr>
 					<td align="right" width="35%">Horizontal Offset :</td>
 					<td width="65%">
-						<input type="text" name="hOffset" class="mySelect" style="width: 50px;" />
+						<input type="text" id="hOffset" class="mySelect" style="width: 50px;" />
 						<p align="justify" style="display: inline; font-size: 12px;">
 							For Horizontal Location offset. Only Numbers are allowed.
 						</p>
@@ -285,7 +299,7 @@
 				<tr>
 					<td align="right" width="35%">Vertical Offset :</td>
 					<td width="65%">
-						<input type="text" name="vOffset" class="mySelect" style="width: 50px;" />
+						<input type="text" id="vOffset" class="mySelect" style="width: 50px;" />
 						<p align="justify" style="display: inline; font-size: 12px;">
 							For Vertical Location offset. Only Numbers are allowed.
 						</p>
@@ -312,7 +326,8 @@
 				</td></tr>
 			</table>
 			
-			<input type="button" id="advSettingsBut" value="Show Advanced Settings" class="mybutton small red" /><input type="button" id="defaultBut" value="Restore to Defaults" class="mybutton small green" /><br/><br/>
+			<input type="button" id="advSettingsBut" value="Show More Settings" class="mybutton small red" title="Choose different icons, configure advanced settings and more..." />
+			<input type="button" id="defaultBut" value="Restore to Defaults" class="mybutton small green" title="Restore all settings to original values." /><br/><br/>
 		</div></form>
 		
 		<div id="donateContainer" align="center" class="actionDiv myFonts">
