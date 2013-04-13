@@ -2,15 +2,11 @@
 ************** This file contains code which is browser independent ****************
 ************** Write browser dependent code in the specific browser dependent js file. *********
 ******************************************/
-var pratikabu_stt_delay = 1200;// variable used to reduce the delay in scrolling
-var pratikabu_stt_maxScrollAmount = 200;// the offset of the scroll bar
+var pratikabu_stt_inversionPoint = 300;// inversion point where the inversion should happen
 var pratikabu_stt_bVisibility = false;// variable to check whether the button is already visible or hidden
 var pratikabu_stt_fadeSpeed = 300;
 var pratikabu_stt_hoverOpacity = 1;
-var pratikabu_stt_iconSize = 48;
 var pratikabu_stt_otherDefaultFade = 0.35;
-var pratikabu_stt_visibilityBehavior = "autohide";
-var pratikabu_stt_controlOption = "simple";
 var pratikabu_stt_preferencesLoaded = false;
 var pratikabu_stt_buttonCreated;// this variable will tell whether the button is created or not on this page also whether this page is eligible for the button or not it will be initialzied once during load
 var pratikabu_stt_prefs;// this variable holds the preferences
@@ -20,11 +16,11 @@ var pratikabu_stt_scrollingInProgress = false;
 
 var pratikabustt = {
 	scrollHideShowHandler: function () {
-		pratikabustt.callHideOrShowOnceAfterInit();
+		pratikabustt.hideOrShowButton();
 	},
 	
 	scrollRotationHandler: function() {
-		if(pratikabu_stt_maxScrollAmount > $(document).scrollTop()) {// you are at the top rotate arrows to original state
+		if(pratikabu_stt_inversionPoint > $(document).scrollTop()) {// you are at the top rotate arrows to original state
 			pratikabu_stt_flipScrolling = true;
 			$("#pratikabuSTTArrowUp").rotate({ animateTo: 180 });
 		} else {
@@ -106,9 +102,9 @@ var pratikabustt = {
 		
 		// populate from preferences
 		var vloc = pratikabu_stt_prefs.vLoc;
-		var vlocVal = "20px";
+		var vlocVal = pratikabu_stt_prefs.vOffset + "px";
 		var hloc = pratikabu_stt_prefs.hLoc;
-		var hlocVal = "20px";
+		var hlocVal = pratikabu_stt_prefs.hOffset + "px";
 		
 		if("middle" == vloc) {
 			vloc = "top";
@@ -129,11 +125,11 @@ var pratikabustt = {
 		var otherImagesSize = pratikabustt.getOtherImageSize();
 		
 		var showPagerButtons = false;
-		if("pager" == pratikabu_stt_controlOption) {
+		if("pager" == pratikabu_stt_prefs.controlOption) {
 			if($(document).height() != pratikabustt.getWindowHeight()) {
 				showPagerButtons = true;
 			} else {
-				pratikabu_stt_controlOption = "simple";// set the control option to simple
+				pratikabu_stt_prefs.controlOption = "simple";// set the control option to simple
 			}
 		}
 		
@@ -165,12 +161,12 @@ var pratikabustt = {
 			}
 			$("#pratikabuSTTDiv2").css("marginLeft", 0 + "px");
 		} else {
-			$("#pratikabuSTTDiv2").css("marginLeft", pratikabu_stt_iconSize + "px");
+			$("#pratikabuSTTDiv2").css("marginLeft", pratikabu_stt_prefs.iconSize + "px");
 		}
 		
 		$("#pratikabuSTTArrowUp").css("float", pratikabu_stt_float);
-		$("#pratikabuSTTArrowUp").css("width", pratikabu_stt_iconSize + "px");
-		$("#pratikabuSTTArrowUp").css("height", pratikabu_stt_iconSize + "px");
+		$("#pratikabuSTTArrowUp").css("width", pratikabu_stt_prefs.iconSize + "px");
+		$("#pratikabuSTTArrowUp").css("height", pratikabu_stt_prefs.iconSize + "px");
 		
 		return "true";// successfully created
 	},
@@ -200,7 +196,7 @@ var pratikabustt = {
 			if($(document).scrollTop() == 0) {
 				return false;
 			}
-			pratikabustt.scrollPageTo(pratikabu_stt_delay, 0);
+			pratikabustt.scrollPageTo(pratikabu_stt_prefs.scrSpeed, 0);
 			return false;
 		});
 		
@@ -213,15 +209,15 @@ var pratikabustt = {
 			if($(document).scrollTop() == location) {
 				return false;
 			}
-			pratikabustt.scrollPageTo(pratikabu_stt_delay, location);
+			pratikabustt.scrollPageTo(pratikabu_stt_prefs.scrSpeed, location);
 			return false;
 		});
 		
 		// populate from preferences
 		var vloc = pratikabu_stt_prefs.vLoc;
-		var vlocVal = "20px";
+		var vlocVal = pratikabu_stt_prefs.vOffset + "px";
 		var hloc = pratikabu_stt_prefs.hLoc;
-		var hlocVal = "20px";
+		var hlocVal = pratikabu_stt_prefs.hOffset + "px";
 		
 		if("middle" == vloc) {
 			vloc = "top";
@@ -247,7 +243,7 @@ var pratikabustt = {
 			return false;
 		}
 		
-		pratikabustt.scrollPageTo(pratikabu_stt_delay, 0);
+		pratikabustt.scrollPageTo(pratikabu_stt_prefs.scrSpeed, 0);
 	},
 	
 	scrollToBottom: function() {
@@ -255,7 +251,7 @@ var pratikabustt = {
 		if($(document).scrollTop() == location) {
 			return false;
 		}
-		pratikabustt.scrollPageTo(pratikabu_stt_delay, location);
+		pratikabustt.scrollPageTo(pratikabu_stt_prefs.scrSpeed, location);
 	},
 	
 	scrollPageTo: function(delay, location, isPager) {
@@ -333,7 +329,7 @@ var pratikabustt = {
 		if("myIcon" == pratikabu_stt_prefs.iconLib) {
 			$("#pratikabuSTTArrowUp").attr("src", "data:image/png;base64," + pratikabu_stt_prefs.userIcon);
 		} else {
-			var suffixString = pratikabu_stt_iconSize + "-" + pratikabu_stt_prefs.iconLib;
+			var suffixString = pratikabu_stt_prefs.iconSize + "-" + pratikabu_stt_prefs.iconLib;
 			pratikabustt_browser_impl.setImageForId("pratikabuSTTArrowUp", suffixString + ".png");
 		}
 	},
@@ -353,7 +349,7 @@ var pratikabustt = {
 				iconName += "vr-";
 			} else {
 				iconNumber -= 40;
-				iconName = pratikabu_stt_iconSize + "-";
+				iconName = pratikabu_stt_prefs.iconSize + "-";
 			}
 			
 			var suffixString = iconName + iconNumber;
@@ -365,6 +361,9 @@ var pratikabustt = {
 	},
 	
 	hideOrShowButton: function() {
+		if(!pratikabu_stt_prefs) {// check whether the preferences have been loaded or not
+			return;
+		}
 		if("false" == pratikabu_stt_buttonCreated) {
 			// page not eligible for the button, do nothing
 			return;
@@ -374,12 +373,12 @@ var pratikabustt = {
 		var vScrollTop = $(document).scrollTop();
 		var ignoreCreation = "false";// this variable will be turned on, iff the page dissatisfies the height check see below
 		
-		if("autohide" == pratikabu_stt_visibilityBehavior) {
-			boolShow = vScrollTop > pratikabu_stt_maxScrollAmount;
-		} else if("alwaysshow" == pratikabu_stt_visibilityBehavior) {
-			boolShow = $(document).height() > (pratikabustt.getWindowHeight() + pratikabu_stt_maxScrollAmount);
+		if("autohide" == pratikabu_stt_prefs.visibilityBehav) {
+			boolShow = vScrollTop > pratikabu_stt_inversionPoint;
+		} else if("alwaysshow" == pratikabu_stt_prefs.visibilityBehav) {
+			boolShow = $(document).height() > (pratikabustt.getWindowHeight() + pratikabu_stt_inversionPoint);
 			if(!boolShow) {// if the logic fails for the pages in which window.height and docuemnt.height is same then trigger the below logic
-				boolShow = vScrollTop > pratikabu_stt_maxScrollAmount;
+				boolShow = vScrollTop > pratikabu_stt_inversionPoint;
 			}
 			
 			// once the bool is visible remove the scroll event as for alwaysshow its not required
@@ -405,7 +404,7 @@ var pratikabustt = {
 			}
 		}
 		
-		if(!pratikabu_stt_dualArrow && boolShow && "alwaysshow" == pratikabu_stt_visibilityBehavior) {
+		if(!pratikabu_stt_dualArrow && boolShow && "alwaysshow" == pratikabu_stt_prefs.visibilityBehav) {
 			pratikabustt.scrollRotationHandler();// call this method to show the arrow in downward direction when the page loads
 		}
 		
@@ -416,7 +415,7 @@ var pratikabustt = {
 	},
 	
 	mainDivHover: function(hoverIn) {
-		if("none" == pratikabu_stt_controlOption) {
+		if("none" == pratikabu_stt_prefs.controlOption) {
 			return;
 		}
 		
@@ -424,8 +423,8 @@ var pratikabustt = {
 			$("#pratikabuSTTDiv2").stop(true, true);// to execute the fading out method
 			
 			var otherImagesSize = pratikabustt.getOtherImageSize();
-			var divSize = pratikabu_stt_iconSize + otherImagesSize;
-			if("pager" == pratikabu_stt_controlOption) {// check whether the page up is shown or not
+			var divSize = pratikabu_stt_prefs.iconSize + otherImagesSize;
+			if("pager" == pratikabu_stt_prefs.controlOption) {// check whether the page up is shown or not
 				divSize += otherImagesSize;// add pixels based on the settings
 			}
 			$("#pratikabuSTTDiv").css("width", divSize + "px");
@@ -435,7 +434,7 @@ var pratikabustt = {
 			$("#pratikabuSTTDiv2").stop(true, true).fadeTo("slow", 0, function() {
 					$("#pratikabuSTTDiv2").hide();
 					
-					var divSize = pratikabu_stt_iconSize;
+					var divSize = pratikabu_stt_prefs.iconSize;
 					$("#pratikabuSTTDiv").css("width", divSize + "px");
 				});
 		}
@@ -443,7 +442,7 @@ var pratikabustt = {
 	
 	getOtherImageSize: function() {
 		var otherImagesSize = 16;
-		if(48 == pratikabu_stt_iconSize) {
+		if(48 == pratikabu_stt_prefs.iconSize) {
 			otherImagesSize = 24;
 		}
 		
@@ -452,35 +451,66 @@ var pratikabustt = {
 	
 	loadFromResponse: function(response) {// load the images, css, include/remove elements
 		pratikabu_stt_prefs = response;
-		
-		pratikabu_stt_delay = parseInt(pratikabu_stt_prefs.scrSpeed);
-		pratikabu_stt_iconSize = parseInt(pratikabu_stt_prefs.iconSize);
-		pratikabu_stt_visibilityBehavior = pratikabu_stt_prefs.visibilityBehav;
-		pratikabu_stt_controlOption = pratikabu_stt_prefs.controlOption;
-		
-		pratikabu_stt_dualArrow = ("2" == pratikabu_stt_prefs.arrowType);
-		
-		pratikabu_stt_preferencesLoaded = true;// enable functioning document.ready function
-		pratikabustt.callHideOrShowOnceAfterInit();
+		pratikabu_stt_preferencesLoaded = true;
+		if(pratikabustt.isValidPageForAddon()) {
+			// if everything is great, go ahead
+			pratikabu_stt_prefs.scrSpeed = parseInt(pratikabu_stt_prefs.scrSpeed);
+			pratikabu_stt_prefs.iconSize = parseInt(pratikabu_stt_prefs.iconSize);
+			pratikabu_stt_dualArrow = ("2" == pratikabu_stt_prefs.arrowType);
+			
+			pratikabustt.hideOrShowButton();// call the logic to hide or show the add-on
+			$(window).scroll(pratikabustt.scrollHideShowHandler);// add the scroll handler on the page to hide and show the image
+			$(window).resize(function() {// when window is resized do the below mentioned steps
+				if(!pratikabu_stt_buttonCreated || "true" == pratikabu_stt_buttonCreated) {// ??
+					// hide or show the button based on the current location, because a page can be loaded scrolled..
+					pratikabustt.hideOrShowButton();
+				}
+			});
+		} else {
+			pratikabustt.removeAddOnCode();
+		}
 	},
 	
-	callHideOrShowOnceAfterInit: function() {// function to handle the call to hideOrShowButton
-		if(pratikabu_stt_preferencesLoaded) {// check whether the preferences have been loaded or not
-			// hide or show the button based on the current location, because a page can be loaded scrolled..
-			pratikabustt.hideOrShowButton();
+	/**
+		There will be two checks one for removed sites and one for internal frames.
+	*/
+	isValidPageForAddon: function() {
+		if(!pratikabustt.mactchDomainAgainstDomainList(pratikabu_stt_prefs.removedSites) || // check for removed sites
+				(window != window.top && // internal frame identified
+				pratikabustt.mactchDomainAgainstDomainList(pratikabu_stt_prefs.frameSupportedSites)) // check if domain is supported
+				) {
+			return true;
 		}
+		
+		return false;
+	},
+	
+	/**
+		Match current page domain against a list of domains separated by ;
+	*/
+	mactchDomainAgainstDomainList: function(listOfDomainsToCheck) {
+		var domains = listOfDomainsToCheck.split(";");
+		for(var i = 0; i < domains.length; i++) {
+			if(0 == domains[i].length) {
+				continue;
+			}
+			if(-1 != window.location.href.indexOf(domains[i])) {
+				return true;
+			}
+		}
+		
+		return false;
+	},
+	
+	/**
+		Remove all excess code required for 
+	*/
+	removeAddOnCode: function() {
 	}
 };
 
-// fetch preferences
+/**
+	Fetch preferences : #ENTRY POINT
+	loadFromResponse() will be executed once the preferences have been fetched.
+*/
 pratikabustt_browser_impl.fetchPreferences();
-
-// add the scroll handler on the page to hide and show the image
-$(window).scroll(pratikabustt.scrollHideShowHandler);
-
-$(window).resize(function() {// when window is resized do the below mentioned steps
-	if(!pratikabu_stt_buttonCreated || "true" == pratikabu_stt_buttonCreated) {// ??
-		// hide or show the button based on the current location, because a page can be loaded scrolled..
-		pratikabustt.callHideOrShowOnceAfterInit();
-	}
-});

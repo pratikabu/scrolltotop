@@ -96,7 +96,7 @@ var forceInitializeSettings = function() {
 chrome.extension.onMessage.addListener(
 	function(request, sender, sendResponse) {
 		if (request.method == "getSettings") {
-			sendResponse({
+			var data = {
 				vLoc: localStorage["vertical_location"],
 				hLoc: localStorage["horizontal_location"],
 				scrSpeed: localStorage["scrolling_speed"],
@@ -104,22 +104,31 @@ chrome.extension.onMessage.addListener(
 				
 				arrowType: localStorage["arrow_type"],
 				
-				controlOption: localStorage["smart_direction_mode"],
-				controlOption: localStorage["control_options"],
-				controlOption: localStorage["hide_controls"],
-				iconSize: localStorage["image_size"],
-				iconLib: localStorage["icon_library"],
-				userIcon: localStorage["user_saved_icon"],
-				
-				dArrang: localStorage["d_arrangement"],
-				dIconLib: localStorage["d_icon_library"],
-				dUserIcon: localStorage["d_user_saved_icon"],
-				
-				dArrang: localStorage["h_offset"],
-				dIconLib: localStorage["v_offset"],
-				dUserIcon: localStorage["removed_sites"],
-				dIconLib: localStorage["frame_supported_sites"]
-			});
+				hOffset: localStorage["h_offset"],
+				vOffset: localStorage["v_offset"],
+				removedSites: localStorage["removed_sites"],
+				frameSupportedSites: localStorage["frame_supported_sites"]
+			};
+			
+			// bypass settings if they are not required
+			if("1" == data.arrowType) {// send only single arrow settings
+				data.smartDirection = localStorage["smart_direction_mode"];
+				data.controlOption = localStorage["control_options"];
+				data.hideControls = localStorage["hide_controls"];
+				data.iconSize = localStorage["image_size"];
+				data.iconLib = localStorage["icon_library"];
+				if("myIcon" == data.iconLib) {
+					data.userIcon = localStorage["user_saved_icon"];
+				}
+			} else {// send only dual arrow settings
+				data.dArrang = localStorage["d_arrangement"];
+				data.dIconLib = localStorage["d_icon_library"];
+				if("myIcon" == data.dIconLib) {
+					data.dUserIcon = localStorage["d_user_saved_icon"];
+				}
+			}
+			
+			sendResponse(data);
 		} else if (request.method == "openOptionPage") {
 			chrome.tabs.create({url: "options.html"});
 		} else if (request.method == "resetSettings") {
