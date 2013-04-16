@@ -13,6 +13,7 @@ var pratikabu_stt_flipScrolling = false;
 var pratikabu_stt_scrollingInProgress = false;
 var pratikabu_stt_lastDocumentTop = 0;// this variable will hold the document top since the last scroll, for smart direction based
 var pratikabu_stt_autoHide = false;
+var pratikabu_stt_ahRequestCount = 0;// counter to handle autohide in seconds
 
 var pratikabustt = {
 	scrollHandlerOneTime: function() {
@@ -38,15 +39,16 @@ var pratikabustt = {
 			pratikabustt.showHideAddon(true);
 			pratikabustt.rotateUp();
 		} else {// user scrolled downwards
+			var animateRotation = pratikabu_stt_bVisibility;
 			pratikabustt.showHideAddon(true);
-			pratikabustt.rotateDown();
+			pratikabustt.rotateDown(animateRotation);
 		}
 		
 		pratikabu_stt_lastDocumentTop = $(document).scrollTop();// update to latest
 		
 		// finally once the scrolling is finished, rotate addon if needed
 		if(0 == pratikabu_stt_lastDocumentTop) {
-			pratikabustt.rotateDown();
+			pratikabustt.rotateDown(true);
 		} else if(pratikabu_stt_lastDocumentTop == ($(document).height() - pratikabustt.getWindowHeight())) {
 			pratikabustt.rotateUp();
 		}
@@ -54,15 +56,19 @@ var pratikabustt = {
 	
 	scrollRotationHandler: function() {
 		if(pratikabu_stt_inversionPoint > $(document).scrollTop()) {// you are at the top rotate arrows to original state
-			pratikabustt.rotateDown();
+			pratikabustt.rotateDown(true);
 		} else {
 			pratikabustt.rotateUp();
 		}
 	},
 	
-	rotateDown: function() {
+	rotateDown: function(animateRotation) {
 		pratikabu_stt_flipScrolling = true;
-		$("#pratikabuSTTArrowUp").rotate({ animateTo: 180 });
+		if(animateRotation) {
+			$("#pratikabuSTTArrowUp").rotate({ animateTo: 180 });
+		} else {
+			$("#pratikabuSTTArrowUp").rotate(180);
+		}
 	},
 	
 	rotateUp: function() {
@@ -264,7 +270,23 @@ var pratikabustt = {
 				pratikabustt.removeAddonHtml();
 			}
 		}
+		if(boolShowAddon) {
+			pratikabustt.triggerAutoHide();
+		}
 		pratikabu_stt_bVisibility = boolShowAddon;// set the latest value
+	},
+	
+	triggerAutoHide: function() {
+		if(!pratikabu_stt_autoHide) {
+			return;
+		}
+		
+		pratikabu_stt_ahRequestCount++;
+		setTimeout(function() {
+			if(0 == --pratikabu_stt_ahRequestCount) {
+				pratikabustt.showHideAddon(false);
+			}
+		}, 5000);
 	},
 	
 	removeAddonHtml: function() {
@@ -386,6 +408,7 @@ var pratikabustt = {
 		}
 		
 		if(hoverIn) {
+			pratikabu_stt_ahRequestCount++;// increment the autohide counter, so that it will stop removing it
 			$("#pratikabuSTTDiv2").stop(true, true);// to execute the fading out method
 			
 			var otherImagesSize = pratikabustt.getOtherImageSize();
@@ -397,6 +420,9 @@ var pratikabustt = {
 			
 			$("#pratikabuSTTDiv2").fadeTo("slow", pratikabu_stt_hoverOpacity);
 		} else {
+			pratikabu_stt_ahRequestCount--;// decrement the counter
+			pratikabustt.triggerAutoHide();// trigger the autohide timer
+			
 			$("#pratikabuSTTDiv2").stop(true, true).fadeTo("slow", 0, function() {
 					$("#pratikabuSTTDiv2").hide();
 					
@@ -452,7 +478,9 @@ var pratikabustt = {
 				}
 				if(boolShow) {
 					pratikabustt.showHideAddon(true);
-					pratikabustt.scrollRotationHandler();// call this method to show the arrow in downward direction when the page loads
+					if(!pratikabu_stt_dualArrow && !pratikabu_stt_prefs.smartDirection) {
+						pratikabustt.scrollRotationHandler();// call this method to show the arrow in downward direction when the page loads
+					}
 				} else {// attach one time handler #specialCase
 					$(window).scroll(pratikabustt.scrollHandlerOneTime);
 				}
