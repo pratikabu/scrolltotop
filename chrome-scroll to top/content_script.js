@@ -7,235 +7,270 @@ var pratikabu_stt_bVisibility = false;// variable to check whether the button is
 var pratikabu_stt_fadeSpeed = 300;
 var pratikabu_stt_hoverOpacity = 1;
 var pratikabu_stt_otherDefaultFade = 0.35;
-var pratikabu_stt_preferencesLoaded = false;
-var pratikabu_stt_buttonCreated;// this variable will tell whether the button is created or not on this page also whether this page is eligible for the button or not it will be initialzied once during load
 var pratikabu_stt_prefs;// this variable holds the preferences
 var pratikabu_stt_dualArrow = false;
 var pratikabu_stt_flipScrolling = false;
 var pratikabu_stt_scrollingInProgress = false;
+var pratikabu_stt_lastDocumentTop = 0;// this variable will hold the document top since the last scroll, for smart direction based
+var pratikabu_stt_autoHide = false;
 
 var pratikabustt = {
-	scrollHideShowHandler: function () {
-		pratikabustt.hideOrShowButton();
+	scrollHandlerOneTime: function() {
+		if($(document).scrollTop() > pratikabu_stt_inversionPoint) {// terminating condition for this handler
+			$(window).unbind('scroll', pratikabustt.scrollHandlerOneTime);
+			pratikabustt.showHideAddon(true);
+		}
+	},
+	
+	scrollHandlerLocationBased: function () {
+		pratikabustt.showHideAddon($(document).scrollTop() > pratikabu_stt_inversionPoint);
+	},
+	
+	windowResizeHandler: function() {
+		// hide or show the button based on the current location, because a page can be loaded scrolled..
+		pratikabustt.scrollHandlerLocationBased();
+	},
+	
+	scrollHandlerDirectionBased: function() {
+		if(pratikabu_stt_lastDocumentTop == $(document).scrollTop()) {
+			// do nothing
+		} else if(pratikabu_stt_lastDocumentTop > $(document).scrollTop()) {// user scrolled upwards
+			pratikabustt.showHideAddon(true);
+			pratikabustt.rotateUp();
+		} else {// user scrolled downwards
+			pratikabustt.showHideAddon(true);
+			pratikabustt.rotateDown();
+		}
+		
+		pratikabu_stt_lastDocumentTop = $(document).scrollTop();// update to latest
+		
+		// finally once the scrolling is finished, rotate addon if needed
+		if(0 == pratikabu_stt_lastDocumentTop) {
+			pratikabustt.rotateDown();
+		} else if(pratikabu_stt_lastDocumentTop == ($(document).height() - pratikabustt.getWindowHeight())) {
+			pratikabustt.rotateUp();
+		}
 	},
 	
 	scrollRotationHandler: function() {
 		if(pratikabu_stt_inversionPoint > $(document).scrollTop()) {// you are at the top rotate arrows to original state
-			pratikabu_stt_flipScrolling = true;
-			$("#pratikabuSTTArrowUp").rotate({ animateTo: 180 });
+			pratikabustt.rotateDown();
 		} else {
-			pratikabu_stt_flipScrolling = false;
-			$("#pratikabuSTTArrowUp").rotate({ animateTo: 0 });
+			pratikabustt.rotateUp();
 		}
 	},
 	
-	createButton: function() {
-		// create div tag
-		$('body').prepend('<div id="pratikabuSTTDiv"><img id="pratikabuSTTArrowUp" style="float: left;" /><div id="pratikabuSTTDiv2"><img id="pratikabuSTTPageUp" /><img id="pratikabuSTTClear" /><img id="pratikabuSTTPageDown" /><img id="pratikabuSTTSettings" /></div></div>');
-		$("#pratikabuSTTDiv").hide();
+	rotateDown: function() {
+		pratikabu_stt_flipScrolling = true;
+		$("#pratikabuSTTArrowUp").rotate({ animateTo: 180 });
+	},
+	
+	rotateUp: function() {
+		pratikabu_stt_flipScrolling = false;
+		$("#pratikabuSTTArrowUp").rotate({ animateTo: 0 });
+	},
+	
+	createAddonHtml: function() {
+		if(pratikabu_stt_dualArrow) {
+			// create div tag
+			if("hr" == pratikabu_stt_prefs.dArrang) {
+				$('body').prepend('<div id="pratikabuSTTDiv"><img id="pratikabuSTTArrowUp" /><img id="pratikabuSTTArrowDown" /></div>');
+			} else if("vr" == pratikabu_stt_prefs.dArrang) {
+				$('body').prepend('<div id="pratikabuSTTDiv"><img id="pratikabuSTTArrowUp" style="display: block !important;" /><img id="pratikabuSTTArrowDown" style="display: block !important;" /></div>');
+			}
+		} else {
+			// create div tag
+			$('body').prepend('<div id="pratikabuSTTDiv"><img id="pratikabuSTTArrowUp" style="float: left;" /><div id="pratikabuSTTDiv2"><img id="pratikabuSTTPageUp" /><img id="pratikabuSTTClear" /><img id="pratikabuSTTPageDown" /><img id="pratikabuSTTSettings" /></div></div>');
+		}
 		
 		// check whether the css has been applied to the div tag or not, if not then remove it from DOM
 		// as it got added to a wrong iFrame
 		if("fixed" != $("#pratikabuSTTDiv").css("position")) {
-			$("#pratikabuSTTDiv").remove();
-			return "false";// tag removed
+			pratikabustt.addRemoveGlobalHandlers(false);// remove all handlers
+			pratikabustt.removeAddonHtml();
+			return false;
 		}
 		
-		pratikabustt.hoverEffect("#pratikabuSTTArrowUp", 0.5);
-		pratikabustt.hoverEffect("#pratikabuSTTClear", pratikabu_stt_otherDefaultFade);
-		pratikabustt.hoverEffect("#pratikabuSTTSettings", pratikabu_stt_otherDefaultFade);
-		pratikabustt.hoverEffect("#pratikabuSTTPageUp", pratikabu_stt_otherDefaultFade);
-		pratikabustt.hoverEffect("#pratikabuSTTPageDown", pratikabu_stt_otherDefaultFade);
+		if(pratikabu_stt_dualArrow) {
+			pratikabustt.hoverEffect("#pratikabuSTTArrowUp", pratikabu_stt_otherDefaultFade);
+			pratikabustt.hoverEffect("#pratikabuSTTArrowDown", pratikabu_stt_otherDefaultFade);
+		} else {
+			pratikabustt.hoverEffect("#pratikabuSTTArrowUp", 0.5);
+			pratikabustt.hoverEffect("#pratikabuSTTClear", pratikabu_stt_otherDefaultFade);
+			pratikabustt.hoverEffect("#pratikabuSTTSettings", pratikabu_stt_otherDefaultFade);
+			pratikabustt.hoverEffect("#pratikabuSTTPageUp", pratikabu_stt_otherDefaultFade);
+			pratikabustt.hoverEffect("#pratikabuSTTPageDown", pratikabu_stt_otherDefaultFade);
+			
+			// add the main div hover effects
+			$("#pratikabuSTTDiv").hover(
+				function() {
+					pratikabustt.mainDivHover(true)
+				},
+				function() {
+					pratikabustt.mainDivHover(false)
+				});
+		}
 		
-		// add the main div hover effects
-		$("#pratikabuSTTDiv").hover(
-			function() {
-				pratikabustt.mainDivHover(true)
-			},
-			function() {
-				pratikabustt.mainDivHover(false)
+		if(pratikabu_stt_dualArrow) {
+			// add the scroll up logic
+			$("#pratikabuSTTArrowUp").click(function() {
+				if(0 == $(document).scrollTop()) {
+					return false;
+				}
+				pratikabustt.scrollPageTo(pratikabu_stt_prefs.scrSpeed, 0);
+				return false;
 			});
+			
+			// add the scroll down logic
+			$("#pratikabuSTTArrowDown").click(function() {
+				var location = ($(document).height() - pratikabustt.getWindowHeight());
+				if(0 == location) {// this should never happen, but it gives this result on some pages
+					location = $(document).height();
+				}
+				if($(document).scrollTop() == location) {
+					return false;
+				}
+				pratikabustt.scrollPageTo(pratikabu_stt_prefs.scrSpeed, location);
+				return false;
+			});
+		} else {
+			// add the scroll up logic
+			$("#pratikabuSTTArrowUp").click(function() {
+				if(pratikabu_stt_flipScrolling) {
+					pratikabustt.scrollToBottom();
+				} else {
+					pratikabustt.scrollToTop();
+				}
+				
+				return false;
+			});
+			
+			// add the scroll down logic
+			$("#pratikabuSTTSettings").click(function() {
+				pratikabustt_browser_impl.openOptionPage();
+				return false;
+			});
+			
+			// add rotation for scrolling down
+			$("#pratikabuSTTSettings").hover(
+				function() {
+					$(this).rotate({ animateTo: 180 });
+				},
+				function() {
+					$(this).rotate({ animateTo: 0 });
+				});
+			
+			// add the remove div logic
+			$("#pratikabuSTTClear").click(function() {
+				pratikabustt.addRemoveGlobalHandlers(false);// remove all handlers
+				pratikabustt.removeAddonHtml();
+				pratikabustt_browser_impl.removeCompleteAddOnCode();// remove everything
+			});
+			
+			// add page up and page down handlers
+			$("#pratikabuSTTPageUp").click(function() {
+				pratikabustt.scrollPageScreen(1);
+			});
+			
+			$("#pratikabuSTTPageDown").click(function() {
+				pratikabustt.scrollPageScreen(-1);
+			});
+		}
 		
-		// add the scroll up logic
-		$("#pratikabuSTTArrowUp").click(function() {
-			if(pratikabu_stt_flipScrolling) {
-				pratikabustt.scrollToBottom();
-			} else {
-				pratikabustt.scrollToTop();
+		// populate from preferences
+		var vloc = pratikabu_stt_prefs.vLoc;
+		var vlocVal = pratikabu_stt_prefs.vOffset + "px";
+		var hloc = pratikabu_stt_prefs.hLoc;
+		var hlocVal = pratikabu_stt_prefs.hOffset + "px";
+		
+		if("middle" == vloc) {
+			vloc = "top";
+			vlocVal = "50%";
+		}
+		
+		if("middle" == hloc) {
+			hloc = "left";
+			hlocVal = "50%";
+		}
+		
+		$("#pratikabuSTTDiv").css(vloc, vlocVal);// set the vertical alignment of the image
+		$("#pratikabuSTTDiv").css(hloc, hlocVal);// set the horizontal alignment of the image
+		
+		// set the image
+		if(pratikabu_stt_dualArrow) {
+			pratikabustt.showDualArrowImage();
+		} else {
+			pratikabustt.showUpArrowImage();
+		}
+		
+		if(!pratikabu_stt_dualArrow) {
+			var otherImagesSize = pratikabustt.getOtherImageSize();
+			
+			var showPagerButtons = false;
+			if("pager" == pratikabu_stt_prefs.controlOption) {
+				if($(document).height() != pratikabustt.getWindowHeight()) {
+					showPagerButtons = true;
+				} else {
+					pratikabu_stt_prefs.controlOption = "simple";// set the control option to simple
+				}
 			}
 			
-			return false;
-		});
-		
-		// add the scroll down logic
-		$("#pratikabuSTTSettings").click(function() {
-			pratikabustt_browser_impl.openOptionPage();
-			return false;
-		});
-		
-		// add rotation for scrolling down
-		$("#pratikabuSTTSettings").hover(
-			function() {
-				$(this).rotate({ animateTo: 180 });
-			},
-			function() {
-				$(this).rotate({ animateTo: 0 });
-			});
-		
-		// add the remove div logic
-		$("#pratikabuSTTClear").click(function() {
-			$("#pratikabuSTTDiv").stop(true, true).fadeTo("slow", 0, function() {
-				$("#pratikabuSTTDiv").remove();
-				pratikabu_stt_bVisibility = false;
-				$(window).unbind('scroll', pratikabustt.scrollHideShowHandler);
-			});
-		});
-		
-		// add page up and page down handlers
-		$("#pratikabuSTTPageUp").click(function() {
-			pratikabustt.scrollPageScreen(1);
-		});
-		
-		$("#pratikabuSTTPageDown").click(function() {
-			pratikabustt.scrollPageScreen(-1);
-		});
-		
-		// populate from preferences
-		var vloc = pratikabu_stt_prefs.vLoc;
-		var vlocVal = pratikabu_stt_prefs.vOffset + "px";
-		var hloc = pratikabu_stt_prefs.hLoc;
-		var hlocVal = pratikabu_stt_prefs.hOffset + "px";
-		
-		if("middle" == vloc) {
-			vloc = "top";
-			vlocVal = "50%";
-		}
-		
-		if("middle" == hloc) {
-			hloc = "left";
-			hlocVal = "50%";
-		}
-		
-		$("#pratikabuSTTDiv").css(vloc, vlocVal);// set the vertical alignment of the image
-		$("#pratikabuSTTDiv").css(hloc, hlocVal);// set the horizontal alignment of the image
-		
-		// set the image
-		pratikabustt.showUpArrowImage();
-		
-		var otherImagesSize = pratikabustt.getOtherImageSize();
-		
-		var showPagerButtons = false;
-		if("pager" == pratikabu_stt_prefs.controlOption) {
-			if($(document).height() != pratikabustt.getWindowHeight()) {
-				showPagerButtons = true;
-			} else {
-				pratikabu_stt_prefs.controlOption = "simple";// set the control option to simple
+			var divSize = otherImagesSize;
+			if(showPagerButtons) {// check whether the page up is shown or not
+				divSize += otherImagesSize;// add pixels based on the settings
 			}
-		}
-		
-		var divSize = otherImagesSize;
-		if(showPagerButtons) {// check whether the page up is shown or not
-			divSize += otherImagesSize;// add pixels based on the settings
-		}
-		$("#pratikabuSTTDiv2").css("width", divSize + "px");
-		
-		pratikabustt_browser_impl.setImageForId("pratikabuSTTClear", "clear-" + otherImagesSize + ".png");
-		pratikabustt_browser_impl.setImageForId("pratikabuSTTSettings", "settings-" + otherImagesSize + ".png");
-		
-		// show/remove page up and page down buttons from settings
-		if(showPagerButtons) {
-			pratikabustt_browser_impl.setImageForId("pratikabuSTTPageUp", "pageup-" + otherImagesSize + ".png");
-			pratikabustt_browser_impl.setImageForId("pratikabuSTTPageDown", "pageup-" + otherImagesSize + ".png");
-			$("#pratikabuSTTPageDown").rotate(180);
-		} else {
-			$("#pratikabuSTTPageUp").remove();
-			$("#pratikabuSTTPageDown").remove();
-		}
-		
-		// change the location of the main image
-		var pratikabu_stt_float = pratikabu_stt_prefs.hLoc;
-		if("right" == pratikabu_stt_prefs.hLoc) {// replace the locations of the icons
+			$("#pratikabuSTTDiv2").css("width", divSize + "px");
+			
+			pratikabustt_browser_impl.setImageForId("pratikabuSTTClear", "clear-" + otherImagesSize + ".png");
+			pratikabustt_browser_impl.setImageForId("pratikabuSTTSettings", "settings-" + otherImagesSize + ".png");
+			
+			// show/remove page up and page down buttons from settings
 			if(showPagerButtons) {
-				$("#pratikabuSTTPageUp").before($("#pratikabuSTTClear"));
-				$("#pratikabuSTTPageDown").before($("#pratikabuSTTSettings"));
+				pratikabustt_browser_impl.setImageForId("pratikabuSTTPageUp", "pageup-" + otherImagesSize + ".png");
+				pratikabustt_browser_impl.setImageForId("pratikabuSTTPageDown", "pageup-" + otherImagesSize + ".png");
+				$("#pratikabuSTTPageDown").rotate(180);
+			} else {
+				$("#pratikabuSTTPageUp").remove();
+				$("#pratikabuSTTPageDown").remove();
 			}
-			$("#pratikabuSTTDiv2").css("marginLeft", 0 + "px");
-		} else {
-			$("#pratikabuSTTDiv2").css("marginLeft", pratikabu_stt_prefs.iconSize + "px");
+			
+			// change the location of the main image
+			var pratikabu_stt_float = pratikabu_stt_prefs.hLoc;
+			if("right" == pratikabu_stt_prefs.hLoc) {// replace the locations of the icons
+				if(showPagerButtons) {
+					$("#pratikabuSTTPageUp").before($("#pratikabuSTTClear"));
+					$("#pratikabuSTTPageDown").before($("#pratikabuSTTSettings"));
+				}
+				$("#pratikabuSTTDiv2").css("marginLeft", 0 + "px");
+			} else {
+				$("#pratikabuSTTDiv2").css("marginLeft", pratikabu_stt_prefs.iconSize + "px");
+			}
+			
+			$("#pratikabuSTTArrowUp").css("float", pratikabu_stt_float);
+			$("#pratikabuSTTArrowUp").css("width", pratikabu_stt_prefs.iconSize + "px");
+			$("#pratikabuSTTArrowUp").css("height", pratikabu_stt_prefs.iconSize + "px");
 		}
 		
-		$("#pratikabuSTTArrowUp").css("float", pratikabu_stt_float);
-		$("#pratikabuSTTArrowUp").css("width", pratikabu_stt_prefs.iconSize + "px");
-		$("#pratikabuSTTArrowUp").css("height", pratikabu_stt_prefs.iconSize + "px");
-		
-		return "true";// successfully created
+		return true;
 	},
 	
-	createDualButton: function() {
-		// create div tag
-		if("hr" == pratikabu_stt_prefs.dArrang) {
-			$('body').prepend('<div id="pratikabuSTTDiv"><img id="pratikabuSTTArrowUp" /><img id="pratikabuSTTArrowDown" /></div>');
-		} else if("vr" == pratikabu_stt_prefs.dArrang) {
-			//$('body').prepend('<div id="pratikabuSTTDiv"><div class="otherDiv"><img id="pratikabuSTTArrowUp" /></div><div align="center" class="otherDiv"><img id="pratikabuSTTArrowDown" /></div></div>');
-			$('body').prepend('<div id="pratikabuSTTDiv"><img id="pratikabuSTTArrowUp" style="display: block !important;" /><img id="pratikabuSTTArrowDown" style="display: block !important;" /></div>');
+	showHideAddon: function(boolShowAddon) {
+		if(boolShowAddon != pratikabu_stt_bVisibility) {
+			if(boolShowAddon) {// show addon
+				if(pratikabustt.createAddonHtml()) {
+					$("#pratikabuSTTDiv").stop(true, true).fadeTo("slow", 1);
+				}
+			} else {// remove it
+				pratikabustt.removeAddonHtml();
+			}
 		}
-		$("#pratikabuSTTDiv").hide();
-		
-		// check whether the css has been applied to the div tag or not, if not then remove it from DOM
-		// as it got added to a wrong iFrame
-		if("fixed" != $("#pratikabuSTTDiv").css("position")) {
+		pratikabu_stt_bVisibility = boolShowAddon;// set the latest value
+	},
+	
+	removeAddonHtml: function() {
+		$("#pratikabuSTTDiv").stop(true, true).fadeTo("slow", 0, function() {
 			$("#pratikabuSTTDiv").remove();
-			return "false";// tag removed
-		}
-		
-		pratikabustt.hoverEffect("#pratikabuSTTArrowUp", pratikabu_stt_otherDefaultFade);
-		pratikabustt.hoverEffect("#pratikabuSTTArrowDown", pratikabu_stt_otherDefaultFade);
-		
-		// add the scroll up logic
-		$("#pratikabuSTTArrowUp").click(function() {
-			if($(document).scrollTop() == 0) {
-				return false;
-			}
-			pratikabustt.scrollPageTo(pratikabu_stt_prefs.scrSpeed, 0);
-			return false;
 		});
-		
-		// add the scroll down logic
-		$("#pratikabuSTTArrowDown").click(function() {
-			var location = ($(document).height() - pratikabustt.getWindowHeight());
-			if(0 == location) {// this should never happen, but it gives this result on some pages
-				location = $(document).height();
-			}
-			if($(document).scrollTop() == location) {
-				return false;
-			}
-			pratikabustt.scrollPageTo(pratikabu_stt_prefs.scrSpeed, location);
-			return false;
-		});
-		
-		// populate from preferences
-		var vloc = pratikabu_stt_prefs.vLoc;
-		var vlocVal = pratikabu_stt_prefs.vOffset + "px";
-		var hloc = pratikabu_stt_prefs.hLoc;
-		var hlocVal = pratikabu_stt_prefs.hOffset + "px";
-		
-		if("middle" == vloc) {
-			vloc = "top";
-			vlocVal = "50%";
-		}
-		
-		if("middle" == hloc) {
-			hloc = "left";
-			hlocVal = "50%";
-		}
-		
-		$("#pratikabuSTTDiv").css(vloc, vlocVal);// set the vertical alignment of the image
-		$("#pratikabuSTTDiv").css(hloc, hlocVal);// set the horizontal alignment of the image
-		
-		// set the image
-		pratikabustt.showDualArrowImage();
-		
-		return "true";// successfully created
 	},
 	
 	scrollToTop: function() {
@@ -275,11 +310,6 @@ var pratikabustt = {
 		var winHeight = pratikabustt.getWindowHeight();
 		var docHeight = $(document).height();
 		
-		if(docHeight == winHeight) {
-			// cannot scroll between pages as window height and document heights are same
-			return;
-		}
-		
 		docHeight -= winHeight;
 		
 		if(0 > direction) {// page down
@@ -298,17 +328,7 @@ var pratikabustt = {
 	},
 	
 	getWindowHeight: function() {
-		var winHeight = $(window).height();
-		/**var docHeight = $(document).height();
-		
-		if(winHeight == docHeight && $(frameElement)) {
-			var frameHeight = $(frameElement).height();
-			if(frameHeight && 0 < frameHeight) {
-				winHeight = frameHeight;
-			}
-		}*/
-		
-		return winHeight;
+		return window.innerHeight;
 	},
 	
 	hoverEffect: function(varId, idleOpacity) {
@@ -360,60 +380,6 @@ var pratikabustt = {
 		$("#pratikabuSTTArrowDown").rotate(180);
 	},
 	
-	hideOrShowButton: function() {
-		if(!pratikabu_stt_prefs) {// check whether the preferences have been loaded or not
-			return;
-		}
-		if("false" == pratikabu_stt_buttonCreated) {
-			// page not eligible for the button, do nothing
-			return;
-		}
-		
-		var boolShow = false;
-		var vScrollTop = $(document).scrollTop();
-		var ignoreCreation = "false";// this variable will be turned on, iff the page dissatisfies the height check see below
-		
-		if("autohide" == pratikabu_stt_prefs.visibilityBehav) {
-			boolShow = vScrollTop > pratikabu_stt_inversionPoint;
-		} else if("alwaysshow" == pratikabu_stt_prefs.visibilityBehav) {
-			boolShow = $(document).height() > (pratikabustt.getWindowHeight() + pratikabu_stt_inversionPoint);
-			if(!boolShow) {// if the logic fails for the pages in which window.height and docuemnt.height is same then trigger the below logic
-				boolShow = vScrollTop > pratikabu_stt_inversionPoint;
-			}
-			
-			// once the bool is visible remove the scroll event as for alwaysshow its not required
-			if(boolShow) {// remove the scroll event
-				$(window).unbind('scroll', pratikabustt.scrollHideShowHandler);
-				if(!pratikabu_stt_dualArrow) {// skip this condition for dual arrows
-					$(window).scroll(pratikabustt.scrollRotationHandler);// bind the pollable handler
-				}
-			}
-		}
-		
-		if(!pratikabu_stt_buttonCreated && (!boolShow || window != window.top)) {// ignore any iFrame/frame, work only for top window. also ignore creation if boolShow is false
-			// since the page doesnot satisfies the height criteria, ignore the creation and hide logic
-			// this logic can create an icon once user resizes the window
-			return;
-		}
-		
-		if(!pratikabu_stt_buttonCreated) {
-			if(pratikabu_stt_dualArrow) {
-				pratikabu_stt_buttonCreated = pratikabustt.createDualButton();
-			} else {
-				pratikabu_stt_buttonCreated = pratikabustt.createButton();
-			}
-		}
-		
-		if(!pratikabu_stt_dualArrow && boolShow && "alwaysshow" == pratikabu_stt_prefs.visibilityBehav) {
-			pratikabustt.scrollRotationHandler();// call this method to show the arrow in downward direction when the page loads
-		}
-		
-		// show the icon if it satisfies this condition
-		pratikabu_stt_bVisibility = boolShow ? // offset is added so that it will not come on all the pages
-		pratikabu_stt_bVisibility || ($("#pratikabuSTTDiv").stop(true, true).fadeTo("slow", 1), true)
-			: pratikabu_stt_bVisibility && ($("#pratikabuSTTDiv").stop(true, true).fadeTo("slow", 0, function() {if(!pratikabu_stt_bVisibility) $("#pratikabuSTTDiv").hide();}), false);
-	},
-	
 	mainDivHover: function(hoverIn) {
 		if("none" == pratikabu_stt_prefs.controlOption) {
 			return;
@@ -451,23 +417,64 @@ var pratikabustt = {
 	
 	loadFromResponse: function(response) {// load the images, css, include/remove elements
 		pratikabu_stt_prefs = response;
-		pratikabu_stt_preferencesLoaded = true;
 		if(pratikabustt.isValidPageForAddon()) {
 			// if everything is great, go ahead
 			pratikabu_stt_prefs.scrSpeed = parseInt(pratikabu_stt_prefs.scrSpeed);
 			pratikabu_stt_prefs.iconSize = parseInt(pratikabu_stt_prefs.iconSize);
 			pratikabu_stt_dualArrow = ("2" == pratikabu_stt_prefs.arrowType);
+			if(!pratikabu_stt_dualArrow) {
+				pratikabu_stt_prefs.smartDirection = ("true" == pratikabu_stt_prefs.smartDirection);
+				pratikabu_stt_prefs.hideControls = ("true" == pratikabu_stt_prefs.hideControls);
+			}
 			
-			pratikabustt.hideOrShowButton();// call the logic to hide or show the add-on
-			$(window).scroll(pratikabustt.scrollHideShowHandler);// add the scroll handler on the page to hide and show the image
-			$(window).resize(function() {// when window is resized do the below mentioned steps
-				if(!pratikabu_stt_buttonCreated || "true" == pratikabu_stt_buttonCreated) {// ??
-					// hide or show the button based on the current location, because a page can be loaded scrolled..
-					pratikabustt.hideOrShowButton();
-				}
-			});
+			pratikabustt.addRemoveGlobalHandlers(true);
 		} else {
-			pratikabustt.removeAddOnCode();
+			pratikabustt_browser_impl.removeCompleteAddOnCode();
+		}
+	},
+	
+	addRemoveGlobalHandlers: function(booleanAdd) {
+		if(booleanAdd) {
+			if(pratikabu_stt_prefs.smartDirection) {
+				$(window).scroll(pratikabustt.scrollHandlerDirectionBased);
+				if("hideattop" == pratikabu_stt_prefs.visibilityBehav) {
+					pratikabu_stt_prefs.visibilityBehav = "autohide";// if hideattop is selected change it to autohide
+				}
+			}
+			
+			if("hideattop" == pratikabu_stt_prefs.visibilityBehav) {
+				$(window).scroll(pratikabustt.scrollHandlerLocationBased);
+				$(window).resize(pratikabustt.windowResizeHandler);
+			} else if("alwaysshow" == pratikabu_stt_prefs.visibilityBehav) {
+				var boolShow = $(document).height() > (pratikabustt.getWindowHeight() + pratikabu_stt_inversionPoint);
+				if(!pratikabu_stt_dualArrow && !pratikabu_stt_prefs.smartDirection) {
+					$(window).scroll(pratikabustt.scrollRotationHandler);// bind the pollable handler
+				}
+				if(boolShow) {
+					pratikabustt.showHideAddon(true);
+					pratikabustt.scrollRotationHandler();// call this method to show the arrow in downward direction when the page loads
+				} else {// attach one time handler #specialCase
+					$(window).scroll(pratikabustt.scrollHandlerOneTime);
+				}
+			} else if("autohide" == pratikabu_stt_prefs.visibilityBehav) {
+				pratikabu_stt_autoHide = true;
+			}
+		} else {
+			if(pratikabu_stt_prefs.smartDirection) {
+				$(window).unbind('scroll', pratikabustt.scrollHandlerDirectionBased);
+			}
+			
+			if("hideattop" == pratikabu_stt_prefs.visibilityBehav) {
+				$(window).unbind('scroll', pratikabustt.scrollHandlerLocationBased);
+				$(window).unbind('resize', pratikabustt.windowResizeHandler);
+			} else if("alwaysshow" == pratikabu_stt_prefs.visibilityBehav) {
+				if(!pratikabu_stt_dualArrow) {// skip this condition for dual arrows
+					$(window).unbind('scroll', pratikabustt.scrollRotationHandler);
+				}
+				$(window).unbind('scroll', pratikabustt.scrollHandlerOneTime);// remove this handler also if not already removed
+			} else if("autohide" == pratikabu_stt_prefs.visibilityBehav) {
+				pratikabu_stt_autoHide = false;
+			}
 		}
 	},
 	
@@ -475,37 +482,32 @@ var pratikabustt = {
 		There will be two checks one for removed sites and one for internal frames.
 	*/
 	isValidPageForAddon: function() {
-		if(!pratikabustt.mactchDomainAgainstDomainList(pratikabu_stt_prefs.removedSites) || // check for removed sites
-				(window != window.top && // internal frame identified
-				pratikabustt.mactchDomainAgainstDomainList(pratikabu_stt_prefs.frameSupportedSites)) // check if domain is supported
-				) {
-			return true;
-		}
+		var validPage = false;
 		
-		return false;
+		validPage = !pratikabustt.mactchDomainAgainstDomainList(window.location.href, pratikabu_stt_prefs.removedSites);// check for removed sites
+		validPage = validPage && window == window.top;// check top window. As of now removing the support for internal frames
+		/** if(validPage && window != window.top) { // internal frame identified
+			validPage = pratikabustt.mactchDomainAgainstDomainList(document.referrer, pratikabu_stt_prefs.frameSupportedSites);// check if the parent's domain is supported
+		} */
+		
+		return validPage;
 	},
 	
 	/**
-		Match current page domain against a list of domains separated by ;
+		Match current page domain against a list of domains separated by ';' (a semicolon)
 	*/
-	mactchDomainAgainstDomainList: function(listOfDomainsToCheck) {
+	mactchDomainAgainstDomainList: function(urlToMatch, listOfDomainsToCheck) {
 		var domains = listOfDomainsToCheck.split(";");
 		for(var i = 0; i < domains.length; i++) {
 			if(0 == domains[i].length) {
 				continue;
 			}
-			if(-1 != window.location.href.indexOf(domains[i])) {
+			if(-1 != urlToMatch.indexOf(domains[i])) {
 				return true;
 			}
 		}
 		
 		return false;
-	},
-	
-	/**
-		Remove all excess code required for 
-	*/
-	removeAddOnCode: function() {
 	}
 };
 
