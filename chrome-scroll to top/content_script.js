@@ -504,7 +504,7 @@ var pratikabustt = {
 	},
 	
 	/**
-		Match current page domain against a list of domains separated by ';' (a semicolon)
+		Match passed domain against a list of domains separated by ';' (a semicolon)
 	*/
 	mactchDomainAgainstDomainList: function(urlToMatch, listOfDomainsToCheck) {
 		var domains = listOfDomainsToCheck.split(";");

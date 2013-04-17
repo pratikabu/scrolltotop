@@ -31,8 +31,7 @@ function save_options() {
 		
 		hOffset: $('#hOffset').val(),
 		vOffset: $('#vOffset').val(),
-		removedSites: $('#removedSites').val(),
-		frameSupportedSites: $('#frameSupportedSites').val()
+		removedSites: $('#removedSites').val()
 	}
 	
 	bsSaveSettings(data);
@@ -72,7 +71,6 @@ function restore_options(data) {
 	$('#hOffset').val(data.hOffset);
 	$('#vOffset').val(data.vOffset);
 	$('#removedSites').val(data.removedSites);
-	$('#frameSupportedSites').val(data.frameSupportedSites);
 }
 
 function show_message(msg) {
@@ -399,7 +397,6 @@ document.addEventListener('DOMContentLoaded', function () {
 	$("#vOffset").change(function() { validateOffsetDataAndFix('vOffset'); });
 	
 	$("#removedSites").change(function() { validateDomainDataAndFix('removedSites'); });
-	$("#frameSupportedSites").change(function() { validateDomainDataAndFix('frameSupportedSites'); });
 	// advanced settings ends
 	
 	bsInit();
@@ -450,8 +447,7 @@ function bsFetchSettings() {
 		
 		hOffset: localStorage["h_offset"],
 		vOffset: localStorage["v_offset"],
-		removedSites: localStorage["removed_sites"],
-		frameSupportedSites: localStorage["frame_supported_sites"]
+		removedSites: localStorage["removed_sites"]
 	}
 	
 	restore_options(data);
@@ -479,5 +475,4 @@ function bsSaveSettings(data) {
 	localStorage["h_offset"] = data.hOffset;
 	localStorage["v_offset"] = data.vOffset;
 	localStorage["removed_sites"] = data.removedSites;
-	localStorage["frame_supported_sites"] = data.frameSupportedSites;
 }
