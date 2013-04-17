@@ -32,15 +32,12 @@ var pratikabustt = {
 		pratikabustt.scrollHandlerLocationBased();
 	},
 	
-	scrollHandlerDirectionBased: function() {
+	smartDirectionLogic: function(animateRotation) {
 		if(pratikabu_stt_lastDocumentTop == $(document).scrollTop()) {
 			// do nothing
 		} else if(pratikabu_stt_lastDocumentTop > $(document).scrollTop()) {// user scrolled upwards
-			pratikabustt.showHideAddon(true);
 			pratikabustt.rotateUp();
 		} else {// user scrolled downwards
-			var animateRotation = pratikabu_stt_bVisibility;
-			pratikabustt.showHideAddon(true);
 			pratikabustt.rotateDown(animateRotation);
 		}
 		
@@ -51,6 +48,17 @@ var pratikabustt = {
 			pratikabustt.rotateDown(true);
 		} else if(pratikabu_stt_lastDocumentTop == ($(document).height() - pratikabustt.getWindowHeight())) {
 			pratikabustt.rotateUp();
+		}
+	},
+	
+	scrollHandlerAutoHide: function() {
+		var animateRotation = pratikabu_stt_bVisibility;
+		pratikabustt.showHideAddon(true);
+		// handle the rotation for normal scenario, make it to behave like alwaysshow
+		if(pratikabu_stt_prefs.smartDirection) {
+			pratikabustt.smartDirectionLogic(animateRotation);
+		} else if(!pratikabu_stt_dualArrow && !pratikabu_stt_prefs.smartDirection) {
+			pratikabustt.scrollRotationHandler();
 		}
 	},
 	
@@ -92,8 +100,7 @@ var pratikabustt = {
 		// check whether the css has been applied to the div tag or not, if not then remove it from DOM
 		// as it got added to a wrong iFrame
 		if("fixed" != $("#pratikabuSTTDiv").css("position")) {
-			pratikabustt.addRemoveGlobalHandlers(false);// remove all handlers
-			pratikabustt.removeAddonHtml();
+			pratikabustt.removeCompleteAddonFromPage();
 			return false;
 		}
 		
@@ -106,51 +113,28 @@ var pratikabustt = {
 			pratikabustt.hoverEffect("#pratikabuSTTSettings", pratikabu_stt_otherDefaultFade);
 			pratikabustt.hoverEffect("#pratikabuSTTPageUp", pratikabu_stt_otherDefaultFade);
 			pratikabustt.hoverEffect("#pratikabuSTTPageDown", pratikabu_stt_otherDefaultFade);
-			
-			// add the main div hover effects
-			$("#pratikabuSTTDiv").hover(
-				function() {
-					pratikabustt.mainDivHover(true)
-				},
-				function() {
-					pratikabustt.mainDivHover(false)
-				});
 		}
+		// add the main div hover effects
+		$("#pratikabuSTTDiv").hover(
+			function() { pratikabustt.mainDivHover(true) },
+			function() { pratikabustt.mainDivHover(false) });
 		
+		// add the scroll up logic
+		$("#pratikabuSTTArrowUp").click(function() {
+			if(pratikabu_stt_flipScrolling) {
+				pratikabustt.scrollToBottom();
+			} else {
+				pratikabustt.scrollToTop();
+			}
+			return false;
+		});
 		if(pratikabu_stt_dualArrow) {
-			// add the scroll up logic
-			$("#pratikabuSTTArrowUp").click(function() {
-				if(0 == $(document).scrollTop()) {
-					return false;
-				}
-				pratikabustt.scrollPageTo(pratikabu_stt_prefs.scrSpeed, 0);
-				return false;
-			});
-			
 			// add the scroll down logic
 			$("#pratikabuSTTArrowDown").click(function() {
-				var location = ($(document).height() - pratikabustt.getWindowHeight());
-				if(0 == location) {// this should never happen, but it gives this result on some pages
-					location = $(document).height();
-				}
-				if($(document).scrollTop() == location) {
-					return false;
-				}
-				pratikabustt.scrollPageTo(pratikabu_stt_prefs.scrSpeed, location);
+				pratikabustt.scrollToBottom();
 				return false;
 			});
 		} else {
-			// add the scroll up logic
-			$("#pratikabuSTTArrowUp").click(function() {
-				if(pratikabu_stt_flipScrolling) {
-					pratikabustt.scrollToBottom();
-				} else {
-					pratikabustt.scrollToTop();
-				}
-				
-				return false;
-			});
-			
 			// add the scroll down logic
 			$("#pratikabuSTTSettings").click(function() {
 				pratikabustt_browser_impl.openOptionPage();
@@ -159,28 +143,17 @@ var pratikabustt = {
 			
 			// add rotation for scrolling down
 			$("#pratikabuSTTSettings").hover(
-				function() {
-					$(this).rotate({ animateTo: 180 });
-				},
-				function() {
-					$(this).rotate({ animateTo: 0 });
-				});
+				function() { $(this).rotate({ animateTo: 180 }); },
+				function() { $(this).rotate({ animateTo: 0 }); });
 			
 			// add the remove div logic
 			$("#pratikabuSTTClear").click(function() {
-				pratikabustt.addRemoveGlobalHandlers(false);// remove all handlers
-				pratikabustt.removeAddonHtml();
-				pratikabustt_browser_impl.removeCompleteAddOnCode();// remove everything
+				pratikabustt.removeCompleteAddonFromPage();
 			});
 			
 			// add page up and page down handlers
-			$("#pratikabuSTTPageUp").click(function() {
-				pratikabustt.scrollPageScreen(1);
-			});
-			
-			$("#pratikabuSTTPageDown").click(function() {
-				pratikabustt.scrollPageScreen(-1);
-			});
+			$("#pratikabuSTTPageUp").click(function() { pratikabustt.scrollPageScreen(1); });
+			$("#pratikabuSTTPageDown").click(function() { pratikabustt.scrollPageScreen(-1); });
 		}
 		
 		// populate from preferences
@@ -255,6 +228,10 @@ var pratikabustt = {
 			$("#pratikabuSTTArrowUp").css("float", pratikabu_stt_float);
 			$("#pratikabuSTTArrowUp").css("width", pratikabu_stt_prefs.iconSize + "px");
 			$("#pratikabuSTTArrowUp").css("height", pratikabu_stt_prefs.iconSize + "px");
+			
+			if(!pratikabu_stt_prefs.hideControls) {
+				pratikabustt.showHideControlOptions(true);
+			}
 		}
 		
 		return true;
@@ -296,7 +273,7 @@ var pratikabustt = {
 	},
 	
 	scrollToTop: function() {
-		if($(document).scrollTop() == 0) {
+		if(0 == $(document).scrollTop()) {
 			return false;
 		}
 		
@@ -304,9 +281,9 @@ var pratikabustt = {
 	},
 	
 	scrollToBottom: function() {
-		var location = $(document).height();
-		if($(document).scrollTop() == location) {
-			return false;
+		var location = ($(document).height() - pratikabustt.getWindowHeight());
+		if(0 == location) {// this should never happen, but it gives this result on some pages
+			location = $(document).height();
 		}
 		pratikabustt.scrollPageTo(pratikabu_stt_prefs.scrSpeed, location);
 	},
@@ -409,26 +386,36 @@ var pratikabustt = {
 		
 		if(hoverIn) {
 			pratikabu_stt_ahRequestCount++;// increment the autohide counter, so that it will stop removing it
-			$("#pratikabuSTTDiv2").stop(true, true);// to execute the fading out method
 			
+			if(pratikabu_stt_prefs.hideControls) {
+				pratikabustt.showHideControlOptions(true);
+			}
+		} else {
+			pratikabu_stt_ahRequestCount--;// decrement the counter
+			pratikabustt.triggerAutoHide();// trigger the autohide timer
+			
+			if(pratikabu_stt_prefs.hideControls) {
+				pratikabustt.showHideControlOptions(false);
+			}
+		}
+	},
+	
+	showHideControlOptions: function(boolShow) {
+		if(boolShow) {
+			$("#pratikabuSTTDiv2").stop(true, true);// to execute the fading out method
 			var otherImagesSize = pratikabustt.getOtherImageSize();
 			var divSize = pratikabu_stt_prefs.iconSize + otherImagesSize;
 			if("pager" == pratikabu_stt_prefs.controlOption) {// check whether the page up is shown or not
 				divSize += otherImagesSize;// add pixels based on the settings
 			}
 			$("#pratikabuSTTDiv").css("width", divSize + "px");
-			
 			$("#pratikabuSTTDiv2").fadeTo("slow", pratikabu_stt_hoverOpacity);
 		} else {
-			pratikabu_stt_ahRequestCount--;// decrement the counter
-			pratikabustt.triggerAutoHide();// trigger the autohide timer
-			
 			$("#pratikabuSTTDiv2").stop(true, true).fadeTo("slow", 0, function() {
-					$("#pratikabuSTTDiv2").hide();
-					
-					var divSize = pratikabu_stt_prefs.iconSize;
-					$("#pratikabuSTTDiv").css("width", divSize + "px");
-				});
+				$("#pratikabuSTTDiv2").hide();
+				var divSize = pratikabu_stt_prefs.iconSize;
+				$("#pratikabuSTTDiv").css("width", divSize + "px");
+			});
 		}
 	},
 	
@@ -461,11 +448,8 @@ var pratikabustt = {
 	
 	addRemoveGlobalHandlers: function(booleanAdd) {
 		if(booleanAdd) {
-			if(pratikabu_stt_prefs.smartDirection) {
-				$(window).scroll(pratikabustt.scrollHandlerDirectionBased);
-				if("hideattop" == pratikabu_stt_prefs.visibilityBehav) {
-					pratikabu_stt_prefs.visibilityBehav = "autohide";// if hideattop is selected change it to autohide
-				}
+			if(pratikabu_stt_prefs.smartDirection && "hideattop" == pratikabu_stt_prefs.visibilityBehav) {
+				pratikabu_stt_prefs.visibilityBehav = "autohide";// if hideattop is selected change it to autohide
 			}
 			
 			if("hideattop" == pratikabu_stt_prefs.visibilityBehav) {
@@ -476,22 +460,19 @@ var pratikabustt = {
 				if(!pratikabu_stt_dualArrow && !pratikabu_stt_prefs.smartDirection) {
 					$(window).scroll(pratikabustt.scrollRotationHandler);// bind the pollable handler
 				}
+				pratikabustt.showHideAddon(boolShow);
 				if(boolShow) {
-					pratikabustt.showHideAddon(true);
 					if(!pratikabu_stt_dualArrow && !pratikabu_stt_prefs.smartDirection) {
-						pratikabustt.scrollRotationHandler();// call this method to show the arrow in downward direction when the page loads
+						pratikabustt.scrollRotationHandler();// call this method to show the arrow in proper direction when the page loads
 					}
 				} else {// attach one time handler #specialCase
 					$(window).scroll(pratikabustt.scrollHandlerOneTime);
 				}
 			} else if("autohide" == pratikabu_stt_prefs.visibilityBehav) {
 				pratikabu_stt_autoHide = true;
+				$(window).scroll(pratikabustt.scrollHandlerAutoHide);
 			}
 		} else {
-			if(pratikabu_stt_prefs.smartDirection) {
-				$(window).unbind('scroll', pratikabustt.scrollHandlerDirectionBased);
-			}
-			
 			if("hideattop" == pratikabu_stt_prefs.visibilityBehav) {
 				$(window).unbind('scroll', pratikabustt.scrollHandlerLocationBased);
 				$(window).unbind('resize', pratikabustt.windowResizeHandler);
@@ -502,6 +483,7 @@ var pratikabustt = {
 				$(window).unbind('scroll', pratikabustt.scrollHandlerOneTime);// remove this handler also if not already removed
 			} else if("autohide" == pratikabu_stt_prefs.visibilityBehav) {
 				pratikabu_stt_autoHide = false;
+				$(window).unbind('scroll', pratikabustt.scrollHandlerAutoHide);
 			}
 		}
 	},
@@ -536,6 +518,12 @@ var pratikabustt = {
 		}
 		
 		return false;
+	},
+	
+	removeCompleteAddonFromPage: function() {
+		pratikabustt.addRemoveGlobalHandlers(false);// remove all handlers
+		pratikabustt.removeAddonHtml();
+		pratikabustt_browser_impl.removeCompleteAddOnCode();// remove everything
 	}
 };
 
