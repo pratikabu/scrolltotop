@@ -14,7 +14,7 @@
 	border: 1px SOLID #2094F0;
 	border-radius: 5px;
 	background: WHITESMOKE;
-	width: 600px;
+	width: 700px;
 	margin-bottom: 20px;
 }
 
@@ -123,4 +123,14 @@ a.donateButton:active {
 	width: 100%;
 	border-bottom: 1px SOLID #CBCBCB;
 	padding-bottom: 5px;
+}
+
+.siteTextArea {
+	width: 85%;
+	height: 70px;
+	border: 1px solid #2094F0;
+}
+
+.advancedProp {
+	display: none;
 }

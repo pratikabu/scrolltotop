@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<widget xmlns="http://www.w3.org/ns/widgets" version="4.0" id="http://pratikabu.users.sourceforge.net/extensions/scrolltotop" href="http://pratikabu.users.sourceforge.net/extensions/scrolltotop">
+<widget xmlns="http://www.w3.org/ns/widgets" version="4.2" id="http://pratikabu.users.sourceforge.net/extensions/scrolltotop" href="http://pratikabu.users.sourceforge.net/extensions/scrolltotop">
 	<name>Scroll To Top</name>
 	<description>Scroll to top and vice-versa in a window. Right-click on any tab to configure the settings.</description>
 	<author href="http://pratikabu.users.sourceforge.net" email="pratikabu@gmail.com">Pratik Soni</author>

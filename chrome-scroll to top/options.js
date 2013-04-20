@@ -418,7 +418,6 @@ function bsDefaultSettings() {
 }
 
 function bsInit() {
-	
 }
 
 function bsFetchSettings() {
