@@ -35,9 +35,6 @@ function save_options() {
 	}
 	
 	bsSaveSettings(data);
-
-	// Update status to let user know options were saved.
-	show_message("Saved successfully. <a target='_blank' href='http://pratikabu.users.sourceforge.net/extensions/scrolltotop/release.html'>Preview your changes</a>.");
 }
 
 // Restores select box state to saved value from localStorage.
@@ -474,4 +471,7 @@ function bsSaveSettings(data) {
 	localStorage["h_offset"] = data.hOffset;
 	localStorage["v_offset"] = data.vOffset;
 	localStorage["removed_sites"] = data.removedSites;
+	
+	// Update status to let user know options were saved.
+	show_message("Saved successfully. <a target='_blank' href='http://pratikabu.users.sourceforge.net/extensions/scrolltotop/release.html'>Preview your changes</a>.");
 }

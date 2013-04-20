@@ -1,40 +1,76 @@
 var requestCount = 0;
-var ignoreImgLoadEvent = true;
-var dIgnoreImgLoadEvent = true;
+var ignoreImgLoad = true;
+var dIgnoreImgLoad = true;
 var globalScrollSpeed;
-var ignoreForDefaults = true;
+var ignoreForDefaults = true;// only for safari
 
-// Saves options to localStorage.
-function default_options() {
-	ignoreForDefaults = true;
-	safari.self.tab.dispatchMessage("resetSettings");
-}
+/*********************************************************************
+	Browser Independent code.
+*********************************************************************/
 
 // Saves options to localStorage.
 function save_options() {
 	var data = {
-		iconSize: $('input:radio[name=iconSize]:checked').val(),
 		vLoc: $('input:radio[name=imgVerticalLocation]:checked').val(),
 		hLoc: $('input:radio[name=imgHorizontalLocation]:checked').val(),
 		scrSpeed: globalScrollSpeed,
 		visibilityBehav: $('input:radio[name=visbilityBehavior]:checked').val(),
+		
+		arrowType: $('input:radio[name=arrowType]:checked').val(),
+		
+		smartDirection: $('input:radio[name=smartDirection]:checked').val(),
 		controlOption: $('input:radio[name=controlOptions]:checked').val(),
+		hideControls: $('input:radio[name=autoHideControls]:checked').val(),
+		iconSize: $('input:radio[name=iconSize]:checked').val(),
 		iconLib: $('input:radio[name=iconLib]:checked').val(),
 		userIcon: $('#useMyIconTextBox').val(),
-		arrowType: $('input:radio[name=arrowType]:checked').val(),
+		
+		dArrang: $('input:radio[name=dIconArrangemnt]:checked').val(),
 		dIconLib: $('input:radio[name=dIconLib]:checked').val(),
 		dUserIcon: $('#dUseMyIconTextBox').val(),
-		dArrang: $('input:radio[name=dIconArrangemnt]:checked').val()
+		
+		hOffset: $('#hOffset').val(),
+		vOffset: $('#vOffset').val(),
+		removedSites: $('#removedSites').val()
 	}
-	safari.self.tab.dispatchMessage("saveSettings", data);
+	
+	bsSaveSettings(data);
+
+	// Update status to let user know options were saved.
+	show_message("Saved successfully. <a target='_blank' href='http://pratikabu.users.sourceforge.net/extensions/scrolltotop/release.html'>Preview your changes</a>.");
 }
 
 // Restores select box state to saved value from localStorage.
-function restore_options() {
-	ignoreImgLoadEvent = true;// ignore the image load method as it will reset myIcon in the radio button
-	dIgnoreImgLoadEvent = true;// ignore the image load method as it will reset myIcon in the radio button
+function restore_options(data) {
+	ignoreImgLoad = true;// ignore the image load method as it will reset myIcon in the radio button
+	dIgnoreImgLoad = true;// ignore the image load method as it will reset myIcon in the radio button
 	
-	safari.self.tab.dispatchMessage("requestSettings");
+	$('input:radio[name=imgVerticalLocation]').filter('[value=' + data.vLoc + ']').attr('checked', true);
+	$('input:radio[name=imgHorizontalLocation]').filter('[value=' + data.hLoc + ']').attr('checked', true);
+	
+	globalScrollSpeed = data.scrSpeed;// for future references
+	initSlider(data.scrSpeed);
+	$('input:radio[name=visbilityBehavior]').filter('[value=' + data.visibilityBehav + ']').attr('checked', true);
+	
+	$('input:radio[name=arrowType]').filter('[value=' + data.arrowType + ']').attr('checked', true);
+	swapAdvancedOptions(data.arrowType);
+	
+	$('input:radio[name=smartDirection]').filter('[value=' + data.smartDirection + ']').attr('checked', true);
+	$('input:radio[name=controlOptions]').filter('[value=' + data.controlOption + ']').attr('checked', true);
+	$('input:radio[name=autoHideControls]').filter('[value=' + data.hideControls + ']').attr('checked', true);
+	$('input:radio[name=iconSize]').filter('[value=' + data.iconSize + ']').attr('checked', true);
+	$('input:radio[name=iconLib]').filter('[value=' + data.iconLib + ']').attr('checked', true);
+	$('#useMyIconTextBox').val(data.userIcon);
+	$("#useMyIconTextBox").change();// load the image
+	
+	$('input:radio[name=dIconLib]').filter('[value=' + data.dIconLib + ']').attr('checked', true);
+	$('#dUseMyIconTextBox').val(data.dUserIcon);
+	$("#dUseMyIconTextBox").change();// load the image
+	$('input:radio[name=dIconArrangemnt]').filter('[value=' + data.dArrang + ']').attr('checked', true);
+	
+	$('#hOffset').val(data.hOffset);
+	$('#vOffset').val(data.vOffset);
+	$('#removedSites').val(data.removedSites);
 }
 
 function show_message(msg) {
@@ -44,7 +80,7 @@ function show_message(msg) {
 		if(0 == --requestCount) {
 			$("#status").html("&nbsp;");
 		}
-	}, 3000);
+	}, 5000);
 }
 
 function getParameterByName(name) {
@@ -57,43 +93,6 @@ function getParameterByName(name) {
 	else
 		return decodeURIComponent(results[1].replace(/\+/g, " "));
 }
-
-function respondMessage(theMessageEvent) {
-	if("resetCompleted" === theMessageEvent.name) {
-		restore_options();
-		
-		// Update status to let user know options were defaulted.
-		show_message("Restored to defaults.");
-	} else if("preferences" === theMessageEvent.name) {
-		var data = theMessageEvent.message;
-		
-		$('input:radio[name=imgVerticalLocation]').filter('[value=' + data.vLoc + ']').attr('checked', true);
-		$('input:radio[name=imgHorizontalLocation]').filter('[value=' + data.hLoc + ']').attr('checked', true);
-		
-		globalScrollSpeed = data.scrSpeed;// for future references
-		initSlider(data.scrSpeed);
-		$('input:radio[name=visbilityBehavior]').filter('[value=' + data.visibilityBehav + ']').attr('checked', true);
-		
-		$('input:radio[name=arrowType]').filter('[value=' + data.arrowType + ']').attr('checked', true);
-		swapAdvancedOptions(data.arrowType);
-		
-		$('input:radio[name=controlOptions]').filter('[value=' + data.controlOption + ']').attr('checked', true);
-		$('input:radio[name=iconSize]').filter('[value=' + data.iconSize + ']').attr('checked', true);
-		$('input:radio[name=iconLib]').filter('[value=' + data.iconLib + ']').attr('checked', true);
-		$('#useMyIconTextBox').val(data.userIcon);
-		$("#useMyIconTextBox").change();// load the image
-		
-		$('input:radio[name=dIconLib]').filter('[value=' + data.dIconLib + ']').attr('checked', true);
-		$('#dUseMyIconTextBox').val(data.dUserIcon);
-		$("#dUseMyIconTextBox").change();// load the image
-		$('input:radio[name=dIconArrangemnt]').filter('[value=' + data.dArrang + ']').attr('checked', true);
-	} else if("saveCompleted" === theMessageEvent.name) {
-		// Update status to let user know options were saved.
-		show_message("Saved successfully.");
-	}
-}
-
-safari.self.addEventListener("message", respondMessage, false);
 
 function populateSliderSpeedOnText(scrollSpeed) {
 	var speed = 2400 - scrollSpeed;
@@ -173,15 +172,22 @@ function makeElementsSelactable() {
 	selectableRadioContent("hlMiddle", "imgHorizontalLocation", "middle");
 	selectableRadioContent("hlRight", "imgHorizontalLocation", "right");
 	
-	selectableRadioContent("vbAutoHide", "visbilityBehavior", "autohide");
+	selectableRadioContent("vbHideAtTop", "visbilityBehavior", "hideattop");
 	selectableRadioContent("vbAlwaysShow", "visbilityBehavior", "alwaysshow");
+	selectableRadioContent("vbAutoHide", "visbilityBehavior", "autohide");
 	
 	selectableRadioContent("atSingle", "arrowType", "1");
 	selectableRadioContent("atDual", "arrowType", "2");
 	
+	selectableRadioContent("sdOn", "smartDirection", "true");
+	selectableRadioContent("sdOff", "smartDirection", "false");
+	
 	selectableRadioContent("coNone", "controlOptions", "none");
 	selectableRadioContent("coSimple", "controlOptions", "simple");
 	selectableRadioContent("coPager", "controlOptions", "pager");
+	
+	selectableRadioContent("ahcYes", "autoHideControls", "true");
+	selectableRadioContent("ahcNo", "autoHideControls", "false");
 	
 	selectableRadioContent("iconSizeOp1", "iconSize", "32");
 	selectableRadioContent("iconSizeOp2", "iconSize", "48");
@@ -229,6 +235,37 @@ function isRightChangedEvent(name, val) {
 	return rightEvent;
 }
 
+function activateAdvancedSettings() {
+	//$(".advancedProp").show();
+	$(".advancedProp").fadeTo(300, 1);
+	$("#advSettingsBut").remove();
+	$("html, body").scrollTop(0);
+}
+
+function validateDomainDataAndFix(textareaId) {
+	var ta = $('#' + textareaId);
+	var domains = ta.val();
+	domains = domains.replace(/\ /g, "");// remove all spaces
+	domains = domains.replace(/\*/g, "");// remove all *
+	ta.val(domains);// reset the value in the textarea
+	
+	save_options();// save these settings
+}
+
+function validateOffsetDataAndFix(textId) {
+	var t = $('#' + textId);
+	var value = t.val();
+	var intVal = 20;
+	if(!isNaN(value) && 0 != value.length) {// should be a number and shouldn't be empty
+		intVal = parseInt(value);
+		intVal = intVal < 0 ? intVal * -1 : intVal;// B-positive :)
+		intVal = intVal > 300 ? 300 : intVal;// not more than 300
+	}
+	t.val(intVal + "");// reset the value in the textbox
+	
+	save_options();// save these settings
+}
+
 document.addEventListener('DOMContentLoaded', function () {
 	var updated = getParameterByName("updated");
 	if("true" == updated) {
@@ -249,27 +286,43 @@ document.addEventListener('DOMContentLoaded', function () {
 	// add all events
 	
 	//document.querySelector('#saveSettings').addEventListener('click', save_options);
-	document.querySelector('#defaultBut').addEventListener('click', default_options);
+	$("#defaultBut").click(function() { bsDefaultSettings(); });
+	$("#advSettingsBut").click(function() { activateAdvancedSettings(); });
 	
+	// common settings starts
 	$('input:radio[name=imgVerticalLocation]').change(function() { isRightChangedEvent("imgVerticalLocation", $(this).val()); });
 	$('input:radio[name=imgHorizontalLocation]').change(function() { isRightChangedEvent("imgHorizontalLocation", $(this).val()); });
-	$('input:radio[name=iconSize]').change(function() { isRightChangedEvent("iconSize", $(this).val()); });
 	$('input:radio[name=visbilityBehavior]').change(function() { isRightChangedEvent("visbilityBehavior", $(this).val()); });
-	$('input:radio[name=controlOptions]').change(function() { isRightChangedEvent("controlOptions", $(this).val()); });
-	$('input:radio[name=iconLib]').change(function() { isRightChangedEvent("iconLib", $(this).val()); });
+	// common settings ends
 	
+	// arrow type settings starts
 	$('input:radio[name=arrowType]').change(function() {
-		if(isRightChangedEvent("arrowType", $(this).val())) {
+		if(isRightChangedEvent("arrowType", $(this).val())) {// auto set location of the icon as per the selection
 			swapAdvancedOptions($(this).val());
 			
+			$('input:radio[name=visbilityBehavior]').filter('[value=autohide]').attr('checked', true);
 			$('input:radio[name=imgHorizontalLocation]').filter('[value=right]').attr('checked', true);
 			if("1" == $(this).val()) {
 				$('input:radio[name=imgVerticalLocation]').filter('[value=bottom]').attr('checked', true);
 			} else {
 				$('input:radio[name=imgVerticalLocation]').filter('[value=middle]').attr('checked', true);
-				$('input:radio[name=visbilityBehavior]').filter('[value=alwaysshow]').attr('checked', true);
 			}
 			save_options();
+		}
+	});
+	// arrow type settings ends
+	
+	// single arrow settings starts
+	$('input:radio[name=controlOptions]').change(function() { isRightChangedEvent("controlOptions", $(this).val()); });
+	$('input:radio[name=autoHideControls]').change(function() { isRightChangedEvent("autoHideControls", $(this).val()); });
+	$('input:radio[name=iconSize]').change(function() { isRightChangedEvent("iconSize", $(this).val()); });
+	$('input:radio[name=iconLib]').change(function() { isRightChangedEvent("iconLib", $(this).val()); });
+	$('input:radio[name=smartDirection]').change(function() {
+		if(isRightChangedEvent("smartDirection", $(this).val())) {
+			if("true" == $(this).val()) {// auto set to visibility to autohide
+				$('input:radio[name=visbilityBehavior]').filter('[value=autohide]').attr('checked', true);
+				save_options();
+			}
 		}
 	});
 	
@@ -286,8 +339,8 @@ document.addEventListener('DOMContentLoaded', function () {
 	});
 	
 	$("#previewIcon").load(function() {
-		if(ignoreImgLoadEvent) {
-			ignoreImgLoadEvent = false;
+		if(ignoreImgLoad) {
+			ignoreImgLoad = false;
 		} else {
 			$('input:radio[name=iconLib]').filter('[value=myIcon]').attr('checked', true);
 			$('input:radio[name=iconLib]').change();
@@ -297,8 +350,9 @@ document.addEventListener('DOMContentLoaded', function () {
 		show_message("Error loading uploaded image.");
 		$('input:radio[name=iconLib]').focus();
 	});
+	// single arrow settings ends
 	
-	// dual arrow changes
+	// dual arrow changes starts
 	$('input:radio[name=dIconLib]').change(function() {
 		if(isRightChangedEvent("dIconLib", $(this).val())) {
 			if(20 >= parseInt($(this).val())) {
@@ -323,8 +377,8 @@ document.addEventListener('DOMContentLoaded', function () {
 	});
 	
 	$("#dPreviewIcon").load(function() {
-		if(dIgnoreImgLoadEvent) {
-			dIgnoreImgLoadEvent = false;
+		if(dIgnoreImgLoad) {
+			dIgnoreImgLoad = false;
 		} else {
 			$('input:radio[name=dIconLib]').filter('[value=myIcon]').attr('checked', true);
 			$('input:radio[name=dIconLib]').change();
@@ -338,6 +392,47 @@ document.addEventListener('DOMContentLoaded', function () {
 	$('input:radio[name=dIconArrangemnt]').change(function() { isRightChangedEvent("dIconArrangemnt", $(this).val()); });
 	// dual arrow settings ends
 	
+	// advanced settings starts
+	$("#hOffset").change(function() { validateOffsetDataAndFix('hOffset'); });
+	$("#vOffset").change(function() { validateOffsetDataAndFix('vOffset'); });
+	
+	$("#removedSites").change(function() { validateDomainDataAndFix('removedSites'); });
+	// advanced settings ends
+	
+	bsInit();
 	makeElementsSelactable();
-	restore_options();
+	bsFetchSettings();
 });
+
+/************************************************************
+	Browser specific coding
+************************************************************/
+
+/** Saves options to localStorage. */
+function bsDefaultSettings() {
+	ignoreForDefaults = true;// ignore the image load method as it will reset myIcon in the radio button
+	safari.self.tab.dispatchMessage("resetSettings");
+}
+
+function bsInit() {
+	safari.self.addEventListener("message", function(theMessageEvent) {
+		if("resetCompleted" === theMessageEvent.name) {
+			bsFetchSettings();
+			// Update status to let user know options were defaulted.
+			show_message("Restored to defaults.");
+		} else if("optionPagePreferences" === theMessageEvent.name) {
+			restore_options(theMessageEvent.message);
+		} else if("saveCompleted" === theMessageEvent.name) {
+			// Update status to let user know options were saved.
+			show_message("Saved successfully. <a target='_blank' href='http://pratikabu.users.sourceforge.net/extensions/scrolltotop/release.html'>Preview your changes</a>.");
+		}
+	}, false);
+}
+
+function bsFetchSettings() {
+	safari.self.tab.dispatchMessage("requestSettings", true);
+}
+
+function bsSaveSettings(data) {
+	safari.self.tab.dispatchMessage("saveSettings", data);
+}

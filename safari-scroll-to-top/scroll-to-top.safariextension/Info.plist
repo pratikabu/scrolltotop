@@ -13,9 +13,9 @@
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleShortVersionString</key>
-	<string>4.0</string>
+	<string>4.2</string>
 	<key>CFBundleVersion</key>
-	<string>4.0</string>
+	<string>4.2</string>
 	<key>Chrome</key>
 	<dict>
 		<key>Context Menu Items</key>
@@ -52,7 +52,7 @@
 		</array>
 	</dict>
 	<key>Description</key>
-	<string>A plugin to scroll to top and vice versa of a window.</string>
+	<string>Scroll to top and vice versa of a window.</string>
 	<key>ExtensionInfoDictionaryVersion</key>
 	<string>1.0</string>
 	<key>Permissions</key>

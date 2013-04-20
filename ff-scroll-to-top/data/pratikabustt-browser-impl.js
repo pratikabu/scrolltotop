@@ -41,5 +41,11 @@ var pratikabustt_browser_impl = {
 	setImageForId: function(imgId, imageName) {
 		var imgUrl = pratikabustt_browser_impl.getFixedLocation() + imageName;
 		$("#" + imgId).attr("src", pratikabustt_browser_impl.getBrowserSpecificUrl(imgUrl));
+	},
+	
+	/**
+		Remove all excess code required for 
+	*/
+	removeCompleteAddOnCode: function() {
 	}
 };
