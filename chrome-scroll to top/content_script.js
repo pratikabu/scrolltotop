@@ -23,13 +23,13 @@ var pratikabustt = {
 		}
 	},
 	
-	scrollHandlerLocationBased: function () {
+	scrollHandlerHideAtTop: function () {
 		pratikabustt.showHideAddon($(document).scrollTop() > pratikabu_stt_inversionPoint);
 	},
 	
-	windowResizeHandler: function() {
+	windowResizeHandlerHideAtTop: function() {
 		// hide or show the button based on the current location, because a page can be loaded scrolled..
-		pratikabustt.scrollHandlerLocationBased();
+		pratikabustt.scrollHandlerHideAtTop();
 	},
 	
 	smartDirectionLogic: function(animateRotation) {
@@ -453,17 +453,26 @@ var pratikabustt = {
 			}
 			
 			if("hideattop" == pratikabu_stt_prefs.visibilityBehav) {
-				$(window).scroll(pratikabustt.scrollHandlerLocationBased);
-				$(window).resize(pratikabustt.windowResizeHandler);
+				$(window).scroll(pratikabustt.scrollHandlerHideAtTop);
+				$(window).resize(pratikabustt.windowResizeHandlerHideAtTop);
 			} else if("alwaysshow" == pratikabu_stt_prefs.visibilityBehav) {
 				var boolShow = $(document).height() > (pratikabustt.getWindowHeight() + pratikabu_stt_inversionPoint);
-				if(!pratikabu_stt_dualArrow && !pratikabu_stt_prefs.smartDirection) {
-					$(window).scroll(pratikabustt.scrollRotationHandler);// bind the pollable handler
+				if(!pratikabu_stt_dualArrow) {
+					if(pratikabu_stt_prefs.smartDirection) {
+						$(window).scroll(pratikabustt.scrollHandlerAutoHide);
+					} else {
+						$(window).scroll(pratikabustt.scrollRotationHandler);// bind the pollable handler
+					}
 				}
 				pratikabustt.showHideAddon(boolShow);
 				if(boolShow) {
-					if(!pratikabu_stt_dualArrow && !pratikabu_stt_prefs.smartDirection) {
-						pratikabustt.scrollRotationHandler();// call this method to show the arrow in proper direction when the page loads
+					// call this method to show the arrow in proper direction when the page loads
+					if(!pratikabu_stt_dualArrow) {
+						if(pratikabu_stt_prefs.smartDirection) {
+							pratikabustt.scrollHandlerAutoHide();
+						} else {
+							pratikabustt.scrollRotationHandler();
+						}
 					}
 				} else {// attach one time handler #specialCase
 					$(window).scroll(pratikabustt.scrollHandlerOneTime);
@@ -474,11 +483,15 @@ var pratikabustt = {
 			}
 		} else {
 			if("hideattop" == pratikabu_stt_prefs.visibilityBehav) {
-				$(window).unbind('scroll', pratikabustt.scrollHandlerLocationBased);
-				$(window).unbind('resize', pratikabustt.windowResizeHandler);
+				$(window).unbind('scroll', pratikabustt.scrollHandlerHideAtTop);
+				$(window).unbind('resize', pratikabustt.windowResizeHandlerHideAtTop);
 			} else if("alwaysshow" == pratikabu_stt_prefs.visibilityBehav) {
-				if(!pratikabu_stt_dualArrow) {// skip this condition for dual arrows
-					$(window).unbind('scroll', pratikabustt.scrollRotationHandler);
+				if(!pratikabu_stt_dualArrow) {
+					if(pratikabu_stt_prefs.smartDirection) {
+						$(window).unbind('scroll', pratikabustt.scrollHandlerAutoHide);
+					} else {
+						$(window).unbind('scroll', pratikabustt.scrollRotationHandler);
+					}
 				}
 				$(window).unbind('scroll', pratikabustt.scrollHandlerOneTime);// remove this handler also if not already removed
 			} else if("autohide" == pratikabu_stt_prefs.visibilityBehav) {

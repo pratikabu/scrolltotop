@@ -414,7 +414,6 @@ function bsDefaultSettings() {
 	
 	// Asks background.html for [LocalStorage] settings from Options Page and assigns them to variables
 	chrome.extension.sendMessage({method: "resetSettings"}, function(response_msg) {
-		console.log("This is the return of msg: " + response_msg);
 		bsFetchSettings();
 		// Update status to let user know options were defaulted.
 		show_message("Restored to defaults.");
