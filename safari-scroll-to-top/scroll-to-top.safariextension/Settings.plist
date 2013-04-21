@@ -36,5 +36,11 @@
 		<key>Type</key>
 		<string>Separator</string>
 	</dict>
+	<dict>
+		<key>DefaultValue</key>
+		<real>0.0</real>
+		<key>Key</key>
+		<string>version_info</string>
+	</dict>
 </array>
 </plist>
