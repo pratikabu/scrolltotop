@@ -156,7 +156,7 @@ window.addEventListener('DOMContentLoaded', function() {
 			// finally once the scrolling is finished, rotate addon if needed
 			if(0 == pratikabu_stt_lastDocumentTop) {
 				pratikabustt.rotateDown(true);
-			} else if(pratikabu_stt_lastDocumentTop == ($(document).height() - pratikabustt.getWindowHeight())) {
+			} else if(pratikabu_stt_lastDocumentTop >= ($(document).height() - pratikabustt.getWindowHeight())) {
 				pratikabustt.rotateUp();
 			}
 		},
