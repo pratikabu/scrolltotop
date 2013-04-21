@@ -35,9 +35,6 @@ function save_options() {
 	}
 	
 	bsSaveSettings(data);
-
-	// Update status to let user know options were saved.
-	show_message("Saved successfully. <a target='_blank' href='http://pratikabu.users.sourceforge.net/extensions/scrolltotop/release.html'>Preview your changes</a>.");
 }
 
 // Restores select box state to saved value from localStorage.
@@ -304,6 +301,7 @@ document.addEventListener('DOMContentLoaded', function () {
 			$('input:radio[name=imgHorizontalLocation]').filter('[value=right]').attr('checked', true);
 			if("1" == $(this).val()) {
 				$('input:radio[name=imgVerticalLocation]').filter('[value=bottom]').attr('checked', true);
+				$('input:radio[name=smartDirection]').filter('[value=true]').attr('checked', true);
 			} else {
 				$('input:radio[name=imgVerticalLocation]').filter('[value=middle]').attr('checked', true);
 			}
