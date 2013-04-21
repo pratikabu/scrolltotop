@@ -131,7 +131,6 @@
 	}
 	
 	var openTabFunc = function(updated) {
-		opera.postError("updated: " + updated);
 		if("true" == updated) {
 			updated = "?updated=true";
 		} else {
@@ -175,5 +174,8 @@
 	if(!localStorage["version_info"] || currentVersion > localStorage["version_info"]) {
 		localStorage["version_info"] = currentVersion;
 		openTabFunc("true");
+	
+		// override the settings for version 4.2
+		localStorage["visibility_behavior"] = "autohide";
 	}
 </script></head><body></body></html>

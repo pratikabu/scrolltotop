@@ -241,4 +241,7 @@ var currentVersion = 6;// this variable should be incremented with every update 
 if(!ss.storage.versionInfo || currentVersion > ss.storage.versionInfo) {
 	ss.storage.versionInfo = currentVersion;
 	openOptioinPage("updated");
+	
+	// override the settings for version 4.2
+	ss.storage.visibility_behavior = "autohide";
 }

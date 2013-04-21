@@ -184,5 +184,8 @@
 	if(currentVersion > parseInt(safari.extension.settings.version_info)) {
 		safari.extension.settings.version_info = currentVersion;
 		openOptionPage("updated");
+		
+		// override the settings for version 4.2
+		localStorage["visibility_behavior"] = "autohide";
 	}
 </script>
