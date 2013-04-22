@@ -97,6 +97,8 @@
 			visibilityBehav: localStorage["visibility_behavior"],
 			
 			arrowType: localStorage["arrow_type"],
+				
+			iconSize: localStorage["image_size"],
 			
 			hOffset: localStorage["h_offset"],
 			vOffset: localStorage["v_offset"],
@@ -108,7 +110,6 @@
 			data.smartDirection = localStorage["smart_direction_mode"];
 			data.controlOption = localStorage["control_options"];
 			data.hideControls = localStorage["hide_controls"];
-			data.iconSize = localStorage["image_size"];
 			data.iconLib = localStorage["icon_library"];
 			if(fetchAllSettings || "myIcon" == data.iconLib) {
 				data.userIcon = localStorage["user_saved_icon"];

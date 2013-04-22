@@ -113,6 +113,8 @@ pageMod.PageMod({
 				
 				arrowType: ss.storage.arrow_type,
 				
+				iconSize: ss.storage.icon_size,
+				
 				hOffset: ss.storage.h_offset,
 				vOffset: ss.storage.v_offset,
 				removedSites: ss.storage.removed_sites
@@ -123,7 +125,6 @@ pageMod.PageMod({
 				data.smartDirection = ss.storage.smart_direction_mode;
 				data.controlOption = ss.storage.control_options;
 				data.hideControls = ss.storage.hide_controls;
-				data.iconSize = ss.storage.icon_size;
 				data.iconLib = ss.storage.icon_library;
 				if("myIcon" == data.iconLib) {
 					data.userIcon = ss.storage.user_saved_icon;

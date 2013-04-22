@@ -97,6 +97,8 @@ chrome.extension.onMessage.addListener(
 				
 				arrowType: localStorage["arrow_type"],
 				
+				iconSize: localStorage["image_size"],
+				
 				hOffset: localStorage["h_offset"],
 				vOffset: localStorage["v_offset"],
 				removedSites: localStorage["removed_sites"]
@@ -107,7 +109,6 @@ chrome.extension.onMessage.addListener(
 				data.smartDirection = localStorage["smart_direction_mode"];
 				data.controlOption = localStorage["control_options"];
 				data.hideControls = localStorage["hide_controls"];
-				data.iconSize = localStorage["image_size"];
 				data.iconLib = localStorage["icon_library"];
 				if("myIcon" == data.iconLib) {
 					data.userIcon = localStorage["user_saved_icon"];
