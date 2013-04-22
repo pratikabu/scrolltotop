@@ -17,6 +17,17 @@ Download for [Apple Safari](http://pratikabu.users.sourceforge.net/extensions/sc
 
 Download for [Opera](http://addons.opera.com/en/extensions/details/scroll-to-top)
 
+Changes in Version 4.2:
+------------
+- Brand new Smart Direction Mode, [learn more](http://pratikabu.blogspot.com/2013/04/stt-smart-direction-mode.html).
+- Auto Hide mode for taking screen shots and printing.
+- Change horizontal/vertical offset of the addon.
+- Now you can give a list of website on which you don't want this addon to load.
+- Memory optimization.
+- Now see less cluttered Options UI with a switch to show Advanced Options.
+- Rewritten whole code for best performance.
+- Visibility setting has been reset to Auto Hide.
+
 Changes in Version 4.0:
 ------------
 - Flip between Scroll Up and Scroll Down based on the current location.
