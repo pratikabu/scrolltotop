@@ -268,6 +268,21 @@ document.addEventListener('DOMContentLoaded', function () {
 	if("true" == updated) {
 		$('#maskDiv').fadeTo("slow", .8);
 		$('#updateDialog').fadeTo("slow", 1);
+		$("#mentionSettingsReset").remove();
+
+		$('#okaygotit').click(function() {
+			$('#updateDialog').fadeTo("slow", 0, function() {
+				$("#updateDialog").remove();
+			});
+			
+			$('#maskDiv').fadeTo("slow", 0, function() {
+				$("#maskDiv").remove();
+			});
+		});
+	} else if("true" == getParameterByName("reverted")) {
+		$('#maskDiv').fadeTo("slow", .8);
+		$('#updateDialog').fadeTo("slow", 1);
+		$("#mentionUpdates").remove();
 
 		$('#okaygotit').click(function() {
 			$('#updateDialog').fadeTo("slow", 0, function() {
@@ -297,11 +312,10 @@ document.addEventListener('DOMContentLoaded', function () {
 		if(isRightChangedEvent("arrowType", $(this).val())) {// auto set location of the icon as per the selection
 			swapAdvancedOptions($(this).val());
 			
-			$('input:radio[name=visbilityBehavior]').filter('[value=autohide]').attr('checked', true);
+			$('input:radio[name=visbilityBehavior]').filter('[value=alwaysshow]').attr('checked', true);
 			$('input:radio[name=imgHorizontalLocation]').filter('[value=right]').attr('checked', true);
 			if("1" == $(this).val()) {
 				$('input:radio[name=imgVerticalLocation]').filter('[value=bottom]').attr('checked', true);
-				$('input:radio[name=smartDirection]').filter('[value=true]').attr('checked', true);
 			} else {
 				$('input:radio[name=imgVerticalLocation]').filter('[value=middle]').attr('checked', true);
 			}

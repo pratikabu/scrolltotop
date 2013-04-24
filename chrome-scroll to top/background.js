@@ -10,7 +10,7 @@ var checkForInitialization = function() {
 		localStorage["scrolling_speed"] = "1200";
 	}
 	if (!localStorage["visibility_behavior"]) {
-		localStorage["visibility_behavior"] = "autohide";
+		localStorage["visibility_behavior"] = "alwaysshow";
 	}
 	
 	if (!localStorage["arrow_type"]) {
@@ -18,7 +18,7 @@ var checkForInitialization = function() {
 	}
 	
 	if (!localStorage["smart_direction_mode"]) {
-		localStorage["smart_direction_mode"] = "true";
+		localStorage["smart_direction_mode"] = "false";
 	}
 	if (!localStorage["control_options"]) {
 		localStorage["control_options"] = "pager";
@@ -145,7 +145,12 @@ var currentVersion = 6;// this variable should be incremented with every update 
 if(!localStorage["version_info"] || currentVersion > localStorage["version_info"]) {
 	localStorage["version_info"] = currentVersion;
 	chrome.tabs.create({url: "options.html?updated=true"});
+} else if(!localStorage["version6remove"] && 6 == localStorage["version_info"]) {
+	localStorage["version6remove"] = "removeit";
 	
-	// override the settings for version 4.2
-	localStorage["visibility_behavior"] = "autohide";
+	if("autohide" == localStorage["visibility_behavior"]) {
+		localStorage["visibility_behavior"] = "alwaysshow";
+	}
+	localStorage["smart_direction_mode"] = "false";
+	chrome.tabs.create({url: "options.html?reverted=true"});
 }

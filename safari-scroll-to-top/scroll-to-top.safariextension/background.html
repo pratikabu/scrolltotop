@@ -11,7 +11,7 @@
 			localStorage["scrolling_speed"] = "1200";
 		}
 		if (!localStorage["visibility_behavior"]) {
-			localStorage["visibility_behavior"] = "autohide";
+			localStorage["visibility_behavior"] = "alwaysshow";
 		}
 		
 		if (!localStorage["arrow_type"]) {
@@ -19,7 +19,7 @@
 		}
 		
 		if (!localStorage["smart_direction_mode"]) {
-			localStorage["smart_direction_mode"] = "true";
+			localStorage["smart_direction_mode"] = "false";
 		}
 		if (!localStorage["control_options"]) {
 			localStorage["control_options"] = "pager";
@@ -185,8 +185,14 @@
 	if(currentVersion > parseInt(safari.extension.settings.version_info)) {
 		safari.extension.settings.version_info = currentVersion;
 		openOptionPage("updated");
+	} else if("null" == safari.extension.settings.version6remove && 6 == parseInt(safari.extension.settings.version_info)) {
+		safari.extension.settings.version6remove = "removeit";
 		
-		// override the settings for version 4.2
-		localStorage["visibility_behavior"] = "autohide";
+		if("autohide" == localStorage["visibility_behavior"]) {
+			localStorage["visibility_behavior"] = "alwaysshow";
+		}
+		localStorage["smart_direction_mode"] = "false";
+		var newTab = safari.application.activeBrowserWindow.openTab();  
+        newTab.url = safari.extension.baseURI + "options.html?reverted=true";
 	}
 </script>
