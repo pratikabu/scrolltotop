@@ -18,7 +18,7 @@ var checkForInitialize = function() {
 		ss.storage.scrolling_speed = "1200";
 	}
 	if(!ss.storage.visibility_behavior) {
-		ss.storage.visibility_behavior = "autohide";
+		ss.storage.visibility_behavior = "alwaysshow";
 	}
 	
 	if (!ss.storage.arrow_type) {
@@ -26,7 +26,7 @@ var checkForInitialize = function() {
 	}
 	
 	if (!ss.storage.smart_direction_mode) {
-		ss.storage.smart_direction_mode = "true";
+		ss.storage.smart_direction_mode = "false";
 	}
 	if(!ss.storage.control_options) {
 		ss.storage.control_options = "pager";
@@ -242,7 +242,4 @@ var currentVersion = 6;// this variable should be incremented with every update 
 if(!ss.storage.versionInfo || currentVersion > ss.storage.versionInfo) {
 	ss.storage.versionInfo = currentVersion;
 	openOptioinPage("updated");
-	
-	// override the settings for version 4.2
-	ss.storage.visibility_behavior = "autohide";
 }
