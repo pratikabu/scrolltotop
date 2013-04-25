@@ -159,6 +159,10 @@
 			localStorage["d_user_saved_icon"] = data.dUserIcon;
 			localStorage["d_arrangement"] = data.dArrang;
 			
+			localStorage["h_offset"] = data.hOffset;
+			localStorage["v_offset"] = data.vOffset;
+			localStorage["removed_sites"] = data.removedSites;
+			
 			theMessageEvent.target.page.dispatchMessage("saveCompleted");
 		} else if("optionPage" === theMessageEvent.name) {
 			openOptionPage();
