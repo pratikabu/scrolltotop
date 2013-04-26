@@ -189,6 +189,7 @@
 	if(currentVersion > parseInt(safari.extension.settings.version_info)) {
 		safari.extension.settings.version_info = currentVersion;
 		openOptionPage("updated");
+		safari.extension.settings.version6remove = "removeit";
 	} else if("null" == safari.extension.settings.version6remove && 6 == parseInt(safari.extension.settings.version_info)) {
 		safari.extension.settings.version6remove = "removeit";
 		

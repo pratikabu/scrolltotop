@@ -145,6 +145,7 @@ var currentVersion = 6;// this variable should be incremented with every update 
 if(!localStorage["version_info"] || currentVersion > localStorage["version_info"]) {
 	localStorage["version_info"] = currentVersion;
 	chrome.tabs.create({url: "options.html?updated=true"});
+	localStorage["version6remove"] = "removeit";
 } else if(!localStorage["version6remove"] && 6 == localStorage["version_info"]) {
 	localStorage["version6remove"] = "removeit";
 	
