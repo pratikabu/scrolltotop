@@ -1,6 +1,6 @@
-var data = require("self").data;
-var pageMod = require("page-mod");
-var sp = require("simple-prefs");
+var data = require("sdk/self").data;
+var pageMod = require("sdk/page-mod");
+var sp = require("sdk/simple-prefs");
 
 // load the content script
 pageMod.PageMod({
@@ -17,6 +17,7 @@ pageMod.PageMod({
 			// load the saved image
 			worker.port.emit("prefsValue", {// send the image url, bottom preference and the left preference
 				imgUrl: data.url("pratikabu-stt-" + (sp.prefs.largerIcon ? "64" : "48") + ".png"),
+				smartDirectionMode: sp.prefs.smartDirectionMode,
 				animatedScrolling: sp.prefs.animatedBeta // its a beta feature, will see any other better implementation in the next release
 			});
 		});
