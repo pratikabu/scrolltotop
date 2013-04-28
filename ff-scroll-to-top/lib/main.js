@@ -14,7 +14,7 @@ var checkForInitialize = function() {
 	if(!ss.storage.horizontal_location) {
 		ss.storage.horizontal_location = "right";
 	}
-	if(!ss.storage.scrolling_speed) {
+	if(!ss.storage.scrolling_speed && 0 != ss.storage.scrolling_speed) {
 		ss.storage.scrolling_speed = "1200";
 	}
 	if(!ss.storage.visibility_behavior) {
