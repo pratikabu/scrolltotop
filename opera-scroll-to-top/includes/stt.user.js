@@ -6,6 +6,8 @@
 // @include *
 // ==/UserScript==
 
+var pratikabusttjquery;
+
 window.addEventListener('DOMContentLoaded', function() {
 	if(window != window.top) {// return if its an internal frame
 		return;
@@ -20,6 +22,7 @@ window.addEventListener('DOMContentLoaded', function() {
 				var fr = new FileReader();
 				fr.onload = function() {                
 					eval(fr.result);
+					pratikabusttjquery = window.jQuery.noConflict(true);
 					callOnceLoaded();
 				};
 				fr.readAsText(fileObj);
@@ -28,16 +31,14 @@ window.addEventListener('DOMContentLoaded', function() {
 
 		addLibrary("/jquery-1.8.2.pratikabu.js");
 	} else {
+		pratikabusttjquery = window.jQuery;
 		callOnceLoaded();
 	}
 }, false);
 
 function callOnceLoaded() {
-	var $ = window.jQuery;
-	var jQuery = window.jQuery;
-
 	/* VERSION: 2.2 LAST UPDATE: 13.03.2012 Made by Wilq32, wilq32@gmail.com, Wroclaw, Poland, 01.2009 */
-	(function(j){for(var d,k=document.getElementsByTagName("head")[0].style,h=["transformProperty","WebkitTransform","OTransform","msTransform","MozTransform"],g=0;g<h.length;g++)void 0!==k[h[g]]&&(d=h[g]);var i="v"=="\v";jQuery.fn.extend({rotate:function(a){if(!(0===this.length||"undefined"==typeof a)){"number"==typeof a&&(a={angle:a});for(var b=[],c=0,f=this.length;c<f;c++){var e=this.get(c);if(!e.Wilq32||!e.Wilq32.PhotoEffect){var d=j.extend(!0,{},a),e=(new Wilq32.PhotoEffect(e,d))._rootObj; b.push(j(e))}else e.Wilq32.PhotoEffect._handleRotation(a)}return b}},getRotateAngle:function(){for(var a=[],b=0,c=this.length;b<c;b++){var f=this.get(b);f.Wilq32&&f.Wilq32.PhotoEffect&&(a[b]=f.Wilq32.PhotoEffect._angle)}return a},stopRotate:function(){for(var a=0,b=this.length;a<b;a++){var c=this.get(a);c.Wilq32&&c.Wilq32.PhotoEffect&&clearTimeout(c.Wilq32.PhotoEffect._timer)}}});Wilq32=window.Wilq32||{};Wilq32.PhotoEffect=function(){return d?function(a,b){a.Wilq32={PhotoEffect:this};this._img=this._rootObj= this._eventObj=a;this._handleRotation(b)}:function(a,b){this._img=a;this._rootObj=document.createElement("span");this._rootObj.style.display="inline-block";this._rootObj.Wilq32={PhotoEffect:this};a.parentNode.insertBefore(this._rootObj,a);if(a.complete)this._Loader(b);else{var c=this;jQuery(this._img).bind("load",function(){c._Loader(b)})}}}();Wilq32.PhotoEffect.prototype={_setupParameters:function(a){this._parameters=this._parameters||{};"number"!==typeof this._angle&&(this._angle=0);"number"=== typeof a.angle&&(this._angle=a.angle);this._parameters.animateTo="number"===typeof a.animateTo?a.animateTo:this._angle;this._parameters.step=a.step||this._parameters.step||null;this._parameters.easing=a.easing||this._parameters.easing||function(a,c,f,e,d){return-e*((c=c/d-1)*c*c*c-1)+f};this._parameters.duration=a.duration||this._parameters.duration||1E3;this._parameters.callback=a.callback||this._parameters.callback||function(){};a.bind&&a.bind!=this._parameters.bind&&this._BindEvents(a.bind)},_handleRotation:function(a){this._setupParameters(a); this._angle==this._parameters.animateTo?this._rotate(this._angle):this._animateStart()},_BindEvents:function(a){if(a&&this._eventObj){if(this._parameters.bind){var b=this._parameters.bind,c;for(c in b)b.hasOwnProperty(c)&&jQuery(this._eventObj).unbind(c,b[c])}this._parameters.bind=a;for(c in a)a.hasOwnProperty(c)&&jQuery(this._eventObj).bind(c,a[c])}},_Loader:function(){return i?function(a){var b=this._img.width,c=this._img.height;this._img.parentNode.removeChild(this._img);this._vimage=this.createVMLNode("image"); this._vimage.src=this._img.src;this._vimage.style.height=c+"px";this._vimage.style.width=b+"px";this._vimage.style.position="absolute";this._vimage.style.top="0px";this._vimage.style.left="0px";this._container=this.createVMLNode("group");this._container.style.width=b;this._container.style.height=c;this._container.style.position="absolute";this._container.setAttribute("coordsize",b-1+","+(c-1));this._container.appendChild(this._vimage);this._rootObj.appendChild(this._container);this._rootObj.style.position= "relative";this._rootObj.style.width=b+"px";this._rootObj.style.height=c+"px";this._rootObj.setAttribute("id",this._img.getAttribute("id"));this._rootObj.className=this._img.className;this._eventObj=this._rootObj;this._handleRotation(a)}:function(a){this._rootObj.setAttribute("id",this._img.getAttribute("id"));this._rootObj.className=this._img.className;this._width=this._img.width;this._height=this._img.height;this._widthHalf=this._width/2;this._heightHalf=this._height/2;var b=Math.sqrt(this._height* this._height+this._width*this._width);this._widthAdd=b-this._width;this._heightAdd=b-this._height;this._widthAddHalf=this._widthAdd/2;this._heightAddHalf=this._heightAdd/2;this._img.parentNode.removeChild(this._img);this._aspectW=(parseInt(this._img.style.width,10)||this._width)/this._img.width;this._aspectH=(parseInt(this._img.style.height,10)||this._height)/this._img.height;this._canvas=document.createElement("canvas");this._canvas.setAttribute("width",this._width);this._canvas.style.position="relative"; this._canvas.style.left=-this._widthAddHalf+"px";this._canvas.style.top=-this._heightAddHalf+"px";this._canvas.Wilq32=this._rootObj.Wilq32;this._rootObj.appendChild(this._canvas);this._rootObj.style.width=this._width+"px";this._rootObj.style.height=this._height+"px";this._eventObj=this._canvas;this._cnv=this._canvas.getContext("2d");this._handleRotation(a)}}(),_animateStart:function(){this._timer&&clearTimeout(this._timer);this._animateStartTime=+new Date;this._animateStartAngle=this._angle;this._animate()}, _animate:function(){var a=+new Date,b=a-this._animateStartTime>this._parameters.duration;if(b&&!this._parameters.animatedGif)clearTimeout(this._timer);else{(this._canvas||this._vimage||this._img)&&this._rotate(~~(10*this._parameters.easing(0,a-this._animateStartTime,this._animateStartAngle,this._parameters.animateTo-this._animateStartAngle,this._parameters.duration))/10);this._parameters.step&&this._parameters.step(this._angle);var c=this;this._timer=setTimeout(function(){c._animate.call(c)},10)}this._parameters.callback&& b&&(this._angle=this._parameters.animateTo,this._rotate(this._angle),this._parameters.callback.call(this._rootObj))},_rotate:function(){var a=Math.PI/180;return i?function(a){this._angle=a;this._container.style.rotation=a%360+"deg"}:d?function(a){this._angle=a;this._img.style[d]="rotate("+a%360+"deg)"}:function(b){this._angle=b;b=b%360*a;this._canvas.width=this._width+this._widthAdd;this._canvas.height=this._height+this._heightAdd;this._cnv.translate(this._widthAddHalf,this._heightAddHalf);this._cnv.translate(this._widthHalf, this._heightHalf);this._cnv.rotate(b);this._cnv.translate(-this._widthHalf,-this._heightHalf);this._cnv.scale(this._aspectW,this._aspectH);this._cnv.drawImage(this._img,0,0)}}()};i&&(Wilq32.PhotoEffect.prototype.createVMLNode=function(){document.createStyleSheet().addRule(".rvml","behavior:url(#default#VML)");try{return!document.namespaces.rvml&&document.namespaces.add("rvml","urn:schemas-microsoft-com:vml"),function(a){return document.createElement("<rvml:"+a+' class="rvml">')}}catch(a){return function(a){return document.createElement("<"+ a+' xmlns="urn:schemas-microsoft.com:vml" class="rvml">')}}}())})(jQuery);
+	(function(j){for(var d,k=document.getElementsByTagName("head")[0].style,h=["transformProperty","WebkitTransform","OTransform","msTransform","MozTransform"],g=0;g<h.length;g++)void 0!==k[h[g]]&&(d=h[g]);var i="v"=="\v";pratikabusttjquery.fn.extend({rotate:function(a){if(!(0===this.length||"undefined"==typeof a)){"number"==typeof a&&(a={angle:a});for(var b=[],c=0,f=this.length;c<f;c++){var e=this.get(c);if(!e.Wilq32||!e.Wilq32.PhotoEffect){var d=j.extend(!0,{},a),e=(new Wilq32.PhotoEffect(e,d))._rootObj; b.push(j(e))}else e.Wilq32.PhotoEffect._handleRotation(a)}return b}},getRotateAngle:function(){for(var a=[],b=0,c=this.length;b<c;b++){var f=this.get(b);f.Wilq32&&f.Wilq32.PhotoEffect&&(a[b]=f.Wilq32.PhotoEffect._angle)}return a},stopRotate:function(){for(var a=0,b=this.length;a<b;a++){var c=this.get(a);c.Wilq32&&c.Wilq32.PhotoEffect&&clearTimeout(c.Wilq32.PhotoEffect._timer)}}});Wilq32=window.Wilq32||{};Wilq32.PhotoEffect=function(){return d?function(a,b){a.Wilq32={PhotoEffect:this};this._img=this._rootObj= this._eventObj=a;this._handleRotation(b)}:function(a,b){this._img=a;this._rootObj=document.createElement("span");this._rootObj.style.display="inline-block";this._rootObj.Wilq32={PhotoEffect:this};a.parentNode.insertBefore(this._rootObj,a);if(a.complete)this._Loader(b);else{var c=this;pratikabusttjquery(this._img).bind("load",function(){c._Loader(b)})}}}();Wilq32.PhotoEffect.prototype={_setupParameters:function(a){this._parameters=this._parameters||{};"number"!==typeof this._angle&&(this._angle=0);"number"=== typeof a.angle&&(this._angle=a.angle);this._parameters.animateTo="number"===typeof a.animateTo?a.animateTo:this._angle;this._parameters.step=a.step||this._parameters.step||null;this._parameters.easing=a.easing||this._parameters.easing||function(a,c,f,e,d){return-e*((c=c/d-1)*c*c*c-1)+f};this._parameters.duration=a.duration||this._parameters.duration||1E3;this._parameters.callback=a.callback||this._parameters.callback||function(){};a.bind&&a.bind!=this._parameters.bind&&this._BindEvents(a.bind)},_handleRotation:function(a){this._setupParameters(a); this._angle==this._parameters.animateTo?this._rotate(this._angle):this._animateStart()},_BindEvents:function(a){if(a&&this._eventObj){if(this._parameters.bind){var b=this._parameters.bind,c;for(c in b)b.hasOwnProperty(c)&&pratikabusttjquery(this._eventObj).unbind(c,b[c])}this._parameters.bind=a;for(c in a)a.hasOwnProperty(c)&&pratikabusttjquery(this._eventObj).bind(c,a[c])}},_Loader:function(){return i?function(a){var b=this._img.width,c=this._img.height;this._img.parentNode.removeChild(this._img);this._vimage=this.createVMLNode("image"); this._vimage.src=this._img.src;this._vimage.style.height=c+"px";this._vimage.style.width=b+"px";this._vimage.style.position="absolute";this._vimage.style.top="0px";this._vimage.style.left="0px";this._container=this.createVMLNode("group");this._container.style.width=b;this._container.style.height=c;this._container.style.position="absolute";this._container.setAttribute("coordsize",b-1+","+(c-1));this._container.appendChild(this._vimage);this._rootObj.appendChild(this._container);this._rootObj.style.position= "relative";this._rootObj.style.width=b+"px";this._rootObj.style.height=c+"px";this._rootObj.setAttribute("id",this._img.getAttribute("id"));this._rootObj.className=this._img.className;this._eventObj=this._rootObj;this._handleRotation(a)}:function(a){this._rootObj.setAttribute("id",this._img.getAttribute("id"));this._rootObj.className=this._img.className;this._width=this._img.width;this._height=this._img.height;this._widthHalf=this._width/2;this._heightHalf=this._height/2;var b=Math.sqrt(this._height* this._height+this._width*this._width);this._widthAdd=b-this._width;this._heightAdd=b-this._height;this._widthAddHalf=this._widthAdd/2;this._heightAddHalf=this._heightAdd/2;this._img.parentNode.removeChild(this._img);this._aspectW=(parseInt(this._img.style.width,10)||this._width)/this._img.width;this._aspectH=(parseInt(this._img.style.height,10)||this._height)/this._img.height;this._canvas=document.createElement("canvas");this._canvas.setAttribute("width",this._width);this._canvas.style.position="relative"; this._canvas.style.left=-this._widthAddHalf+"px";this._canvas.style.top=-this._heightAddHalf+"px";this._canvas.Wilq32=this._rootObj.Wilq32;this._rootObj.appendChild(this._canvas);this._rootObj.style.width=this._width+"px";this._rootObj.style.height=this._height+"px";this._eventObj=this._canvas;this._cnv=this._canvas.getContext("2d");this._handleRotation(a)}}(),_animateStart:function(){this._timer&&clearTimeout(this._timer);this._animateStartTime=+new Date;this._animateStartAngle=this._angle;this._animate()}, _animate:function(){var a=+new Date,b=a-this._animateStartTime>this._parameters.duration;if(b&&!this._parameters.animatedGif)clearTimeout(this._timer);else{(this._canvas||this._vimage||this._img)&&this._rotate(~~(10*this._parameters.easing(0,a-this._animateStartTime,this._animateStartAngle,this._parameters.animateTo-this._animateStartAngle,this._parameters.duration))/10);this._parameters.step&&this._parameters.step(this._angle);var c=this;this._timer=setTimeout(function(){c._animate.call(c)},10)}this._parameters.callback&& b&&(this._angle=this._parameters.animateTo,this._rotate(this._angle),this._parameters.callback.call(this._rootObj))},_rotate:function(){var a=Math.PI/180;return i?function(a){this._angle=a;this._container.style.rotation=a%360+"deg"}:d?function(a){this._angle=a;this._img.style[d]="rotate("+a%360+"deg)"}:function(b){this._angle=b;b=b%360*a;this._canvas.width=this._width+this._widthAdd;this._canvas.height=this._height+this._heightAdd;this._cnv.translate(this._widthAddHalf,this._heightAddHalf);this._cnv.translate(this._widthHalf, this._heightHalf);this._cnv.rotate(b);this._cnv.translate(-this._widthHalf,-this._heightHalf);this._cnv.scale(this._aspectW,this._aspectH);this._cnv.drawImage(this._img,0,0)}}()};i&&(Wilq32.PhotoEffect.prototype.createVMLNode=function(){document.createStyleSheet().addRule(".rvml","behavior:url(#default#VML)");try{return!document.namespaces.rvml&&document.namespaces.add("rvml","urn:schemas-microsoft-com:vml"),function(a){return document.createElement("<rvml:"+a+' class="rvml">')}}catch(a){return function(a){return document.createElement("<"+ a+' xmlns="urn:schemas-microsoft.com:vml" class="rvml">')}}}())})(pratikabusttjquery);
 
 	var style3 = document.createElement('style');
 	style3.type = 'text/css';
@@ -107,7 +108,7 @@ function callOnceLoaded() {
 			// Read out the File object as a Data URI
 			var fr = new FileReader();
 			fr.onload = function(event) {
-				$("#" + imgId).attr("src", event.target.result);
+				pratikabusttjquery("#" + imgId).attr("src", event.target.result);
 			};
 			fr.readAsDataURL(imgFile);
 		},
@@ -150,14 +151,14 @@ function callOnceLoaded() {
 
 	var pratikabustt = {
 		scrollHandlerOneTime: function() {
-			if($(document).scrollTop() > pratikabu_stt_inversionPoint) {// terminating condition for this handler
-				$(window).unbind('scroll', pratikabustt.scrollHandlerOneTime);
+			if(pratikabusttjquery(document).scrollTop() > pratikabu_stt_inversionPoint) {// terminating condition for this handler
+				pratikabusttjquery(window).unbind('scroll', pratikabustt.scrollHandlerOneTime);
 				pratikabustt.showHideAddon(true);
 			}
 		},
 		
 		scrollHandlerHideAtTop: function () {
-			pratikabustt.showHideAddon($(document).scrollTop() > pratikabu_stt_inversionPoint);
+			pratikabustt.showHideAddon(pratikabusttjquery(document).scrollTop() > pratikabu_stt_inversionPoint);
 		},
 		
 		windowResizeHandlerHideAtTop: function() {
@@ -166,20 +167,20 @@ function callOnceLoaded() {
 		},
 		
 		smartDirectionLogic: function(animateRotation) {
-			if(pratikabu_stt_lastDocumentTop == $(document).scrollTop()) {
+			if(pratikabu_stt_lastDocumentTop == pratikabusttjquery(document).scrollTop()) {
 				// do nothing
-			} else if(pratikabu_stt_lastDocumentTop > $(document).scrollTop()) {// user scrolled upwards
+			} else if(pratikabu_stt_lastDocumentTop > pratikabusttjquery(document).scrollTop()) {// user scrolled upwards
 				pratikabustt.rotateUp();
 			} else {// user scrolled downwards
 				pratikabustt.rotateDown(animateRotation);
 			}
 			
-			pratikabu_stt_lastDocumentTop = $(document).scrollTop();// update to latest
+			pratikabu_stt_lastDocumentTop = pratikabusttjquery(document).scrollTop();// update to latest
 			
 			// finally once the scrolling is finished, rotate addon if needed
 			if(0 == pratikabu_stt_lastDocumentTop) {
 				pratikabustt.rotateDown(true);
-			} else if(pratikabu_stt_lastDocumentTop >= ($(document).height() - pratikabustt.getWindowHeight())) {
+			} else if(pratikabu_stt_lastDocumentTop >= (pratikabusttjquery(document).height() - pratikabustt.getWindowHeight())) {
 				pratikabustt.rotateUp();
 			}
 		},
@@ -196,7 +197,7 @@ function callOnceLoaded() {
 		},
 		
 		scrollRotationHandler: function() {
-			if(pratikabu_stt_inversionPoint > $(document).scrollTop()) {// you are at the top rotate arrows to original state
+			if(pratikabu_stt_inversionPoint > pratikabusttjquery(document).scrollTop()) {// you are at the top rotate arrows to original state
 				pratikabustt.rotateDown(true);
 			} else {
 				pratikabustt.rotateUp();
@@ -206,33 +207,33 @@ function callOnceLoaded() {
 		rotateDown: function(animateRotation) {
 			pratikabu_stt_flipScrolling = true;
 			if(animateRotation) {
-				$("#pratikabuSTTArrowUp").rotate({ animateTo: 180 });
+				pratikabusttjquery("#pratikabuSTTArrowUp").rotate({ animateTo: 180 });
 			} else {
-				$("#pratikabuSTTArrowUp").rotate(180);
+				pratikabusttjquery("#pratikabuSTTArrowUp").rotate(180);
 			}
 		},
 		
 		rotateUp: function() {
 			pratikabu_stt_flipScrolling = false;
-			$("#pratikabuSTTArrowUp").rotate({ animateTo: 0 });
+			pratikabusttjquery("#pratikabuSTTArrowUp").rotate({ animateTo: 0 });
 		},
 		
 		createAddonHtml: function() {
 			if(pratikabu_stt_dualArrow) {
 				// create div tag
 				if("hr" == pratikabu_stt_prefs.dArrang) {
-					$('body').prepend('<div id="pratikabuSTTDiv"><img id="pratikabuSTTArrowUp" /><img id="pratikabuSTTArrowDown" /></div>');
+					pratikabusttjquery('body').prepend('<div id="pratikabuSTTDiv"><img id="pratikabuSTTArrowUp" /><img id="pratikabuSTTArrowDown" /></div>');
 				} else if("vr" == pratikabu_stt_prefs.dArrang) {
-					$('body').prepend('<div id="pratikabuSTTDiv"><img id="pratikabuSTTArrowUp" style="display: block !important;" /><img id="pratikabuSTTArrowDown" style="display: block !important;" /></div>');
+					pratikabusttjquery('body').prepend('<div id="pratikabuSTTDiv"><img id="pratikabuSTTArrowUp" style="display: block !important;" /><img id="pratikabuSTTArrowDown" style="display: block !important;" /></div>');
 				}
 			} else {
 				// create div tag
-				$('body').prepend('<div id="pratikabuSTTDiv"><img id="pratikabuSTTArrowUp" style="float: left;" /><div id="pratikabuSTTDiv2"><img id="pratikabuSTTPageUp" /><img id="pratikabuSTTClear" /><img id="pratikabuSTTPageDown" /><img id="pratikabuSTTSettings" /></div></div>');
+				pratikabusttjquery('body').prepend('<div id="pratikabuSTTDiv"><img id="pratikabuSTTArrowUp" style="float: left;" /><div id="pratikabuSTTDiv2"><img id="pratikabuSTTPageUp" /><img id="pratikabuSTTClear" /><img id="pratikabuSTTPageDown" /><img id="pratikabuSTTSettings" /></div></div>');
 			}
 			
 			// check whether the css has been applied to the div tag or not, if not then remove it from DOM
 			// as it got added to a wrong iFrame
-			if("fixed" != $("#pratikabuSTTDiv").css("position")) {
+			if("fixed" != pratikabusttjquery("#pratikabuSTTDiv").css("position")) {
 				pratikabustt.removeCompleteAddonFromPage();
 				return false;
 			}
@@ -248,12 +249,12 @@ function callOnceLoaded() {
 				pratikabustt.hoverEffect("#pratikabuSTTPageDown", pratikabu_stt_otherDefaultFade);
 			}
 			// add the main div hover effects
-			$("#pratikabuSTTDiv").hover(
+			pratikabusttjquery("#pratikabuSTTDiv").hover(
 				function() { pratikabustt.mainDivHover(true) },
 				function() { pratikabustt.mainDivHover(false) });
 			
 			// add the scroll up logic
-			$("#pratikabuSTTArrowUp").click(function() {
+			pratikabusttjquery("#pratikabuSTTArrowUp").click(function() {
 				if(pratikabu_stt_flipScrolling) {
 					pratikabustt.scrollToBottom();
 				} else {
@@ -263,30 +264,30 @@ function callOnceLoaded() {
 			});
 			if(pratikabu_stt_dualArrow) {
 				// add the scroll down logic
-				$("#pratikabuSTTArrowDown").click(function() {
+				pratikabusttjquery("#pratikabuSTTArrowDown").click(function() {
 					pratikabustt.scrollToBottom();
 					return false;
 				});
 			} else {
 				// add the scroll down logic
-				$("#pratikabuSTTSettings").click(function() {
+				pratikabusttjquery("#pratikabuSTTSettings").click(function() {
 					pratikabustt_browser_impl.openOptionPage();
 					return false;
 				});
 				
 				// add rotation for scrolling down
-				$("#pratikabuSTTSettings").hover(
-					function() { $(this).rotate({ animateTo: 180 }); },
-					function() { $(this).rotate({ animateTo: 0 }); });
+				pratikabusttjquery("#pratikabuSTTSettings").hover(
+					function() { pratikabusttjquery(this).rotate({ animateTo: 180 }); },
+					function() { pratikabusttjquery(this).rotate({ animateTo: 0 }); });
 				
 				// add the remove div logic
-				$("#pratikabuSTTClear").click(function() {
+				pratikabusttjquery("#pratikabuSTTClear").click(function() {
 					pratikabustt.removeCompleteAddonFromPage();
 				});
 				
 				// add page up and page down handlers
-				$("#pratikabuSTTPageUp").click(function() { pratikabustt.scrollPageScreen(1); });
-				$("#pratikabuSTTPageDown").click(function() { pratikabustt.scrollPageScreen(-1); });
+				pratikabusttjquery("#pratikabuSTTPageUp").click(function() { pratikabustt.scrollPageScreen(1); });
+				pratikabusttjquery("#pratikabuSTTPageDown").click(function() { pratikabustt.scrollPageScreen(-1); });
 			}
 			
 			// populate from preferences
@@ -305,8 +306,8 @@ function callOnceLoaded() {
 				hlocVal = "50%";
 			}
 			
-			$("#pratikabuSTTDiv").css(vloc, vlocVal);// set the vertical alignment of the image
-			$("#pratikabuSTTDiv").css(hloc, hlocVal);// set the horizontal alignment of the image
+			pratikabusttjquery("#pratikabuSTTDiv").css(vloc, vlocVal);// set the vertical alignment of the image
+			pratikabusttjquery("#pratikabuSTTDiv").css(hloc, hlocVal);// set the horizontal alignment of the image
 			
 			// set the image
 			if(pratikabu_stt_dualArrow) {
@@ -320,7 +321,7 @@ function callOnceLoaded() {
 				
 				var showPagerButtons = false;
 				if("pager" == pratikabu_stt_prefs.controlOption) {
-					if($(document).height() != pratikabustt.getWindowHeight()) {
+					if(pratikabusttjquery(document).height() != pratikabustt.getWindowHeight()) {
 						showPagerButtons = true;
 					} else {
 						pratikabu_stt_prefs.controlOption = "simple";// set the control option to simple
@@ -331,7 +332,7 @@ function callOnceLoaded() {
 				if(showPagerButtons) {// check whether the page up is shown or not
 					divSize += otherImagesSize;// add pixels based on the settings
 				}
-				$("#pratikabuSTTDiv2").css("width", divSize + "px");
+				pratikabusttjquery("#pratikabuSTTDiv2").css("width", divSize + "px");
 				
 				pratikabustt_browser_impl.setImageForId("pratikabuSTTClear", "clear-" + otherImagesSize + ".png");
 				pratikabustt_browser_impl.setImageForId("pratikabuSTTSettings", "settings-" + otherImagesSize + ".png");
@@ -340,27 +341,27 @@ function callOnceLoaded() {
 				if(showPagerButtons) {
 					pratikabustt_browser_impl.setImageForId("pratikabuSTTPageUp", "pageup-" + otherImagesSize + ".png");
 					pratikabustt_browser_impl.setImageForId("pratikabuSTTPageDown", "pageup-" + otherImagesSize + ".png");
-					$("#pratikabuSTTPageDown").rotate(180);
+					pratikabusttjquery("#pratikabuSTTPageDown").rotate(180);
 				} else {
-					$("#pratikabuSTTPageUp").remove();
-					$("#pratikabuSTTPageDown").remove();
+					pratikabusttjquery("#pratikabuSTTPageUp").remove();
+					pratikabusttjquery("#pratikabuSTTPageDown").remove();
 				}
 				
 				// change the location of the main image
 				var pratikabu_stt_float = pratikabu_stt_prefs.hLoc;
 				if("right" == pratikabu_stt_prefs.hLoc) {// replace the locations of the icons
 					if(showPagerButtons) {
-						$("#pratikabuSTTPageUp").before($("#pratikabuSTTClear"));
-						$("#pratikabuSTTPageDown").before($("#pratikabuSTTSettings"));
+						pratikabusttjquery("#pratikabuSTTPageUp").before(pratikabusttjquery("#pratikabuSTTClear"));
+						pratikabusttjquery("#pratikabuSTTPageDown").before(pratikabusttjquery("#pratikabuSTTSettings"));
 					}
-					$("#pratikabuSTTDiv2").css("marginLeft", 0 + "px");
+					pratikabusttjquery("#pratikabuSTTDiv2").css("marginLeft", 0 + "px");
 				} else {
-					$("#pratikabuSTTDiv2").css("marginLeft", pratikabu_stt_prefs.iconSize + "px");
+					pratikabusttjquery("#pratikabuSTTDiv2").css("marginLeft", pratikabu_stt_prefs.iconSize + "px");
 				}
 				
-				$("#pratikabuSTTArrowUp").css("float", pratikabu_stt_float);
-				$("#pratikabuSTTArrowUp").css("width", pratikabu_stt_prefs.iconSize + "px");
-				$("#pratikabuSTTArrowUp").css("height", pratikabu_stt_prefs.iconSize + "px");
+				pratikabusttjquery("#pratikabuSTTArrowUp").css("float", pratikabu_stt_float);
+				pratikabusttjquery("#pratikabuSTTArrowUp").css("width", pratikabu_stt_prefs.iconSize + "px");
+				pratikabusttjquery("#pratikabuSTTArrowUp").css("height", pratikabu_stt_prefs.iconSize + "px");
 				
 				if(!pratikabu_stt_prefs.hideControls) {
 					pratikabustt.showHideControlOptions(true);
@@ -374,7 +375,7 @@ function callOnceLoaded() {
 			if(boolShowAddon != pratikabu_stt_bVisibility) {
 				if(boolShowAddon) {// show addon
 					if(pratikabustt.createAddonHtml()) {
-						$("#pratikabuSTTDiv").stop(true, true).fadeTo("slow", 1);
+						pratikabusttjquery("#pratikabuSTTDiv").stop(true, true).fadeTo("slow", 1);
 					}
 				} else {// remove it
 					pratikabustt.removeAddonHtml();
@@ -400,13 +401,13 @@ function callOnceLoaded() {
 		},
 		
 		removeAddonHtml: function() {
-			$("#pratikabuSTTDiv").stop(true, true).fadeTo("slow", 0, function() {
-				$("#pratikabuSTTDiv").remove();
+			pratikabusttjquery("#pratikabuSTTDiv").stop(true, true).fadeTo("slow", 0, function() {
+				pratikabusttjquery("#pratikabuSTTDiv").remove();
 			});
 		},
 		
 		scrollToTop: function() {
-			if(0 == $(document).scrollTop()) {
+			if(0 == pratikabusttjquery(document).scrollTop()) {
 				return false;
 			}
 			
@@ -414,23 +415,23 @@ function callOnceLoaded() {
 		},
 		
 		scrollToBottom: function() {
-			var location = ($(document).height() - pratikabustt.getWindowHeight());
+			var location = (pratikabusttjquery(document).height() - pratikabustt.getWindowHeight());
 			if(0 == location) {// this should never happen, but it gives this result on some pages
-				location = $(document).height();
+				location = pratikabusttjquery(document).height();
 			}
 			pratikabustt.scrollPageTo(pratikabu_stt_prefs.scrSpeed, location);
 		},
 		
 		scrollPageTo: function(delay, location, isPager) {
 			if(!isPager && pratikabu_stt_scrollingInProgress) {// pause any scroll when scrolling is in progress
-				$("html, body").stop();
+				pratikabusttjquery("html, body").stop();
 				pratikabu_stt_scrollingInProgress = false;
 				return;
 			}
 			
 			pratikabu_stt_scrollingInProgress = true;
 			
-			$("html, body").stop(true, true).animate({ scrollTop: location }, delay, function() {
+			pratikabusttjquery("html, body").stop(true, true).animate({ scrollTop: location }, delay, function() {
 				pratikabu_stt_scrollingInProgress = false;
 			});
 		},
@@ -438,9 +439,9 @@ function callOnceLoaded() {
 		scrollPageScreen: function(direction) {
 			var speed = 344;
 			var location = 0;
-			var scrollTop = $(document).scrollTop();
+			var scrollTop = pratikabusttjquery(document).scrollTop();
 			var winHeight = pratikabustt.getWindowHeight();
-			var docHeight = $(document).height();
+			var docHeight = pratikabusttjquery(document).height();
 			
 			docHeight -= winHeight;
 			
@@ -464,22 +465,22 @@ function callOnceLoaded() {
 		},
 		
 		hoverEffect: function(varId, idleOpacity) {
-			$(varId).attr("class", "pratikabuSTTImg");// add it for all the images we've
-			$(varId).hide();
-			$(varId).stop(true, true).fadeTo(pratikabu_stt_fadeSpeed, idleOpacity);
-			$(varId).css("cursor", "pointer");
-			$(varId).hover(
+			pratikabusttjquery(varId).attr("class", "pratikabuSTTImg");// add it for all the images we've
+			pratikabusttjquery(varId).hide();
+			pratikabusttjquery(varId).stop(true, true).fadeTo(pratikabu_stt_fadeSpeed, idleOpacity);
+			pratikabusttjquery(varId).css("cursor", "pointer");
+			pratikabusttjquery(varId).hover(
 				function() {
-					$(varId).stop(true, true).fadeTo(pratikabu_stt_fadeSpeed, pratikabu_stt_hoverOpacity);
+					pratikabusttjquery(varId).stop(true, true).fadeTo(pratikabu_stt_fadeSpeed, pratikabu_stt_hoverOpacity);
 				},
 				function() {
-					$(varId).stop(true, true).fadeTo(pratikabu_stt_fadeSpeed, idleOpacity);
+					pratikabusttjquery(varId).stop(true, true).fadeTo(pratikabu_stt_fadeSpeed, idleOpacity);
 				});
 		},
 		
 		showUpArrowImage: function() {
 			if("myIcon" == pratikabu_stt_prefs.iconLib) {
-				$("#pratikabuSTTArrowUp").attr("src", "data:image/png;base64," + pratikabu_stt_prefs.userIcon);
+				pratikabusttjquery("#pratikabuSTTArrowUp").attr("src", "data:image/png;base64," + pratikabu_stt_prefs.userIcon);
 			} else {
 				var suffixString = pratikabu_stt_prefs.iconSize + "-" + pratikabu_stt_prefs.iconLib;
 				pratikabustt_browser_impl.setImageForId("pratikabuSTTArrowUp", suffixString + ".png");
@@ -489,8 +490,8 @@ function callOnceLoaded() {
 		showDualArrowImage: function() {
 			if("myIcon" == pratikabu_stt_prefs.dIconLib) {
 				var base64url = "data:image/png;base64," + pratikabu_stt_prefs.dUserIcon;
-				$("#pratikabuSTTArrowUp").attr("src", base64url);
-				$("#pratikabuSTTArrowDown").attr("src", base64url);
+				pratikabusttjquery("#pratikabuSTTArrowUp").attr("src", base64url);
+				pratikabusttjquery("#pratikabuSTTArrowDown").attr("src", base64url);
 			} else {
 				var iconNumber = parseInt(pratikabu_stt_prefs.dIconLib);
 				var iconName = "dual-";
@@ -509,7 +510,7 @@ function callOnceLoaded() {
 				pratikabustt_browser_impl.setImageForId("pratikabuSTTArrowDown", suffixString + ".png");
 			}
 			
-			$("#pratikabuSTTArrowDown").rotate(180);
+			pratikabusttjquery("#pratikabuSTTArrowDown").rotate(180);
 		},
 		
 		mainDivHover: function(hoverIn) {
@@ -535,19 +536,19 @@ function callOnceLoaded() {
 		
 		showHideControlOptions: function(boolShow) {
 			if(boolShow) {
-				$("#pratikabuSTTDiv2").stop(true, true);// to execute the fading out method
+				pratikabusttjquery("#pratikabuSTTDiv2").stop(true, true);// to execute the fading out method
 				var otherImagesSize = pratikabustt.getOtherImageSize();
 				var divSize = pratikabu_stt_prefs.iconSize + otherImagesSize;
 				if("pager" == pratikabu_stt_prefs.controlOption) {// check whether the page up is shown or not
 					divSize += otherImagesSize;// add pixels based on the settings
 				}
-				$("#pratikabuSTTDiv").css("width", divSize + "px");
-				$("#pratikabuSTTDiv2").fadeTo("slow", pratikabu_stt_hoverOpacity);
+				pratikabusttjquery("#pratikabuSTTDiv").css("width", divSize + "px");
+				pratikabusttjquery("#pratikabuSTTDiv2").fadeTo("slow", pratikabu_stt_hoverOpacity);
 			} else {
-				$("#pratikabuSTTDiv2").stop(true, true).fadeTo("slow", 0, function() {
-					$("#pratikabuSTTDiv2").hide();
+				pratikabusttjquery("#pratikabuSTTDiv2").stop(true, true).fadeTo("slow", 0, function() {
+					pratikabusttjquery("#pratikabuSTTDiv2").hide();
 					var divSize = pratikabu_stt_prefs.iconSize;
-					$("#pratikabuSTTDiv").css("width", divSize + "px");
+					pratikabusttjquery("#pratikabuSTTDiv").css("width", divSize + "px");
 				});
 			}
 		},
@@ -586,15 +587,15 @@ function callOnceLoaded() {
 				}
 				
 				if("hideattop" == pratikabu_stt_prefs.visibilityBehav) {
-					$(window).scroll(pratikabustt.scrollHandlerHideAtTop);
-					$(window).resize(pratikabustt.windowResizeHandlerHideAtTop);
+					pratikabusttjquery(window).scroll(pratikabustt.scrollHandlerHideAtTop);
+					pratikabusttjquery(window).resize(pratikabustt.windowResizeHandlerHideAtTop);
 				} else if("alwaysshow" == pratikabu_stt_prefs.visibilityBehav) {
-					var boolShow = $(document).height() > (pratikabustt.getWindowHeight() + pratikabu_stt_inversionPoint);
+					var boolShow = pratikabusttjquery(document).height() > (pratikabustt.getWindowHeight() + pratikabu_stt_inversionPoint);
 					if(!pratikabu_stt_dualArrow) {
 						if(pratikabu_stt_prefs.smartDirection) {
-							$(window).scroll(pratikabustt.scrollHandlerAutoHide);
+							pratikabusttjquery(window).scroll(pratikabustt.scrollHandlerAutoHide);
 						} else {
-							$(window).scroll(pratikabustt.scrollRotationHandler);// bind the pollable handler
+							pratikabusttjquery(window).scroll(pratikabustt.scrollRotationHandler);// bind the pollable handler
 						}
 					}
 					pratikabustt.showHideAddon(boolShow);
@@ -608,28 +609,28 @@ function callOnceLoaded() {
 							}
 						}
 					} else {// attach one time handler #specialCase
-						$(window).scroll(pratikabustt.scrollHandlerOneTime);
+						pratikabusttjquery(window).scroll(pratikabustt.scrollHandlerOneTime);
 					}
 				} else if("autohide" == pratikabu_stt_prefs.visibilityBehav) {
 					pratikabu_stt_autoHide = true;
-					$(window).scroll(pratikabustt.scrollHandlerAutoHide);
+					pratikabusttjquery(window).scroll(pratikabustt.scrollHandlerAutoHide);
 				}
 			} else {
 				if("hideattop" == pratikabu_stt_prefs.visibilityBehav) {
-					$(window).unbind('scroll', pratikabustt.scrollHandlerHideAtTop);
-					$(window).unbind('resize', pratikabustt.windowResizeHandlerHideAtTop);
+					pratikabusttjquery(window).unbind('scroll', pratikabustt.scrollHandlerHideAtTop);
+					pratikabusttjquery(window).unbind('resize', pratikabustt.windowResizeHandlerHideAtTop);
 				} else if("alwaysshow" == pratikabu_stt_prefs.visibilityBehav) {
 					if(!pratikabu_stt_dualArrow) {
 						if(pratikabu_stt_prefs.smartDirection) {
-							$(window).unbind('scroll', pratikabustt.scrollHandlerAutoHide);
+							pratikabusttjquery(window).unbind('scroll', pratikabustt.scrollHandlerAutoHide);
 						} else {
-							$(window).unbind('scroll', pratikabustt.scrollRotationHandler);
+							pratikabusttjquery(window).unbind('scroll', pratikabustt.scrollRotationHandler);
 						}
 					}
-					$(window).unbind('scroll', pratikabustt.scrollHandlerOneTime);// remove this handler also if not already removed
+					pratikabusttjquery(window).unbind('scroll', pratikabustt.scrollHandlerOneTime);// remove this handler also if not already removed
 				} else if("autohide" == pratikabu_stt_prefs.visibilityBehav) {
 					pratikabu_stt_autoHide = false;
-					$(window).unbind('scroll', pratikabustt.scrollHandlerAutoHide);
+					pratikabusttjquery(window).unbind('scroll', pratikabustt.scrollHandlerAutoHide);
 				}
 			}
 		},
