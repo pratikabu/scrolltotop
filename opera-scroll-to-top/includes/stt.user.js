@@ -22,7 +22,7 @@ window.addEventListener('DOMContentLoaded', function() {
 				var fr = new FileReader();
 				fr.onload = function() {                
 					eval(fr.result);
-					pratikabusttjquery = window.jQuery.noConflict(true);
+					pratikabusttjquery = window.jQuery.noConflict(true);// this line will replace any existing mapping of $ and jQuery on the current page
 					callOnceLoaded();
 				};
 				fr.readAsText(fileObj);
