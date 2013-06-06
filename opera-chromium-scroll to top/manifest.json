@@ -1,0 +1,92 @@
+{
+  "manifest_version": 2,
+  "name": "Scroll To Top",
+  "version": "4.2.8",
+  "description": "Scroll to top and vice versa in a window.",
+  "homepage_url": "http://pratikabu.users.sourceforge.net/extensions/scrolltotop",
+  "options_page": "options.html",
+  "background": {
+    "scripts": ["background.js"],
+    "persistent": false
+  },
+  
+  "icons": {"16": "icons/pratikabu-stt-16.png",
+      "48": "icons/pratikabu-stt-48-1.png",
+      "128": "icons/pratikabu-stt-128.png"},
+	
+  "content_scripts": [
+    {
+		"css": [ "pratikabu-stt.css" ],
+		"matches": ["<all_urls>"],
+		"js": ["jquery-1.8.2.pratikabu.js", "jQueryRotate.js", "pratikabustt-browser-impl.js", "content_script.js"]
+	}
+  ],
+  
+  "web_accessible_resources": [
+    "icons/pratikabu-stt-48-1.png",
+    "icons/pratikabu-stt-48-2.png",
+	"icons/pratikabu-stt-48-3.png",
+	"icons/pratikabu-stt-48-4.png",
+	"icons/pratikabu-stt-48-5.png",
+	"icons/pratikabu-stt-48-6.png",
+	"icons/pratikabu-stt-48-7.png",
+	"icons/pratikabu-stt-48-8.png",
+	"icons/pratikabu-stt-48-9.png",
+	"icons/pratikabu-stt-48-10.png",
+	"icons/pratikabu-stt-48-11.png",
+	"icons/pratikabu-stt-48-12.png",
+	"icons/pratikabu-stt-48-13.png",
+	"icons/pratikabu-stt-48-14.png",
+	"icons/pratikabu-stt-48-15.png",
+	"icons/pratikabu-stt-48-16.png",
+	"icons/pratikabu-stt-48-17.png",
+	"icons/pratikabu-stt-48-18.png",
+	"icons/pratikabu-stt-48-19.png",
+	"icons/pratikabu-stt-48-20.png",
+	"icons/pratikabu-stt-48-21.png",
+	"icons/pratikabu-stt-48-22.png",
+	"icons/pratikabu-stt-48-23.png",
+
+	"icons/pratikabu-stt-32-1.png",
+	"icons/pratikabu-stt-32-2.png",
+	"icons/pratikabu-stt-32-3.png",
+	"icons/pratikabu-stt-32-4.png",
+	"icons/pratikabu-stt-32-5.png",
+	"icons/pratikabu-stt-32-6.png",
+	"icons/pratikabu-stt-32-7.png",
+	"icons/pratikabu-stt-32-8.png",
+	"icons/pratikabu-stt-32-9.png",
+	"icons/pratikabu-stt-32-10.png",
+	"icons/pratikabu-stt-32-11.png",
+	"icons/pratikabu-stt-32-12.png",
+	"icons/pratikabu-stt-32-13.png",
+	"icons/pratikabu-stt-32-14.png",
+	"icons/pratikabu-stt-32-15.png",
+	"icons/pratikabu-stt-32-16.png",
+	"icons/pratikabu-stt-32-17.png",
+	"icons/pratikabu-stt-32-18.png",
+	"icons/pratikabu-stt-32-19.png",
+	"icons/pratikabu-stt-32-20.png",
+	"icons/pratikabu-stt-32-21.png",
+	"icons/pratikabu-stt-32-22.png",
+	"icons/pratikabu-stt-32-23.png",
+	
+    "icons/pratikabu-stt-dual-hr-1.png",
+	"icons/pratikabu-stt-dual-hr-2.png",
+	"icons/pratikabu-stt-dual-hr-3.png",
+	"icons/pratikabu-stt-dual-hr-4.png",
+	"icons/pratikabu-stt-dual-hr-5.png",
+	"icons/pratikabu-stt-dual-hr-6.png",
+	
+    "icons/pratikabu-stt-dual-vr-1.png",
+	"icons/pratikabu-stt-dual-vr-2.png",
+	"icons/pratikabu-stt-dual-vr-3.png",
+	
+	"icons/pratikabu-stt-clear-16.png",
+	"icons/pratikabu-stt-clear-24.png",
+	"icons/pratikabu-stt-settings-24.png",
+	"icons/pratikabu-stt-settings-16.png",
+	"icons/pratikabu-stt-pageup-24.png",
+	"icons/pratikabu-stt-pageup-16.png"
+  ]
+}

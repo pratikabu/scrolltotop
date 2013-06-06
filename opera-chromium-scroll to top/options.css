@@ -1,0 +1,136 @@
+.myFonts, .mySelect {
+	color: black;
+	font-family: Arial,Helvetica,sans-serif;
+	font-size: 16px;
+}
+
+.mySelect {
+	width: 135px;
+	border: 1px solid #2094F0;
+	padding: 4px;
+}
+
+.tableClass {
+	border: 1px SOLID #2094F0;
+	border-radius: 5px;
+	background: WHITESMOKE;
+	width: 700px;
+	margin-bottom: 20px;
+}
+
+.actionDiv {
+	position: fixed;
+	right: 0px;
+	top: 50%;
+	margin-top: -20px;
+	border: 1px SOLID #2094F0;
+	border-radius: 5px 0 0 5px;
+	border-right: 0px;
+	background: WHITESMOKE;
+	padding: 10px;
+}
+
+.myHeader {
+	background: url(icons/pratikabu-stt-48-1.png) no-repeat;
+	text-indent: 60px;
+	display: inline-block;
+	line-height: 50px;
+	letter-spacing: -1.5px;
+	font-family: Arial,Helvetica,sans-serif;
+	font-weight: bold;
+	font-size: 28px;
+	color: #0070C0;
+	margin: 20px;
+}
+
+.mybutton {
+	padding: 5px 10px;
+	display: inline;
+	background: #777 url(button.png) repeat-x bottom;
+	border: none;
+	color: #fff;
+	cursor: pointer;
+	border-radius: 5px;
+	-webkit-border-radius: 5px;
+	text-shadow: 1px 1px #666;
+	text-decoration: none;
+	margin-right: 5px;
+}
+.mybutton:hover {
+	background-position: 0 -48px;
+}
+
+.mybutton.red { background-color: #e50000; }
+.mybutton.green { background-color: #58aa00; }
+.mybutton.small { font-size: 16px; padding: 3px 7px; }
+.mybutton.small:hover { background-position: 0 -50px; }
+.mybutton.small:active {background-position: 0 top; }
+
+a:link {
+	color: blue;
+	text-decoration: none;
+}
+a:visited {
+	color: blue;
+	text-decoration: none;
+}
+a:hover {
+	color: #9B2D2D;
+	text-decoration: underline;
+}
+
+#updateDiv {
+	margin-top: 20px;
+	margin-bottom: 10px;
+	font-size: 20px;
+	color: #9B2D2D;
+	font-family: Arial,Helvetica,sans-serif;
+}
+
+form {
+	margin-bottom: 0px;
+}
+
+a.donateButton {
+	font: bold 16px Arial,Helvetica,sans-serif;
+	text-shadow: 0 -1px 1px rgba(0,0,0,0.25), -2px 0 1px rgba(0,0,0,0.25);
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	-moz-box-shadow: 0 1px 2px rgba(0,0,0,0.5);
+	-webkit-box-shadow: 0 1px 2px rgba(0,0,0,0.5);
+	display: inline-block;
+	color: white;
+	padding: 5px 10px 5px;
+	white-space: nowrap;
+	text-decoration: none;
+	cursor: pointer;
+	background: #4699DA;
+	border-style: none;
+	text-align: center;
+	overflow: visible;
+	margin-bottom: 5px;
+}
+
+a.donateButton:active {
+	-moz-box-shadow: none;
+	-webkit-box-shadow: none;
+}
+
+.groupHeader {
+	font-size: 13px;
+	font-weight: bold;
+	width: 100%;
+	border-bottom: 1px SOLID #CBCBCB;
+	padding-bottom: 5px;
+}
+
+.siteTextArea {
+	width: 85%;
+	height: 70px;
+	border: 1px solid #2094F0;
+}
+
+.advancedProp {
+	display: none;
+}
