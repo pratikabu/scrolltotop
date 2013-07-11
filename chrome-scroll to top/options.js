@@ -3,6 +3,7 @@ var ignoreImgLoad = true;
 var dIgnoreImgLoad = true;
 var globalScrollSpeed;
 var ignoreForDefaults = false;
+var addonVersion = "4.3";
 
 /*********************************************************************
 	Browser Independent code.
@@ -335,6 +336,7 @@ function validateOffsetDataAndFix(textId) {
 }
 
 document.addEventListener('DOMContentLoaded', function () {
+	// is updated then show update dialog
 	var updated = getParameterByName("updated");
 	if("true" == updated) {
 		$('#maskDiv').fadeTo("slow", .5);
@@ -471,6 +473,13 @@ document.addEventListener('DOMContentLoaded', function () {
 	bsInit();
 	makeElementsSelactable();
 	bsFetchSettings();
+	
+	// place the version
+	$("#addonVersionId").append(addonVersion);
+	// latest version check
+	$("#latestVersionCheckId").append('<a target="_blank" href="http://pratikabu.users.sourceforge.net/extensions/scrolltotop/latest.html?v=' + addonVersion + '" style="font-size: 12px;" title="See if any new version available.">Check Updates</a>');
+	// give review link
+	$("#reviewId").append('<a target="_blank" href="' + bsReviewPageUrl() + '" style="font-size: 12px;" title="Love Scroll To Top, give it a 5 star and leave your feedback.">Give Review</a>');
 });
 
 /************************************************************
@@ -549,4 +558,8 @@ function bsSaveSettings(data) {
 	
 	// Update status to let user know options were saved.
 	show_message("Saved successfully. <a target='_blank' href='http://pratikabu.users.sourceforge.net/extensions/scrolltotop/release.html'>Preview your changes</a>.");
+}
+
+function bsReviewPageUrl() {
+	return "https://chrome.google.com/webstore/detail/scroll-to-top/hegiignepmecppikdlbohnnbfjdoaghj/reviews";
 }
