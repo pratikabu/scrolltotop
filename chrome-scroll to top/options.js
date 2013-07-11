@@ -9,7 +9,7 @@ var ignoreForDefaults = false;
 *********************************************************************/
 
 // Saves options to localStorage.
-function save_options() {
+function save_options(returnValue) {
 	var data = {
 		vLoc: $('input:radio[name=imgVerticalLocation]:checked').val(),
 		hLoc: $('input:radio[name=imgHorizontalLocation]:checked').val(),
@@ -34,7 +34,11 @@ function save_options() {
 		removedSites: $('#removedSites').val()
 	}
 	
-	bsSaveSettings(data);
+	if(!returnValue) {
+		bsSaveSettings(data);
+	} else {
+		return data;
+	}
 }
 
 // Restores select box state to saved value from localStorage.
@@ -224,9 +228,12 @@ function swapAdvancedOptions(selectedValue) {
 	}
 }
 
-function isRightChangedEvent(name, val) {
+/**
+	ignoreSave: this parameter has been created for export import, as I'm using a radio button there.
+*/
+function isRightChangedEvent(name, val, ignoreSave) {
 	var rightEvent = $('input:radio[name=' + name + ']:checked').val() == val;
-	if(rightEvent) {
+	if(rightEvent && !ignoreSave) {
 		save_options();
 	}
 	return rightEvent;
@@ -237,6 +244,70 @@ function activateAdvancedSettings() {
 	$(".advancedProp").fadeTo(300, 1);
 	$("#advSettingsBut").remove();
 	$("html, body").scrollTop(0);
+}
+
+function closeExportImport() {
+	$('#exportImportDialog').fadeTo("slow", 0, function() {
+		$("#exportImportDialog").hide();
+	});
+	
+	$('#maskDiv').fadeTo("slow", 0, function() {
+		$("#maskDiv").hide();
+	});
+}
+
+function exportImportSettingsInits() {
+	$("#exportImportBut").click(function() {
+		// load in the export textarea
+		$('#txtExportSettings').val(JSON.stringify(save_options(true)));
+		
+		$('#maskDiv').fadeTo("slow", .5);
+		$('#exportImportDialog').fadeTo("slow", 1);
+		
+		// by default export should be selected
+		$('input:radio[name=eiRBG]').filter('[value=E]').attr('checked', true);
+		$('input:radio[name=eiRBG]').change();
+	});
+	$('#eiSave').click(function() {
+		var jsonSTR = $("#txtImportSettings").val().trim();
+		if(0 == jsonSTR.length) {
+			return;
+		}
+		if(!confirm("All your settings will be overwritten. Are you sure?")) {
+			return;
+		}
+		// save the content
+		var data = JSON.parse(jsonSTR);
+		bsSaveSettings(data);
+		restore_options(data);
+		$("#txtImportSettings").val("");
+		closeExportImport();
+	});
+	$('#eiClose').click(function() {
+		closeExportImport();
+	});
+	$('#txtExportSettings').click(function() {
+		this.select();
+	});
+	
+	$('input:radio[name=eiRBG]').change(function() {
+		if(isRightChangedEvent("eiRBG", $(this).val(), true)) {
+			var visibleProps = ".eiExport";
+			var invisibleProps = ".eiImport";
+			if('E' == $(this).val()) {
+				visibleProps = ".eiExport";
+				invisibleProps = ".eiImport";
+			} else {
+				visibleProps = ".eiImport";
+				invisibleProps = ".eiExport";
+			}
+			$(invisibleProps).hide();
+			$(visibleProps).fadeTo(300, 1);
+		}
+	});
+	
+	selectableRadioContent("eiExportLb", "eiRBG", "E");
+	selectableRadioContent("eiImportLb", "eiRBG", "I");
 }
 
 function validateDomainDataAndFix(textareaId) {
@@ -266,9 +337,8 @@ function validateOffsetDataAndFix(textId) {
 document.addEventListener('DOMContentLoaded', function () {
 	var updated = getParameterByName("updated");
 	if("true" == updated) {
-		$('#maskDiv').fadeTo("slow", .8);
+		$('#maskDiv').fadeTo("slow", .5);
 		$('#updateDialog').fadeTo("slow", 1);
-		$("#mentionSettingsReset").remove();
 
 		$('#okaygotit').click(function() {
 			$('#updateDialog').fadeTo("slow", 0, function() {
@@ -276,21 +346,7 @@ document.addEventListener('DOMContentLoaded', function () {
 			});
 			
 			$('#maskDiv').fadeTo("slow", 0, function() {
-				$("#maskDiv").remove();
-			});
-		});
-	} else if("true" == getParameterByName("reverted")) {
-		$('#maskDiv').fadeTo("slow", .8);
-		$('#updateDialog').fadeTo("slow", 1);
-		$("#mentionUpdates").remove();
-
-		$('#okaygotit').click(function() {
-			$('#updateDialog').fadeTo("slow", 0, function() {
-				$("#updateDialog").remove();
-			});
-			
-			$('#maskDiv').fadeTo("slow", 0, function() {
-				$("#maskDiv").remove();
+				$("#maskDiv").hide();
 			});
 		});
 	}
@@ -300,6 +356,7 @@ document.addEventListener('DOMContentLoaded', function () {
 	//document.querySelector('#saveSettings').addEventListener('click', save_options);
 	$("#defaultBut").click(function() { bsDefaultSettings(); });
 	$("#advSettingsBut").click(function() { activateAdvancedSettings(); });
+	exportImportSettingsInits();
 	
 	// common settings starts
 	$('input:radio[name=imgVerticalLocation]').change(function() { isRightChangedEvent("imgVerticalLocation", $(this).val()); });
@@ -422,6 +479,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
 /** Saves options to localStorage. */
 function bsDefaultSettings() {
+	if(!confirm("All settings will be reverted to original settings.")) {
+		return;
+	}
+	
 	ignoreForDefaults = true;// ignore the image load method as it will reset myIcon in the radio button
 	
 	// Asks background.html for [LocalStorage] settings from Options Page and assigns them to variables

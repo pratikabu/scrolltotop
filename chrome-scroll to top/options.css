@@ -62,6 +62,7 @@
 
 .mybutton.red { background-color: #e50000; }
 .mybutton.green { background-color: #58aa00; }
+.mybutton.blue { background-color: #4699DA; }
 .mybutton.small { font-size: 16px; padding: 3px 7px; }
 .mybutton.small:hover { background-position: 0 -50px; }
 .mybutton.small:active {background-position: 0 top; }

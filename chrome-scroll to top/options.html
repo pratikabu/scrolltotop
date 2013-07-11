@@ -328,7 +328,8 @@
 			</table>
 			
 			<input type="button" id="advSettingsBut" value="Show More Settings" class="mybutton small red" title="Choose different icons, configure advanced settings and more..." />
-			<input type="button" id="defaultBut" value="Restore to Defaults" class="mybutton small green" title="Restore all settings to original values." /><br/><br/>
+			<input type="button" id="defaultBut" value="Restore to Defaults" class="mybutton small green" title="Restore all settings to original values." />
+			<input type="button" id="exportImportBut" value="Export/Import" class="mybutton small blue" title="Export/Import settings cross browser." /><br/><br/>
 		</div></form>
 		
 		<div id="donateContainer" align="center" class="actionDiv myFonts">
@@ -360,14 +361,40 @@
 					<li>Now see less cluttered Options UI with a switch to show Advanced Options.</li>
 					<li>Rewritten whole code for best performance.</li>
 				</ul>
-				<ul id="mentionSettingsReset">
-					<li>Your visibility has been restored to "Always Show", apologies for inconvenience.</li>
-					<li>Smart Direction Mode has been turned off by default.</li>
-					<li>You can turn on these settings by going into Settings page.</li>
-				</ul>
 				<p style="line-height: 0;">See <a target="_blank" href="http://pratikabu.users.sourceforge.net/extensions/scrolltotop/release.html">Release Notes</a> for discussions.</p>
 			</div>
 			<div id="commands" align="center"><a id="okaygotit" class="donateButton">Got it</a></div>
+		</div>
+		<div id="exportImportDialog" class="tableClass myFonts" style="width: 600px; padding: 10px; z-index: 40; background: WHITE; position: fixed; top: 50%; left: 50%; margin-left: -316px; margin-top: -120px; display: none; border: 5px SOLID #507C9E;">
+			<div id="header" class="groupHeader">Export/Import Settings</div>
+			<div id="content">
+				<table style="width: 100%;">
+					<tr>
+						<td align="center">
+							<input type="radio" name="eiRBG" value="E"><span id="eiExportLb">Export Settings</span>
+							<input type="radio" name="eiRBG" value="I"><span id="eiImportLb">Import Settings</span>
+						</td>
+					</tr>
+					<tr>
+						<td align="center">
+							<textarea readonly id="txtExportSettings" class="siteTextArea eiExport" style="height: 150px;"></textarea>
+							<textarea id="txtImportSettings" class="siteTextArea eiImport" style="height: 150px; display: none;"></textarea>
+						</td>
+					</tr>
+					<tr>
+						<td align="center">
+							<span class="eiExport">Copy the above code and save it in a file.</span>
+							<span class="eiImport">Paste the code you copied from other browser. Don't play :)</span>
+						</td>
+					</tr>
+					<tr>
+						<td align="center">
+							<input type="button" id="eiSave" value="Save" class="mybutton small blue eiImport" />
+							<input type="button" id="eiClose" value="Close" class="mybutton small green" />
+						</td>
+					</tr>
+				</table>
+			</div>
 		</div>
 	</body>
 </html>

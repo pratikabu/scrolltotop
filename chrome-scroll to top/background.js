@@ -55,6 +55,9 @@ var checkForInitialization = function() {
 	if (!localStorage["removed_sites"]) {
 		localStorage["removed_sites"] = "mail.google.com/mail;google.com/calendar;";
 	}
+	if(localStorage["version6remove"]) {
+		localStorage.removeItem("version6remove");
+	}
 }
 
 checkForInitialization();// execute it for the first time also
@@ -141,17 +144,8 @@ chrome.extension.onMessage.addListener(
 	});
 
 // open option page on initial in this version
-var currentVersion = 6;// this variable should be incremented with every update so that, add-on update message can be shown
+var currentVersion = 7;// this variable should be incremented with every update so that, add-on update message can be shown
 if(!localStorage["version_info"] || currentVersion > localStorage["version_info"]) {
 	localStorage["version_info"] = currentVersion;
 	chrome.tabs.create({url: "options.html?updated=true"});
-	localStorage["version6remove"] = "removeit";
-} else if(!localStorage["version6remove"] && 6 == localStorage["version_info"]) {
-	localStorage["version6remove"] = "removeit";
-	
-	if("autohide" == localStorage["visibility_behavior"]) {
-		localStorage["visibility_behavior"] = "alwaysshow";
-	}
-	localStorage["smart_direction_mode"] = "false";
-	chrome.tabs.create({url: "options.html?reverted=true"});
 }
