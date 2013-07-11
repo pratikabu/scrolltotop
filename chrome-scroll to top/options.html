@@ -329,7 +329,8 @@
 			
 			<input type="button" id="advSettingsBut" value="Show More Settings" class="mybutton small red" title="Choose different icons, configure advanced settings and more..." />
 			<input type="button" id="defaultBut" value="Restore to Defaults" class="mybutton small green" title="Restore all settings to original values." />
-			<input type="button" id="exportImportBut" value="Export / Import" class="mybutton small blue" title="Export/Import settings cross browser." /><br/><br/>
+			<input type="button" id="exportImportBut" value="Export / Import" class="mybutton small blue" title="Export/Import settings cross browser." />
+			<input type="button" id="donateReviewBut" value="Support Me" class="mybutton small orange" /><br/><br/>
 		</div></form>
 		
 		<div style="position: absolute; top: 50%; right: 0px;">
@@ -339,11 +340,11 @@
 				<a target="_blank" href="https://github.com/pratikabu/scrolltotop/issues" style="font-size: 12px;" title="Report an Issue">Report Issue</a><br/>
 				<a target="_blank" href="http://pratikabu.users.sourceforge.net" style="font-size: 12px;" title="Developer's Home Page">Developer's Page</a>
 				<hr/>
-				<span style="font-size: 12px;">Version: <span id="addonVersionId"></span></span><br/>
+				<span style="font-size: 12px;">Version: <span class="addonVersionId"></span></span><br/>
 				<a target="_blank" href="http://pratikabu.users.sourceforge.net/extensions/scrolltotop/release.html" style="font-size: 12px;" title="See what's new and exciting.">What's New</a><br/>
 				<span id="latestVersionCheckId"></span>
-				<div id="donateId" style="margin-top: 5px;"></div>
-				<div id="reviewId" style="margin-top: 9px;"></div>
+				<div class="donateId" style="margin-top: 5px;"></div>
+				<div class="reviewId" style="margin-top: 9px;"></div>
 			</div>
 		</div>
 		<div id="status" align="center" class="statusMsgDiv myFonts" title="All statuses will appear here."></div>
@@ -351,7 +352,7 @@
 		<!-- DialogBox -->
 		<div id="maskDiv" style="background: grey; display: none; z-index: 38; position: fixed; top: 0; bottom: 0; left: 0; right: 0;"></div>
 		<div id="updateDialog" class="tableClass myFonts" style="width: 600px; padding: 10px; z-index: 40; background: WHITE; position: fixed; top: 50%; left: 50%; margin-left: -316px; margin-top: -120px; display: none; border: 5px SOLID #507C9E;">
-			<div id="header" class="groupHeader">Congratulations! Scroll To Top has been updated to Version 4.2.</div>
+			<div id="header" class="groupHeader">Congratulations! Scroll To Top has been updated to Version <span class="addonVersionId"></span></div>
 			<div id="content" style="margin-top: 10px; margin-bottom: 20px;">
 				<p style="line-height: 0;">Here is the list of updates:</p>
 				<ul id="mentionUpdates">
@@ -365,7 +366,7 @@
 				</ul>
 				<p style="line-height: 0;">See <a target="_blank" href="http://pratikabu.users.sourceforge.net/extensions/scrolltotop/release.html">Release Notes</a> for discussions.</p>
 			</div>
-			<div id="commands" align="center"><a id="okaygotit" class="donateButton">Got it</a></div>
+			<div id="commands" align="center"><input type="button" id="okaygotit" value="Got it" class="mybutton small green" /></div>
 		</div>
 		<div id="exportImportDialog" class="tableClass myFonts" style="width: 600px; padding: 10px; z-index: 40; background: WHITE; position: fixed; top: 50%; left: 50%; margin-left: -316px; margin-top: -120px; display: none; border: 5px SOLID #507C9E;">
 			<div id="header" class="groupHeader">Export/Import Settings</div>
@@ -393,6 +394,26 @@
 						<td align="center">
 							<input type="button" id="eiSave" value="Save" class="mybutton small blue eiImport" />
 							<input type="button" id="eiClose" value="Close" class="mybutton small green" />
+						</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+		<div id="donateReviewDialog" class="tableClass myFonts" style="width: 500px; padding: 10px; z-index: 40; background: WHITE; position: fixed; top: 50%; left: 50%; margin-left: -266px; margin-top: -120px; display: none; border: 5px SOLID #507C9E;">
+			<div id="header" class="groupHeader">Show your support</div>
+			<div id="content">
+				<p align="justify">Show your support by either donating few bucks for its development, or leave a review so that it can be reached to a bigger audience, even both.</p>
+				<table style="width: 100%;">
+					<tr>
+						<td align="center">
+							<span class="donateId" style="margin-right: 10px;"></span><span class="reviewId" style="display: inline-block;"></span>
+							<p>Your small step makes a difference.<br/>&nbsp;</p>
+						</td>
+					</tr>
+					<tr>
+						<td align="center">
+							<span style="float: left;"><input id="supportPromptCBId" type="checkbox" /><span id="supportPromptId">I've supported. Don't prompt.</span></span>
+							<input type="button" id="drClose" value="Close" class="mybutton small blue" style="float: right;" />
 						</td>
 					</tr>
 				</table>

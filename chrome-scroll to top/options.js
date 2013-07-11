@@ -32,7 +32,9 @@ function save_options(returnValue) {
 		
 		hOffset: $('#hOffset').val(),
 		vOffset: $('#vOffset').val(),
-		removedSites: $('#removedSites').val()
+		removedSites: $('#removedSites').val(),
+		
+		supportPrompt: $('#supportPromptCBId').is(':checked')
 	}
 	
 	if(!returnValue) {
@@ -73,6 +75,8 @@ function restore_options(data) {
 	$('#hOffset').val(data.hOffset);
 	$('#vOffset').val(data.vOffset);
 	$('#removedSites').val(data.removedSites);
+	
+	$("#supportPromptCBId").attr('checked', "true" == data.supportPrompt ? true : false);
 }
 
 function show_message(msg) {
@@ -314,6 +318,33 @@ function exportImportSettingsInits() {
 	selectableRadioContent("eiImportLb", "eiRBG", "I");
 }
 
+function donateReviewInits() {
+	$("#donateReviewBut").click(function() {
+		$('#maskDiv').fadeTo("slow", .5);
+		$('#donateReviewDialog').fadeTo("slow", 1);
+	});
+	
+	
+	$('#drClose').click(function() {
+		$('#donateReviewDialog').fadeTo("slow", 0, function() {
+			$("#donateReviewDialog").hide();
+		});
+		
+		$('#maskDiv').fadeTo("slow", 0, function() {
+			$("#maskDiv").hide();
+		});
+	});
+	
+	$("#supportPromptId").css("cursor", "default");
+	$("#supportPromptCBId").change(function() {
+		save_options();
+	});
+	$('#supportPromptId').click(function() {
+		$("#supportPromptCBId").attr('checked', !$('#supportPromptCBId').is(':checked'));
+		$("#supportPromptCBId").change();
+	});
+}
+
 function validateDomainDataAndFix(textareaId) {
 	var ta = $('#' + textareaId);
 	var domains = ta.val();
@@ -362,6 +393,7 @@ document.addEventListener('DOMContentLoaded', function () {
 	$("#defaultBut").click(function() { bsDefaultSettings(); });
 	$("#advSettingsBut").click(function() { activateAdvancedSettings(); });
 	exportImportSettingsInits();
+	donateReviewInits();
 	
 	// common settings starts
 	$('input:radio[name=imgVerticalLocation]').change(function() { isRightChangedEvent("imgVerticalLocation", $(this).val()); });
@@ -478,13 +510,13 @@ document.addEventListener('DOMContentLoaded', function () {
 	bsFetchSettings();
 	
 	// place the version
-	$("#addonVersionId").append(addonVersion);
+	$(".addonVersionId").append(addonVersion);
 	// latest version check
 	$("#latestVersionCheckId").append('<a target="_blank" href="http://pratikabu.users.sourceforge.net/extensions/scrolltotop/latest.html?v=' + addonVersion + '" style="font-size: 12px;" title="See if any new version available.">Check Updates</a>');
 	// give review link
-	$("#reviewId").append('<a class="mybutton small green mylink" target="_blank" style="font-size: 12px;" href="' + bsReviewPageUrl() + '" title="Love Scroll To Top, give it a 5 star and leave your feedback.">Give Review</a>');
+	$(".reviewId").append('<a class="mybutton small green mylink" target="_blank" style="font-size: 12px;" href="' + bsReviewPageUrl() + '" title="Love Scroll To Top, give it a 5 star and leave your feedback.">Give Review</a>');
 	
-	$("#donateId").append('<a target="_blank" title="Show your support." href="http://pratikabu.users.sourceforge.net/extensions/scrolltotop/donate.php"><img src="icons/donate.gif"></a>');
+	$(".donateId").append('<a target="_blank" title="Show your support." href="http://pratikabu.users.sourceforge.net/extensions/scrolltotop/donate.php"><span class="donateButton">&nbsp;</span></a>');
 });
 
 /************************************************************
@@ -532,7 +564,9 @@ function bsFetchSettings() {
 		
 		hOffset: localStorage["h_offset"],
 		vOffset: localStorage["v_offset"],
-		removedSites: localStorage["removed_sites"]
+		removedSites: localStorage["removed_sites"],
+		
+		supportPrompt: localStorage["support_prompt"]
 	}
 	
 	restore_options(data);
@@ -560,6 +594,8 @@ function bsSaveSettings(data) {
 	localStorage["h_offset"] = data.hOffset;
 	localStorage["v_offset"] = data.vOffset;
 	localStorage["removed_sites"] = data.removedSites;
+	
+	localStorage["support_prompt"] = data.supportPrompt;
 	
 	// Update status to let user know options were saved.
 	show_message("Saved successfully. <a target='_blank' href='http://pratikabu.users.sourceforge.net/extensions/scrolltotop/release.html'>Preview your changes</a>.");
