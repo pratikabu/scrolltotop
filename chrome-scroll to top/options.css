@@ -18,16 +18,29 @@
 	margin-bottom: 20px;
 }
 
-.actionDiv {
-	position: fixed;
-	right: 0px;
-	top: 50%;
-	margin-top: -20px;
+.donateContainerDiv {
+	position: relative;
+	margin-top: -50%;
 	border: 1px SOLID #2094F0;
 	border-radius: 5px 0 0 5px;
 	border-right: 0px;
 	background: WHITESMOKE;
 	padding: 10px;
+}
+
+.statusMsgDiv {
+	position: fixed;
+	bottom: 0px;
+	left: 50%;
+	margin-left: -350px;
+	border: 2px SOLID #2094F0;
+	color: RED;
+	border-radius: 5px 5px 0 0;
+	border-bottom: 0px;
+	background: #DEFFCF;
+	padding: 10px;
+	width: 676px;
+	display: none;
 }
 
 .myHeader {
@@ -42,30 +55,6 @@
 	color: #0070C0;
 	margin: 20px;
 }
-
-.mybutton {
-	padding: 5px 10px;
-	display: inline;
-	background: #777 url(button.png) repeat-x bottom;
-	border: none;
-	color: #fff;
-	cursor: pointer;
-	border-radius: 5px;
-	-webkit-border-radius: 5px;
-	text-shadow: 1px 1px #666;
-	text-decoration: none;
-	margin-right: 5px;
-}
-.mybutton:hover {
-	background-position: 0 -48px;
-}
-
-.mybutton.red { background-color: #e50000; }
-.mybutton.green { background-color: #58aa00; }
-.mybutton.blue { background-color: #4699DA; }
-.mybutton.small { font-size: 16px; padding: 3px 7px; }
-.mybutton.small:hover { background-position: 0 -50px; }
-.mybutton.small:active {background-position: 0 top; }
 
 a:link {
 	color: blue;
@@ -92,30 +81,33 @@ form {
 	margin-bottom: 0px;
 }
 
-a.donateButton {
-	font: bold 16px Arial,Helvetica,sans-serif;
-	text-shadow: 0 -1px 1px rgba(0,0,0,0.25), -2px 0 1px rgba(0,0,0,0.25);
-	border-radius: 5px;
-	-moz-border-radius: 5px;
-	-webkit-border-radius: 5px;
-	-moz-box-shadow: 0 1px 2px rgba(0,0,0,0.5);
-	-webkit-box-shadow: 0 1px 2px rgba(0,0,0,0.5);
-	display: inline-block;
-	color: white;
-	padding: 5px 10px 5px;
-	white-space: nowrap;
-	text-decoration: none;
+.mybutton {
+	padding: 5px 10px;
+	display: inline;
+	background: #777 url(button.png) repeat-x bottom;
+	border: none;
+	color: #fff;
 	cursor: pointer;
-	background: #4699DA;
-	border-style: none;
-	text-align: center;
-	overflow: visible;
-	margin-bottom: 5px;
+	border-radius: 5px;
+	-webkit-border-radius: 5px;
+	text-shadow: 1px 1px #666;
+	text-decoration: none;
 }
 
-a.donateButton:active {
-	-moz-box-shadow: none;
-	-webkit-box-shadow: none;
+.mybutton:hover {
+	background-position: 0 -48px;
+}
+
+.mybutton.red { background-color: #e50000; }
+.mybutton.green { background-color: #58aa00; }
+.mybutton.blue { background-color: #4699DA; }
+.mybutton.small { font-size: 16px; padding: 3px 7px; }
+.mybutton.small:hover { background-position: 0 -50px; }
+.mybutton.small:active {background-position: 0 top; }
+
+a.mylink {
+	text-decoration: none;
+	color: white;
 }
 
 .groupHeader {

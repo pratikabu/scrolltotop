@@ -329,22 +329,24 @@
 			
 			<input type="button" id="advSettingsBut" value="Show More Settings" class="mybutton small red" title="Choose different icons, configure advanced settings and more..." />
 			<input type="button" id="defaultBut" value="Restore to Defaults" class="mybutton small green" title="Restore all settings to original values." />
-			<input type="button" id="exportImportBut" value="Export/Import" class="mybutton small blue" title="Export/Import settings cross browser." /><br/><br/>
+			<input type="button" id="exportImportBut" value="Export / Import" class="mybutton small blue" title="Export/Import settings cross browser." /><br/><br/>
 		</div></form>
 		
-		<div id="donateContainer" align="center" class="actionDiv myFonts">
-			<a id="donateButtonId" class="donateButton" target="_blank" title="Scroll To Top is free software, if you like it you can support its progress." href="http://pratikabu.users.sourceforge.net/extensions/scrolltotop/donate.php"><b>Donate Now</b></a><br/>
-			<a target="_blank" href="http://pratikabu.users.sourceforge.net/extensions/scrolltotop" style="font-size: 12px;" title="Scroll To Top Home Page">Home Page</a><br/>
-			<a target="_blank" href="https://github.com/pratikabu/scrolltotop/issues" style="font-size: 12px;" title="Suggest a Feature">Suggest Feature</a><br/>
-			<a target="_blank" href="https://github.com/pratikabu/scrolltotop/issues" style="font-size: 12px;" title="Report an Issue">Report Issue</a><br/>
-			<a target="_blank" href="http://pratikabu.users.sourceforge.net" style="font-size: 12px;" title="Developer's Home Page">Developer's Page</a>
-			<hr/>
-			<span style="font-size: 12px;">Version: <span id="addonVersionId"></span></span><br/>
-			<a target="_blank" href="http://pratikabu.users.sourceforge.net/extensions/scrolltotop/release.html" style="font-size: 12px;" title="See what's new and exciting.">What's New</a><br/>
-			<span id="latestVersionCheckId"></span><br/>
-			<span id="reviewId"></span>
+		<div style="position: absolute; top: 50%; right: 0px;">
+			<div align="center" class="donateContainerDiv myFonts">
+				<a target="_blank" href="http://pratikabu.users.sourceforge.net/extensions/scrolltotop" style="font-size: 12px;" title="Scroll To Top Home Page">Home Page</a><br/>
+				<a target="_blank" href="https://github.com/pratikabu/scrolltotop/issues" style="font-size: 12px;" title="Suggest a Feature">Suggest Feature</a><br/>
+				<a target="_blank" href="https://github.com/pratikabu/scrolltotop/issues" style="font-size: 12px;" title="Report an Issue">Report Issue</a><br/>
+				<a target="_blank" href="http://pratikabu.users.sourceforge.net" style="font-size: 12px;" title="Developer's Home Page">Developer's Page</a>
+				<hr/>
+				<span style="font-size: 12px;">Version: <span id="addonVersionId"></span></span><br/>
+				<a target="_blank" href="http://pratikabu.users.sourceforge.net/extensions/scrolltotop/release.html" style="font-size: 12px;" title="See what's new and exciting.">What's New</a><br/>
+				<span id="latestVersionCheckId"></span>
+				<div id="donateId" style="margin-top: 5px;"></div>
+				<div id="reviewId" style="margin-top: 9px;"></div>
+			</div>
 		</div>
-		<div id="status" class="actionDiv myFonts" title="All statuses will appear here." style="color: RED; top: 50%; margin-top: -70px;">&nbsp;</div>
+		<div id="status" align="center" class="statusMsgDiv myFonts" title="All statuses will appear here."></div>
 		
 		<!-- DialogBox -->
 		<div id="maskDiv" style="background: grey; display: none; z-index: 38; position: fixed; top: 0; bottom: 0; left: 0; right: 0;"></div>

@@ -77,10 +77,13 @@ function restore_options(data) {
 
 function show_message(msg) {
 	requestCount++;
-	$("#status").html(msg);
+	$("#status").append(msg + "<br/>");
+	$("#status").slideDown('normal');
 	setTimeout(function() {
 		if(0 == --requestCount) {
-			$("#status").html("&nbsp;");
+			$("#status").slideUp('slow', function() {
+				$("#status").html("");
+			});
 		}
 	}, 5000);
 }
@@ -479,7 +482,9 @@ document.addEventListener('DOMContentLoaded', function () {
 	// latest version check
 	$("#latestVersionCheckId").append('<a target="_blank" href="http://pratikabu.users.sourceforge.net/extensions/scrolltotop/latest.html?v=' + addonVersion + '" style="font-size: 12px;" title="See if any new version available.">Check Updates</a>');
 	// give review link
-	$("#reviewId").append('<a target="_blank" href="' + bsReviewPageUrl() + '" style="font-size: 12px;" title="Love Scroll To Top, give it a 5 star and leave your feedback.">Give Review</a>');
+	$("#reviewId").append('<a class="mybutton small green mylink" target="_blank" style="font-size: 12px;" href="' + bsReviewPageUrl() + '" title="Love Scroll To Top, give it a 5 star and leave your feedback.">Give Review</a>');
+	
+	$("#donateId").append('<a target="_blank" title="Show your support." href="http://pratikabu.users.sourceforge.net/extensions/scrolltotop/donate.php"><img src="icons/donate.gif"></a>');
 });
 
 /************************************************************
