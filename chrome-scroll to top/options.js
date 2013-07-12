@@ -35,7 +35,7 @@ function save_options(returnValue) {
 		removedSites: $('#removedSites').val(),
 		
 		supportPrompt: $('#supportPromptCBId').is(':checked')
-	}
+	};
 	
 	if(!returnValue) {
 		bsSaveSettings(data);
