@@ -318,10 +318,14 @@ function exportImportSettingsInits() {
 	selectableRadioContent("eiImportLb", "eiRBG", "I");
 }
 
+function openSupportDialog() {
+	$('#maskDiv').fadeTo("slow", .5);
+	$('#donateReviewDialog').fadeTo("slow", 1);
+}
+
 function donateReviewInits() {
 	$("#donateReviewBut").click(function() {
-		$('#maskDiv').fadeTo("slow", .5);
-		$('#donateReviewDialog').fadeTo("slow", 1);
+		openSupportDialog();
 	});
 	
 	
@@ -343,6 +347,12 @@ function donateReviewInits() {
 		$("#supportPromptCBId").attr('checked', !$('#supportPromptCBId').is(':checked'));
 		$("#supportPromptCBId").change();
 	});
+}
+
+function randomOpenSupportDialog() {
+	if(!$('#supportPromptCBId').is(':checked') && 0 == new Date().getTime() % 4) {
+		openSupportDialog();
+	}
 }
 
 function validateDomainDataAndFix(textareaId) {
@@ -372,7 +382,7 @@ function validateOffsetDataAndFix(textId) {
 document.addEventListener('DOMContentLoaded', function () {
 	// is updated then show update dialog
 	var updated = getParameterByName("updated");
-	if("true" == updated) {
+	if("true" === updated) {
 		$('#maskDiv').fadeTo("slow", .5);
 		$('#updateDialog').fadeTo("slow", 1);
 
@@ -507,7 +517,7 @@ document.addEventListener('DOMContentLoaded', function () {
 	
 	bsInit();
 	makeElementsSelactable();
-	bsFetchSettings();
+	bsFetchSettings(updated);
 	
 	// place the version
 	$(".addonVersionId").append(addonVersion);
@@ -542,7 +552,7 @@ function bsDefaultSettings() {
 function bsInit() {
 }
 
-function bsFetchSettings() {
+function bsFetchSettings(updated) {
 	var data = {
 		vLoc: localStorage["vertical_location"],
 		hLoc: localStorage["horizontal_location"],
@@ -570,6 +580,10 @@ function bsFetchSettings() {
 	}
 	
 	restore_options(data);
+	
+	if("true" !== updated) {
+		randomOpenSupportDialog();// only once it will be called
+	}
 }
 
 function bsSaveSettings(data) {
