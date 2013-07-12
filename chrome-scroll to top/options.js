@@ -577,7 +577,7 @@ function bsFetchSettings(updated) {
 		removedSites: localStorage["removed_sites"],
 		
 		supportPrompt: localStorage["support_prompt"]
-	}
+	};
 	
 	restore_options(data);
 	
