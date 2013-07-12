@@ -9,7 +9,11 @@ var addonVersion = "4.3";
 	Browser Independent code.
 *********************************************************************/
 
-// Saves options to localStorage.
+/**
+ * Saves options to localStorage.
+ * @param {type} returnValue
+ * @returns {save_options.data}
+ */
 function save_options(returnValue) {
 	var data = {
 		vLoc: $('input:radio[name=imgVerticalLocation]:checked').val(),
@@ -76,7 +80,7 @@ function restore_options(data) {
 	$('#vOffset').val(data.vOffset);
 	$('#removedSites').val(data.removedSites);
 	
-	$("#supportPromptCBId").attr('checked', "true" == data.supportPrompt ? true : false);
+	$("#supportPromptCBId").attr('checked', "true" === data.supportPrompt ? true : false);
 }
 
 function show_message(msg) {
@@ -84,7 +88,7 @@ function show_message(msg) {
 	$("#status").append(msg + "<br/>");
 	$("#status").slideDown('normal');
 	setTimeout(function() {
-		if(0 == --requestCount) {
+		if(0 === --requestCount) {
 			$("#status").slideUp('slow', function() {
 				$("#status").html("");
 			});
@@ -97,7 +101,7 @@ function getParameterByName(name) {
 	var regexS = "[\\?&]" + name + "=([^&#]*)";
 	var regex = new RegExp(regexS);
 	var results = regex.exec(window.location.search);
-	if(results == null)
+	if(results === null)
 		return "";
 	else
 		return decodeURIComponent(results[1].replace(/\+/g, " "));
@@ -111,13 +115,13 @@ function populateSliderSpeedOnText(scrollSpeed) {
 	multiplicity = multiplicity + " X ";
 	
 	var displayText = multiplicity + "FASTER";
-	if(2000 == speed) {
+	if(2000 === speed) {
 		displayText = "SLOWEST";
 	} else if(1200 < speed) {
 		displayText = multiplicity + "SLOWER";
-	} else if(1200 == speed) {
+	} else if(1200 === speed) {
 		displayText = "NORMAL";
-	} else if(400 == speed) {
+	} else if(400 === speed) {
 		displayText = "IMMEDIATE";
 	}
 	
@@ -125,7 +129,7 @@ function populateSliderSpeedOnText(scrollSpeed) {
 }
 
 function initSlider(initialValue) {
-	if(0 == initialValue) {
+	if(0 === initialValue) {
 		initialValue = 400;
 	}
 	initialValue = 2400 - initialValue;
@@ -143,7 +147,7 @@ function initSlider(initialValue) {
 		},
 		change: function( event, ui ) {
 			var speedVal = 2400 - ui.value;
-			if(400 == speedVal) {
+			if(400 === speedVal) {
 				speedVal = 0;
 			}
 			globalScrollSpeed = speedVal;
@@ -227,7 +231,7 @@ function makeElementsSelactable() {
 }
 
 function swapAdvancedOptions(selectedValue) {
-	if("1" == selectedValue) {
+	if("1" === selectedValue) {
 		$("#dualArrowSettings").hide();
 		$("#singleArrowSettings").show();
 	} else {
@@ -237,10 +241,14 @@ function swapAdvancedOptions(selectedValue) {
 }
 
 /**
-	ignoreSave: this parameter has been created for export import, as I'm using a radio button there.
-*/
+ * ignoreSave: this parameter has been created for export import, as I'm using a radio button there.
+ * @param {type} name
+ * @param {type} val
+ * @param {type} ignoreSave
+ * @returns {Boolean}
+ */
 function isRightChangedEvent(name, val, ignoreSave) {
-	var rightEvent = $('input:radio[name=' + name + ']:checked').val() == val;
+	var rightEvent = $('input:radio[name=' + name + ']:checked').val() === val;
 	if(rightEvent && !ignoreSave) {
 		save_options();
 	}
@@ -278,7 +286,7 @@ function exportImportSettingsInits() {
 	});
 	$('#eiSave').click(function() {
 		var jsonSTR = $("#txtImportSettings").val().trim();
-		if(0 == jsonSTR.length) {
+		if(0 === jsonSTR.length) {
 			return;
 		}
 		if(!confirm("All your settings will be overwritten. Are you sure?")) {
@@ -302,7 +310,7 @@ function exportImportSettingsInits() {
 		if(isRightChangedEvent("eiRBG", $(this).val(), true)) {
 			var visibleProps = ".eiExport";
 			var invisibleProps = ".eiImport";
-			if('E' == $(this).val()) {
+			if('E' === $(this).val()) {
 				visibleProps = ".eiExport";
 				invisibleProps = ".eiImport";
 			} else {
@@ -350,7 +358,7 @@ function donateReviewInits() {
 }
 
 function randomOpenSupportDialog() {
-	if(!$('#supportPromptCBId').is(':checked') && 0 == new Date().getTime() % 4) {
+	if(!$('#supportPromptCBId').is(':checked') && 0 === new Date().getTime() % 4) {
 		openSupportDialog();
 	}
 }
@@ -369,7 +377,7 @@ function validateOffsetDataAndFix(textId) {
 	var t = $('#' + textId);
 	var value = t.val();
 	var intVal = 20;
-	if(!isNaN(value) && 0 != value.length) {// should be a number and shouldn't be empty
+	if(!isNaN(value) && 0 !== value.length) {// should be a number and shouldn't be empty
 		intVal = parseInt(value);
 		intVal = intVal < 0 ? intVal * -1 : intVal;// B-positive :)
 		intVal = intVal > 300 ? 300 : intVal;// not more than 300
@@ -418,7 +426,7 @@ document.addEventListener('DOMContentLoaded', function () {
 			
 			$('input:radio[name=visbilityBehavior]').filter('[value=alwaysshow]').attr('checked', true);
 			$('input:radio[name=imgHorizontalLocation]').filter('[value=right]').attr('checked', true);
-			if("1" == $(this).val()) {
+			if("1" === $(this).val()) {
 				$('input:radio[name=imgVerticalLocation]').filter('[value=bottom]').attr('checked', true);
 			} else {
 				$('input:radio[name=imgVerticalLocation]').filter('[value=middle]').attr('checked', true);
@@ -435,7 +443,7 @@ document.addEventListener('DOMContentLoaded', function () {
 	$('input:radio[name=iconLib]').change(function() { isRightChangedEvent("iconLib", $(this).val()); });
 	$('input:radio[name=smartDirection]').change(function() {
 		if(isRightChangedEvent("smartDirection", $(this).val())) {
-			if("true" == $(this).val()) {// auto set to visibility to autohide
+			if("true" === $(this).val()) {// auto set to visibility to autohide
 				$('input:radio[name=visbilityBehavior]').filter('[value=autohide]').attr('checked', true);
 				save_options();
 			}

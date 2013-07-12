@@ -58,7 +58,7 @@ var checkForInitialization = function() {
 	if(localStorage["version6remove"]) {
 		localStorage.removeItem("version6remove");
 	}
-}
+};
 
 checkForInitialization();// execute it for the first time also
 
@@ -86,12 +86,12 @@ var forceInitializeSettings = function() {
 	localStorage.removeItem("removed_sites");
 	
 	checkForInitialization();
-}
+};
 
 // Message passer to give [LocalStorage] settings to content_script.js
 chrome.extension.onMessage.addListener(
 	function(request, sender, sendResponse) {
-		if (request.method == "getSettings") {
+		if ("getSettings" === request.method) {
 			var data = {
 				vLoc: localStorage["vertical_location"],
 				hLoc: localStorage["horizontal_location"],
@@ -108,26 +108,26 @@ chrome.extension.onMessage.addListener(
 			};
 			
 			// bypass settings if they are not required
-			if("1" == data.arrowType) {// send only single arrow settings
+			if("1" === data.arrowType) {// send only single arrow settings
 				data.smartDirection = localStorage["smart_direction_mode"];
 				data.controlOption = localStorage["control_options"];
 				data.hideControls = localStorage["hide_controls"];
 				data.iconLib = localStorage["icon_library"];
-				if("myIcon" == data.iconLib) {
+				if("myIcon" === data.iconLib) {
 					data.userIcon = localStorage["user_saved_icon"];
 				}
 			} else {// send only dual arrow settings
 				data.dArrang = localStorage["d_arrangement"];
 				data.dIconLib = localStorage["d_icon_library"];
-				if("myIcon" == data.dIconLib) {
+				if("myIcon" === data.dIconLib) {
 					data.dUserIcon = localStorage["d_user_saved_icon"];
 				}
 			}
 			
 			sendResponse(data);
-		} else if (request.method == "openOptionPage") {
+		} else if ("openOptionPage" === request.method) {
 			chrome.tabs.query({url: "chrome-extension://*/options.html"}, function(tabs) {// query with this pattern
-				if(0 == tabs.length) {// open a new options page
+				if(0 === tabs.length) {// open a new options page
 					chrome.tabs.create({url: "options.html"});
 				} else {// open the existing one
 					chrome.tabs.highlight({tabs: [tabs[0].index], windowId: tabs[0].windowId}, function(win) {
@@ -135,7 +135,7 @@ chrome.extension.onMessage.addListener(
 					});
 				}
 			});
-		} else if (request.method == "resetSettings") {
+		} else if ("resetSettings" === request.method) {
 			forceInitializeSettings();
 			sendResponse({defaulted: true});
 		} else {

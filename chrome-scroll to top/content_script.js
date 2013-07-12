@@ -33,7 +33,7 @@ var pratikabustt = {
 	},
 	
 	smartDirectionLogic: function(animateRotation) {
-		if(pratikabu_stt_lastDocumentTop == $(document).scrollTop()) {
+		if(pratikabu_stt_lastDocumentTop === $(document).scrollTop()) {
 			// do nothing
 		} else if(pratikabu_stt_lastDocumentTop > $(document).scrollTop()) {// user scrolled upwards
 			pratikabustt.rotateUp();
@@ -44,7 +44,7 @@ var pratikabustt = {
 		pratikabu_stt_lastDocumentTop = $(document).scrollTop();// update to latest
 		
 		// finally once the scrolling is finished, rotate addon if needed
-		if(0 == pratikabu_stt_lastDocumentTop) {
+		if(0 === pratikabu_stt_lastDocumentTop) {
 			pratikabustt.rotateDown(true);
 		} else if(pratikabu_stt_lastDocumentTop >= ($(document).height() - pratikabustt.getWindowHeight())) {
 			pratikabustt.rotateUp();
@@ -87,9 +87,9 @@ var pratikabustt = {
 	createAddonHtml: function() {
 		if(pratikabu_stt_dualArrow) {
 			// create div tag
-			if("hr" == pratikabu_stt_prefs.dArrang) {
+			if("hr" === pratikabu_stt_prefs.dArrang) {
 				$('body').prepend('<div id="pratikabuSTTDiv"><img id="pratikabuSTTArrowUp" /><img id="pratikabuSTTArrowDown" /></div>');
-			} else if("vr" == pratikabu_stt_prefs.dArrang) {
+			} else if("vr" === pratikabu_stt_prefs.dArrang) {
 				$('body').prepend('<div id="pratikabuSTTDiv"><img id="pratikabuSTTArrowUp" style="display: block !important;" /><img id="pratikabuSTTArrowDown" style="display: block !important;" /></div>');
 			}
 		} else {
@@ -99,7 +99,7 @@ var pratikabustt = {
 		
 		// check whether the css has been applied to the div tag or not, if not then remove it from DOM
 		// as it got added to a wrong iFrame
-		if("fixed" != $("#pratikabuSTTDiv").css("position")) {
+		if("fixed" !== $("#pratikabuSTTDiv").css("position")) {
 			pratikabustt.removeCompleteAddonFromPage();
 			return false;
 		}
@@ -116,8 +116,8 @@ var pratikabustt = {
 		}
 		// add the main div hover effects
 		$("#pratikabuSTTDiv").hover(
-			function() { pratikabustt.mainDivHover(true) },
-			function() { pratikabustt.mainDivHover(false) });
+			function() { pratikabustt.mainDivHover(true); },
+			function() { pratikabustt.mainDivHover(false); });
 		
 		// add the scroll up logic
 		$("#pratikabuSTTArrowUp").click(function() {
@@ -162,12 +162,12 @@ var pratikabustt = {
 		var hloc = pratikabu_stt_prefs.hLoc;
 		var hlocVal = pratikabu_stt_prefs.hOffset + "px";
 		
-		if("middle" == vloc) {
+		if("middle" === vloc) {
 			vloc = "top";
 			vlocVal = "50%";
 		}
 		
-		if("middle" == hloc) {
+		if("middle" === hloc) {
 			hloc = "left";
 			hlocVal = "50%";
 		}
@@ -186,8 +186,8 @@ var pratikabustt = {
 			var otherImagesSize = pratikabustt.getOtherImageSize();
 			
 			var showPagerButtons = false;
-			if("pager" == pratikabu_stt_prefs.controlOption) {
-				if($(document).height() != pratikabustt.getWindowHeight()) {
+			if("pager" === pratikabu_stt_prefs.controlOption) {
+				if($(document).height() !== pratikabustt.getWindowHeight()) {
 					showPagerButtons = true;
 				} else {
 					pratikabu_stt_prefs.controlOption = "simple";// set the control option to simple
@@ -215,7 +215,7 @@ var pratikabustt = {
 			
 			// change the location of the main image
 			var pratikabu_stt_float = pratikabu_stt_prefs.hLoc;
-			if("right" == pratikabu_stt_prefs.hLoc) {// replace the locations of the icons
+			if("right" === pratikabu_stt_prefs.hLoc) {// replace the locations of the icons
 				if(showPagerButtons) {
 					$("#pratikabuSTTPageUp").before($("#pratikabuSTTClear"));
 					$("#pratikabuSTTPageDown").before($("#pratikabuSTTSettings"));
@@ -238,7 +238,7 @@ var pratikabustt = {
 	},
 	
 	showHideAddon: function(boolShowAddon) {
-		if(boolShowAddon != pratikabu_stt_bVisibility) {
+		if(boolShowAddon !== pratikabu_stt_bVisibility) {
 			if(boolShowAddon) {// show addon
 				if(pratikabustt.createAddonHtml()) {
 					$("#pratikabuSTTDiv").stop(true, true).fadeTo("slow", 1);
@@ -260,7 +260,7 @@ var pratikabustt = {
 		
 		pratikabu_stt_ahRequestCount++;
 		setTimeout(function() {
-			if(0 == --pratikabu_stt_ahRequestCount) {
+			if(0 === --pratikabu_stt_ahRequestCount) {
 				pratikabustt.showHideAddon(false);
 			}
 		}, 5000);
@@ -273,7 +273,7 @@ var pratikabustt = {
 	},
 	
 	scrollToTop: function() {
-		if(0 == $(document).scrollTop()) {
+		if(0 === $(document).scrollTop()) {
 			return false;
 		}
 		
@@ -282,7 +282,7 @@ var pratikabustt = {
 	
 	scrollToBottom: function() {
 		var location = ($(document).height() - pratikabustt.getWindowHeight());
-		if(0 == location) {// this should never happen, but it gives this result on some pages
+		if(0 === location) {// this should never happen, but it gives this result on some pages
 			location = $(document).height();
 		}
 		pratikabustt.scrollPageTo(pratikabu_stt_prefs.scrSpeed, location);
@@ -345,7 +345,7 @@ var pratikabustt = {
 	},
 	
 	showUpArrowImage: function() {
-		if("myIcon" == pratikabu_stt_prefs.iconLib) {
+		if("myIcon" === pratikabu_stt_prefs.iconLib) {
 			$("#pratikabuSTTArrowUp").attr("src", "data:image/png;base64," + pratikabu_stt_prefs.userIcon);
 		} else {
 			var suffixString = pratikabu_stt_prefs.iconSize + "-" + pratikabu_stt_prefs.iconLib;
@@ -354,7 +354,7 @@ var pratikabustt = {
 	},
 	
 	showDualArrowImage: function() {
-		if("myIcon" == pratikabu_stt_prefs.dIconLib) {
+		if("myIcon" === pratikabu_stt_prefs.dIconLib) {
 			var base64url = "data:image/png;base64," + pratikabu_stt_prefs.dUserIcon;
 			$("#pratikabuSTTArrowUp").attr("src", base64url);
 			$("#pratikabuSTTArrowDown").attr("src", base64url);
@@ -380,7 +380,7 @@ var pratikabustt = {
 	},
 	
 	mainDivHover: function(hoverIn) {
-		if("none" == pratikabu_stt_prefs.controlOption) {
+		if("none" === pratikabu_stt_prefs.controlOption) {
 			return;
 		}
 		
@@ -405,7 +405,7 @@ var pratikabustt = {
 			$("#pratikabuSTTDiv2").stop(true, true);// to execute the fading out method
 			var otherImagesSize = pratikabustt.getOtherImageSize();
 			var divSize = pratikabu_stt_prefs.iconSize + otherImagesSize;
-			if("pager" == pratikabu_stt_prefs.controlOption) {// check whether the page up is shown or not
+			if("pager" === pratikabu_stt_prefs.controlOption) {// check whether the page up is shown or not
 				divSize += otherImagesSize;// add pixels based on the settings
 			}
 			$("#pratikabuSTTDiv").css("width", divSize + "px");
@@ -421,7 +421,7 @@ var pratikabustt = {
 	
 	getOtherImageSize: function() {
 		var otherImagesSize = 16;
-		if(48 == pratikabu_stt_prefs.iconSize) {
+		if(48 === pratikabu_stt_prefs.iconSize) {
 			otherImagesSize = 24;
 		}
 		
@@ -434,10 +434,10 @@ var pratikabustt = {
 			// if everything is great, go ahead
 			pratikabu_stt_prefs.scrSpeed = parseInt(pratikabu_stt_prefs.scrSpeed);
 			pratikabu_stt_prefs.iconSize = parseInt(pratikabu_stt_prefs.iconSize);
-			pratikabu_stt_dualArrow = ("2" == pratikabu_stt_prefs.arrowType);
+			pratikabu_stt_dualArrow = ("2" === pratikabu_stt_prefs.arrowType);
 			if(!pratikabu_stt_dualArrow) {
-				pratikabu_stt_prefs.smartDirection = ("true" == pratikabu_stt_prefs.smartDirection);
-				pratikabu_stt_prefs.hideControls = ("true" == pratikabu_stt_prefs.hideControls);
+				pratikabu_stt_prefs.smartDirection = ("true" === pratikabu_stt_prefs.smartDirection);
+				pratikabu_stt_prefs.hideControls = ("true" === pratikabu_stt_prefs.hideControls);
 			}
 			
 			pratikabustt.addRemoveGlobalHandlers(true);
@@ -448,14 +448,14 @@ var pratikabustt = {
 	
 	addRemoveGlobalHandlers: function(booleanAdd) {
 		if(booleanAdd) {
-			if(pratikabu_stt_prefs.smartDirection && "hideattop" == pratikabu_stt_prefs.visibilityBehav) {
+			if(pratikabu_stt_prefs.smartDirection && "hideattop" === pratikabu_stt_prefs.visibilityBehav) {
 				pratikabu_stt_prefs.visibilityBehav = "autohide";// if hideattop is selected change it to autohide
 			}
 			
-			if("hideattop" == pratikabu_stt_prefs.visibilityBehav) {
+			if("hideattop" === pratikabu_stt_prefs.visibilityBehav) {
 				$(window).scroll(pratikabustt.scrollHandlerHideAtTop);
 				$(window).resize(pratikabustt.windowResizeHandlerHideAtTop);
-			} else if("alwaysshow" == pratikabu_stt_prefs.visibilityBehav) {
+			} else if("alwaysshow" === pratikabu_stt_prefs.visibilityBehav) {
 				var boolShow = $(document).height() > (pratikabustt.getWindowHeight() + pratikabu_stt_inversionPoint);
 				if(!pratikabu_stt_dualArrow) {
 					if(pratikabu_stt_prefs.smartDirection) {
@@ -477,15 +477,15 @@ var pratikabustt = {
 				} else {// attach one time handler #specialCase
 					$(window).scroll(pratikabustt.scrollHandlerOneTime);
 				}
-			} else if("autohide" == pratikabu_stt_prefs.visibilityBehav) {
+			} else if("autohide" === pratikabu_stt_prefs.visibilityBehav) {
 				pratikabu_stt_autoHide = true;
 				$(window).scroll(pratikabustt.scrollHandlerAutoHide);
 			}
 		} else {
-			if("hideattop" == pratikabu_stt_prefs.visibilityBehav) {
+			if("hideattop" === pratikabu_stt_prefs.visibilityBehav) {
 				$(window).unbind('scroll', pratikabustt.scrollHandlerHideAtTop);
 				$(window).unbind('resize', pratikabustt.windowResizeHandlerHideAtTop);
-			} else if("alwaysshow" == pratikabu_stt_prefs.visibilityBehav) {
+			} else if("alwaysshow" === pratikabu_stt_prefs.visibilityBehav) {
 				if(!pratikabu_stt_dualArrow) {
 					if(pratikabu_stt_prefs.smartDirection) {
 						$(window).unbind('scroll', pratikabustt.scrollHandlerAutoHide);
@@ -494,7 +494,7 @@ var pratikabustt = {
 					}
 				}
 				$(window).unbind('scroll', pratikabustt.scrollHandlerOneTime);// remove this handler also if not already removed
-			} else if("autohide" == pratikabu_stt_prefs.visibilityBehav) {
+			} else if("autohide" === pratikabu_stt_prefs.visibilityBehav) {
 				pratikabu_stt_autoHide = false;
 				$(window).unbind('scroll', pratikabustt.scrollHandlerAutoHide);
 			}
@@ -508,8 +508,8 @@ var pratikabustt = {
 		var validPage = false;
 		
 		validPage = !pratikabustt.mactchDomainAgainstDomainList(window.location.href, pratikabu_stt_prefs.removedSites);// check for removed sites
-		validPage = validPage && window == window.top;// check top window. As of now removing the support for internal frames
-		/** if(validPage && window != window.top) { // internal frame identified
+		validPage = validPage && window === window.top;// check top window. As of now removing the support for internal frames
+		/** if(validPage && window !== window.top) { // internal frame identified
 			validPage = pratikabustt.mactchDomainAgainstDomainList(document.referrer, pratikabu_stt_prefs.frameSupportedSites);// check if the parent's domain is supported
 		} */
 		
@@ -517,15 +517,18 @@ var pratikabustt = {
 	},
 	
 	/**
-		Match passed domain against a list of domains separated by ';' (a semicolon)
-	*/
+	 * Match passed domain against a list of domains separated by ';' (a semicolon)
+	 * @param {type} urlToMatch
+	 * @param {type} listOfDomainsToCheck
+	 * @returns {Boolean}
+	 */
 	mactchDomainAgainstDomainList: function(urlToMatch, listOfDomainsToCheck) {
 		var domains = listOfDomainsToCheck.split(";");
 		for(var i = 0; i < domains.length; i++) {
-			if(0 == domains[i].length) {
+			if(0 === domains[i].length) {
 				continue;
 			}
-			if(-1 != urlToMatch.indexOf(domains[i])) {
+			if(-1 !== urlToMatch.indexOf(domains[i])) {
 				return true;
 			}
 		}
