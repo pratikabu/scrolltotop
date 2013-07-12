@@ -19,13 +19,27 @@
 }
 
 .donateContainerDiv {
-	position: relative;
-	margin-top: -50%;
+	position: absolute;
+	right: 0px;
+	top: 50%;
+	margin-top: -92px;
 	border: 1px SOLID #2094F0;
 	border-radius: 5px 0 0 5px;
 	border-right: 0px;
 	background: WHITESMOKE;
 	padding: 10px;
+}
+
+.socialContainerDiv {
+	position: absolute;
+	right: 0px;
+	top: 50%;
+	margin-top: -150px;
+	border: 1px SOLID #2094F0;
+	border-radius: 5px 0 0 5px;
+	border-right: 0px;
+	background: WHITESMOKE;
+	padding: 10px 10px 6px 10px;
 }
 
 .statusMsgDiv {
@@ -53,7 +67,7 @@
 	font-weight: bold;
 	font-size: 28px;
 	color: #0070C0;
-	margin: 20px;
+	margin: 10px;
 }
 
 a:link {
