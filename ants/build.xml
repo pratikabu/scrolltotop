@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+
+<project name="ScrollToTop" default="cleanAndBuild">
+	<property file="build.properties" />
+	<property file="buildspecific.properties" />
+
+	<target name="clean" description="clean up everything">
+		<delete dir="${generateDir}" />
+	</target>
+
+	<target name="build" description="generate chrome executable folder">
+		<!-- Copy base directory structure to the broswer location -->
+		<copy overwrite="true" todir="${browserDir}">
+			<fileset dir="${base}" />
+		</copy>
+		
+		<!-- Copy base directory structure to the broswer location -->
+		<copy overwrite="true" todir="${browserDir}">
+			<fileset dir="${browserSpecific}" />
+		</copy>
+	</target>
+	
+	<target name="cleanAndBuild" description="Cleans the generate folder and rebuild it again.">
+		<antcall target="cleans" />
+		<antcall target="build" />
+	</target>
+</project>

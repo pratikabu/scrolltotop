@@ -1,0 +1,143 @@
+<?xml version="1.0"?>
+
+<project name="Nirvana" default="localCompile">
+	<property file="build.properties" />
+
+	<!-- cleaning of folders and jar starts -->
+
+	<target name="localCleanJar" description="clean up the jar file">
+		<!-- Delete the ${jar.file.name} -->
+		<delete file="${jarFile}" failonerror="false" />
+	</target>
+
+	<target name="localCleanFolders" description="clean up advanced folder">
+		<!-- Delete the JS folder -->
+		<delete dir="${advancedBase}/js" />
+
+		<!-- Delete the skins folder -->
+		<delete dir="${advancedBase}/sc/skins" />
+	</target>
+
+
+	<!-- copying of the folders starts -->
+
+	<target name="localCopyAll" description="copy gwt, advanced and JS folders without cleaning">
+		<!-- lite -->
+		<!--copy gwt theme related files -->
+		<!-- <copy overwrite="true" todir="${liteBase}/gwt"> <fileset dir="gwt"> 
+			<exclude name="**/.svn/**" /> </fileset> </copy> -->
+
+		<!-- copy the js folder into the configurator's war folder -->
+		<mkdir dir="${advancedBase}/js" />
+
+		<copy overwrite="true" todir="${advancedBase}/js">
+			<fileset dir="js">
+				<exclude name="**/.svn/**" />
+			</fileset>
+		</copy>
+
+		<!--copy theme folders -->
+		<mkdir dir="${advancedBase}/sc/skins" />
+
+		<copy overwrite="true" todir="${advancedBase}/sc/skins">
+			<fileset dir="skins">
+				<exclude name="**/.svn/**" />
+			</fileset>
+		</copy>
+	</target>
+
+	<!-- create a jar from classes and replace -->
+	<target name="localCreateJar" depends="localCleanJar" description="This will create the jar file">
+		<!--code to include ccf file also thats why commented -->
+		<jar destfile="${jarFile}" basedir="war/WEB-INF/classes" />
+	</target>
+
+	<!-- .....................All NIRVANA Related changes............... -->
+	<!-- cleaning Nirvana -->
+
+	<target name="nirvanaCleanFolders" description="This will remove both folders from Nirvana location.">
+		<!-- Delete the advanced folder -->
+		<delete dir="${nirvanaConfFolder}/${advanced.folder.name}" />
+
+		<!-- Delete the lite folder -->
+		<!-- <delete dir="${nirvanaConfFolder}/${lite.folder.name}" /> -->
+	</target>
+
+	<target name="nirvanaCleanJar" description="This will remove the jar file from Nirvana.">
+		<!-- Delete the ${jar.file.name} -->
+		<delete file="${nirvanaLibFolder}/${jar.file.name}" failonerror="false" />
+	</target>
+
+	<!-- copying Nirvana -->
+	<target name="nirvanaCopyFolders" depends="localCopyAll,nirvanaCleanFolders" description="It will copy both the folders from Configurator local to Nirvana after copying the fresh copy in local.">
+		<!-- copy advanced folder -->
+		<mkdir dir="${nirvanaConfFolder}/${advanced.folder.name}" />
+
+		<copy overwrite="true" todir="${nirvanaConfFolder}/${advanced.folder.name}">
+			<fileset dir="${advancedBase}">
+				<exclude name="**/.svn/**" />
+			</fileset>
+		</copy>
+	</target>
+
+	<target name="nirvanaCreateJar" depends="localCreateJar,nirvanaCleanJar" description="It will copy the jar file from local configurator.">
+		<copy file="${jarFile}" todir="${nirvanaLibFolder}" />
+	</target>
+
+	<target name="nirvanaCleanAll" depends="nirvanaCleanFolders,nirvanaCleanJar" description="It will clean both folders and jar file." />
+
+	<target name="nirvanaCopyAll" depends="nirvanaCopyFolders,nirvanaCreateJar" description="It will copy everthing to Nirvana after cleaning." />
+
+	<!-- The new GWT compilation logic will go here -->
+	<path id="project.class.path">
+		<pathelement location="${build.dir}" />
+		<pathelement location="${GWT.dir}/gwt-user.jar" />
+		<fileset dir="${GWT.dir}" includes="gwt-dev*.jar" />
+		<!-- Add any additional non-server libs (such as JUnit) -->
+		<fileset dir="war/WEB-INF/lib" includes="**/*.jar" />
+	</path>
+
+	<target name="gwtc" description="GWT compile to JavaScript for a single module">
+		<java failonerror="true" fork="true" classname="com.google.gwt.dev.Compiler">
+			<classpath>
+				<pathelement location="${src.dir}" />
+				<path refid="project.class.path" />
+			</classpath>
+			<!-- add jvmarg -Xss16M or similar if you see a StackOverflowError -->
+			<jvmarg value="-Xmx256M" />
+			<!-- Additional arguments like -style PRETTY or -logLevel DEBUG -->
+			<arg value="${module.name}" />
+			<arg value="-war" />
+			<arg value="${output.location.folder}" />
+		</java>
+	</target>
+
+	<target name="javac" description="Compile java source">
+		<delete dir="${build.dir}" />
+		<mkdir dir="${build.dir}" />
+		<javac srcdir="src" includes="**" encoding="utf-8" destdir="${build.dir}">
+			<classpath refid="project.class.path" />
+		</javac>
+		<copy todir="${build.dir}">
+			<fileset dir="src" excludes="**/*.java" />
+		</copy>
+	</target>
+
+	<target name="cleanGWTBuildFolder" description="It will clean the ${output.location.folder}/${module.name} folder.">
+		<delete dir="${output.location.folder}/${module.name}" />
+	</target>
+
+	<target name="GWTCompileMultipleModule" description="This will compile the Java code to JavaScript for the two modules.">
+		<antcall target="cleanGWTBuildFolder">
+			<param name="module.name" value="${advanced.folder.name}" />
+		</antcall>
+		<antcall target="gwtc">
+			<param name="module.name" value="${advanced.module.name}" />
+		</antcall>
+	</target>
+
+	<target name="localCompile" depends="localCreateJar,localCleanFolders,GWTCompileMultipleModule,localCopyAll" description="This target will compile and copy all the required files." />
+
+	<target name="nirvanaCompile" depends="localCompile,nirvanaCopyAll" description="It will compile the code and then copy it to the
+                Nirvana folders." />
+</project>
