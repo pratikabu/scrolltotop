@@ -21,7 +21,7 @@
 	</target>
 	
 	<target name="cleanAndBuild" description="Cleans the generate folder and rebuild it again.">
-		<antcall target="cleans" />
+		<antcall target="clean" />
 		<antcall target="build" />
 	</target>
 </project>
