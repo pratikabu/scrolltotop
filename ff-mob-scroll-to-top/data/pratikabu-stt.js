@@ -25,7 +25,7 @@ var pratikabustt = {
 	},
 	
 	showHideAddon: function(boolShowAddon) {
-		if(boolShowAddon != pratikabu_stt_bVisibility) {
+		if(boolShowAddon !== pratikabu_stt_bVisibility) {
 			if(boolShowAddon) {// show addon
 				pratikabustt.loadIcon();
 				document.body.appendChild(pratikabustt_arrow_up);
@@ -44,7 +44,7 @@ var pratikabustt = {
 	triggerAutoHide: function() {
 		pratikabu_stt_ahRequestCount++;
 		setTimeout(function() {
-			if(0 == --pratikabu_stt_ahRequestCount) {
+			if(0 === --pratikabu_stt_ahRequestCount) {
 				pratikabustt.showHideAddon(false);
 			}
 		}, 5000);
@@ -60,12 +60,12 @@ var pratikabustt = {
 	
 	normalScrolling : function() {
 		var nVScroll = pratikabustt.currentLocation();
-		pratikabustt.showHideAddon(nVScroll != 0 && (pratikabustt_lastScrollLoc > nVScroll));
+		pratikabustt.showHideAddon(0 !== nVScroll && (pratikabustt_lastScrollLoc > nVScroll));
 		pratikabustt_lastScrollLoc = nVScroll;
 	},
 	
 	smartDirectionScrolling: function() {
-		if(pratikabustt_lastScrollLoc == pratikabustt.currentLocation()) {
+		if(pratikabustt_lastScrollLoc === pratikabustt.currentLocation()) {
 			// do nothing
 		} else if(pratikabustt_lastScrollLoc > pratikabustt.currentLocation()) {// user scrolled upwards
 			pratikabustt.rotateUp();
@@ -76,7 +76,7 @@ var pratikabustt = {
 		pratikabustt_lastScrollLoc = pratikabustt.currentLocation();// update to latest
 		
 		// finally once the scrolling is finished, rotate addon if needed
-		if(0 == pratikabustt_lastScrollLoc) {
+		if(0 === pratikabustt_lastScrollLoc) {
 			pratikabustt.rotateDown();
 		} else if(pratikabustt_lastScrollLoc >= (pratikabustt.getDocHeight() - window.innerHeight)) {
 			pratikabustt.rotateUp();
@@ -153,7 +153,7 @@ var pratikabustt = {
 	currentLocation: function() {
 		return document.documentElement.scrollTop || document.body.scrollTop;
 	}
-}
+};
 
 // fetch the icon from settings
 self.port.on("prefsValue", function(data) {
