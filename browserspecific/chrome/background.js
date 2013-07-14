@@ -12,6 +12,9 @@ var checkForInitialization = function() {
 	if (!localStorage["visibility_behavior"]) {
 		localStorage["visibility_behavior"] = "alwaysshow";
 	}
+	if (!localStorage["black_and_white"]) {
+		localStorage["black_and_white"] = "false";
+	}
 	
 	if (!localStorage["arrow_type"]) {
 		localStorage["arrow_type"] = "1";
@@ -67,6 +70,7 @@ var forceInitializeSettings = function() {
 	localStorage.removeItem("horizontal_location");
 	localStorage.removeItem("scrolling_speed");
 	localStorage.removeItem("visibility_behavior");
+	localStorage.removeItem("black_and_white");
 	
 	localStorage.removeItem("arrow_type");
 	
@@ -97,6 +101,7 @@ chrome.extension.onMessage.addListener(
 				hLoc: localStorage["horizontal_location"],
 				scrSpeed: localStorage["scrolling_speed"],
 				visibilityBehav: localStorage["visibility_behavior"],
+				blackAndWhite: localStorage["black_and_white"],
 				
 				arrowType: localStorage["arrow_type"],
 				

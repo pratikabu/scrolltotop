@@ -1,3 +1,5 @@
+//http://demosthenes.info/blog/532/ refer black and white here for mozilla
+
 var requestCount = 0;
 var ignoreImgLoad = true;
 var dIgnoreImgLoad = true;
@@ -8,6 +10,14 @@ var addonVersion = "4.3";
 /*******************************************************************************
  * Browser Independent code.
  ******************************************************************************/
+
+function updateBlackAndWhite() {
+	if(isChecked("#blackWhiteCBId")) {
+		$(".blackAndWhiteCSS").addClass("pratikabuSTTBlackAndWhite");
+	} else {
+		$(".blackAndWhiteCSS").removeClass("pratikabuSTTBlackAndWhite");
+	}
+}
 
 /**
  * 
@@ -20,6 +30,7 @@ function save_options(returnValue) {
 		hLoc: $('input:radio[name=imgHorizontalLocation]:checked').val(),
 		scrSpeed: globalScrollSpeed,
 		visibilityBehav: $('input:radio[name=visbilityBehavior]:checked').val(),
+		blackAndWhite: isChecked("#blackWhiteCBId"),
 		
 		arrowType: $('input:radio[name=arrowType]:checked').val(),
 		
@@ -59,6 +70,8 @@ function restore_options(data) {
 	globalScrollSpeed = data.scrSpeed;// for future references
 	initSlider(data.scrSpeed);
 	$('input:radio[name=visbilityBehavior]').filter('[value=' + data.visibilityBehav + ']').attr('checked', true);
+	$("#blackWhiteCBId").attr('checked', ("true" === data.blackAndWhite));
+	updateBlackAndWhite();
 	
 	$('input:radio[name=arrowType]').filter('[value=' + data.arrowType + ']').attr('checked', true);
 	swapAdvancedOptions(data.arrowType);
@@ -169,6 +182,20 @@ function selectableRadioContent(id, name, value) {
 	});
 }
 
+function isChecked(checkboxId) {
+	return $(checkboxId).is(':checked');
+}
+
+function selectatbleCheckBoxContent(checkboxId, spanId) {
+	checkboxId = "#" + checkboxId;
+	spanId = "#" + spanId;
+	$(spanId).css("cursor", "default");
+	$(spanId).click(function() {
+		$(checkboxId).attr('checked', !isChecked(checkboxId));
+		$(checkboxId).change();
+	});
+}
+
 /*
 	for all radio button's content to be selecatable
 */
@@ -180,6 +207,7 @@ function makeElementsSelactable() {
 	selectableRadioContent("vlTop", "imgVerticalLocation", "top");
 	selectableRadioContent("vlMiddle", "imgVerticalLocation", "middle");
 	selectableRadioContent("vlBottom", "imgVerticalLocation", "bottom");
+	selectatbleCheckBoxContent("blackWhiteCBId", "blackWhiteId");
 	
 	selectableRadioContent("hlLeft", "imgHorizontalLocation", "left");
 	selectableRadioContent("hlMiddle", "imgHorizontalLocation", "middle");
@@ -347,14 +375,10 @@ function donateReviewInits() {
 		});
 	});
 	
-	$("#supportPromptId").css("cursor", "default");
 	$("#supportPromptCBId").change(function() {
 		save_options();
 	});
-	$('#supportPromptId').click(function() {
-		$("#supportPromptCBId").attr('checked', !$('#supportPromptCBId').is(':checked'));
-		$("#supportPromptCBId").change();
-	});
+	selectatbleCheckBoxContent("supportPromptCBId", "supportPromptId");
 }
 
 function randomOpenSupportDialog() {
@@ -417,6 +441,10 @@ document.addEventListener('DOMContentLoaded', function () {
 	$('input:radio[name=imgVerticalLocation]').change(function() { isRightChangedEvent("imgVerticalLocation", $(this).val()); });
 	$('input:radio[name=imgHorizontalLocation]').change(function() { isRightChangedEvent("imgHorizontalLocation", $(this).val()); });
 	$('input:radio[name=visbilityBehavior]').change(function() { isRightChangedEvent("visbilityBehavior", $(this).val()); });
+	$("#blackWhiteCBId").change(function() {
+		updateBlackAndWhite();
+		save_options();
+	});
 	// common settings ends
 	
 	// arrow type settings starts

@@ -27,6 +27,7 @@ function bsFetchSettings(updated) {
 		hLoc: localStorage["horizontal_location"],
 		visibilityBehav: localStorage["visibility_behavior"],
 		scrSpeed: localStorage["scrolling_speed"],
+		blackAndWhite: localStorage["black_and_white"],
 		
 		arrowType: localStorage["arrow_type"],
 		
@@ -60,6 +61,7 @@ function bsSaveSettings(data) {
 	localStorage["horizontal_location"] = data.hLoc;
 	localStorage["visibility_behavior"] = data.visibilityBehav;
 	localStorage["scrolling_speed"] = data.scrSpeed;
+	localStorage["black_and_white"] = data.blackAndWhite;
 	
 	localStorage["arrow_type"] = data.arrowType;
 	

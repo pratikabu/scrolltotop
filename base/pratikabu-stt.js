@@ -234,6 +234,10 @@ var pratikabustt = {
 			}
 		}
 		
+		if(pratikabu_stt_prefs.blackAndWhite) {
+			$(".pratikabuSTTImg").addClass("pratikabuSTTBlackAndWhite");
+		}
+		
 		return true;
 	},
 	
@@ -435,6 +439,7 @@ var pratikabustt = {
 			pratikabu_stt_prefs.scrSpeed = parseInt(pratikabu_stt_prefs.scrSpeed);
 			pratikabu_stt_prefs.iconSize = parseInt(pratikabu_stt_prefs.iconSize);
 			pratikabu_stt_dualArrow = ("2" === pratikabu_stt_prefs.arrowType);
+			pratikabu_stt_prefs.blackAndWhite = ("true" === pratikabu_stt_prefs.blackAndWhite);
 			if(!pratikabu_stt_dualArrow) {
 				pratikabu_stt_prefs.smartDirection = ("true" === pratikabu_stt_prefs.smartDirection);
 				pratikabu_stt_prefs.hideControls = ("true" === pratikabu_stt_prefs.hideControls);
