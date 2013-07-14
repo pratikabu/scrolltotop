@@ -238,14 +238,43 @@ function selectatbleCheckBoxContent(checkboxId, spanId) {
 	});
 }
 
+function addElement(tag, groupName, value, componentId, image) {
+	tag.append('<input type="radio" name="' + groupName + '" value="' + value + '">'
+			+ '<img class="blackAndWhiteCSS" style="vertical-align: middle;" id="'+ componentId
+			+ '" src="../icons/pratikabu-stt-'+ image + '.png" />');
+	selectableRadioContent(componentId, groupName, "" + value);
+}
+
+function addBatchOfIcons(tag, length, cidPrefix, cidStartNumber, groupName, imageSuffix) {
+	for(var i = 1; i <= length; i++) {
+		var value = cidStartNumber + i;
+		var componentId = cidPrefix + value;
+		addElement(tag, groupName, value, componentId, imageSuffix + i);
+		
+		if(0 == i % 9) {
+			tag.append("<br />");
+		}
+	}
+}
+
+function addIcons() {
+	// single icons
+	addBatchOfIcons($('#singleIconTD'), 23, 'iconGal', 0, 'iconLib', '48-');
+	
+	// horizontal icons
+	addBatchOfIcons($('#dualHRTD'), 6, 'dIconGal', 0, 'dIconLib', 'dual-hr-');
+	
+	// vertical icons
+	addBatchOfIcons($('#dualVRTD'), 3, 'dIconGal', 20, 'dIconLib', 'dual-vr-');
+	
+	// dual single icon
+	addBatchOfIcons($('#dualNornalTD'), 23, 'dIconGal', 40, 'dIconLib', '48-');
+}
+
 /*
-	for all radio button's content to be selecatable
+	for all radio button's content to be selectable
 */
 function makeElementsSelactable() {
-	for(var i = 1; i <= 23; i++) {
-		selectableRadioContent("iconGal" + i, "iconLib", "" + i);
-	}
-	
 	selectableRadioContent("vlTop", "imgVerticalLocation", "top");
 	selectableRadioContent("vlMiddle", "imgVerticalLocation", "middle");
 	selectableRadioContent("vlBottom", "imgVerticalLocation", "bottom");
@@ -281,21 +310,6 @@ function makeElementsSelactable() {
 	
 	selectableRadioContent("diarrHr", "dIconArrangemnt", "hr");
 	selectableRadioContent("diarrVr", "dIconArrangemnt", "vr");
-	
-	// horizontal arrangement selector
-	for(var i = 1; i <= 6; i++) {
-		selectableRadioContent("dIconGal" + i, "dIconLib", "" + i);
-	}
-	
-	// vertical arrangement selector
-	for(var i = 21; i <= 23; i++) {
-		selectableRadioContent("dIconGal" + i, "dIconLib", "" + i);
-	}
-	
-	// dual icon's single icon selector
-	for(var i = 41; i <= 63; i++) {
-		selectableRadioContent("dIconGal" + i, "dIconLib", "" + i);
-	}
 	
 	selectableRadioContent("dUseMyIcon", "dIconLib", "myIcon");
 }
@@ -471,6 +485,9 @@ document.addEventListener('DOMContentLoaded', function () {
 		});
 	}
 	
+	// add all icons
+	addIcons();
+	
 	// add all events
 	
 	//document.querySelector('#saveSettings').addEventListener('click', save_options);
@@ -498,7 +515,7 @@ document.addEventListener('DOMContentLoaded', function () {
 	
 	// arrow type settings starts
 	$('input:radio[name=arrowType]').change(function() {
-		if(isRightChangedEvent("arrowType", $(this).val())) {// auto set location of the icon as per the selection
+		if(isRightChangedEvent("arrowType", $(this).val(), true)) {// auto set location of the icon as per the selection
 			swapAdvancedOptions($(this).val());
 			
 			$('input:radio[name=visbilityBehavior]').filter('[value=alwaysshow]').attr('checked', true);
@@ -555,7 +572,7 @@ document.addEventListener('DOMContentLoaded', function () {
 	
 	// dual arrow changes starts
 	$('input:radio[name=dIconLib]').change(function() {
-		if(isRightChangedEvent("dIconLib", $(this).val())) {
+		if(isRightChangedEvent("dIconLib", $(this).val(), true)) {
 			if(20 >= parseInt($(this).val())) {
 				$('input:radio[name=dIconArrangemnt]').filter('[value=hr]').attr('checked', true);
 			} else if(40 >= parseInt($(this).val())) {
