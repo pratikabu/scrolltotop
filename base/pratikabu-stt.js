@@ -6,7 +6,7 @@ var pratikabu_stt_inversionPoint = 300;// inversion point where the inversion sh
 var pratikabu_stt_bVisibility = false;// variable to check whether the button is already visible or hidden
 var pratikabu_stt_fadeSpeed = 300;
 var pratikabu_stt_hoverOpacity = 1;
-var pratikabu_stt_otherDefaultFade = 0.35;
+var pratikabu_stt_otherDefaultFade = 0.5;
 var pratikabu_stt_prefs;// this variable holds the preferences
 var pratikabu_stt_dualArrow = false;
 var pratikabu_stt_flipScrolling = false;
@@ -108,7 +108,7 @@ var pratikabustt = {
 			pratikabustt.hoverEffect("#pratikabuSTTArrowUp", pratikabu_stt_otherDefaultFade);
 			pratikabustt.hoverEffect("#pratikabuSTTArrowDown", pratikabu_stt_otherDefaultFade);
 		} else {
-			pratikabustt.hoverEffect("#pratikabuSTTArrowUp", 0.5);
+			pratikabustt.hoverEffect("#pratikabuSTTArrowUp", pratikabu_stt_otherDefaultFade);
 			pratikabustt.hoverEffect("#pratikabuSTTClear", pratikabu_stt_otherDefaultFade);
 			pratikabustt.hoverEffect("#pratikabuSTTSettings", pratikabu_stt_otherDefaultFade);
 			pratikabustt.hoverEffect("#pratikabuSTTPageUp", pratikabu_stt_otherDefaultFade);
