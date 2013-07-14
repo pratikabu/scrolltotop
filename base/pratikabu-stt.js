@@ -6,7 +6,6 @@ var pratikabu_stt_inversionPoint = 300;// inversion point where the inversion sh
 var pratikabu_stt_bVisibility = false;// variable to check whether the button is already visible or hidden
 var pratikabu_stt_fadeSpeed = 300;
 var pratikabu_stt_hoverOpacity = 1;
-var pratikabu_stt_otherDefaultFade = 0.5;
 var pratikabu_stt_prefs;// this variable holds the preferences
 var pratikabu_stt_dualArrow = false;
 var pratikabu_stt_flipScrolling = false;
@@ -105,14 +104,14 @@ var pratikabustt = {
 		}
 		
 		if(pratikabu_stt_dualArrow) {
-			pratikabustt.hoverEffect("#pratikabuSTTArrowUp", pratikabu_stt_otherDefaultFade);
-			pratikabustt.hoverEffect("#pratikabuSTTArrowDown", pratikabu_stt_otherDefaultFade);
+			pratikabustt.hoverEffect("#pratikabuSTTArrowUp");
+			pratikabustt.hoverEffect("#pratikabuSTTArrowDown");
 		} else {
-			pratikabustt.hoverEffect("#pratikabuSTTArrowUp", pratikabu_stt_otherDefaultFade);
-			pratikabustt.hoverEffect("#pratikabuSTTClear", pratikabu_stt_otherDefaultFade);
-			pratikabustt.hoverEffect("#pratikabuSTTSettings", pratikabu_stt_otherDefaultFade);
-			pratikabustt.hoverEffect("#pratikabuSTTPageUp", pratikabu_stt_otherDefaultFade);
-			pratikabustt.hoverEffect("#pratikabuSTTPageDown", pratikabu_stt_otherDefaultFade);
+			pratikabustt.hoverEffect("#pratikabuSTTArrowUp");
+			pratikabustt.hoverEffect("#pratikabuSTTClear");
+			pratikabustt.hoverEffect("#pratikabuSTTSettings");
+			pratikabustt.hoverEffect("#pratikabuSTTPageUp");
+			pratikabustt.hoverEffect("#pratikabuSTTPageDown");
 		}
 		// add the main div hover effects
 		$("#pratikabuSTTDiv").hover(
@@ -334,17 +333,17 @@ var pratikabustt = {
 		return window.innerHeight;
 	},
 	
-	hoverEffect: function(varId, idleOpacity) {
+	hoverEffect: function(varId) {
 		$(varId).attr("class", "pratikabuSTTImg");// add it for all the images we've
 		$(varId).hide();
-		$(varId).stop(true, true).fadeTo(pratikabu_stt_fadeSpeed, idleOpacity);
+		$(varId).stop(true, true).fadeTo(pratikabu_stt_fadeSpeed, pratikabu_stt_prefs.iconTransparency);
 		$(varId).css("cursor", "pointer");
 		$(varId).hover(
 			function() {
 				$(varId).stop(true, true).fadeTo(pratikabu_stt_fadeSpeed, pratikabu_stt_hoverOpacity);
 			},
 			function() {
-				$(varId).stop(true, true).fadeTo(pratikabu_stt_fadeSpeed, idleOpacity);
+				$(varId).stop(true, true).fadeTo(pratikabu_stt_fadeSpeed, pratikabu_stt_prefs.iconTransparency);
 			});
 	},
 	

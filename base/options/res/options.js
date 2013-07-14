@@ -3,8 +3,8 @@
 var requestCount = 0;
 var ignoreImgLoad = true;
 var dIgnoreImgLoad = true;
-var globalScrollSpeed;
-var ignoreForDefaults = false;
+var globalScrollSpeed, globalTransparency;
+var ignoreForDefaults = false, ignoreTransparencyForRestore = false;
 var addonVersion = "4.3";
 
 /*******************************************************************************
@@ -30,6 +30,7 @@ function save_options(returnValue) {
 		hLoc: $('input:radio[name=imgHorizontalLocation]:checked').val(),
 		scrSpeed: globalScrollSpeed,
 		visibilityBehav: $('input:radio[name=visbilityBehavior]:checked').val(),
+		iconTransparency: globalTransparency,
 		blackAndWhite: isChecked("#blackWhiteCBId"),
 		
 		arrowType: $('input:radio[name=arrowType]:checked').val(),
@@ -70,6 +71,8 @@ function restore_options(data) {
 	globalScrollSpeed = data.scrSpeed;// for future references
 	initSlider(data.scrSpeed);
 	$('input:radio[name=visbilityBehavior]').filter('[value=' + data.visibilityBehav + ']').attr('checked', true);
+	globalTransparency = data.iconTransparency;
+	initTransparencySlider(data.iconTransparency);
 	$("#blackWhiteCBId").attr('checked', ("true" === data.blackAndWhite));
 	updateBlackAndWhite();
 	
@@ -94,6 +97,16 @@ function restore_options(data) {
 	$('#removedSites').val(data.removedSites);
 	
 	$("#supportPromptCBId").attr('checked', "true" === data.supportPrompt ? true : false);
+}
+
+function restore_settings() {
+	if(!confirm("All settings will be reverted to original settings.")) {
+		return;
+	}
+	
+	ignoreForDefaults = true;// ignore the scroll speed save
+	ignoreTransparencyForRestore = true;// ignore transparency save
+	bsDefaultSettings();
 }
 
 function show_message(msg) {
@@ -148,7 +161,7 @@ function initSlider(initialValue) {
 	initialValue = 2400 - initialValue;
 	populateSliderSpeedOnText(initialValue);
 	
-	$( "#scrollSpeed" ).slider({
+	$("#scrollSpeed").slider({
 		value: initialValue,
 		min: 400,
 		max: 2000,
@@ -169,6 +182,35 @@ function initSlider(initialValue) {
 				save_options();
 			} else {
 				ignoreForDefaults = false;
+			}
+		}
+	});
+}
+
+
+function updateTransparency(transparency) {
+	$("#transparencyImgId").stop(true, true).fadeTo(300, transparency);
+}
+
+function initTransparencySlider(transparency) {
+	updateTransparency(transparency);
+	$("#transparencyId").slider({
+		value: transparency,
+		min: .1,
+		max: .9,
+		step: .1,
+		animate: true,
+		range: "min",
+		slide: function(event, ui) {
+			updateTransparency(ui.value);
+		},
+		change: function(event, ui) {
+			globalTransparency = ui.value;
+			
+			if(!ignoreTransparencyForRestore) {
+				save_options();
+			} else {
+				ignoreTransparencyForRestore = false;
 			}
 		}
 	});
@@ -432,7 +474,7 @@ document.addEventListener('DOMContentLoaded', function () {
 	// add all events
 	
 	//document.querySelector('#saveSettings').addEventListener('click', save_options);
-	$("#defaultBut").click(function() { bsDefaultSettings(); });
+	$("#defaultBut").click(function() { restore_settings(); });
 	$("#advSettingsBut").click(function() { activateAdvancedSettings(); });
 	exportImportSettingsInits();
 	donateReviewInits();
@@ -441,6 +483,13 @@ document.addEventListener('DOMContentLoaded', function () {
 	$('input:radio[name=imgVerticalLocation]').change(function() { isRightChangedEvent("imgVerticalLocation", $(this).val()); });
 	$('input:radio[name=imgHorizontalLocation]').change(function() { isRightChangedEvent("imgHorizontalLocation", $(this).val()); });
 	$('input:radio[name=visbilityBehavior]').change(function() { isRightChangedEvent("visbilityBehavior", $(this).val()); });
+	$("#transparencyImgId").hover(
+			function() {
+				$("#transparencyImgId").stop(true, true).fadeTo(300, 1);
+			},
+			function() {
+				$("#transparencyImgId").stop(true, true).fadeTo(300, globalTransparency);
+			});
 	$("#blackWhiteCBId").change(function() {
 		updateBlackAndWhite();
 		save_options();

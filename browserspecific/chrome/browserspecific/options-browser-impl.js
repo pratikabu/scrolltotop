@@ -4,12 +4,6 @@
 
 /** Saves options to localStorage. */
 function bsDefaultSettings() {
-	if(!confirm("All settings will be reverted to original settings.")) {
-		return;
-	}
-	
-	ignoreForDefaults = true;// ignore the image load method as it will reset myIcon in the radio button
-	
 	// Asks background.html for [LocalStorage] settings from Options Page and assigns them to variables
 	chrome.extension.sendMessage({method: "resetSettings"}, function(response_msg) {
 		bsFetchSettings();
@@ -27,6 +21,7 @@ function bsFetchSettings(updated) {
 		hLoc: localStorage["horizontal_location"],
 		visibilityBehav: localStorage["visibility_behavior"],
 		scrSpeed: localStorage["scrolling_speed"],
+		iconTransparency: localStorage["icon_transparency"],
 		blackAndWhite: localStorage["black_and_white"],
 		
 		arrowType: localStorage["arrow_type"],
@@ -61,6 +56,7 @@ function bsSaveSettings(data) {
 	localStorage["horizontal_location"] = data.hLoc;
 	localStorage["visibility_behavior"] = data.visibilityBehav;
 	localStorage["scrolling_speed"] = data.scrSpeed;
+	localStorage["icon_transparency"] = data.iconTransparency;
 	localStorage["black_and_white"] = data.blackAndWhite;
 	
 	localStorage["arrow_type"] = data.arrowType;
