@@ -126,9 +126,9 @@ chrome.extension.onMessage.addListener(
 			
 			sendResponse(data);
 		} else if ("openOptionPage" === request.method) {
-			chrome.tabs.query({url: "chrome-extension://*/options.html"}, function(tabs) {// query with this pattern
+			chrome.tabs.query({url: "chrome-extension://*/options/options.html"}, function(tabs) {// query with this pattern
 				if(0 === tabs.length) {// open a new options page
-					chrome.tabs.create({url: "options.html"});
+					chrome.tabs.create({url: "options/options.html"});
 				} else {// open the existing one
 					chrome.tabs.highlight({tabs: [tabs[0].index], windowId: tabs[0].windowId}, function(win) {
 						chrome.windows.update(win.id, {focused: true}, function(win2) {});
@@ -147,5 +147,5 @@ chrome.extension.onMessage.addListener(
 var currentVersion = 7;// this variable should be incremented with every update so that, add-on update message can be shown
 if(!localStorage["version_info"] || currentVersion > localStorage["version_info"]) {
 	localStorage["version_info"] = currentVersion;
-	chrome.tabs.create({url: "options.html?updated=true"});
+	chrome.tabs.create({url: "options/options.html?updated=true"});
 }

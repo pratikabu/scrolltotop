@@ -58,7 +58,7 @@
 }
 
 .myHeader {
-	background: url(icons/pratikabu-stt-48-1.png) no-repeat;
+	background: url(../icons/pratikabu-stt-48-1.png) no-repeat;
 	text-indent: 60px;
 	display: inline-block;
 	line-height: 50px;
@@ -98,7 +98,7 @@ form {
 .mybutton {
 	padding: 5px 10px;
 	display: inline;
-	background: #777 url(button.png) repeat-x bottom;
+	background: #777 url(../images/button.png) repeat-x bottom;
 	border: none;
 	color: #fff;
 	cursor: pointer;
@@ -144,7 +144,7 @@ a.mylink {
 }
 
 .donateButton {
-	background: url(icons/donate.gif) no-repeat;
+	background: url(../icons/donate.gif) no-repeat;
 	text-indent: 74px;
 	display: inline-block;
 	line-height: 21px;

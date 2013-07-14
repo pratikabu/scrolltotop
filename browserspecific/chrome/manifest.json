@@ -4,7 +4,7 @@
   "manifest_version": 2,
   "description": "Scroll to top and vice versa in a window.",
   "homepage_url": "http://pratikabu.users.sourceforge.net/extensions/scrolltotop",
-  "options_page": "options.html",
+  "options_page": "options/options.html",
   "background": {
     "scripts": ["background.js"],
     "persistent": false
@@ -15,7 +15,7 @@
       "128": "icons/pratikabu-stt-128.png"},
 	
   "content_scripts": [
-    { "css": [ "pratikabu-stt.css" ], "matches": ["<all_urls>"], "js": ["jquery-1.8.2.pratikabu.js", "jQueryRotate.js", "pratikabustt-browser-impl.js", "content_script.js"] }
+    { "css": [ "pratikabu-stt.css" ], "matches": ["<all_urls>"], "js": ["thirdparty/jquery-pratikabu.js", "thirdparty/jquery-rotate.js", "browserspecific/pratikabu-stt-impl.js", "pratikabu-stt.js"] }
   ],
   
   "web_accessible_resources": [
