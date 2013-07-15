@@ -8,7 +8,8 @@
 		<delete dir="${generateDir}" />
 	</target>
 
-	<target name="build" description="generate chrome executable folder">
+	<target name="build" description="generate executable folder">
+		
 		<!-- Copy base directory structure to the broswer location -->
 		<copy overwrite="true" todir="${browserDir}">
 			<fileset dir="${base}" />
@@ -16,8 +17,60 @@
 		
 		<!-- Copy base directory structure to the broswer location -->
 		<copy overwrite="true" todir="${browserDir}">
-			<fileset dir="${browserSpecific}" />
+			<fileset dir="${baseBrowserSpecific}" />
 		</copy>
+	</target>
+	
+	<target name="minfiyFile" description="minify any file js, css">
+		<echo>Minifying ${sourceFolder}/${fileName}</echo>
+		<java jar="yuicompressor-2.4.2.jar" fork="true" failonerror="true">
+			<arg value="${sourceFolder}/${fileName}" />
+			<arg value="-o" />
+			<arg value="${destFolder}/${fileName}" />
+		</java>
+	</target>
+	
+	<target name="minfiyBuild" description="generate build while compressing the js">
+		<!-- copy all the existing files -->
+		<antcall target="build" />
+		
+		<!-- generate the minify js -->
+		<antcall target="minfiyFile">
+			<param name="sourceFolder" value="${base}" />
+			<param name="destFolder" value="${browserDir}" />
+			<param name="fileName" value="pratikabu-stt.js" />
+		</antcall>
+		<antcall target="minfiyFile">
+			<param name="sourceFolder" value="${base}" />
+			<param name="destFolder" value="${browserDir}" />
+			<param name="fileName" value="pratikabu-stt.css" />
+		</antcall>
+		<antcall target="minfiyFile">
+			<param name="sourceFolder" value="${options}/res" />
+			<param name="destFolder" value="${browserOptions}/res" />
+			<param name="fileName" value="options.css" />
+		</antcall>
+		<antcall target="minfiyFile">
+			<param name="sourceFolder" value="${options}/res" />
+			<param name="destFolder" value="${browserOptions}/res" />
+			<param name="fileName" value="options.js" />
+		</antcall>
+	</target>
+	
+	<target name="minBrowserBuildChrome" description="generate build while compressing the js">
+		<antcall target="minfiyBuild" />
+		
+		<!-- generate the minify js -->
+		<antcall target="minfiyFile">
+			<param name="sourceFolder" value="${baseBrowserSpecific}" />
+			<param name="destFolder" value="${browserSpecific}" />
+			<param name="fileName" value="${bsOptionsImplName}" />
+		</antcall>
+		<antcall target="minfiyFile">
+			<param name="sourceFolder" value="${baseBrowserSpecific}" />
+			<param name="destFolder" value="${browserSpecific}" />
+			<param name="fileName" value="${bsSTTImpl}" />
+		</antcall>
 	</target>
 	
 	<target name="cleanAndBuild" description="Cleans the generate folder and rebuild it again.">
