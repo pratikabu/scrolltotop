@@ -62,12 +62,12 @@
 		
 		<!-- generate the minify js -->
 		<antcall target="minfiyFile">
-			<param name="sourceFolder" value="${baseBrowserSpecific}" />
+			<param name="sourceFolder" value="${baseBrowserSpecific}/${bsFolderName}" />
 			<param name="destFolder" value="${browserSpecific}" />
 			<param name="fileName" value="${bsOptionsImplName}" />
 		</antcall>
 		<antcall target="minfiyFile">
-			<param name="sourceFolder" value="${baseBrowserSpecific}" />
+			<param name="sourceFolder" value="${baseBrowserSpecific}/${bsFolderName}" />
 			<param name="destFolder" value="${browserSpecific}" />
 			<param name="fileName" value="${bsSTTImpl}" />
 		</antcall>
