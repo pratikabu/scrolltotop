@@ -1,5 +1,3 @@
-//http://demosthenes.info/blog/532/ refer black and white here for mozilla
-
 var requestCount = 0;
 var ignoreImgLoad = true;
 var dIgnoreImgLoad = true;
@@ -20,9 +18,9 @@ function updateBlackAndWhite() {
 }
 
 /**
- * 
- * @param {type} returnValue
- * @returns {save_options.data}
+ * Saves options to localStorage.
+ * @param returnValue
+ * @returns data optionally returns data json object
  */
 function save_options(returnValue) {
 	var data = {
@@ -60,7 +58,10 @@ function save_options(returnValue) {
 	}
 }
 
-// Restores select box state to saved value from localStorage.
+/**
+ * Restores select box state to saved value from localStorage.
+ * @param data
+ */
 function restore_options(data) {
 	ignoreImgLoad = true;// ignore the image load method as it will reset myIcon in the radio button
 	dIgnoreImgLoad = true;// ignore the image load method as it will reset myIcon in the radio button
