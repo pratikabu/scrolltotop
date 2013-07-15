@@ -16,6 +16,10 @@
 	background: WHITESMOKE;
 	width: 700px;
 	margin-bottom: 20px;
+	
+/* 	to give the cellSpacing */
+	border-collapse:separate;
+	border-spacing: 15px;
 }
 
 .donateContainerDiv {
