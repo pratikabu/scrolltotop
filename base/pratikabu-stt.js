@@ -13,17 +13,19 @@ var pratikabu_stt_scrollingInProgress = false;
 var pratikabu_stt_lastDocumentTop = 0;// this variable will hold the document top since the last scroll, for smart direction based
 var pratikabu_stt_autoHide = false;
 var pratikabu_stt_ahRequestCount = 0;// counter to handle autohide in seconds
+var pratikabu_stt_pollabelIconSwitch = false;// maintains whether or not the pollable downward icon is visible or not
 
 var pratikabustt = {
 	scrollHandlerOneTime: function() {
-		if($(document).scrollTop() > pratikabu_stt_inversionPoint) {// terminating condition for this handler
+		if(pratikabustt.isPOICrossed()) {// terminating condition for this handler
 			$(window).unbind('scroll', pratikabustt.scrollHandlerOneTime);
 			pratikabustt.showHideAddon(true);
 		}
 	},
 	
 	scrollHandlerHideAtTop: function () {
-		pratikabustt.showHideAddon($(document).scrollTop() > pratikabu_stt_inversionPoint);
+		pratikabustt.showHideAddon(pratikabustt.isPOICrossed());
+		pratikabustt.togglePollableIcon();
 	},
 	
 	windowResizeHandlerHideAtTop: function() {
@@ -45,9 +47,10 @@ var pratikabustt = {
 		// finally once the scrolling is finished, rotate addon if needed
 		if(0 === pratikabu_stt_lastDocumentTop) {
 			pratikabustt.rotateDown(true);
-		} else if(pratikabu_stt_lastDocumentTop >= ($(document).height() - pratikabustt.getWindowHeight())) {
+		} else if(pratikabustt.isAtBottom()) {
 			pratikabustt.rotateUp();
 		}
+		pratikabustt.togglePollableIcon();
 	},
 	
 	scrollHandlerAutoHide: function() {
@@ -62,11 +65,30 @@ var pratikabustt = {
 	},
 	
 	scrollRotationHandler: function() {
-		if(pratikabu_stt_inversionPoint > $(document).scrollTop()) {// you are at the top rotate arrows to original state
+		if(!pratikabustt.isPOICrossed()) {// you are at the top rotate arrows to original state
 			pratikabustt.rotateDown(true);
 		} else {
 			pratikabustt.rotateUp();
 		}
+		pratikabustt.togglePollableIcon();
+	},
+	
+	/**
+	 * POI: Point of Inversion, used to see whether or not the scroll has passed the POI.
+	 * @returns {Boolean}
+	 */
+	isPOICrossed: function() {
+		var isCrossed = pratikabu_stt_inversionPoint < $(document).scrollTop();
+		return isCrossed;
+	},
+	
+	/**
+	 * Identifies whether or not the scroll is at the bottom of the page.
+	 * @returns {Boolean}
+	 */
+	isAtBottom: function() {
+		var atBottom = $(document).scrollTop() >= ($(document).height() - pratikabustt.getWindowHeight());
+		return atBottom;
 	},
 	
 	rotateDown: function(animateRotation) {
@@ -136,14 +158,18 @@ var pratikabustt = {
 		} else {
 			// add the scroll down logic
 			$("#pratikabuSTTSettings").click(function() {
-				pratikabustt_browser_impl.openOptionPage();
+				if(pratikabu_stt_pollabelIconSwitch) {
+					pratikabustt.scrollToBottom();
+				} else {
+					pratikabustt_browser_impl.openOptionPage();
+				}
 				return false;
 			});
 			
 			// add rotation for scrolling down
 			$("#pratikabuSTTSettings").hover(
-				function() { $(this).rotate({ animateTo: 180 }); },
-				function() { $(this).rotate({ animateTo: 0 }); });
+				function() { if(!pratikabu_stt_pollabelIconSwitch) { $(this).rotate({ animateTo: 180 });} },
+				function() { if(!pratikabu_stt_pollabelIconSwitch) { $(this).rotate({ animateTo: 0 });} });
 			
 			// add the remove div logic
 			$("#pratikabuSTTClear").click(function() {
@@ -238,6 +264,21 @@ var pratikabustt = {
 		}
 		
 		return true;
+	},
+	
+	togglePollableIcon: function() {
+		var showPollable = pratikabustt.isPOICrossed() && !pratikabustt.isAtBottom();
+		if(showPollable === pratikabu_stt_pollabelIconSwitch) {
+			return;
+		}
+		
+		pratikabu_stt_pollabelIconSwitch = showPollable;
+		if(showPollable) {
+			pratikabustt_browser_impl.setImageForId("pratikabuSTTSettings", "bottom-" + pratikabustt.getOtherImageSize() + ".png");
+		} else {
+			pratikabustt_browser_impl.setImageForId("pratikabuSTTSettings", "settings-" + pratikabustt.getOtherImageSize() + ".png");
+		}
+		$("#pratikabuSTTSettings").rotate(0);
 	},
 	
 	showHideAddon: function(boolShowAddon) {
