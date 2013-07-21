@@ -4,7 +4,6 @@
 
 /** Saves options to localStorage. */
 function bsDefaultSettings() {
-	ignoreForDefaults = true;// ignore the image load method as it will reset myIcon in the radio button
 	self.port.emit("resetPrefs");// method to communicate to main.js
 }
 
@@ -32,4 +31,8 @@ function bsFetchSettings() {
 
 function bsSaveSettings(data) {
 	self.port.emit("setPrefs", data);// method to communicate to main.js
+}
+
+function bsReviewPageUrl() {
+	return "https://addons.mozilla.org/en-us/firefox/addon/scroll-to-top/reviews/add";
 }

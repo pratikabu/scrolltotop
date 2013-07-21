@@ -100,8 +100,8 @@ pageMod.PageMod({
     include: "*", // for all pages, as it will give the scrolling for all pages
 	attachTo: ["existing", "top"],
     contentStyleFile: data.url("pratikabu-stt.css"),
-    contentScriptFile: [data.url("jquery-1.8.2.pratikabu.js"), data.url("jQueryRotate.js"),
-        data.url("pratikabustt-browser-impl.js"), data.url("pratikabu-stt.js")],
+    contentScriptFile: [data.url("thirdparty/jquery-pratikabu.js"), data.url("thirdparty/jquery-rotate.js"),
+        data.url("browserspecific/pratikabustt-browser-impl.js"), data.url("pratikabu-stt.js")],
 	contentScriptWhen: "ready",
     onAttach: function onAttach(worker) {// attaching the worker so as to do the communication with contentscript file
 		worker.port.on('getPrefs', function() {
@@ -148,7 +148,7 @@ pageMod.PageMod({
 
 var openOptioinPage = function(updated) {
 	// don't open the option page if it is already open
-	var optionPageUrl = data.url("options.html");
+	var optionPageUrl = data.url("options/options.html");
 	for each (var openTab in tabs) {
 		if(openTab.url.toLowerCase().indexOf(optionPageUrl.toLowerCase()) != -1) {
 			// page is already open
@@ -163,12 +163,12 @@ var openOptioinPage = function(updated) {
 		updated = "";
 	}
     tabs.open({
-		url: data.url("options.html" + updated),
+		url: data.url("options/options.html" + updated),
 		onReady: runScript
 	});
 	function runScript(tab) {
 		tabWorker = tab.attach({
-			contentScriptFile: [data.url("jquery-1.8.2.pratikabu.js"), data.url("pratikabustt-slider.js"), data.url("options.js")]
+			contentScriptFile: [data.url("thirdparty/jquery-pratikabu.js"), data.url("thirdparty/jquery-ui.js"), data.url("browserspecific/options-browser-impl.js"), data.url("options/res/options.js")]
 		});
 		
 		tabWorker.port.on('getPrefs', function() {
@@ -238,7 +238,7 @@ var openOptioinPage = function(updated) {
 sp.on("myButtonPref", openOptioinPage);
 
 // open option page on initial in this version
-var currentVersion = 6;// this variable should be incremented with every update so that, add-on update message can be shown
+var currentVersion = 7;// this variable should be incremented with every update so that, add-on update message can be shown
 if(!ss.storage.versionInfo || currentVersion > ss.storage.versionInfo) {
 	ss.storage.versionInfo = currentVersion;
 	openOptioinPage("updated");

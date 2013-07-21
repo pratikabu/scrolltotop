@@ -2,7 +2,7 @@
 
 <project name="ScrollToTop" default="cleanAndBuild">
 	<property file="build.properties" />
-	<property file="buildspecific.properties" />
+	<property file="firefoxspecific.properties" />
 
 	<target name="clean" description="clean up everything">
 		<delete dir="${generateDir}" />
@@ -11,7 +11,7 @@
 	<target name="build" description="generate executable folder">
 		
 		<!-- Copy base directory structure to the broswer location -->
-		<copy overwrite="true" todir="${browserDir}">
+		<copy overwrite="true" todir="${browserDir}${browserSubDir}">
 			<fileset dir="${base}" />
 		</copy>
 		
@@ -57,7 +57,7 @@
 		</antcall>
 	</target>
 	
-	<target name="minBrowserBuildChrome" description="build while compressing the js">
+	<target name="minBrowserBuild" description="build while compressing the js">
 		<antcall target="minfiyBuild" />
 		
 		<!-- generate the minify js -->
