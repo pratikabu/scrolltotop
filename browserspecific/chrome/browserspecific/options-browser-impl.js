@@ -15,7 +15,7 @@ function bsDefaultSettings() {
 function bsInit() {
 }
 
-function bsFetchSettings(updated) {
+function bsFetchSettings() {
 	var data = {
 		vLoc: localStorage["vertical_location"],
 		hLoc: localStorage["horizontal_location"],
@@ -45,10 +45,6 @@ function bsFetchSettings(updated) {
 	};
 	
 	restore_options(data);
-	
-	if("true" !== updated) {
-		randomOpenSupportDialog();// only once it will be called
-	}
 }
 
 function bsSaveSettings(data) {

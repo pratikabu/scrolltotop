@@ -20,6 +20,12 @@ var checkForInitialize = function() {
 	if(!ss.storage.visibility_behavior) {
 		ss.storage.visibility_behavior = "alwaysshow";
 	}
+	if (!ss.storage.icon_transparency) {
+		ss.storage.icon_transparency = "0.5";
+	}
+	if (!ss.storage.black_and_white) {
+		ss.storage.black_and_white = "false";
+	}
 	
 	if (!ss.storage.arrow_type) {
 		ss.storage.arrow_type = "1";
@@ -73,6 +79,8 @@ var forceInitializeSettings = function() {
 	delete ss.storage.horizontal_location;
 	delete ss.storage.scrolling_speed;
 	delete ss.storage.visibility_behavior;
+	delete ss.storage.icon_transparency;
+	delete ss.storage.black_and_white;
 	
 	delete ss.storage.arrow_type;
 	
@@ -101,7 +109,7 @@ pageMod.PageMod({
 	attachTo: ["existing", "top"],
     contentStyleFile: data.url("pratikabu-stt.css"),
     contentScriptFile: [data.url("thirdparty/jquery-pratikabu.js"), data.url("thirdparty/jquery-rotate.js"),
-        data.url("browserspecific/pratikabustt-browser-impl.js"), data.url("pratikabu-stt.js")],
+        data.url("browserspecific/pratikabu-stt-impl.js"), data.url("pratikabu-stt.js")],
 	contentScriptWhen: "ready",
     onAttach: function onAttach(worker) {// attaching the worker so as to do the communication with contentscript file
 		worker.port.on('getPrefs', function() {
@@ -110,6 +118,8 @@ pageMod.PageMod({
 				hLoc: ss.storage.horizontal_location,
 				scrSpeed: ss.storage.scrolling_speed,
 				visibilityBehav: ss.storage.visibility_behavior,
+				iconTransparency: ss.storage.icon_transparency,
+				blackAndWhite: ss.storage.black_and_white,
 				
 				arrowType: ss.storage.arrow_type,
 				
@@ -177,6 +187,8 @@ var openOptioinPage = function(updated) {
 				hLoc: ss.storage.horizontal_location,
 				scrSpeed: ss.storage.scrolling_speed,
 				visibilityBehav: ss.storage.visibility_behavior,
+				iconTransparency: ss.storage.icon_transparency,
+				blackAndWhite: ss.storage.black_and_white,
 				
 				arrowType: ss.storage.arrow_type,
 				
@@ -202,6 +214,8 @@ var openOptioinPage = function(updated) {
 			ss.storage.horizontal_location = data.hLoc;
 			ss.storage.scrolling_speed = data.scrSpeed;
 			ss.storage.visibility_behavior = data.visibilityBehav;
+			ss.storage.icon_transparency = data.iconTransparency;
+			ss.storage.black_and_white = data.blackAndWhite;
 			
 			ss.storage.arrow_type = data.arrowType;
 			
