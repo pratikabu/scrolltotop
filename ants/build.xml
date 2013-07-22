@@ -1,80 +1,52 @@
-<?xml version="1.0"?>
+<project name="ScrollToTop">
+	<!--<property file="build.properties" />-->
+	
+	<target name="callTarget">
+		<ant antfile="browserbuild.xml" target="${targetName}">
+			<property file="browserbuild.properties" />
+			<property file="${browserName}specific.properties" />
+		</ant>
+	</target>
 
-<project name="ScrollToTop" default="cleanAndBuild">
-	<property file="build.properties" />
-	<property file="firefoxspecific.properties" />
-
-	<target name="clean" description="clean up everything">
-		<delete dir="${generateDir}" />
+	<target name="clean">
+		<antcall target="callTarget">
+			<param name="targetName" value="clean" />
+		</antcall>
 	</target>
 
-	<target name="build" description="generate executable folder">
-		
-		<!-- Copy base directory structure to the broswer location -->
-		<copy overwrite="true" todir="${browserDir}${browserSubDir}">
-			<fileset dir="${base}" />
-		</copy>
-		
-		<!-- Copy base directory structure to the broswer location -->
-		<copy overwrite="true" todir="${browserDir}">
-			<fileset dir="${baseBrowserSpecific}" />
-		</copy>
+	<!-- minify builds -->
+	<target name="minifyFirefoxBuild">
+		<antcall target="callTarget">
+			<param name="targetName" value="minifyBuild" />
+			<param name="browserName" value="firefox" />
+		</antcall>
 	</target>
-	
-	<target name="minfiyFile" description="minify any file js, css">
-		<echo>Minifying ${sourceFolder}/${fileName}</echo>
-		<java jar="${comressorJarFile}" fork="true" failonerror="true">
-			<arg value="${sourceFolder}/${fileName}" />
-			<arg value="-o" />
-			<arg value="${destFolder}/${fileName}" />
-		</java>
-	</target>
-	
-	<target name="minfiyBuild" description="build while compressing the js">
-		<!-- copy all the existing files -->
-		<antcall target="build" />
-		
-		<!-- generate the minify js -->
-		<antcall target="minfiyFile">
-			<param name="sourceFolder" value="${base}" />
-			<param name="destFolder" value="${browserDir}" />
-			<param name="fileName" value="${sttJsFileName}" />
-		</antcall>
-		<antcall target="minfiyFile">
-			<param name="sourceFolder" value="${base}" />
-			<param name="destFolder" value="${browserDir}" />
-			<param name="fileName" value="${sttCssFileName}" />
-		</antcall>
-		<antcall target="minfiyFile">
-			<param name="sourceFolder" value="${options}/res" />
-			<param name="destFolder" value="${browserOptions}/res" />
-			<param name="fileName" value="${optionJsFileName}" />
-		</antcall>
-		<antcall target="minfiyFile">
-			<param name="sourceFolder" value="${options}/res" />
-			<param name="destFolder" value="${browserOptions}/res" />
-			<param name="fileName" value="${optionCssFileName}" />
+
+	<target name="minifyChromeBuild">
+		<antcall target="callTarget">
+			<param name="targetName" value="minifyBuild" />
+			<param name="browserName" value="chrome" />
 		</antcall>
 	</target>
 	
-	<target name="minBrowserBuild" description="build while compressing the js">
-		<antcall target="minfiyBuild" />
-		
-		<!-- generate the minify js -->
-		<antcall target="minfiyFile">
-			<param name="sourceFolder" value="${baseBrowserSpecific}/${bsFolderName}" />
-			<param name="destFolder" value="${browserSpecific}" />
-			<param name="fileName" value="${bsOptionsImplName}" />
+	<target name="minifyBuildAll" depends="minifyChromeBuild,minifyFirefoxBuild" />
+	<target name="minifyCleanBuildAll" depends="clean,minifyBuildAll" />
+
+	<!-- normal builds -->
+	<target name="normalFirefoxBuild">
+		<antcall target="callTarget">
+			<param name="targetName" value="build" />
+			<param name="browserName" value="firefox" />
 		</antcall>
-		<antcall target="minfiyFile">
-			<param name="sourceFolder" value="${baseBrowserSpecific}/${bsFolderName}" />
-			<param name="destFolder" value="${browserSpecific}" />
-			<param name="fileName" value="${bsSTTImpl}" />
+	</target>
+
+	<target name="normalChromeBuild">
+		<antcall target="callTarget">
+			<param name="targetName" value="build" />
+			<param name="browserName" value="chrome" />
 		</antcall>
 	</target>
 	
-	<target name="cleanAndBuild" description="Cleans the generated folder and rebuild it again.">
-		<antcall target="clean" />
-		<antcall target="build" />
-	</target>
+	<target name="normalBuildAll" depends="normalChromeBuild,normalFirefoxBuild" />
+	<target name="normalCleanBuildAll" depends="clean,normalBuildAll" />
 </project>

@@ -1,0 +1,87 @@
+<?xml version="1.0"?>
+
+<project name="BrowserBuild" default="cleanAndBuild">
+	<!--<property file="browserbuild.properties" />
+	<property file="firefoxspecific.properties" />-->
+
+	<target name="clean" description="clean up everything">
+		<delete dir="${generateDir}" />
+	</target>
+
+	<target name="build" description="generate executable folder">
+		<!-- Copy base directory structure to the broswer location -->
+		<copy overwrite="true" todir="${browserDir}${browserSubDir}">
+			<fileset dir="${base}">
+				<exclude name="**/${ignoreFolderName}/**" />
+			</fileset>
+		</copy>
+		
+		<!-- Copy base directory structure to the broswer location -->
+		<copy overwrite="true" todir="${browserDir}">
+			<fileset dir="${baseBrowserSpecific}">
+				<exclude name="**/${ignoreFolderName}/**" />
+			</fileset>
+		</copy>
+		
+		<!-- do some browser specific stuffs -->
+		<condition property="browserSpecific.isFirefox">
+			<equals arg1="${browserName}" arg2="firefox" />
+		</condition>
+		<antcall target="internalfirefoxSpecific" />
+	</target>
+	
+	<target name="internalfirefoxSpecific" if="browserSpecific.isFirefox">
+		<echo>Removing script tags from ${options}/${optionHtmlFileName}</echo>
+		<java jar="${firefoxHtmlJarFile}" fork="true" failonerror="true">
+			<arg value="${options}/${optionHtmlFileName}" />
+			<arg value="${browserOptions}/${optionHtmlFileName}" />
+		</java>
+	</target>
+	
+	<target name="minifyFile" description="minify any file js, css">
+		<echo>Minifying ${sourceFolder}/${fileName}</echo>
+		<java jar="${comressorJarFile}" fork="true" failonerror="true">
+			<arg value="${sourceFolder}/${fileName}" />
+			<arg value="-o" />
+			<arg value="${destFolder}/${fileName}" />
+		</java>
+	</target>
+	
+	<target name="minifyBuild" depends="build" description="build while compressing the js">
+		<!-- compress base js and css -->
+		<antcall target="minifyFile">
+			<param name="sourceFolder" value="${base}" />
+			<param name="destFolder" value="${browserDir}${browserSubDir}" />
+			<param name="fileName" value="${sttJsFileName}" />
+		</antcall>
+		<antcall target="minifyFile">
+			<param name="sourceFolder" value="${base}" />
+			<param name="destFolder" value="${browserDir}${browserSubDir}" />
+			<param name="fileName" value="${sttCssFileName}" />
+		</antcall>
+		<antcall target="minifyFile">
+			<param name="sourceFolder" value="${options}/res" />
+			<param name="destFolder" value="${browserOptions}/res" />
+			<param name="fileName" value="${optionJsFileName}" />
+		</antcall>
+		<antcall target="minifyFile">
+			<param name="sourceFolder" value="${options}/res" />
+			<param name="destFolder" value="${browserOptions}/res" />
+			<param name="fileName" value="${optionCssFileName}" />
+		</antcall>
+		
+		<!-- compress browser specific js -->
+		<antcall target="minifyFile">
+			<param name="sourceFolder" value="${baseBrowserSpecific}${browserSubDir}/${bsFolderName}" />
+			<param name="destFolder" value="${browserSpecific}" />
+			<param name="fileName" value="${bsOptionsImplName}" />
+		</antcall>
+		<antcall target="minifyFile">
+			<param name="sourceFolder" value="${baseBrowserSpecific}${browserSubDir}/${bsFolderName}" />
+			<param name="destFolder" value="${browserSpecific}" />
+			<param name="fileName" value="${bsSTTImpl}" />
+		</antcall>
+	</target>
+	
+	<target name="cleanAndBuild" depends="clean,build" description="Cleans the generated folder and rebuild it again." />
+</project>
