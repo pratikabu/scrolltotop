@@ -1,4 +1,4 @@
-<project name="ScrollToTop">
+<project name="ScrollToTop" default="normalCleanBuildAll">
 	<!--<property file="build.properties" />-->
 	
 	<target name="callTarget">
