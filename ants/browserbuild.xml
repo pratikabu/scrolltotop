@@ -81,6 +81,11 @@
 			<param name="destFolder" value="${browserSpecific}" />
 			<param name="fileName" value="${bsSTTImpl}" />
 		</antcall>
+		<antcall target="minifyFile">
+			<param name="sourceFolder" value="${browserMainSrcJSLoc}" />
+			<param name="destFolder" value="${browserMainDestJSLoc}" />
+			<param name="fileName" value="${browserJSFileName}" />
+		</antcall>
 	</target>
 	
 	<target name="cleanAndBuild" depends="clean,build" description="Cleans the generated folder and rebuild it again." />
