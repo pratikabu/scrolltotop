@@ -27,64 +27,64 @@
 		<condition property="browserSpecific.isFirefox">
 			<equals arg1="${browserName}" arg2="firefox" />
 		</condition>
-		<antcall target="internalfirefoxSpecific" />
+		<antcall target="internalFirefoxSpecific" />
+		
+
+		<condition property="browserSpecific.isOperaChromium">
+			<equals arg1="${browserName}" arg2="opera-chromium" />
+		</condition>
+		<antcall target="internalOperaChromiumSpecific" />
 	</target>
 	
-	<target name="internalfirefoxSpecific" if="browserSpecific.isFirefox">
-		<echo>Removing script tags from ${options}/${optionHtmlFileName}</echo>
+	<target name="internalFirefoxSpecific" if="browserSpecific.isFirefox">
 		<java jar="${firefoxHtmlJarFile}" fork="true" failonerror="true">
+			<arg value="MFO" />
 			<arg value="${options}/${optionHtmlFileName}" />
 			<arg value="${browserOptions}/${optionHtmlFileName}" />
 		</java>
 	</target>
 	
+	<target name="internalOperaChromiumSpecific" if="browserSpecific.isOperaChromium">
+		<java jar="${firefoxHtmlJarFile}" fork="true" failonerror="true">
+			<arg value="OCOJI" />
+			<arg value="${baseBrowserSpecific}/${bsFolderName}/${bsOptionsImplName}" />
+			<arg value="${browserSpecific}/${bsOptionsImplName}" />
+		</java>
+	</target>
+	
 	<target name="minifyFile" description="minify any file js, css">
-		<echo>Minifying ${sourceFolder}/${fileName}</echo>
+		<echo>Minifying ${fileLoc}</echo>
 		<java jar="${comressorJarFile}" fork="true" failonerror="true">
-			<arg value="${sourceFolder}/${fileName}" />
+			<arg value="${fileLoc}" />
 			<arg value="-o" />
-			<arg value="${destFolder}/${fileName}" />
+			<arg value="${fileLoc}" />
 		</java>
 	</target>
 	
 	<target name="minifyBuild" depends="build" description="build while compressing the js">
 		<!-- compress base js and css -->
 		<antcall target="minifyFile">
-			<param name="sourceFolder" value="${base}" />
-			<param name="destFolder" value="${browserDir}${browserSubDir}" />
-			<param name="fileName" value="${sttJsFileName}" />
+			<param name="fileLoc" value="${browserDir}${browserSubDir}/${sttJsFileName}" />
 		</antcall>
 		<antcall target="minifyFile">
-			<param name="sourceFolder" value="${base}" />
-			<param name="destFolder" value="${browserDir}${browserSubDir}" />
-			<param name="fileName" value="${sttCssFileName}" />
+			<param name="fileLoc" value="${browserDir}${browserSubDir}/${sttCssFileName}" />
 		</antcall>
 		<antcall target="minifyFile">
-			<param name="sourceFolder" value="${options}/res" />
-			<param name="destFolder" value="${browserOptions}/res" />
-			<param name="fileName" value="${optionJsFileName}" />
+			<param name="fileLoc" value="${browserOptions}/${resFolderName}/${optionJsFileName}" />
 		</antcall>
 		<antcall target="minifyFile">
-			<param name="sourceFolder" value="${options}/res" />
-			<param name="destFolder" value="${browserOptions}/res" />
-			<param name="fileName" value="${optionCssFileName}" />
+			<param name="fileLoc" value="${browserOptions}/${resFolderName}/${optionCssFileName}" />
 		</antcall>
 		
 		<!-- compress browser specific js -->
 		<antcall target="minifyFile">
-			<param name="sourceFolder" value="${baseBrowserSpecific}${browserSubDir}/${bsFolderName}" />
-			<param name="destFolder" value="${browserSpecific}" />
-			<param name="fileName" value="${bsOptionsImplName}" />
+			<param name="fileLoc" value="${browserSpecific}/${bsOptionsImplName}" />
 		</antcall>
 		<antcall target="minifyFile">
-			<param name="sourceFolder" value="${baseBrowserSpecific}${browserSubDir}/${bsFolderName}" />
-			<param name="destFolder" value="${browserSpecific}" />
-			<param name="fileName" value="${bsSTTImpl}" />
+			<param name="fileLoc" value="${browserSpecific}/${bsSTTImpl}" />
 		</antcall>
 		<antcall target="minifyFile">
-			<param name="sourceFolder" value="${browserMainSrcJSLoc}" />
-			<param name="destFolder" value="${browserMainDestJSLoc}" />
-			<param name="fileName" value="${browserJSFileName}" />
+			<param name="fileLoc" value="${browserMainDestJSLoc}" />
 		</antcall>
 	</target>
 	
