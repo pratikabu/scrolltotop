@@ -1,0 +1,6 @@
+Make the changes and create the scroll-to-top-x.y.safariextz
+upload it to dropbox.com or any other place
+make the goo.gl url for this
+
+Update the update.plist file with proper version
+upload it to res folder in my website
