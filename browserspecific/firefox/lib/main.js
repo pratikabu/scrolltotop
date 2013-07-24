@@ -205,7 +205,9 @@ var openOptioinPage = function(updated) {
 				
 				hOffset: ss.storage.h_offset,
 				vOffset: ss.storage.v_offset,
-				removedSites: ss.storage.removed_sites
+				removedSites: ss.storage.removed_sites,
+				
+				supportPrompt: ss.storage.support_prompt
 			});
 		});
 		
@@ -233,6 +235,8 @@ var openOptioinPage = function(updated) {
 			ss.storage.h_offset = data.hOffset;
 			ss.storage.v_offset = data.vOffset;
 			ss.storage.removed_sites = data.removedSites;
+			
+			ss.storage.support_prompt = data.supportPrompt;
 			
 			tabWorker.port.emit("saveStatus", {// send the status of the step
 				status: "Saved perfectly."

@@ -13,6 +13,12 @@
 		if (!localStorage["visibility_behavior"]) {
 			localStorage["visibility_behavior"] = "alwaysshow";
 		}
+		if (!localStorage["icon_transparency"]) {
+			localStorage["icon_transparency"] = "0.5";
+		}
+		if (!localStorage["black_and_white"]) {
+			localStorage["black_and_white"] = "false";
+		}
 		
 		if (!localStorage["arrow_type"]) {
 			localStorage["arrow_type"] = "1";
@@ -56,6 +62,9 @@
 		if (!localStorage["removed_sites"]) {
 			localStorage["removed_sites"] = "mail.google.com/mail;google.com/calendar;";
 		}
+		if(localStorage["version6remove"]) {
+			localStorage.removeItem("version6remove");
+		}
 	}
 
 	checkForInitialization();// execute it for the first time also
@@ -65,6 +74,8 @@
 		localStorage.removeItem("horizontal_location");
 		localStorage.removeItem("scrolling_speed");
 		localStorage.removeItem("visibility_behavior");
+		localStorage.removeItem("icon_transparency");
+		localStorage.removeItem("black_and_white");
 		
 		localStorage.removeItem("arrow_type");
 		
@@ -95,6 +106,8 @@
 				hLoc: localStorage["horizontal_location"],
 				scrSpeed: localStorage["scrolling_speed"],
 				visibilityBehav: localStorage["visibility_behavior"],
+				iconTransparency: localStorage["icon_transparency"],
+				blackAndWhite: localStorage["black_and_white"],
 				
 				arrowType: localStorage["arrow_type"],
 				
@@ -141,7 +154,7 @@
 		// Create a tab with the specified URL
 		var tab;
 		
-		var optionPageUrl = "options.html" + updated;
+		var optionPageUrl = "options/options.html" + updated;
 		var tabs = opera.extension.tabs.getAll();
 		for (var i = 0; i < tabs.length; i++) {
 			var openTab = tabs[i];
@@ -171,18 +184,9 @@
 	opera.contexts.menu.addItem(item);
 	
 	// open option page on initial in this version
-	var currentVersion = 6;// this variable should be incremented with every update so that, add-on update message can be shown
+	var currentVersion = 7;// this variable should be incremented with every update so that, add-on update message can be shown
 	if(!localStorage["version_info"] || currentVersion > localStorage["version_info"]) {
 		localStorage["version_info"] = currentVersion;
 		openTabFunc("true");
-		localStorage["version6remove"] = "removeit";
-	} else if(!localStorage["version6remove"] && 6 == localStorage["version_info"]) {
-		localStorage["version6remove"] = "removeit";
-		
-		if("autohide" == localStorage["visibility_behavior"]) {
-			localStorage["visibility_behavior"] = "alwaysshow";
-		}
-		localStorage["smart_direction_mode"] = "false";
-		opera.extension.tabs.create({url: "options.html?reverted=true"}).focus();
 	}
 </script></head><body></body></html>

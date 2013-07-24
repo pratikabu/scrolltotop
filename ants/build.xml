@@ -60,6 +60,13 @@
 			<param name="browserName" value="opera-chromium" />
 		</antcall>
 	</target>
+
+	<target name="normalOperaBuild">
+		<antcall target="callTarget">
+			<param name="targetName" value="build" />
+			<param name="browserName" value="opera" />
+		</antcall>
+	</target>
 	
 	<target name="normalBuildAll" depends="normalChromeBuild,normalFirefoxBuild,normalOperChromiumBuild" />
 	<target name="normalCleanBuildAll" depends="clean,normalBuildAll" />

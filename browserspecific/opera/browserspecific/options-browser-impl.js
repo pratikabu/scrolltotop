@@ -4,7 +4,6 @@
 
 /** Saves options to localStorage. */
 function bsDefaultSettings() {
-	ignoreForDefaults = true;// ignore the image load method as it will reset myIcon in the radio button
 	opera.extension.postMessage({requestFor: "resetSettings"});
 }
 
@@ -25,6 +24,8 @@ function bsFetchSettings() {
 		hLoc: localStorage["horizontal_location"],
 		visibilityBehav: localStorage["visibility_behavior"],
 		scrSpeed: localStorage["scrolling_speed"],
+		iconTransparency: localStorage["icon_transparency"],
+		blackAndWhite: localStorage["black_and_white"],
 		
 		arrowType: localStorage["arrow_type"],
 		
@@ -41,7 +42,9 @@ function bsFetchSettings() {
 		
 		hOffset: localStorage["h_offset"],
 		vOffset: localStorage["v_offset"],
-		removedSites: localStorage["removed_sites"]
+		removedSites: localStorage["removed_sites"],
+		
+		supportPrompt: localStorage["support_prompt"]
 	};
 	
 	restore_options(data);
@@ -52,6 +55,8 @@ function bsSaveSettings(data) {
 	localStorage["horizontal_location"] = data.hLoc;
 	localStorage["visibility_behavior"] = data.visibilityBehav;
 	localStorage["scrolling_speed"] = data.scrSpeed;
+	localStorage["icon_transparency"] = data.iconTransparency;
+	localStorage["black_and_white"] = data.blackAndWhite;
 	
 	localStorage["arrow_type"] = data.arrowType;
 	
@@ -70,6 +75,12 @@ function bsSaveSettings(data) {
 	localStorage["v_offset"] = data.vOffset;
 	localStorage["removed_sites"] = data.removedSites;
 	
+	localStorage["support_prompt"] = data.supportPrompt;
+	
 	// Update status to let user know options were saved.
 	show_message("Saved successfully. <a target='_blank' href='http://pratikabu.users.sourceforge.net/extensions/scrolltotop/release.html'>Preview your changes</a>.");
+}
+
+function bsReviewPageUrl() {
+	return "http://addons.opera.com/en/extensions/details/scroll-to-top";
 }

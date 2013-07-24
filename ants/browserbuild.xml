@@ -34,10 +34,15 @@
 			<equals arg1="${browserName}" arg2="opera-chromium" />
 		</condition>
 		<antcall target="internalOperaChromiumSpecific" />
+		
+		<condition property="browserSpecific.isOpera">
+			<equals arg1="${browserName}" arg2="opera" />
+		</condition>
+		<antcall target="internalOperaSpecific" />
 	</target>
 	
 	<target name="internalFirefoxSpecific" if="browserSpecific.isFirefox">
-		<java jar="${firefoxHtmlJarFile}" fork="true" failonerror="true">
+		<java jar="${htmlModifierJarFile}" fork="true" failonerror="true">
 			<arg value="MFO" />
 			<arg value="${options}/${optionHtmlFileName}" />
 			<arg value="${browserOptions}/${optionHtmlFileName}" />
@@ -45,10 +50,17 @@
 	</target>
 	
 	<target name="internalOperaChromiumSpecific" if="browserSpecific.isOperaChromium">
-		<java jar="${firefoxHtmlJarFile}" fork="true" failonerror="true">
+		<java jar="${htmlModifierJarFile}" fork="true" failonerror="true">
 			<arg value="OCOJI" />
 			<arg value="${baseBrowserSpecific}/${bsFolderName}/${bsOptionsImplName}" />
 			<arg value="${browserSpecific}/${bsOptionsImplName}" />
+		</java>
+	</target>
+	
+	<target name="internalOperaSpecific" if="browserSpecific.isOpera">
+		<java jar="${htmlModifierJarFile}" fork="true" failonerror="true">
+			<arg value="OSJE" />
+			<arg value="${browserDir}/${browserSTTJSFileLoc}" />
 		</java>
 	</target>
 	

@@ -28,14 +28,6 @@
 	border: 0px !important;
 }
 
-.otherDiv {
-	background: none !important;
-	display: block;
-	padding: 0px !important;
-	margin: 0px !important;
-	line-height: 0 !important;
-}
-
 .pratikabuSTTBlackAndWhite {
 	filter: grayscale(100%);
 	-webkit-filter: grayscale(100%); -moz-filter: grayscale(100%);
