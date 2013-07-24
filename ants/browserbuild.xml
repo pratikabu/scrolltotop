@@ -60,7 +60,7 @@
 	<target name="internalOperaSpecific" if="browserSpecific.isOpera">
 		<java jar="${htmlModifierJarFile}" fork="true" failonerror="true">
 			<arg value="OSJE" />
-			<arg value="${browserDir}/${browserSTTJSFileLoc}" />
+			<arg value="${browserSTTJSFileLoc}" />
 		</java>
 	</target>
 	

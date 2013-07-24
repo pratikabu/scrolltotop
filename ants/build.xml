@@ -35,8 +35,15 @@
 			<param name="browserName" value="opera-chromium" />
 		</antcall>
 	</target>
+
+	<target name="minifyOperaBuild">
+		<antcall target="callTarget">
+			<param name="targetName" value="minifyBuild" />
+			<param name="browserName" value="opera" />
+		</antcall>
+	</target>
 	
-	<target name="minifyBuildAll" depends="minifyChromeBuild,minifyFirefoxBuild,minifyOperChromiumBuild" />
+	<target name="minifyBuildAll" depends="minifyChromeBuild,minifyFirefoxBuild,minifyOperChromiumBuild,minifyOperChromiumBuild" />
 	<target name="minifyCleanBuildAll" depends="clean,minifyBuildAll" />
 
 	<!-- normal builds -->
@@ -68,6 +75,6 @@
 		</antcall>
 	</target>
 	
-	<target name="normalBuildAll" depends="normalChromeBuild,normalFirefoxBuild,normalOperChromiumBuild" />
+	<target name="normalBuildAll" depends="normalChromeBuild,normalFirefoxBuild,normalOperChromiumBuild,normalOperaBuild" />
 	<target name="normalCleanBuildAll" depends="clean,normalBuildAll" />
 </project>
