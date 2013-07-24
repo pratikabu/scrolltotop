@@ -13,6 +13,12 @@
 		if (!localStorage["visibility_behavior"]) {
 			localStorage["visibility_behavior"] = "alwaysshow";
 		}
+		if (!localStorage["icon_transparency"]) {
+			localStorage["icon_transparency"] = "0.5";
+		}
+		if (!localStorage["black_and_white"]) {
+			localStorage["black_and_white"] = "false";
+		}
 		
 		if (!localStorage["arrow_type"]) {
 			localStorage["arrow_type"] = "1";
@@ -65,6 +71,8 @@
 		localStorage.removeItem("horizontal_location");
 		localStorage.removeItem("scrolling_speed");
 		localStorage.removeItem("visibility_behavior");
+		localStorage.removeItem("icon_transparency");
+		localStorage.removeItem("black_and_white");
 		
 		localStorage.removeItem("arrow_type");
 		
@@ -95,6 +103,8 @@
 			hLoc: localStorage["horizontal_location"],
 			scrSpeed: localStorage["scrolling_speed"],
 			visibilityBehav: localStorage["visibility_behavior"],
+			iconTransparency: localStorage["icon_transparency"],
+			blackAndWhite: localStorage["black_and_white"],
 			
 			arrowType: localStorage["arrow_type"],
 				
@@ -104,6 +114,10 @@
 			vOffset: localStorage["v_offset"],
 			removedSites: localStorage["removed_sites"]
 		};
+		
+		if(fetchAllSettings) {
+			data.supportPrompt = localStorage["support_prompt"];
+		}
 		
 		// bypass settings if they are not required
 		if(fetchAllSettings || "1" == data.arrowType) {// send only single arrow settings
@@ -145,6 +159,8 @@
 			localStorage["horizontal_location"] = data.hLoc;
 			localStorage["visibility_behavior"] = data.visibilityBehav;
 			localStorage["scrolling_speed"] = data.scrSpeed;
+			localStorage["icon_transparency"] = data.iconTransparency;
+			localStorage["black_and_white"] = data.blackAndWhite;
 			
 			localStorage["arrow_type"] = data.arrowType;
 			
@@ -163,6 +179,8 @@
 			localStorage["v_offset"] = data.vOffset;
 			localStorage["removed_sites"] = data.removedSites;
 			
+			localStorage["support_prompt"] = data.supportPrompt;
+			
 			theMessageEvent.target.page.dispatchMessage("saveCompleted");
 		} else if("optionPage" === theMessageEvent.name) {
 			openOptionPage();
@@ -173,7 +191,7 @@
 	
 	function openOptionPage(updated) {
 		var newTab = safari.application.activeBrowserWindow.openTab();  
-        newTab.url = safari.extension.baseURI + "options.html" + (!updated ? "" : "?updated=true");
+        newTab.url = safari.extension.baseURI + "options/options.html" + (!updated ? "" : "?updated=true");
 	}
 	
 	function performCommand(event) {
@@ -185,19 +203,9 @@
 	safari.application.addEventListener("command", performCommand, false);
 	
 	// open option page on initial in this version
-	var currentVersion = 6;// this variable should be incremented with every update so that, add-on update message can be shown
+	var currentVersion = 7;// this variable should be incremented with every update so that, add-on update message can be shown
 	if(currentVersion > parseInt(safari.extension.settings.version_info)) {
 		safari.extension.settings.version_info = currentVersion;
 		openOptionPage("updated");
-		safari.extension.settings.version6remove = "removeit";
-	} else if("null" == safari.extension.settings.version6remove && 6 == parseInt(safari.extension.settings.version_info)) {
-		safari.extension.settings.version6remove = "removeit";
-		
-		if("autohide" == localStorage["visibility_behavior"]) {
-			localStorage["visibility_behavior"] = "alwaysshow";
-		}
-		localStorage["smart_direction_mode"] = "false";
-		var newTab = safari.application.activeBrowserWindow.openTab();  
-        newTab.url = safari.extension.baseURI + "options.html?reverted=true";
 	}
 </script>

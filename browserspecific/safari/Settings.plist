@@ -42,11 +42,5 @@
 		<key>Key</key>
 		<string>version_info</string>
 	</dict>
-	<dict>
-		<key>DefaultValue</key>
-		<string>null</string>
-		<key>Key</key>
-		<string>version6remove</string>
-	</dict>
 </array>
 </plist>

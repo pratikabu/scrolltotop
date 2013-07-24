@@ -13,9 +13,9 @@
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleShortVersionString</key>
-	<string>4.2.5</string>
+	<string>4.3</string>
 	<key>CFBundleVersion</key>
-	<string>4.2.5</string>
+	<string>4.3</string>
 	<key>Chrome</key>
 	<dict>
 		<key>Context Menu Items</key>
@@ -40,10 +40,10 @@
 		<dict>
 			<key>End</key>
 			<array>
-				<string>jquery-1.8.2.pratikabu.js</string>
-				<string>jQueryRotate.js</string>
-				<string>pratikabustt-browser-impl.js</string>
-				<string>content_script.js</string>
+				<string>thirdparty/jquery-pratikabu.js</string>
+				<string>thirdparty/jquery-rotate.js</string>
+				<string>browserspecific/pratikabu-stt-impl.js</string>
+				<string>pratikabu-stt.js</string>
 			</array>
 		</dict>
 		<key>Stylesheets</key>

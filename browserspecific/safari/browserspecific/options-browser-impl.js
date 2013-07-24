@@ -4,7 +4,6 @@
 
 /** Saves options to localStorage. */
 function bsDefaultSettings() {
-	ignoreForDefaults = true;// ignore the image load method as it will reset myIcon in the radio button
 	safari.self.tab.dispatchMessage("resetSettings");
 }
 
@@ -29,4 +28,8 @@ function bsFetchSettings() {
 
 function bsSaveSettings(data) {
 	safari.self.tab.dispatchMessage("saveSettings", data);
+}
+
+function bsReviewPageUrl() {
+	return "http://pratikabu.blogspot.com/2013/04/stt-smart-direction-mode.html";
 }

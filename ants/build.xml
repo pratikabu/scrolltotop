@@ -43,7 +43,7 @@
 		</antcall>
 	</target>
 	
-	<target name="minifyBuildAll" depends="minifyChromeBuild,minifyFirefoxBuild,minifyOperChromiumBuild,minifyOperChromiumBuild" />
+	<target name="minifyBuildAll" depends="minifyChromeBuild,minifyFirefoxBuild,minifyOperChromiumBuild,minifyOperaBuild" />
 	<target name="minifyCleanBuildAll" depends="clean,minifyBuildAll" />
 
 	<!-- normal builds -->
@@ -61,6 +61,13 @@
 		</antcall>
 	</target>
 
+	<target name="normalSafariBuild">
+		<antcall target="callTarget">
+			<param name="targetName" value="build" />
+			<param name="browserName" value="safari" />
+		</antcall>
+	</target>
+
 	<target name="normalOperChromiumBuild">
 		<antcall target="callTarget">
 			<param name="targetName" value="build" />
@@ -75,6 +82,6 @@
 		</antcall>
 	</target>
 	
-	<target name="normalBuildAll" depends="normalChromeBuild,normalFirefoxBuild,normalOperChromiumBuild,normalOperaBuild" />
+	<target name="normalBuildAll" depends="normalChromeBuild,normalFirefoxBuild,normalSafariBuild,normalOperChromiumBuild,normalOperaBuild" />
 	<target name="normalCleanBuildAll" depends="clean,normalBuildAll" />
 </project>
