@@ -3,24 +3,10 @@
 <plist version="1.0">
 <array>
 	<dict>
-		<key>DefaultValue</key>
-		<real>48</real>
-		<key>Key</key>
-		<string>iconSize</string>
 		<key>Title</key>
 		<string>To configure Scroll To Top right-click on the web page.</string>
-		<key>Titles</key>
-		<array>
-			<string>48px Images</string>
-			<string>32px Images</string>
-		</array>
 		<key>Type</key>
 		<string>Group</string>
-		<key>Values</key>
-		<array>
-			<real>48</real>
-			<real>32</real>
-		</array>
 	</dict>
 	<dict>
 		<key>Type</key>
