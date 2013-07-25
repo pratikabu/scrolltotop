@@ -439,9 +439,11 @@ function donateReviewInits() {
 }
 
 function randomOpenSupportDialog() {
-	if(!$('#supportPromptCBId').is(':checked') && 0 === new Date().getTime() % 4) {
-		openSupportDialog();
-	}
+	setTimeout(function() {
+		if(!$('#supportPromptCBId').is(':checked') && 0 === new Date().getTime() % 7) {
+			openSupportDialog();
+		}
+	}, 10 * 1000);// 10 seconds delay
 }
 
 function validateDomainDataAndFix(textareaId) {
@@ -472,6 +474,9 @@ document.addEventListener('DOMContentLoaded', function () {
 	// is updated then show update dialog
 	var updated = getParameterByName("updated");
 	if("true" === updated) {
+		$('#updateIfromeId').append('<iframe src="http://pratikabu.users.sourceforge.net/extensions/scrolltotop/release-stt.html?date='
+				+ new Date().getTime() + '" style="width: 100%; height: 100%; border: 0;"></iframe>');
+		
 		$('#maskDiv').fadeTo("slow", .5);
 		$('#updateDialog').fadeTo("slow", 1);
 
@@ -484,6 +489,8 @@ document.addEventListener('DOMContentLoaded', function () {
 				$("#maskDiv").hide();
 			});
 		});
+	} else {
+		randomOpenSupportDialog();
 	}
 	
 	// add all icons

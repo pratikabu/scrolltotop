@@ -29,6 +29,11 @@
 		</condition>
 		<antcall target="internalFirefoxSpecific" />
 		
+		<condition property="browserSpecific.isChrome">
+			<equals arg1="${browserName}" arg2="chrome" />
+		</condition>
+		<antcall target="internalChromeSpecific" />
+		
 
 		<condition property="browserSpecific.isOperaChromium">
 			<equals arg1="${browserName}" arg2="opera-chromium" />
@@ -47,6 +52,10 @@
 			<arg value="${options}/${optionHtmlFileName}" />
 			<arg value="${browserOptions}/${optionHtmlFileName}" />
 		</java>
+	</target>
+	
+	<target name="internalChromeSpecific" if="browserSpecific.isChrome">
+		<delete file="${browserDir}/icons/pratikabu-stt-64.png" />
 	</target>
 	
 	<target name="internalOperaChromiumSpecific" if="browserSpecific.isOperaChromium">
