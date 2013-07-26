@@ -107,6 +107,11 @@
 		<antcall target="minifyFile">
 			<param name="fileLoc" value="${browserMainDestJSLoc}" />
 		</antcall>
+		
+		<!-- create brwoser specific zip files -->
+		<zip destfile="${generatedZipDir}/${browserName}-stt.${deployExtension}">
+			<zipfileset dir="${generateDir}/${browserName}"></zipfileset>
+		</zip>
 	</target>
 	
 	<target name="cleanAndBuild" depends="clean,build" description="Cleans the generated folder and rebuild it again." />
