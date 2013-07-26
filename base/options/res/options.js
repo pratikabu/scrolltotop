@@ -474,8 +474,12 @@ document.addEventListener('DOMContentLoaded', function () {
 	// is updated then show update dialog
 	var updated = getParameterByName("updated");
 	if("true" === updated) {
-		$('#updateIfromeId').append('<iframe src="http://pratikabu.users.sourceforge.net/extensions/scrolltotop/release-stt.html?date='
-				+ new Date().getTime() + '" style="width: 100%; height: 100%; border: 0;"></iframe>');
+		$('#updateIframeId').load(function() {
+			$('#updateLoadingId').fadeOut(300, function() {
+				$('#updateLoadingId').remove();
+			});
+		});
+		$('#updateIframeId').attr("src", 'http://pratikabu.users.sourceforge.net/extensions/scrolltotop/release-stt.html?date=' + new Date().getTime());
 		
 		$('#maskDiv').fadeTo("slow", .5);
 		$('#updateDialog').fadeTo("slow", 1);
