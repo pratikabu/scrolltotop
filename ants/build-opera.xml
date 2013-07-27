@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+
+<project name="OperaBuild" default="cleanAndBuild">
+	<property file="build.properties" />
+	<property file="${buildBrowserPropFileName}" />
+	<property file="operaspecific.properties" />
+
+	<target name="clean" description="clean up everything">
+		<delete dir="${browserDir}" />
+	</target>
+
+	<target name="baseCall">
+		<ant antfile="${buildBrowserFileName}" target="${targetName}">
+			<property file="${buildBrowserPropFileName}" />
+			<property file="${browserName}specific.properties" />
+		</ant>
+	</target>
+
+	<target name="build" description="generate executable folder">
+		<antcall target="baseCall">
+			<param name="targetName" value="build" />
+		</antcall>
+
+
+		<!-- do some browser specific stuffs -->
+		<java jar="${htmlModifierJarFile}" fork="true" failonerror="true">
+			<arg value="OSJE" />
+			<arg value="${browserSTTJSFileLoc}" />
+		</java>
+	</target>
+
+	<target name="minifyBuild" depends="build" description="build while compressing the js">
+		<antcall target="baseCall">
+			<param name="targetName" value="minifyBuild" />
+		</antcall>
+
+		<!-- compress browser specific js -->
+		<antcall target="baseCall">
+			<param name="targetName" value="minifyFile" />
+			<param name="fileLoc" value="${browserSTTJSFileLoc}" />
+		</antcall>
+
+		<!-- create brwoser specific zip files -->
+		<zip destfile="${generatedZipDir}/${browserName}-stt.${deployExtension}">
+			<zipfileset dir="${generateDir}/${browserName}" />
+		</zip>
+	</target>
+
+	<target name="cleanAndBuild" depends="clean,build" description="Cleans the generated folder and rebuild it again." />
+	<target name="cleanAndMinBuild" depends="clean,minifyBuild" description="Cleans the generated folder and rebuild it again in minified form." />
+</project>

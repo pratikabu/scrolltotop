@@ -1,87 +1,94 @@
-<project name="ScrollToTop" default="normalCleanBuildAll">
-	<!--<property file="build.properties" />-->
+<project name="ScrollToTop" default="allBuild">
+	<property file="build.properties" />
 	
 	<target name="callTarget">
-		<ant antfile="browserbuild.xml" target="${targetName}">
-			<property file="browserbuild.properties" />
-			<property file="${browserName}specific.properties" />
+		<ant antfile="build-${browserName}.xml" target="${targetName}">
+			<property file="build.properties" />
+			<property file="${buildBrowserPropFileName}" />
+			<property file="build-${browserName}.properties" />
 		</ant>
 	</target>
 
 	<target name="clean">
 		<antcall target="callTarget">
 			<param name="targetName" value="clean" />
+			<param name="browserName" value="browser" />
 		</antcall>
 	</target>
 
 	<!-- minify builds -->
-	<target name="minifyFirefoxBuild">
+	<target name="mBuildFirefox">
 		<antcall target="callTarget">
 			<param name="targetName" value="minifyBuild" />
 			<param name="browserName" value="firefox" />
 		</antcall>
 	</target>
 
-	<target name="minifyChromeBuild">
+	<target name="mBuildChrome">
 		<antcall target="callTarget">
 			<param name="targetName" value="minifyBuild" />
 			<param name="browserName" value="chrome" />
 		</antcall>
 	</target>
 
-	<target name="minifyOperChromiumBuild">
+	<target name="mBuildSafari">
+		<antcall target="callTarget">
+			<param name="targetName" value="minifyBuild" />
+			<param name="browserName" value="safari" />
+		</antcall>
+	</target>
+
+	<target name="mBuildOperChromium">
 		<antcall target="callTarget">
 			<param name="targetName" value="minifyBuild" />
 			<param name="browserName" value="opera-chromium" />
 		</antcall>
 	</target>
 
-	<target name="minifyOperaBuild">
+	<target name="mBuildOpera">
 		<antcall target="callTarget">
 			<param name="targetName" value="minifyBuild" />
 			<param name="browserName" value="opera" />
 		</antcall>
 	</target>
 	
-	<target name="minifyBuildAll" depends="minifyChromeBuild,minifyFirefoxBuild,minifyOperChromiumBuild,minifyOperaBuild" />
-	<target name="minifyCleanBuildAll" depends="clean,minifyBuildAll" />
+	<target name="allMinifyBuild" depends="clean,mBuildFirefox,mBuildChrome,mBuildSafari,mBuildOperChromium,mBuildOpera" />
 
 	<!-- normal builds -->
-	<target name="normalFirefoxBuild">
+	<target name="buildFirefox">
 		<antcall target="callTarget">
 			<param name="targetName" value="build" />
 			<param name="browserName" value="firefox" />
 		</antcall>
 	</target>
 
-	<target name="normalChromeBuild">
+	<target name="buildChrome">
 		<antcall target="callTarget">
 			<param name="targetName" value="build" />
 			<param name="browserName" value="chrome" />
 		</antcall>
 	</target>
 
-	<target name="normalSafariBuild">
+	<target name="buildSafari">
 		<antcall target="callTarget">
 			<param name="targetName" value="build" />
 			<param name="browserName" value="safari" />
 		</antcall>
 	</target>
 
-	<target name="normalOperChromiumBuild">
+	<target name="buildOperChromium">
 		<antcall target="callTarget">
 			<param name="targetName" value="build" />
 			<param name="browserName" value="opera-chromium" />
 		</antcall>
 	</target>
 
-	<target name="normalOperaBuild">
+	<target name="buildOpera">
 		<antcall target="callTarget">
 			<param name="targetName" value="build" />
 			<param name="browserName" value="opera" />
 		</antcall>
 	</target>
 	
-	<target name="normalBuildAll" depends="normalChromeBuild,normalFirefoxBuild,normalSafariBuild,normalOperChromiumBuild,normalOperaBuild" />
-	<target name="normalCleanBuildAll" depends="clean,normalBuildAll" />
+	<target name="allBuild" depends="clean,buildFirefox,buildChrome,buildSafari,buildOperChromium,buildOpera" />
 </project>
