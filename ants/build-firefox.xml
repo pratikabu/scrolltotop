@@ -53,7 +53,7 @@
 			<zipfileset dir="${unzipFolder}" />
 		</zip>
 		<delete dir="${unzipFolder}" />
-		<delete file="${srcXpi}" />
+		<!--<delete file="${srcXpi}" />-->
 	</target>
 	
 	<target name="cleanAndBuild" depends="clean,build" description="Cleans the generated folder and rebuild it again." />
