@@ -3,7 +3,7 @@
 <project name="OperaBuild" default="cleanAndBuild">
 	<property file="build.properties" />
 	<property file="${buildBrowserPropFileName}" />
-	<property file="operaspecific.properties" />
+	<property file="build-opera.properties" />
 
 	<target name="clean" description="clean up everything">
 		<delete dir="${browserDir}" />
