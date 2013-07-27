@@ -38,6 +38,24 @@
 		<!-- compress browser specific js -->
 	</target>
 	
+	<target name="updateVersion">
+		<property name="srcXpi" value="${generateDir}/${browserName}/scroll-to-top.xpi" />
+		<property name="unzipFolder" value="${generatedZipDir}/${browserName}" />
+		<unzip dest="${unzipFolder}" src="${srcXpi}" />
+		<echo>Updating tags of install.rdf file</echo>
+		<java jar="${htmlModifierJarFile}" fork="true" failonerror="true">
+			<arg value="XMOD" />
+			<arg value="${unzipFolder}/install.rdf" />
+			<arg value="em:maxVersion" />
+			<arg value="${maxVersion}" />
+		</java>
+		<zip destfile="${generatedZipDir}/${browserName}-stt.${deployExtension}">
+			<zipfileset dir="${unzipFolder}" />
+		</zip>
+		<delete dir="${unzipFolder}" />
+		<delete file="${srcXpi}" />
+	</target>
+	
 	<target name="cleanAndBuild" depends="clean,build" description="Cleans the generated folder and rebuild it again." />
 	<target name="cleanAndMinBuild" depends="clean,minifyBuild" description="Cleans the generated folder and rebuild it again in minified form." />
 </project>
