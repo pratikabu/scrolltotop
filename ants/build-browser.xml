@@ -24,38 +24,5 @@
 		</copy>
 	</target>
 	
-	<target name="minifyFile" description="minify any file js, css">
-		<echo>Minifying ${fileLoc}</echo>
-		<java jar="${comressorJarFile}" fork="true" failonerror="true">
-			<arg value="${fileLoc}" />
-			<arg value="-o" />
-			<arg value="${fileLoc}" />
-		</java>
-	</target>
-	
-	<target name="minifyBuild" description="build while compressing the js">
-		<!-- compress base js and css -->
-		<antcall target="minifyFile">
-			<param name="fileLoc" value="${browserDir}${browserSubDir}/${sttJsFileName}" />
-		</antcall>
-		<antcall target="minifyFile">
-			<param name="fileLoc" value="${browserDir}${browserSubDir}/${sttCssFileName}" />
-		</antcall>
-		<antcall target="minifyFile">
-			<param name="fileLoc" value="${browserOptions}/${resFolderName}/${optionJsFileName}" />
-		</antcall>
-		<antcall target="minifyFile">
-			<param name="fileLoc" value="${browserOptions}/${resFolderName}/${optionCssFileName}" />
-		</antcall>
-		
-		<!-- compress browser specific js -->
-		<antcall target="minifyFile">
-			<param name="fileLoc" value="${browserSpecific}/${bsOptionsImplName}" />
-		</antcall>
-		<antcall target="minifyFile">
-			<param name="fileLoc" value="${browserSpecific}/${bsSTTImpl}" />
-		</antcall>
-	</target>
-	
 	<target name="cleanAndBuild" depends="clean,build" description="Cleans the generated folder and rebuild it again." />
 </project>

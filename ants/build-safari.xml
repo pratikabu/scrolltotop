@@ -25,14 +25,5 @@
 		<!-- do some browser specific stuffs -->
 	</target>
 
-	<target name="minifyBuild" depends="build" description="build while compressing the js">
-		<antcall target="baseCall">
-			<param name="targetName" value="minifyBuild" />
-		</antcall>
-
-		<!-- compress browser specific js -->
-	</target>
-
 	<target name="cleanAndBuild" depends="clean,build" description="Cleans the generated folder and rebuild it again." />
-	<target name="cleanAndMinBuild" depends="clean,minifyBuild" description="Cleans the generated folder and rebuild it again in minified form." />
 </project>

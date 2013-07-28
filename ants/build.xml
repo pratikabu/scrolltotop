@@ -16,44 +16,6 @@
 		</antcall>
 	</target>
 
-	<!-- minify builds -->
-	<target name="mBuildFirefox">
-		<antcall target="callTarget">
-			<param name="targetName" value="minifyBuild" />
-			<param name="browserName" value="firefox" />
-		</antcall>
-	</target>
-
-	<target name="mBuildChrome">
-		<antcall target="callTarget">
-			<param name="targetName" value="minifyBuild" />
-			<param name="browserName" value="chrome" />
-		</antcall>
-	</target>
-
-	<target name="mBuildSafari">
-		<antcall target="callTarget">
-			<param name="targetName" value="minifyBuild" />
-			<param name="browserName" value="safari" />
-		</antcall>
-	</target>
-
-	<target name="mBuildOperChromium">
-		<antcall target="callTarget">
-			<param name="targetName" value="minifyBuild" />
-			<param name="browserName" value="opera-chromium" />
-		</antcall>
-	</target>
-
-	<target name="mBuildOpera">
-		<antcall target="callTarget">
-			<param name="targetName" value="minifyBuild" />
-			<param name="browserName" value="opera" />
-		</antcall>
-	</target>
-	
-	<target name="allMinifyBuild" depends="clean,mBuildFirefox,mBuildChrome,mBuildSafari,mBuildOperChromium,mBuildOpera" />
-
 	<!-- normal builds -->
 	<target name="buildFirefox">
 		<antcall target="callTarget">
