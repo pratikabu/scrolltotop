@@ -30,7 +30,7 @@
 			</dict>
 		</array>
 		<key>Database Quota</key>
-		<real>1048576</real>
+		<real>5242880</real>
 		<key>Global Page</key>
 		<string>background.html</string>
 	</dict>
