@@ -34,7 +34,7 @@
 	<target name="buildSafari">
 		<antcall target="callTarget">
 			<param name="targetName" value="build" />
-			<param name="browserName" value="safari" />
+			<param name="browserName" value="safari.safariextension" />
 		</antcall>
 	</target>
 

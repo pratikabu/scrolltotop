@@ -31,5 +31,5 @@ function bsSaveSettings(data) {
 }
 
 function bsReviewPageUrl() {
-	return "http://pratikabu.blogspot.com/2013/04/stt-smart-direction-mode.html";
+	return "http://pratikabu.blogspot.com/2013/02/scroll-to-top-review-from-safari-users.html";
 }
