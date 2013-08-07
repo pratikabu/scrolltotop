@@ -3,7 +3,9 @@ Scroll To Top
 
 It is a browser add-on available for Firefox, Chrome, Safari and Opera.
 
-Scrolling on pages is really a tiring experience. Specially if the page is really big one. This plugin tries to minify this tiring experience. With this plugin it will be more fun than just scroll. It adds images at bottom-right corner of the page to give you one click scrolling to top and vice-versa with beautiful animation. You can configure the location of the icon using options page. Moreover you can stop the scrolling in-between.
+Everyday scrolling on long pages can be a tiring experience specially on those sites which provides infinite scrolling (like facebook, twitter, Google+, etc). You will keep scrolling using your mouse to see more and more updates and then when you want to go up to the top of the page, you might move your hand from your mouse to keyboard to search for Home key or you will drag the scroll bar to the top.
+
+Scroll To Top tries to minimize this effort by providing an intuitive icon at the bottom-right corner of each page so that with one click you will be at the top of the page with beautiful animation. No more searching for Home key on your keyboard and no more dragging of the scroll bar. It will be just fun and ergonomic to use it.
 
 [Official website](http://pratikabu.users.sourceforge.net/extensions/scrolltotop), [Donate Now](http://pratikabu.users.sourceforge.net/extensions/scrolltotop/donate.php)
 
