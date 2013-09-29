@@ -23,7 +23,7 @@
 }
 
 .donateContainerDiv {
-	position: absolute;
+	position: fixed;
 	right: 0px;
 	top: 50%;
 	margin-top: -92px;
@@ -35,7 +35,7 @@
 }
 
 .socialContainerDiv {
-	position: absolute;
+	position: fixed;
 	right: 0px;
 	top: 50%;
 	margin-top: -150px;
