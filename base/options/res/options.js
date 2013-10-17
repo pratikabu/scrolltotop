@@ -3,7 +3,7 @@ var ignoreImgLoad = true;
 var dIgnoreImgLoad = true;
 var globalScrollSpeed, globalTransparency;
 var ignoreForDefaults = false, ignoreTransparencyForRestore = false;
-var addonVersion = "4.3";
+var addonVersion = "4.4";
 
 /*******************************************************************************
  * Browser Independent code.

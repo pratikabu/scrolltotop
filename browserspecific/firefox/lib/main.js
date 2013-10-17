@@ -108,7 +108,7 @@ pageMod.PageMod({
     include: "*", // for all pages, as it will give the scrolling for all pages
 	attachTo: ["existing", "top"],
     contentStyleFile: data.url("pratikabu-stt.css"),
-    contentScriptFile: [data.url("thirdparty/jquery-pratikabu.js"), data.url("thirdparty/jquery-rotate.js"),
+    contentScriptFile: [data.url("thirdparty/pratikabu-jquery.js"), data.url("thirdparty/pratikabu-jquery-rotate.js"),
         data.url("browserspecific/pratikabu-stt-impl.js"), data.url("pratikabu-stt.js")],
 	contentScriptWhen: "ready",
     onAttach: function onAttach(worker) {// attaching the worker so as to do the communication with contentscript file
