@@ -23,7 +23,7 @@ function addLibrary(path, onLoadFunction) {
 
 function loadJQuery() {
 	if(!window.jQuery) {// load only if its required as it is giving problem on many pages.
-		addLibrary("/thirdparty/jquery-pratikabu.js", function(result) {
+		addLibrary("/thirdparty/pratikabu-jquery.js", function(result) {
 			eval(result);
 			pratikabusttjquery = window.jQuery.noConflict(true);// this line will replace any existing mapping of $ and jQuery on the current page
 			loadCompleteFile();
