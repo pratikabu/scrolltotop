@@ -122,17 +122,21 @@ var pratikabustt = {
 	},
 	
 	createAddonHtml: function() {
+		// create div tag
+		var divTag = '';
 		if(pratikabu_stt_dualArrow) {
-			// create div tag
 			if("hr" === pratikabu_stt_prefs.dArrang) {
-				$('body').prepend('<div id="pratikabuSTTDiv"><img id="pratikabuSTTArrowUp" /><img id="pratikabuSTTArrowDown" /></div>');
+				divTag = '<div id="pratikabuSTTDiv"><img id="pratikabuSTTArrowUp" /><img id="pratikabuSTTArrowDown" /></div>';
 			} else if("vr" === pratikabu_stt_prefs.dArrang) {
-				$('body').prepend('<div id="pratikabuSTTDiv"><img id="pratikabuSTTArrowUp" style="display: block !important;" /><img id="pratikabuSTTArrowDown" style="display: block !important;" /></div>');
+				divTag = '<div id="pratikabuSTTDiv"><img id="pratikabuSTTArrowUp" style="display: block !important;" />' +
+						'<img id="pratikabuSTTArrowDown" style="display: block !important;" /></div>';
 			}
 		} else {
-			// create div tag
-			$('body').prepend('<div id="pratikabuSTTDiv"><img id="pratikabuSTTArrowUp" style="float: left;" /><div id="pratikabuSTTDiv2"><img id="pratikabuSTTPageUp" /><img id="pratikabuSTTClear" /><img id="pratikabuSTTPageDown" /><img id="pratikabuSTTSettings" /></div></div>');
+			divTag = '<div id="pratikabuSTTDiv"><img id="pratikabuSTTArrowUp" style="float: left;" />' +
+					'<div id="pratikabuSTTDiv2"><img id="pratikabuSTTPageUp" /><img id="pratikabuSTTClear" />' +
+					'<img id="pratikabuSTTPageDown" /><img id="pratikabuSTTSettings" /></div></div>';
 		}
+		$('body').prepend(divTag);
 		
 		// check whether the css has been applied to the div tag or not, if not then remove it from DOM
 		// as it got added to a wrong iFrame
@@ -141,11 +145,10 @@ var pratikabustt = {
 			return false;
 		}
 		
+		pratikabustt.hoverEffect("#pratikabuSTTArrowUp");
 		if(pratikabu_stt_dualArrow) {
-			pratikabustt.hoverEffect("#pratikabuSTTArrowUp");
 			pratikabustt.hoverEffect("#pratikabuSTTArrowDown");
 		} else {
-			pratikabustt.hoverEffect("#pratikabuSTTArrowUp");
 			pratikabustt.hoverEffect("#pratikabuSTTClear");
 			pratikabustt.hoverEffect("#pratikabuSTTSettings");
 			pratikabustt.hoverEffect("#pratikabuSTTPageUp");
