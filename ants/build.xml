@@ -1,4 +1,4 @@
-<project name="ScrollToTop" default="allBuild">
+<project name="ScrollToTop" default="build">
 	<property file="build.properties" />
 	
 	<target name="callTarget">
@@ -52,5 +52,5 @@
 		</antcall>
 	</target>
 	
-	<target name="allBuild" depends="clean,buildFirefox,buildChrome,buildSafari,buildOperChromium,buildOpera" />
+	<target name="build" depends="clean,buildFirefox,buildChrome,buildSafari,buildOperChromium,buildOpera" />
 </project>

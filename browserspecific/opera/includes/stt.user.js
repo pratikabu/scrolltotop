@@ -36,7 +36,7 @@ function loadJQuery() {
 
 function loadCompleteFile() {
 	// TODO SKIP the below todo snippets will be replaced by actual files while the build is happening in the ant file
-	// TODO REPLACE ../generated/opera/thirdparty/jquery-rotate.js
+	// TODO REPLACE ../generated/opera/thirdparty/pratikabu-jquery-rotate.js
 	
 	createStyleElement('#pratikabuSTTDiv{background:none!important;z-index:2147483647!important;position:fixed!important;display:none;padding:0!important;margin:0!important;line-height:0!important;}');
 	createStyleElement('#pratikabuSTTDiv2{background:none!important;z-index:2147483647!important;position:fixed!important;display:none;padding:0!important;margin-top:0!important;margin-bottom:0!important;margin-right:0!important;margin-left:0;line-height:0!important;width:48px;}');
