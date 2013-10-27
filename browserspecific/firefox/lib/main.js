@@ -178,7 +178,7 @@ var openOptioinPage = function(updated) {
 	});
 	function runScript(tab) {
 		tabWorker = tab.attach({
-			contentScriptFile: [data.url("thirdparty/jquery-pratikabu.js"), data.url("thirdparty/jquery-ui.js"), data.url("browserspecific/options-browser-impl.js"), data.url("options/res/options.js")]
+			contentScriptFile: [data.url("thirdparty/pratikabu-jquery.js"), data.url("thirdparty/jquery-ui.js"), data.url("browserspecific/options-browser-impl.js"), data.url("options/res/options.js")]
 		});
 		
 		tabWorker.port.on('getPrefs', function() {
