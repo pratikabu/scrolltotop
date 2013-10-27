@@ -283,58 +283,7 @@ var pratikabustt = {
 			$(".pratikabuSTTImg").addClass("pratikabuSTTBlackAndWhite");
 		}
 		
-		// add dragging capability
-		pratikabustt.makeDraggable();
-		
 		return true;
-	},
-	
-	makeDraggable: function() {
-		// add the dragging capability
-		(function($) {
-			$.fn.drags = function(opt) {
-				opt = $.extend({handle:"",cursor:"move"}, opt);
-				var $el;
-				if(opt.handle === "") {
-					$el = this;
-				} else {
-					$el = this.find(opt.handle);
-				}
-
-				var $drag;
-				return $el.css('cursor', opt.cursor).on("mousedown", function(e) {
-					if(opt.handle === "") {
-						$drag = $(this).addClass('draggable');
-					} else {
-						$drag = $(this).addClass('active-handle').parent().addClass('draggable');
-					}
-					var z_idx = $drag.css('z-index'),
-						drg_h = $drag.outerHeight(),
-						drg_w = $drag.outerWidth(),
-						pos_y = $drag.offset().top + drg_h - e.pageY,
-						pos_x = $drag.offset().left + drg_w - e.pageX;
-					$drag.css('z-index', 1000).parents().on("mousemove", function(e) {
-						var topPos = e.pageY + pos_y - drg_h, leftPos = e.pageX + pos_x - drg_w;
-						$('.draggable').offset({
-							top: topPos,
-							left: leftPos
-						}).on("mouseup", function() {
-							$(this).removeClass('draggable').css('z-index', z_idx);
-							// TODO add the logic to store the location
-						});
-					});
-					e.preventDefault(); // disable selection
-				}).on("mouseup", function() {
-					if(opt.handle === "") {
-						$(this).removeClass('draggable');
-					} else {
-						$(this).removeClass('active-handle').parent().removeClass('draggable');
-					}
-				});
-
-			};
-		})(jQuery);
-		$('#pratikabuSTTDiv').drags();
 	},
 	
 	togglePollableIcon: function() {
@@ -660,11 +609,6 @@ var pratikabustt = {
 		pratikabustt.addRemoveGlobalHandlers(false);// remove all handlers
 		pratikabustt.removeAddonHtml();
 		pratikabustt_browser_impl.removeCompleteAddOnCode();// remove everything
-	},
-	
-	checkIconLocationVisible: function() {
-		
-		$(window).width();
 	}
 };
 
