@@ -256,7 +256,7 @@ var openOptioinPage = function(updated) {
 sp.on("myButtonPref", openOptioinPage);
 
 // open option page on initial in this version
-var currentVersion = 7;// this variable should be incremented with every update so that, add-on update message can be shown
+var currentVersion = 8;// this variable should be incremented with every update so that, add-on update message can be shown
 if(!ss.storage.versionInfo || currentVersion > ss.storage.versionInfo) {
 	ss.storage.versionInfo = currentVersion;
 	openOptioinPage("updated");
