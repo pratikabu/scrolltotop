@@ -123,19 +123,23 @@ var pratikabustt = {
 	
 	createAddonHtml: function() {
 		// create div tag
-		var divTag = '';
+		var divTag = '<div id="pratikabuSTTDiv" class="pratikabusttdiv-no-print"><img id="pratikabuSTTArrowUp" ';
 		if(pratikabu_stt_dualArrow) {
 			if("hr" === pratikabu_stt_prefs.dArrang) {
-				divTag = '<div id="pratikabuSTTDiv"><img id="pratikabuSTTArrowUp" /><img id="pratikabuSTTArrowDown" /></div>';
-			} else if("vr" === pratikabu_stt_prefs.dArrang) {
-				divTag = '<div id="pratikabuSTTDiv"><img id="pratikabuSTTArrowUp" style="display: block !important;" />' +
-						'<img id="pratikabuSTTArrowDown" style="display: block !important;" /></div>';
+				divTag = divTag + '/><img id="pratikabuSTTArrowDown" />';
+			} else {// if("vr" === pratikabu_stt_prefs.dArrang) {
+				divTag = divTag + 'style="display: block !important;" />' +
+						'<img id="pratikabuSTTArrowDown" style="display: block !important;" />';
 			}
 		} else {
-			divTag = '<div id="pratikabuSTTDiv"><img id="pratikabuSTTArrowUp" style="float: left;" />' +
-					'<div id="pratikabuSTTDiv2"><img id="pratikabuSTTPageUp" /><img id="pratikabuSTTClear" />' +
-					'<img id="pratikabuSTTPageDown" /><img id="pratikabuSTTSettings" /></div></div>';
+			divTag = divTag + 'style="float: left;" />' +
+					'<div id="pratikabuSTTDiv2" class="pratikabusttdiv-no-print">' +
+						'<img id="pratikabuSTTPageUp" /><img id="pratikabuSTTClear" />' +
+						'<img id="pratikabuSTTPageDown" /><img id="pratikabuSTTSettings" />' +
+					'</div>';
 		}
+		divTag = divTag + '</div>';
+		
 		$('body').prepend(divTag);
 		
 		// check whether the css has been applied to the div tag or not, if not then remove it from DOM

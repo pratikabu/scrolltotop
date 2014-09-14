@@ -36,3 +36,9 @@
 	filter: gray;
 	-webkit-filter: grayscale(1);
 }
+
+@media print {
+	.pratikabusttdiv-no-print {
+		display: none !important;
+	}
+}
