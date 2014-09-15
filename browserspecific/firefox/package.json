@@ -11,7 +11,8 @@
 	"author": "Pratik Soni",
 	"url": "http://pratikabu.users.sourceforge.net",
 	"name": "scroll-to-top",
-	"version": "4.4",
+	"version": "4.5",
 	"main": "main",
-	"homepage": "http://pratikabu.users.sourceforge.net/extensions/scrolltotop"
+	"homepage": "http://pratikabu.users.sourceforge.net/extensions/scrolltotop",
+	"permissions": {"private-browsing": true}
 }
