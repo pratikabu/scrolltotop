@@ -2,8 +2,8 @@ var requestCount = 0;
 var ignoreImgLoad = true;
 var dIgnoreImgLoad = true;
 var globalScrollSpeed, globalTransparency;
-var ignoreForDefaults = false, ignoreTransparencyForRestore = false;
-var addonVersion = "4.4";
+var ignoreForDefaults = true, ignoreTransparencyForRestore = true;
+var addonVersion = "4.5";
 
 /*******************************************************************************
  * Browser Independent code.
@@ -70,10 +70,10 @@ function restore_options(data) {
 	$('input:radio[name=imgHorizontalLocation]').filter('[value=' + data.hLoc + ']').attr('checked', true);
 	
 	globalScrollSpeed = data.scrSpeed;// for future references
-	initSlider(data.scrSpeed);
+	loadValueInSpeedSlider(data.scrSpeed);
 	$('input:radio[name=visbilityBehavior]').filter('[value=' + data.visibilityBehav + ']').attr('checked', true);
 	globalTransparency = data.iconTransparency;
-	initTransparencySlider(data.iconTransparency);
+	loadValueInTransparencySlider(data.iconTransparency);
 	$("#blackWhiteCBId").attr('checked', ("true" === data.blackAndWhite));
 	updateBlackAndWhite();
 	
@@ -155,37 +155,13 @@ function populateSliderSpeedOnText(scrollSpeed) {
 	$("#currentSpeed").html(displayText);
 }
 
-function initSlider(initialValue) {
+function loadValueInSpeedSlider(initialValue) {
 	if(0 === initialValue) {
 		initialValue = 400;
 	}
 	initialValue = 2400 - initialValue;
 	populateSliderSpeedOnText(initialValue);
-	
-	$("#scrollSpeed").slider({
-		value: initialValue,
-		min: 400,
-		max: 2000,
-		step: 100,
-		animate: true,
-		range: "min",
-		slide: function( event, ui ) {
-			populateSliderSpeedOnText(ui.value);
-		},
-		change: function( event, ui ) {
-			var speedVal = 2400 - ui.value;
-			if(400 === speedVal) {
-				speedVal = 0;
-			}
-			globalScrollSpeed = speedVal;
-			
-			if(!ignoreForDefaults) {
-				save_options();
-			} else {
-				ignoreForDefaults = false;
-			}
-		}
-	});
+	$("#scrollSpeedSliderId").simpleSlider("setValue", initialValue);
 }
 
 
@@ -193,28 +169,9 @@ function updateTransparency(transparency) {
 	$("#transparencyImgId").stop(true, true).fadeTo(300, transparency);
 }
 
-function initTransparencySlider(transparency) {
+function loadValueInTransparencySlider(transparency) {
 	updateTransparency(transparency);
-	$("#transparencyId").slider({
-		value: transparency,
-		min: .1,
-		max: .9,
-		step: .1,
-		animate: true,
-		range: "min",
-		slide: function(event, ui) {
-			updateTransparency(ui.value);
-		},
-		change: function(event, ui) {
-			globalTransparency = ui.value;
-			
-			if(!ignoreTransparencyForRestore) {
-				save_options();
-			} else {
-				ignoreTransparencyForRestore = false;
-			}
-		}
-	});
+	$("#transparencySliderId").simpleSlider("setValue", transparency);
 }
 
 function selectableRadioContent(id, name, value) {
@@ -511,7 +468,30 @@ document.addEventListener('DOMContentLoaded', function () {
 	// common settings starts
 	$('input:radio[name=imgVerticalLocation]').change(function() { isRightChangedEvent("imgVerticalLocation", $(this).val()); });
 	$('input:radio[name=imgHorizontalLocation]').change(function() { isRightChangedEvent("imgHorizontalLocation", $(this).val()); });
+	$("#scrollSpeedSliderId").bind("slider:changed", function(event, data) {
+		populateSliderSpeedOnText(data.value);
+		var speedVal = 2400 - data.value;
+		if(400 === speedVal) {
+			speedVal = 0;
+		}
+		globalScrollSpeed = speedVal;
+		
+		if(!ignoreForDefaults) {
+			save_options();
+		} else {
+			ignoreForDefaults = false;
+		}
+	});
 	$('input:radio[name=visbilityBehavior]').change(function() { isRightChangedEvent("visbilityBehavior", $(this).val()); });
+	$("#transparencySliderId").bind("slider:changed", function(event, data) {
+		updateTransparency(data.value);
+		globalTransparency = data.value;
+		if(!ignoreTransparencyForRestore) {
+			save_options();
+		} else {
+			ignoreTransparencyForRestore = false;
+		}
+	});
 	$("#transparencyImgId").hover(
 			function() {
 				$("#transparencyImgId").stop(true, true).fadeTo(300, 1);

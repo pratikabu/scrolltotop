@@ -153,3 +153,7 @@ a.mylink {
 	display: inline-block;
 	line-height: 21px;
 }
+
+[class^=slider] {
+	display: inline-block;
+}

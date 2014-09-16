@@ -3,10 +3,10 @@
 		<title>Scroll To Top - Settings</title>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<link rel="stylesheet" href="res/options.css" type="text/css">
-		<link rel="stylesheet" href="../thirdparty/jquery-ui.css" type="text/css">
+		<link rel="stylesheet" href="../thirdparty/pratikabu-simple-slider.css" type="text/css">
 		<link rel="stylesheet" href="../pratikabu-stt.css" type="text/css">
 		<script type="text/javascript" src="../thirdparty/pratikabu-jquery.js"></script>
-		<script type="text/javascript" src="../thirdparty/jquery-ui.js"></script>
+		<script type="text/javascript" src="../thirdparty/pratikabu-simple-slider.js"></script>
 		<script type="text/javascript" src="../browserspecific/options-browser-impl.js"></script>
 		<script type="text/javascript" src="res/options.js"></script>
 	</head>
@@ -37,9 +37,11 @@
 				</tr>
 				<tr>
 					<td align="right">Scrolling Speed :</td>
-					<td style="padding-left: 5px;">
-						<div class="pratikabustt" style="width: 75%; display: inline-block;"><div id="scrollSpeed" style="font-size: 12px;"></div></div>
-						<div id="currentSpeed" style="font-size: 11px; display: inline-block; margin-left: 10px; vertical-align: middle;"></div>
+					<td>
+						<input type="text" id="scrollSpeedSliderId"
+								data-slider="true" data-slider-range="400,2000" data-slider-step="100"
+								data-slider-highlight="true" data-slider-snap="true" />
+						<span id="currentSpeed" style="font-size: 11px; margin-left: 10px;"></span>
 					</td>
 				</tr>
 				<tr>
@@ -53,7 +55,8 @@
 				<tr class="advancedProp">
 					<td align="right">Transparency :</td>
 					<td style="padding-left: 5px;">
-						<div class="pratikabustt" style="width: 75%; display: inline-block;"><div id="transparencyId" style="font-size: 12px;"></div></div>
+						<div class="pratikabustt" style="width: 75%; display: inline-block;"><input type="text" id="transparencySliderId"
+								data-slider="true" data-slider-range="0.1,0.9" data-slider-highlight="true" /></div>
 						<img class="blackAndWhiteCSS" style="vertical-align: middle; margin-left: 20px;" id="transparencyImgId" src="../icons/pratikabu-stt-32-1.png" />
 					</td>
 				</tr>
