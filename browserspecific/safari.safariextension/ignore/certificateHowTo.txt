@@ -1,0 +1,5 @@
+Run this:
+certreq -new <path>\certreq.txt
+
+It will generate one pem file.
+Use that pem file to generate Safari Certificate.
