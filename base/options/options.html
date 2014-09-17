@@ -12,285 +12,294 @@
 	</head>
 	<body>
 		<form name="myForm"><div align="center" class="myFonts" style="width: 100%;">
-			<a target="_blank" href="http://pratikabu.users.sourceforge.net/extensions/scrolltotop"><span class="myHeader" title="Scroll To Top - Home page">Scroll To Top</span></a>
-			<table id="commonSettings" class="tableClass">
-				<tr>
-					<td align="left" colSpan=2>
-						<div class="groupHeader">Common Settings</div>
-					</td>
-				</tr>
-				<tr>
-					<td align="right" width="35%">Vertical Location :</td>
-					<td width="65%">
-						<input type="radio" name="imgVerticalLocation" value="top"><span id="vlTop">Top</span>
-						<input type="radio" name="imgVerticalLocation" value="middle"><span id="vlMiddle">Middle</span>
-						<input type="radio" name="imgVerticalLocation" value="bottom"><span id="vlBottom">Bottom</span>
-					</td>
-				</tr>
-				<tr>
-					<td align="right">Horizontal Location :</td>
-					<td>
-						<input type="radio" name="imgHorizontalLocation" value="left"><span id="hlLeft">Left</span>
-						<input type="radio" name="imgHorizontalLocation" value="middle"><span id="hlMiddle">Middle</span>
-						<input type="radio" name="imgHorizontalLocation" value="right"><span id="hlRight">Right</span>
-					</td>
-				</tr>
-				<tr>
-					<td align="right">Scrolling Speed :</td>
-					<td>
-						<input type="text" id="scrollSpeedSliderId"
-								data-slider="true" data-slider-range="400,2000" data-slider-step="100"
-								data-slider-highlight="true" data-slider-snap="true" />
-						<span id="currentSpeed" style="font-size: 11px; margin-left: 10px;"></span>
-					</td>
-				</tr>
-				<tr>
-					<td align="right">Visibility Behavior :</td>
-					<td>
-						<input type="radio" name="visbilityBehavior" value="hideattop"><span id="vbHideAtTop">Hide at Top</span>
-						<input type="radio" name="visbilityBehavior" value="alwaysshow"><span id="vbAlwaysShow">Always Show</span>
-						<input type="radio" name="visbilityBehavior" value="autohide"><span id="vbAutoHide">Auto Hide (5 sec)</span>
-					</td>
-				</tr>
-				<tr class="advancedProp">
-					<td align="right">Transparency :</td>
-					<td style="padding-left: 5px;">
-						<div class="pratikabustt" style="width: 75%; display: inline-block;"><input type="text" id="transparencySliderId"
-								data-slider="true" data-slider-range="0.1,0.9" data-slider-highlight="true" /></div>
-						<img class="blackAndWhiteCSS" style="vertical-align: middle; margin-left: 20px;" id="transparencyImgId" src="../icons/pratikabu-stt-32-1.png" />
-					</td>
-				</tr>
-				<tr class="advancedProp">
-					<td align="right"></td>
-					<td align="left" style="vertical-align: middle;">
-						<input id="blackWhiteCBId" type="checkbox" /><span id="blackWhiteId">Use Black &amp; White Icons</span>
-					</td>
-				</tr>
-			</table>
-			
-			<table id="arrowTypeSelector" class="tableClass" style="background: none;">
-				<tr>
-					<td align="center">
-						Choose Arrow Type :
-						<input type="radio" name="arrowType" value="1"><span id="atSingle">Single Arrow</span>
-						<input type="radio" name="arrowType" value="2"><span id="atDual">Dual Arrow</span>
-					</td>
-				</tr>
-			</table>
-			
-			<table id="singleArrowSettings" class="tableClass">
-				<tr>
-					<td align="left" colSpan=2>
-						<div class="groupHeader">Basic Settings</div>
-					</td>
-				</tr>
-				<tr>
-					<td align="right" width="35%">Smart Direction Mode :</td>
-					<td width="65%">
-						<input type="radio" name="smartDirection" value="true"><span id="sdOn">On</span>
-						<input type="radio" name="smartDirection" value="false"><span id="sdOff">Off</span>
-						<a target="_blank" href="http://pratikabu.blogspot.com/2013/04/stt-smart-direction-mode.html" title="Learn more about Smart Direction Mode" style="margin-left: 20px;">What is smart direction mode?</a>
-					</td>
-				</tr>
-				<tr class="advancedProp">
-					<td align="right" width="35%">Control Options :</td>
-					<td width="65%">
-						<input type="radio" name="controlOptions" value="none"><span id="coNone">None</span>
-						<input type="radio" name="controlOptions" value="simple"><span id="coSimple">Simple</span>
-						<input type="radio" name="controlOptions" value="pager"><span id="coPager">With Pager</span>
-					</td>
-				</tr>
-				<tr class="advancedProp">
-					<td align="right" width="35%">Auto Hide Controls :</td>
-					<td width="65%">
-						<input type="radio" name="autoHideControls" value="true"><span id="ahcYes">Yes</span>
-						<input type="radio" name="autoHideControls" value="false"><span id="ahcNo">No</span>
-					</td>
-				</tr>
-				<tr>
-					<td align="right">Icon Size :</td>
-					<td align="left" style="vertical-align: middle;">
-						<input type="radio" name="iconSize" value="32"><img class="blackAndWhiteCSS" style="vertical-align: middle;" id="iconSizeOp1" src="../icons/pratikabu-stt-32-1.png" title="Small Icon (32px)" />
-						<input type="radio" name="iconSize" value="48"><img class="blackAndWhiteCSS" style="vertical-align: middle;" id="iconSizeOp2" src="../icons/pratikabu-stt-48-1.png" title="Large Icon (48px)" />
-					</td>
-				</tr>
-				<tr class="advancedProp">
-					<td align="left" colSpan=2>
-						<div class="groupHeader">Icons &amp; Library Settings</div>
-					</td>
-				</tr>
-				<tr class="advancedProp">
-					<td align="left" colSpan=2>
-						Choose Icon from Library:
-					</td>
-				</tr>
-				<tr class="advancedProp">
-					<td id="singleIconTD" align="left" colSpan=2>
-					</td>
-				</tr>
-				<tr class="advancedProp">
-					<td align="left" colSpan=2>
-						<input type="radio" name="iconLib" value="myIcon"><span id="useMyIcon">Use my icon</span>
-						<p align="justify" style="font-size: 12px;">
-							Note: If you enable Use My Icon, then icon size will be restricted to either 32 or 48 pixels as per the selection.
-						</p>
-					</td>
-				</tr>
-				<tr class="advancedProp">
-					<td align="left" style="vertical-align: middle;" colSpan=2>
-						<input type="text" id="useMyIconTextBox" class="mySelect" style="width: 100%;">
-					</td>
-				</tr>
-				<tr class="advancedProp">
-					<td align="center" colSpan=2>
-						<img class="blackAndWhiteCSS" style="vertical-align: middle; width: 48px; height: 48px;" id="previewIcon" alt="Preview" title="Preview of your uploaded icon." />
-						<br/>
-						<p align="justify" style="font-size: 12px;">
-							To upload your own icon. Follow these steps:<br/>
-							1. Get base64 encoded string of your image. <a href="http://www.base64-image.de/step-1.php" target="_blank">Click here</a> and follow the steps.<br/>
-							2. Paste the base64 encoded string in the above text box.<br/>
-							3. Thats it!! Your image should appear in the preview box above.<br/>
-							4. Still confused? <a target="_blank" href="http://pratikabu.users.sourceforge.net/extensions/scrolltotop/base64help.html">Click here</a> for detailed explanation with pictures.
-						</p>
-					</td>
-				</tr>
-			</table>
-			
-			<table id="dualArrowSettings" class="tableClass">
-				<tr>
-					<td align="left" colSpan=2>
-						<div class="groupHeader">Basic Settings</div>
-					</td>
-				</tr>
-				<tr>
-					<td align="right" width="35%">Icons Arrangement :</td>
-					<td width="65%">
-						<input type="radio" name="dIconArrangemnt" value="hr"><span id="diarrHr">Horizontal</span>
-						<input type="radio" name="dIconArrangemnt" value="vr"><span id="diarrVr">Vertical</span>
-					</td>
-				</tr>
+			<div align="center" class="myFonts centerDiv">
 				
-				<tr class="advancedProp">
-					<td align="left" colSpan=2>
-						<div class="groupHeader">Icons &amp; Library Settings</div>
-					</td>
-				</tr>
-				<tr class="advancedProp">
-					<td align="left" colSpan=2>
-						Horizontal Arrangement (recommended) :
-					</td>
-				</tr>
-				<tr class="advancedProp">
-					<td id="dualHRTD" align="left" colSpan=2>
-					</td>
-				</tr>
+				<a target="_blank" href="http://pratikabu.users.sourceforge.net/extensions/scrolltotop"><span class="myHeader" title="Scroll To Top - Home page">Scroll To Top</span></a>
+				<table id="commonSettings" class="tableClass">
+					<tr>
+						<td align="left" colSpan=2>
+							<div class="groupHeader">Common Settings</div>
+						</td>
+					</tr>
+					<tr>
+						<td align="right" width="35%">Vertical Location :</td>
+						<td width="65%">
+							<input type="radio" name="imgVerticalLocation" value="top"><span id="vlTop">Top</span>
+							<input type="radio" name="imgVerticalLocation" value="middle"><span id="vlMiddle">Middle</span>
+							<input type="radio" name="imgVerticalLocation" value="bottom"><span id="vlBottom">Bottom</span>
+						</td>
+					</tr>
+					<tr>
+						<td align="right">Horizontal Location :</td>
+						<td>
+							<input type="radio" name="imgHorizontalLocation" value="left"><span id="hlLeft">Left</span>
+							<input type="radio" name="imgHorizontalLocation" value="middle"><span id="hlMiddle">Middle</span>
+							<input type="radio" name="imgHorizontalLocation" value="right"><span id="hlRight">Right</span>
+						</td>
+					</tr>
+					<tr>
+						<td align="right">Scrolling Speed :</td>
+						<td>
+							<input type="text" id="scrollSpeedSliderId"
+									data-slider="true" data-slider-range="400,2000" data-slider-step="100"
+									data-slider-highlight="true" data-slider-snap="true" />
+							<span id="currentSpeed" style="font-size: 11px; margin-left: 10px;"></span>
+						</td>
+					</tr>
+					<tr>
+						<td align="right">Visibility Behavior :</td>
+						<td>
+							<input type="radio" name="visbilityBehavior" value="hideattop"><span id="vbHideAtTop">Hide at Top</span>
+							<input type="radio" name="visbilityBehavior" value="alwaysshow"><span id="vbAlwaysShow">Always Show</span>
+							<input type="radio" name="visbilityBehavior" value="autohide"><span id="vbAutoHide">Auto Hide (5 sec)</span>
+						</td>
+					</tr>
+					<tr class="advancedProp">
+						<td align="right">Transparency :</td>
+						<td style="padding-left: 5px;">
+							<div class="pratikabustt" style="width: 75%; display: inline-block;"><input type="text" id="transparencySliderId"
+									data-slider="true" data-slider-range="0.1,0.9" data-slider-highlight="true" /></div>
+							<img class="blackAndWhiteCSS" style="vertical-align: middle; margin-left: 20px;" id="transparencyImgId" src="../icons/pratikabu-stt-32-1.png" />
+						</td>
+					</tr>
+					<tr class="advancedProp">
+						<td align="right"></td>
+						<td align="left" style="vertical-align: middle;">
+							<input id="blackWhiteCBId" type="checkbox" /><span id="blackWhiteId">Use Black &amp; White Icons</span>
+						</td>
+					</tr>
+				</table>
 				
-				<tr class="advancedProp">
-					<td align="left" colSpan=2>
-						Vertical Arrangement (recommended) :
-					</td>
-				</tr>
-				<tr class="advancedProp">
-					<td id="dualVRTD" align="left" colSpan=2>
-					</td>
-				</tr>
+				<table id="arrowTypeSelector" class="tableClass" style="margin-bottom: 0;">
+					<tr>
+						<td align="left" colSpan=2>
+							<div class="groupHeader">Choose Arrow Type</div>
+						</td>
+					</tr>
+					<tr>
+						<td align="center">
+							<input type="radio" name="arrowType" value="1"><span id="atSingle">Single Arrow</span>
+							<input type="radio" name="arrowType" value="2"><span id="atDual">Dual Arrow</span>
+						</td>
+					</tr>
+				</table>
 				
-				<tr class="advancedProp">
-					<td align="left" colSpan=2>
-						Single Arrow Icons :
-					</td>
-				</tr>
-				<tr class="advancedProp">
-					<td id="dualNornalTD" align="left" colSpan=2>
-					</td>
-				</tr>
+				<table id="singleArrowSettings" class="tableClass">
+					<tr>
+						<td align="left" colSpan=2>
+							<div class="groupHeader">Basic Settings</div>
+						</td>
+					</tr>
+					<tr>
+						<td align="right" width="35%">Smart Direction Mode :</td>
+						<td width="65%">
+							<input type="radio" name="smartDirection" value="true"><span id="sdOn">On</span>
+							<input type="radio" name="smartDirection" value="false"><span id="sdOff">Off</span>
+							<a target="_blank" href="http://pratikabu.blogspot.com/2013/04/stt-smart-direction-mode.html" title="Learn more about Smart Direction Mode" style="margin-left: 20px;">What is smart direction mode?</a>
+						</td>
+					</tr>
+					<tr class="advancedProp">
+						<td align="right" width="35%">Control Options :</td>
+						<td width="65%">
+							<input type="radio" name="controlOptions" value="none"><span id="coNone">None</span>
+							<input type="radio" name="controlOptions" value="simple"><span id="coSimple">Simple</span>
+							<input type="radio" name="controlOptions" value="pager"><span id="coPager">With Pager</span>
+						</td>
+					</tr>
+					<tr class="advancedProp">
+						<td align="right" width="35%">Auto Hide Controls :</td>
+						<td width="65%">
+							<input type="radio" name="autoHideControls" value="true"><span id="ahcYes">Yes</span>
+							<input type="radio" name="autoHideControls" value="false"><span id="ahcNo">No</span>
+						</td>
+					</tr>
+					<tr>
+						<td align="right">Icon Size :</td>
+						<td align="left" style="vertical-align: middle;">
+							<input type="radio" name="iconSize" value="32"><img class="blackAndWhiteCSS" style="vertical-align: middle;" id="iconSizeOp1" src="../icons/pratikabu-stt-32-1.png" title="Small Icon (32px)" />
+							<input type="radio" name="iconSize" value="48"><img class="blackAndWhiteCSS" style="vertical-align: middle;" id="iconSizeOp2" src="../icons/pratikabu-stt-48-1.png" title="Large Icon (48px)" />
+						</td>
+					</tr>
+					<tr class="advancedProp">
+						<td align="left" colSpan=2>
+							<div class="groupHeader">Icons &amp; Library Settings</div>
+						</td>
+					</tr>
+					<tr class="advancedProp">
+						<td align="left" colSpan=2>
+							Choose Icon from Library:
+						</td>
+					</tr>
+					<tr class="advancedProp">
+						<td id="singleIconTD" align="left" colSpan=2>
+						</td>
+					</tr>
+					<tr class="advancedProp">
+						<td align="left" colSpan=2>
+							<input type="radio" name="iconLib" value="myIcon"><span id="useMyIcon">Use my icon</span>
+							<p align="justify" style="font-size: 12px;">
+								Note: If you enable Use My Icon, then icon size will be restricted to either 32 or 48 pixels as per the selection.
+							</p>
+						</td>
+					</tr>
+					<tr class="advancedProp">
+						<td align="left" style="vertical-align: middle;" colSpan=2>
+							<input type="text" id="useMyIconTextBox" class="mySelect" style="width: 100%;">
+						</td>
+					</tr>
+					<tr class="advancedProp">
+						<td align="center" colSpan=2>
+							<img class="blackAndWhiteCSS" style="vertical-align: middle; width: 48px; height: 48px;" id="previewIcon" alt="Preview" title="Preview of your uploaded icon." />
+							<br/>
+							<p align="justify" style="font-size: 12px;">
+								To upload your own icon. Follow these steps:<br/>
+								1. Get base64 encoded string of your image. <a href="http://www.base64-image.de/step-1.php" target="_blank">Click here</a> and follow the steps.<br/>
+								2. Paste the base64 encoded string in the above text box.<br/>
+								3. That's it!! Your image should appear in the preview box above.<br/>
+								4. Still confused? <a target="_blank" href="http://pratikabu.users.sourceforge.net/extensions/scrolltotop/base64help.html">Click here</a> for detailed explanation with pictures.<br/>
+								You can try on these sites to get amazing icons <a target="_blank" href="http://findicons.com">findicons.com</a>, <a target="_blank" href="http://www.iconarchive.com">iconarchive.com</a>.
+							</p>
+						</td>
+					</tr>
+				</table>
 				
-				<tr class="advancedProp">
-					<td align="left" colSpan=2>
-						<input type="radio" name="dIconLib" value="myIcon"><span id="dUseMyIcon">Use my icon</span>
-						<p align="justify" style="font-size: 12px;">
-							Note: You can use icon of any size, the same icon will be used for downward arrow.
-						</p>
-					</td>
-				</tr>
-				<tr class="advancedProp">
-					<td align="left" style="vertical-align: middle;" colSpan=2>
-						<input type="text" id="dUseMyIconTextBox" class="mySelect" style="width: 100%;">
-					</td>
-				</tr>
-				<tr class="advancedProp">
-					<td align="center" colSpan=2>
-						<img class="blackAndWhiteCSS" style="vertical-align: middle; width: 48px; height: 48px;" id="dPreviewIcon" alt="Preview" title="Preview of your uploaded icon." />
-						<br/>
-						<p align="justify" style="font-size: 12px;">
-							To upload your own icon. Follow these steps:<br/>
-							1. Get base64 encoded string of your image. <a href="http://www.base64-image.de/step-1.php" target="_blank">Click here</a> and follow the steps.<br/>
-							2. Paste the base64 encoded string in the above text box.<br/>
-							3. Thats it!! Your image should appear in the preview box above.<br/>
-							4. Still confused? <a target="_blank" href="http://pratikabu.users.sourceforge.net/extensions/scrolltotop/base64help.html">Click here</a> for detailed explanation with pictures.
-						</p>
-					</td>
-				</tr>
-				
-				<tr>
-					<td align="center" colSpan=2>
-						<a href="http://pratikabu.blogspot.in/2013/01/dual-arrow-feature-request.html">Suggest a Feature</a>
-					</td>
+				<table id="dualArrowSettings" class="tableClass">
+					<tr>
+						<td align="left" colSpan=2>
+							<div class="groupHeader">Basic Settings</div>
+						</td>
+					</tr>
+					<tr>
+						<td align="right" width="35%">Icons Arrangement :</td>
+						<td width="65%">
+							<input type="radio" name="dIconArrangemnt" value="hr"><span id="diarrHr">Horizontal</span>
+							<input type="radio" name="dIconArrangemnt" value="vr"><span id="diarrVr">Vertical</span>
+						</td>
+					</tr>
 					
-				</tr>
-			</table>
-			
-			<table id="advancedSettings" class="tableClass advancedProp">
-				<tr>
-					<td align="left" colSpan=2>
-						<div class="groupHeader">Advanced Settings</div>
-					</td>
-				</tr>
+					<tr class="advancedProp">
+						<td align="left" colSpan=2>
+							<div class="groupHeader">Icons &amp; Library Settings</div>
+						</td>
+					</tr>
+					<tr class="advancedProp">
+						<td align="left" colSpan=2>
+							Horizontal Arrangement (recommended) :
+						</td>
+					</tr>
+					<tr class="advancedProp">
+						<td id="dualHRTD" align="left" colSpan=2>
+						</td>
+					</tr>
+					
+					<tr class="advancedProp">
+						<td align="left" colSpan=2>
+							Vertical Arrangement (recommended) :
+						</td>
+					</tr>
+					<tr class="advancedProp">
+						<td id="dualVRTD" align="left" colSpan=2>
+						</td>
+					</tr>
+					
+					<tr class="advancedProp">
+						<td align="left" colSpan=2>
+							Single Arrow Icons :
+						</td>
+					</tr>
+					<tr class="advancedProp">
+						<td id="dualNornalTD" align="left" colSpan=2>
+						</td>
+					</tr>
+					
+					<tr class="advancedProp">
+						<td align="left" colSpan=2>
+							<input type="radio" name="dIconLib" value="myIcon"><span id="dUseMyIcon">Use my icon</span>
+							<p align="justify" style="font-size: 12px;">
+								Note: You can use icon of any size, the same icon will be used for downward arrow.
+							</p>
+						</td>
+					</tr>
+					<tr class="advancedProp">
+						<td align="left" style="vertical-align: middle;" colSpan=2>
+							<input type="text" id="dUseMyIconTextBox" class="mySelect" style="width: 100%;">
+						</td>
+					</tr>
+					<tr class="advancedProp">
+						<td align="center" colSpan=2>
+							<img class="blackAndWhiteCSS" style="vertical-align: middle; width: 48px; height: 48px;" id="dPreviewIcon" alt="Preview" title="Preview of your uploaded icon." />
+							<br/>
+							<p align="justify" style="font-size: 12px;">
+								To upload your own icon. Follow these steps:<br/>
+								1. Get base64 encoded string of your image. <a href="http://www.base64-image.de/step-1.php" target="_blank">Click here</a> and follow the steps.<br/>
+								2. Paste the base64 encoded string in the above text box.<br/>
+								3. Thats it!! Your image should appear in the preview box above.<br/>
+								4. Still confused? <a target="_blank" href="http://pratikabu.users.sourceforge.net/extensions/scrolltotop/base64help.html">Click here</a> for detailed explanation with pictures.
+							</p>
+						</td>
+					</tr>
+					
+					<tr>
+						<td align="center" colSpan=2>
+							<a href="http://pratikabu.blogspot.in/2013/01/dual-arrow-feature-request.html">Suggest a Feature</a>
+						</td>
+						
+					</tr>
+				</table>
 				
-				<tr>
-					<td align="right" width="35%">Horizontal Offset :</td>
-					<td width="65%">
-						<input type="text" id="hOffset" class="mySelect" style="width: 50px;" />
-						<p align="justify" style="display: inline; font-size: 12px;">
-							For Horizontal Location offset. Only Numbers are allowed.
-						</p>
-					</td>
-				</tr>
+				<table id="advancedSettings" class="tableClass advancedProp">
+					<tr>
+						<td align="left" colSpan=2>
+							<div class="groupHeader">Advanced Settings</div>
+						</td>
+					</tr>
+					
+					<tr>
+						<td align="right" width="35%">Horizontal Offset :</td>
+						<td width="65%">
+							<input type="text" id="hOffset" class="mySelect" style="width: 50px;" />
+							<p align="justify" style="display: inline; font-size: 12px;">
+								For Horizontal Location offset. Only Numbers are allowed.
+							</p>
+						</td>
+					</tr>
+					
+					<tr>
+						<td align="right" width="35%">Vertical Offset :</td>
+						<td width="65%">
+							<input type="text" id="vOffset" class="mySelect" style="width: 50px;" />
+							<p align="justify" style="display: inline; font-size: 12px;">
+								For Vertical Location offset. Only Numbers are allowed.
+							</p>
+						</td>
+					</tr>
+					
+					<tr><td align="left" colSpan=2>Remove add-on from these sites :</td></tr>
+					<tr><td align="left" colSpan=2>
+							<textarea id="removedSites" class="siteTextArea"></textarea>
+							<p align="justify" style="font-size: 12px;">
+								type domain names separated by ';'. No special charaters please. <a target="_blank" href="http://pratikabu.blogspot.com/2013/04/stt-how-to-fill-domain-names.html">Help</a><br/>
+								Ex: mail.google.com;google.com/calendar;
+							</p>
+					</td></tr>
+					
+				<!--<tr><td align="left" colSpan=2>Support internal frames in these sites :</td></tr>
+					<tr><td align="left" colSpan=2>
+							<textarea id="frameSupportedSites" class="siteTextArea"></textarea>
+							<p align="justify" style="font-size: 12px;">
+								type domain names separated by ';'. No special charaters please. <a target="_blank" href="http://pratikabu.blogspot.com/2013/04/stt-how-to-fill-domain-names.html">Help</a><br/>
+								Ex: stumbleupon.com;<br/>
+								This is an advanced setting use it carefully, internal frame support was removed from <a target="_blank" href="http://pratikabu.blogspot.com/2012/11/scroll-to-top-version-36-released.html" title="Release notes of version 3.6">Version 3.6</a>, read <a target="_blank" href="http://pratikabu.users.sourceforge.net/extensions/scrolltotop">Why frame support removed?</a> blog post.
+							</p>
+					</td></tr>-->
+				</table>
 				
-				<tr>
-					<td align="right" width="35%">Vertical Offset :</td>
-					<td width="65%">
-						<input type="text" id="vOffset" class="mySelect" style="width: 50px;" />
-						<p align="justify" style="display: inline; font-size: 12px;">
-							For Vertical Location offset. Only Numbers are allowed.
-						</p>
-					</td>
-				</tr>
+				<input type="button" id="advSettingsBut" value="Show More Settings" class="mybutton small red" title="Choose different icons, configure advanced settings and more..." />
+				<input type="button" id="defaultBut" value="Restore to Defaults" class="mybutton small green" title="Restore all settings to original values." />
+				<input type="button" id="exportImportBut" value="Export / Import" class="mybutton small blue" title="Export/Import settings cross browser." />
+				<input type="button" id="donateReviewBut" value="Support Me" class="mybutton small orange" /><br/><br/>
 				
-				<tr><td align="left" colSpan=2>Remove add-on from these sites :</td></tr>
-				<tr><td align="left" colSpan=2>
-						<textarea id="removedSites" class="siteTextArea"></textarea>
-						<p align="justify" style="font-size: 12px;">
-							type domain names separated by ';'. No special charaters please. <a target="_blank" href="http://pratikabu.blogspot.com/2013/04/stt-how-to-fill-domain-names.html">Help</a><br/>
-							Ex: mail.google.com;google.com/calendar;
-						</p>
-				</td></tr>
-				
-			<!--<tr><td align="left" colSpan=2>Support internal frames in these sites :</td></tr>
-				<tr><td align="left" colSpan=2>
-						<textarea id="frameSupportedSites" class="siteTextArea"></textarea>
-						<p align="justify" style="font-size: 12px;">
-							type domain names separated by ';'. No special charaters please. <a target="_blank" href="http://pratikabu.blogspot.com/2013/04/stt-how-to-fill-domain-names.html">Help</a><br/>
-							Ex: stumbleupon.com;<br/>
-							This is an advanced setting use it carefully, internal frame support was removed from <a target="_blank" href="http://pratikabu.blogspot.com/2012/11/scroll-to-top-version-36-released.html" title="Release notes of version 3.6">Version 3.6</a>, read <a target="_blank" href="http://pratikabu.users.sourceforge.net/extensions/scrolltotop">Why frame support removed?</a> blog post.
-						</p>
-				</td></tr>-->
-			</table>
-			
-			<input type="button" id="advSettingsBut" value="Show More Settings" class="mybutton small red" title="Choose different icons, configure advanced settings and more..." />
-			<input type="button" id="defaultBut" value="Restore to Defaults" class="mybutton small green" title="Restore all settings to original values." />
-			<input type="button" id="exportImportBut" value="Export / Import" class="mybutton small blue" title="Export/Import settings cross browser." />
-			<input type="button" id="donateReviewBut" value="Support Me" class="mybutton small orange" /><br/><br/>
+			</div>
 		</div></form>
 		
 		<div align="center" class="donateContainerDiv myFonts">
@@ -333,7 +342,7 @@
 				</tr>
 			</table>
 		</div>
-		<div id="exportImportDialog" class="tableClass myFonts" style="width: 600px; padding: 10px; z-index: 40; background: WHITE; position: fixed; top: 50%; left: 50%; margin-left: -316px; margin-top: -120px; display: none; border: 5px SOLID #507C9E;">
+		<div id="exportImportDialog" class="tableClass myFonts" style="width: 600px; padding: 10px; z-index: 40; background: WHITE; position: fixed; top: 50%; left: 50%; margin-left: -316px; margin-top: -120px; display: none; border: 2px SOLID #507C9E; border-radius: 3px;">
 			<div id="header" class="groupHeader">Export/Import Settings</div>
 			<div id="content">
 				<table style="width: 100%;">
@@ -364,7 +373,7 @@
 				</table>
 			</div>
 		</div>
-		<div id="donateReviewDialog" class="tableClass myFonts" style="width: 500px; padding: 10px; z-index: 40; background: WHITE; position: fixed; top: 50%; left: 50%; margin-left: -266px; margin-top: -120px; display: none; border: 5px SOLID #507C9E;">
+		<div id="donateReviewDialog" class="tableClass myFonts" style="width: 500px; padding: 10px; z-index: 40; background: WHITE; position: fixed; top: 50%; left: 50%; margin-left: -266px; margin-top: -120px; display: none; border: 2px SOLID #507C9E; border-radius: 3px;">
 			<div id="header" class="groupHeader">Show your support</div>
 			<div id="content">
 				<p align="justify">Show your support by either donating few bucks for its development, or leave a review so that it can be reached to a bigger audience, even both.</p>

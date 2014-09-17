@@ -154,7 +154,7 @@ chrome.extension.onMessage.addListener(
 	});
 
 // open option page on initial in this version
-var currentVersion = 8;// this variable should be incremented with every update so that, add-on update message can be shown
+var currentVersion = 9;// this variable should be incremented with every update so that, add-on update message can be shown
 if(!localStorage["version_info"] || currentVersion > localStorage["version_info"]) {
 	localStorage["version_info"] = currentVersion;
 	chrome.tabs.create({url: "options/options.html?updated=true"});

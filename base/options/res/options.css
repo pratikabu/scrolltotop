@@ -11,9 +11,6 @@
 }
 
 .tableClass {
-	border: 1px SOLID #2094F0;
-	border-radius: 5px;
-	background: WHITESMOKE;
 	width: 700px;
 	margin-bottom: 20px;
 	
@@ -27,10 +24,10 @@
 	right: 0px;
 	top: 50%;
 	margin-top: -92px;
-	border: 1px SOLID #2094F0;
-	border-radius: 5px 0 0 5px;
+	border: 1px SOLID rgb(207, 207, 207);
+	border-radius: 3px 0 0 3px;
 	border-right: 0px;
-	background: WHITESMOKE;
+	background: WHITE;
 	padding: 10px;
 }
 
@@ -39,10 +36,10 @@
 	right: 0px;
 	top: 50%;
 	margin-top: -150px;
-	border: 1px SOLID #2094F0;
-	border-radius: 5px 0 0 5px;
+	border: 1px SOLID rgb(207, 207, 207);
+	border-radius: 3px 0 0 3px;
 	border-right: 0px;
-	background: WHITESMOKE;
+	background: WHITE;
 	padding: 10px;
 }
 
@@ -156,4 +153,15 @@ a.mylink {
 
 [class^=slider] {
 	display: inline-block;
+}
+
+body {
+	background-color: rgba(155, 155, 155, 0.2);
+}
+
+.centerDiv {
+	width: 700px;
+	background-color: WHITE;
+	border-radius: 3px;
+	border: 1px SOLID rgb(207, 207, 207);
 }

@@ -203,7 +203,7 @@
 	safari.application.addEventListener("command", performCommand, false);
 	
 	// open option page on initial in this version
-	var currentVersion = 8;// this variable should be incremented with every update so that, add-on update message can be shown
+	var currentVersion = 9;// this variable should be incremented with every update so that, add-on update message can be shown
 	if(currentVersion > parseInt(safari.extension.settings.version_info)) {
 		safari.extension.settings.version_info = currentVersion;
 		openOptionPage("updated");
