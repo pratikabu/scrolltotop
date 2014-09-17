@@ -193,7 +193,7 @@ function selectatbleCheckBoxContent(checkboxId, spanId) {
 }
 
 function addElement(tag, groupName, value, componentId, image) {
-	tag.append('<input type="radio" name="' + groupName + '" value="' + value + '">'
+	tag.append('<input type="radio" name="' + groupName + '" value="' + value + '" style="margin-left: 8px;">'
 			+ '<img class="blackAndWhiteCSS" style="vertical-align: middle;" id="'+ componentId
 			+ '" src="../icons/pratikabu-stt-'+ image + '.png" />');
 	selectableRadioContent(componentId, groupName, "" + value);
@@ -206,14 +206,17 @@ function addBatchOfIcons(tag, length, cidPrefix, cidStartNumber, groupName, imag
 		addElement(tag, groupName, value, componentId, imageSuffix + i);
 		
 		if(0 == i % 9) {
-			tag.append("<br />");
+			tag.append("<div style='margin-bottom: 5px;' />");
 		}
+	}
+	if(0 != length % 9) {
+		tag.append("</div>");
 	}
 }
 
 function addIcons() {
 	// single icons
-	addBatchOfIcons($('#singleIconTD'), 23, 'iconGal', 0, 'iconLib', '48-');
+	addBatchOfIcons($('#singleIconTD'), 35, 'iconGal', 0, 'iconLib', '48-');
 	
 	// horizontal icons
 	addBatchOfIcons($('#dualHRTD'), 6, 'dIconGal', 0, 'dIconLib', 'dual-hr-');
@@ -222,7 +225,7 @@ function addIcons() {
 	addBatchOfIcons($('#dualVRTD'), 3, 'dIconGal', 20, 'dIconLib', 'dual-vr-');
 	
 	// dual single icon
-	addBatchOfIcons($('#dualNornalTD'), 23, 'dIconGal', 40, 'dIconLib', '48-');
+	addBatchOfIcons($('#dualNornalTD'), 35, 'dIconGal', 40, 'dIconLib', '48-');
 }
 
 /*
