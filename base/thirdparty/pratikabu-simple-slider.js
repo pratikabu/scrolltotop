@@ -92,6 +92,7 @@ var __slice = [].slice,
         if (_this.dragging) {
           _this.dragging = false;
           _this.dragger.removeClass("dragging");
+          _this.input.trigger("slider:postChangeComplete");
           return $("body").css({
             cursor: "auto"
           });

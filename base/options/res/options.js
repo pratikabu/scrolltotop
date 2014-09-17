@@ -2,7 +2,6 @@ var requestCount = 0;
 var ignoreImgLoad = true;
 var dIgnoreImgLoad = true;
 var globalScrollSpeed, globalTransparency;
-var ignoreForDefaults = true, ignoreTransparencyForRestore = true;
 var addonVersion = "4.5";
 
 /*******************************************************************************
@@ -104,9 +103,6 @@ function restore_settings() {
 	if(!confirm("All settings will be reverted to original settings.")) {
 		return;
 	}
-	
-	ignoreForDefaults = true;// ignore the scroll speed save
-	ignoreTransparencyForRestore = true;// ignore transparency save
 	bsDefaultSettings();
 }
 
@@ -475,22 +471,17 @@ document.addEventListener('DOMContentLoaded', function () {
 			speedVal = 0;
 		}
 		globalScrollSpeed = speedVal;
-		
-		if(!ignoreForDefaults) {
-			save_options();
-		} else {
-			ignoreForDefaults = false;
-		}
+	});
+	$("#scrollSpeedSliderId").bind("slider:postChangeComplete", function(event) {
+		save_options();
 	});
 	$('input:radio[name=visbilityBehavior]').change(function() { isRightChangedEvent("visbilityBehavior", $(this).val()); });
 	$("#transparencySliderId").bind("slider:changed", function(event, data) {
 		updateTransparency(data.value);
 		globalTransparency = data.value;
-		if(!ignoreTransparencyForRestore) {
-			save_options();
-		} else {
-			ignoreTransparencyForRestore = false;
-		}
+	});
+	$("#transparencySliderId").bind("slider:postChangeComplete", function(event) {
+		save_options();
 	});
 	$("#transparencyImgId").hover(
 			function() {
