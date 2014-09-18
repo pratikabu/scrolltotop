@@ -2,6 +2,7 @@ var ignoreImgLoad = true;
 var dIgnoreImgLoad = true;
 var globalScrollSpeed, globalTransparency;
 var addonVersion = "4.5";
+var globalDialogId;
 
 /*******************************************************************************
  * Browser Independent code.
@@ -308,23 +309,12 @@ function activateAdvancedSettings() {
 	$("html, body").scrollTop(0);
 }
 
-function closeExportImport() {
-	$('#exportImportDialog').fadeTo("slow", 0, function() {
-		$("#exportImportDialog").hide();
-	});
-	
-	$('#maskDiv').fadeTo("slow", 0, function() {
-		$("#maskDiv").hide();
-	});
-}
-
 function exportImportSettingsInits() {
 	$("#exportImportBut").click(function() {
 		// load in the export textarea
 		$('#txtExportSettings').val(JSON.stringify(save_options(true)));
 		
-		$('#maskDiv').fadeTo("slow", .5);
-		$('#exportImportDialog').fadeTo("slow", 1);
+		toggleDialog("exportImportDialog");
 		
 		// by default export should be selected
 		$('input:radio[name=eiRBG]').filter('[value=E]').attr('checked', true);
@@ -343,10 +333,7 @@ function exportImportSettingsInits() {
 		bsSaveSettings(data);
 		restore_options(data);
 		$("#txtImportSettings").val("");
-		closeExportImport();
-	});
-	$('#eiClose').click(function() {
-		closeExportImport();
+		toggleDialog();
 	});
 	$('#txtExportSettings').click(function() {
 		this.select();
@@ -373,24 +360,12 @@ function exportImportSettingsInits() {
 }
 
 function openSupportDialog() {
-	$('#maskDiv').fadeTo("slow", .5);
-	$('#donateReviewDialog').fadeTo("slow", 1);
+	toggleDialog("donateReviewDialog");
 }
 
 function donateReviewInits() {
 	$("#donateReviewBut").click(function() {
 		openSupportDialog();
-	});
-	
-	
-	$('#drClose').click(function() {
-		$('#donateReviewDialog').fadeTo("slow", 0, function() {
-			$("#donateReviewDialog").hide();
-		});
-		
-		$('#maskDiv').fadeTo("slow", 0, function() {
-			$("#maskDiv").hide();
-		});
 	});
 	
 	$("#supportPromptCBId").change(function() {
@@ -431,6 +406,14 @@ function validateOffsetDataAndFix(textId) {
 	save_options();// save these settings
 }
 
+function toggleDialog(dialogId) {
+	if(dialogId) {
+		globalDialogId = '#' + dialogId;
+	}
+	$('#maskDiv').fadeToggle("slow");
+	$(globalDialogId).fadeToggle("slow");
+}
+
 document.addEventListener('DOMContentLoaded', function () {
 	// is updated then show update dialog
 	var updated = getParameterByName("updated");
@@ -442,18 +425,7 @@ document.addEventListener('DOMContentLoaded', function () {
 		});
 		$('#updateIframeId').attr("src", 'http://pratikabu.users.sourceforge.net/extensions/scrolltotop/release-stt.html?ver=' + addonVersion);
 		
-		$('#maskDiv').fadeTo("slow", .5);
-		$('#updateDialog').fadeTo("slow", 1);
-
-		$('#okaygotit').click(function() {
-			$('#updateDialog').fadeTo("slow", 0, function() {
-				$("#updateDialog").remove();
-			});
-			
-			$('#maskDiv').fadeTo("slow", 0, function() {
-				$("#maskDiv").hide();
-			});
-		});
+		toggleDialog("updateDialog");
 	} else {
 		randomOpenSupportDialog();
 	}
@@ -501,6 +473,12 @@ document.addEventListener('DOMContentLoaded', function () {
 	$("#blackWhiteCBId").change(function() {
 		updateBlackAndWhite();
 		save_options();
+	});
+	$('.dialogCloseButton').click(function() {// dialog closing common script
+		toggleDialog();
+	});
+	$('#maskDiv').click(function() {// dialog closing common script
+		toggleDialog();
 	});
 	// common settings ends
 	
