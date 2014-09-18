@@ -43,7 +43,7 @@
 							<input type="text" id="scrollSpeedSliderId"
 									data-slider="true" data-slider-range="400,2000" data-slider-step="100"
 									data-slider-highlight="true" data-slider-snap="true" />
-							<span id="currentSpeed" style="font-size: 11px; margin-left: 10px;"></span>
+							<span id="currentSpeed" style="font-size: 11px; margin-left: 10px; vertical-align: middle;"></span>
 						</td>
 					</tr>
 					<tr>
@@ -300,7 +300,7 @@
 				<input type="button" id="donateReviewBut" value="Support Me" class="mybutton small orange" /><br/><br/>
 				
 			</div>
-			<div class="withLove"><a target="_blank" href="http://en.wikipedia.org/wiki/India" title="Read more about India"><span style="vertical-align: middle;">With love from India.</span><img style="vertical-align: middle; margin-left: 5px;" src="res/flagIndia-24.png" alt="India Flag" /></a></div>
+			<div class="withLove"><a target="_blank" href="http://en.wikipedia.org/wiki/India" title="Read more about India"><span style="vertical-align: middle; font-size: 14px;">With love from India.</span></a></div>
 		</div></form>
 		
 		<div align="center" class="donateContainerDiv myFonts">
@@ -308,7 +308,7 @@
 			<a target="_blank" href="https://github.com/pratikabu/scrolltotop/issues" style="font-size: 12px;" title="Suggest a Feature">Suggest Feature</a><br/>
 			<a target="_blank" href="https://github.com/pratikabu/scrolltotop/issues" style="font-size: 12px;" title="Report an Issue">Report Issue</a><br/>
 			<a target="_blank" href="http://pratikabu.users.sourceforge.net" style="font-size: 12px;" title="Developer's Home Page">Developer's Page</a><br/>
-			<a target="_blank" href="http://www.twitter.com/scrolltotop" style="font-size: 12px;" title="Find Scroll To Top on Twitter">Twitter</a>
+			<a target="_blank" href="http://www.twitter.com/scrolltotop" style="font-size: 12px;" title="Scroll To Top on Twitter"><img src="res/social-tw.png" alt="Twitter" /></a>
 			<hr/>
 			<span style="font-size: 12px;">Version: <span class="addonVersionId"></span></span><br/>
 			<a target="_blank" href="http://pratikabu.users.sourceforge.net/extensions/scrolltotop/release.html" style="font-size: 12px;" title="See what's new and exciting.">What's New</a><br/>
@@ -325,7 +325,9 @@
 		</div>
 		 -->
 		
-		<div id="status" align="center" class="statusMsgDiv myFonts" title="All statuses will appear here."></div>
+		<div style="position: fixed; left: 50%; top: 0;">
+			<div id="status" align="center" class="statusMsgDiv myFonts" title="All statuses will appear here."></div>
+		</div>
 		
 		<!-- DialogBox -->
 		<div id="maskDiv" style="background: rgba(128, 128, 128, 0.5); display: none; z-index: 38; position: fixed; top: 0; bottom: 0; left: 0; right: 0;"></div>

@@ -44,18 +44,16 @@
 }
 
 .statusMsgDiv {
-	position: fixed;
-	top: 0px;
-	left: 50%;
-	margin-left: -350px;
-	border: 1px SOLID rgb(207, 207, 207);
+	position: relative;
+	left: -50%;
+	border: 1px SOLID #FFEA51;
 	color: BLACK;
 	border-radius: 0 0 3px 3px;
 	border-top: 0px;
-	background: #DEFFCF;
-	padding: 3px;
+	background: #FFEA51;
+	padding: 3px 20px 3px 20px;
 	display: none;
-	font-size: 12px;
+	font-size: 14px;
 }
 
 .myHeader {
@@ -153,6 +151,7 @@ a.mylink {
 
 [class^=slider] {
 	display: inline-block;
+	vertical-align: middle;
 }
 
 body {
@@ -167,7 +166,7 @@ body {
 }
 
 .withLove {
-	margin: 15px;
+	margin: 10px;
 }
 
 .withLove a:link {
