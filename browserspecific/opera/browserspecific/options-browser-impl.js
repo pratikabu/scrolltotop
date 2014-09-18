@@ -13,7 +13,7 @@ function bsInit() {
 		if("resetSettings" == responseFor) {
 			bsFetchSettings();
 			// Update status to let user know options were defaulted.
-			show_message("Restored to defaults.");
+			post_restore_success();
 		}
 	};
 }
@@ -78,7 +78,7 @@ function bsSaveSettings(data) {
 	localStorage["support_prompt"] = data.supportPrompt;
 	
 	// Update status to let user know options were saved.
-	show_message("Saved successfully. <a target='_blank' href='http://pratikabu.users.sourceforge.net/extensions/scrolltotop/release.html'>Preview your changes</a>.");
+	post_save_success();
 }
 
 function bsReviewPageUrl() {

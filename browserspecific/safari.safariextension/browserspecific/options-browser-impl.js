@@ -12,12 +12,12 @@ function bsInit() {
 		if("resetCompleted" === theMessageEvent.name) {
 			bsFetchSettings();
 			// Update status to let user know options were defaulted.
-			show_message("Restored to defaults.");
+			post_restore_success();
 		} else if("optionPagePreferences" === theMessageEvent.name) {
 			restore_options(theMessageEvent.message);
 		} else if("saveCompleted" === theMessageEvent.name) {
 			// Update status to let user know options were saved.
-			show_message("Saved successfully. <a target='_blank' href='http://pratikabu.users.sourceforge.net/extensions/scrolltotop/release.html'>Preview your changes</a>.");
+			post_save_success();
 		}
 	}, false);
 }

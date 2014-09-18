@@ -45,17 +45,17 @@
 
 .statusMsgDiv {
 	position: fixed;
-	bottom: 0px;
+	top: 0px;
 	left: 50%;
 	margin-left: -350px;
-	border: 2px SOLID #2094F0;
-	color: RED;
-	border-radius: 5px 5px 0 0;
-	border-bottom: 0px;
+	border: 1px SOLID rgb(207, 207, 207);
+	color: BLACK;
+	border-radius: 0 0 3px 3px;
+	border-top: 0px;
 	background: #DEFFCF;
-	padding: 10px;
-	width: 676px;
+	padding: 3px;
 	display: none;
+	font-size: 12px;
 }
 
 .myHeader {
@@ -164,4 +164,26 @@ body {
 	background-color: WHITE;
 	border-radius: 3px;
 	border: 1px SOLID rgb(207, 207, 207);
+}
+
+.withLove {
+	margin: 15px;
+}
+
+.withLove a:link {
+	color: #929292;
+	text-decoration: none;
+}
+.withLove a:visited {
+	color: #929292;
+	text-decoration: none;
+}
+.withLove a:hover {
+	color: #585858;
+	text-decoration: none;
+}
+
+hr {
+	border: 0;
+	border-top: 1px SOLID #CBCBCB;
 }

@@ -1,4 +1,3 @@
-var requestCount = 0;
 var ignoreImgLoad = true;
 var dIgnoreImgLoad = true;
 var globalScrollSpeed, globalTransparency;
@@ -106,17 +105,23 @@ function restore_settings() {
 	bsDefaultSettings();
 }
 
+function post_save_success() {
+	show_message("<b>Saved!</b> <a target='_blank' href='http://pratikabu.users.sourceforge.net/extensions/scrolltotop/release.html'>Preview</a>");
+}
+
+function post_restore_success() {
+	show_message("Restored to defaults.");
+}
+
+function show_error_message(msg) {
+	show_message("<span style='color: RED;'>" + msg + "</span>");
+}
+
 function show_message(msg) {
-	requestCount++;
-	$("#status").append(msg + "<br/>");
-	$("#status").slideDown('normal');
-	setTimeout(function() {
-		if(0 === --requestCount) {
-			$("#status").slideUp('slow', function() {
-				$("#status").html("");
-			});
-		}
-	}, 5000);
+	var statusVar = $("#status");
+	statusVar.stop();
+	statusVar.html(msg);
+	statusVar.slideDown('fast').delay(5000).slideUp('fast');
 }
 
 function getParameterByName(name) {
@@ -435,7 +440,7 @@ document.addEventListener('DOMContentLoaded', function () {
 				$('#updateLoadingId').remove();
 			});
 		});
-		$('#updateIframeId').attr("src", 'http://pratikabu.users.sourceforge.net/extensions/scrolltotop/release-stt.html?date=' + new Date().getTime());
+		$('#updateIframeId').attr("src", 'http://pratikabu.users.sourceforge.net/extensions/scrolltotop/release-stt.html?ver=' + addonVersion);
 		
 		$('#maskDiv').fadeTo("slow", .5);
 		$('#updateDialog').fadeTo("slow", 1);
@@ -551,7 +556,7 @@ document.addEventListener('DOMContentLoaded', function () {
 		}
 	});
 	$("#previewIcon").error(function() {
-		show_message("Error loading uploaded image.");
+		show_error_message("Error loading uploaded image.");
 		$('input:radio[name=iconLib]').focus();
 	});
 	// single arrow settings ends
@@ -589,7 +594,7 @@ document.addEventListener('DOMContentLoaded', function () {
 		}
 	});
 	$("#dPreviewIcon").error(function() {
-		show_message("Error loading uploaded image.");
+		show_error_message("Error loading uploaded image.");
 		$('input:radio[name=dIconLib]').focus();
 	});
 	
