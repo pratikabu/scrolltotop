@@ -23,19 +23,7 @@
 	position: fixed;
 	right: 0px;
 	top: 50%;
-	margin-top: -92px;
-	border: 1px SOLID rgb(207, 207, 207);
-	border-radius: 3px 0 0 3px;
-	border-right: 0px;
-	background: WHITE;
-	padding: 10px;
-}
-
-.socialContainerDiv {
-	position: fixed;
-	right: 0px;
-	top: 50%;
-	margin-top: -150px;
+	margin-top: -101px;
 	border: 1px SOLID rgb(207, 207, 207);
 	border-radius: 3px 0 0 3px;
 	border-right: 0px;
