@@ -423,7 +423,7 @@ document.addEventListener('DOMContentLoaded', function () {
 				$('#updateLoadingId').remove();
 			});
 		});
-		$('#updateIframeId').attr("src", 'http://pratikabu.users.sourceforge.net/extensions/scrolltotop/release-stt.html?ver=' + addonVersion);
+		$('#updateIframeId').attr("src", 'http://pratikabu.users.sourceforge.net/extensions/scrolltotop/release-stt.html?v=' + addonVersion);
 		
 		toggleDialog("updateDialog");
 	} else {
@@ -592,6 +592,8 @@ document.addEventListener('DOMContentLoaded', function () {
 	
 	// place the version
 	$(".addonVersionId").append(addonVersion);
+	// what's new link
+	$("#whatsNewId").append('<a target="_blank" href="http://pratikabu.users.sourceforge.net/extensions/scrolltotop/release.html?v=' + addonVersion + '" style="font-size: 12px;" title="See what&#39;s new and exciting.">What&#39;s New</a>');
 	// latest version check
 	$("#latestVersionCheckId").append('<a target="_blank" href="http://pratikabu.users.sourceforge.net/extensions/scrolltotop/latest.html?v=' + addonVersion + '" style="font-size: 12px;" title="See if any new version available.">Check Updates</a>');
 	// give review link
