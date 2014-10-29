@@ -36,3 +36,7 @@ function bsSaveSettings(data) {
 function bsReviewPageUrl() {
 	return "https://addons.mozilla.org/en-us/firefox/addon/scroll-to-top/reviews/add";
 }
+
+self.port.on("loadJavascriptFunctions", function(data) {
+	psInitJavascriptFunctions();
+});

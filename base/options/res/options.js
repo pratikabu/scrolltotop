@@ -1,7 +1,7 @@
 var ignoreImgLoad = true;
 var dIgnoreImgLoad = true;
 var globalScrollSpeed, globalTransparency;
-var addonVersion = "4.5";
+var addonVersion = "4.5.1";
 var globalDialogId;
 
 /*******************************************************************************
@@ -414,7 +414,7 @@ function toggleDialog(dialogId) {
 	$(globalDialogId).fadeToggle("slow");
 }
 
-document.addEventListener('DOMContentLoaded', function () {
+function psInitJavascriptFunctions() {
 	// is updated then show update dialog
 	var updated = getParameterByName("updated");
 	if("true" === updated) {
@@ -600,4 +600,4 @@ document.addEventListener('DOMContentLoaded', function () {
 	$(".reviewId").append('<a class="mybutton small green mylink" target="_blank" style="font-size: 12px;" href="' + bsReviewPageUrl() + '" title="Love Scroll To Top, give it a 5 star and leave your feedback.">Give Review</a>');
 	
 	$(".donateId").append('<a target="_blank" title="Show your support." href="http://pratikabu.users.sourceforge.net/extensions/scrolltotop/donate.php"><span class="donateButton">&nbsp;</span></a>');
-});
+}

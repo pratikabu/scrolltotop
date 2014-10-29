@@ -84,3 +84,7 @@ function bsSaveSettings(data) {
 function bsReviewPageUrl() {
 	return "http://addons.opera.com/en/extensions/details/scroll-to-top";
 }
+
+document.addEventListener('DOMContentLoaded', function () {
+	psInitJavascriptFunctions();
+});
