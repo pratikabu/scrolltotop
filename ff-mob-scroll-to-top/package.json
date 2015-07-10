@@ -10,12 +10,13 @@
 	"author": "Pratik Soni",
 	"url": "http://pratikabu.users.sourceforge.net",
 	"name": "scroll-to-top-mobile",
-	"version": "1.1",
+	"version": "1.2",
 	"main": "main",
 	"homepage": "http://pratikabu.users.sourceforge.net/extensions/scrolltotop",
 	"preferences": [
 		{"description": "", "type": "bool", "name": "largerIcon", "value": false, "title": "Use Large Icon"},
 		{"description": "", "type": "bool", "name": "smartDirectionMode", "value": true, "title": "Smart Direction Mode"},
 		{"description": "", "type": "bool", "name": "animatedBeta", "value": false, "title": "Animate (Beta)"}
-	]
+	],
+	"permissions": {"private-browsing": true}
 }
