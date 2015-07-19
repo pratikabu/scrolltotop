@@ -1,3 +1,5 @@
+var iconsFolderUrl;// icon folder url, this location will come from fetchPreferences
+
 var pratikabustt_browser_impl = {
 	getFixedLocation : function() {
 		// #BrowserSpecific location
@@ -8,6 +10,7 @@ var pratikabustt_browser_impl = {
 		// #BrowserSpecific method call
 		// prefsValue listner
     	self.port.on("prefsValue", function(data) {
+    		iconsFolderUrl = data.iconFolderLocation;
 			// load the css and image source from preference
 			pratikabustt_browser_impl.loadFromPreference(data);
 		});
@@ -24,7 +27,7 @@ var pratikabustt_browser_impl = {
 	
 	getBrowserSpecificUrl: function(imgUrl) {
 		// #BrowserSpecific method to get the resource
-		return "resource://jid0-grmsxw9byuhwgjlhtxjg27ynzrs-at-jetpack/scroll-to-top/data/icons/" + imgUrl;
+		return iconsFolderUrl + "/" + imgUrl;
 	},
 	
 	convertResponse: function(rawResponse) {

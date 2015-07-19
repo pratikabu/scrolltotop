@@ -1,7 +1,7 @@
 var ignoreImgLoad = true;
 var dIgnoreImgLoad = true;
 var globalScrollSpeed, globalTransparency;
-var addonVersion = "4.5.1";
+var addonVersion = "4.5.5";
 var globalDialogId;
 
 /*******************************************************************************
@@ -28,7 +28,7 @@ function save_options(returnValue) {
 		scrSpeed: globalScrollSpeed,
 		visibilityBehav: $('input:radio[name=visbilityBehavior]:checked').val(),
 		iconTransparency: globalTransparency,
-		blackAndWhite: isChecked("#blackWhiteCBId"),
+		blackAndWhite: isChecked("#blackWhiteCBId") + "",
 		
 		arrowType: $('input:radio[name=arrowType]:checked').val(),
 		

@@ -1,18 +1,19 @@
 {
-	"description": "Scroll to top and vice versa in a window.",
-	"contributors": [],
-	"icon": "data/icons/pratikabu-stt-48-1.png",
-	"icon64": "data/icons/pratikabu-stt-64.png",
+	"author": {
+		"name" : "Pratik Soni",
+		"url" : "http://pratikabu.users.sourceforge.net"
+	},
 	"dependencies": ["api-utils", "addon-kit"],
-	"lib": "lib",
-	"fullName": "Scroll To Top",
-	"id": "jid0-gRmSxW9ByuHwGjLhtXJg27YnZRs",
-	"preferences": [ {"title": "Preferences", "type": "control", "name": "myButtonPref", "label": "Customize Scroll To Top"} ],
-	"author": "Pratik Soni",
-	"url": "http://pratikabu.users.sourceforge.net",
-	"name": "scroll-to-top",
-	"version": "4.5.1",
-	"main": "main",
+	"description": "Scroll to top and vice versa in a window.",
 	"homepage": "http://pratikabu.users.sourceforge.net/extensions/scrolltotop",
-	"permissions": {"private-browsing": true}
+	"icon": {
+		"48": "icon.png",
+		"64": "icon64.png"
+	},
+	"id": "jid0-gRmSxW9ByuHwGjLhtXJg27YnZRs@jetpack",
+	"name": "scroll-to-top",
+	"permissions": {"private-browsing": true},
+	"preferences": [ {"title": "Preferences", "type": "control", "name": "myButtonPref", "label": "Customize Scroll To Top"} ],
+	"title": "Scroll To Top",
+	"version": "4.5.5"
 }

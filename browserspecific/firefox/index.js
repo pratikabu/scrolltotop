@@ -113,7 +113,7 @@ pageMod.PageMod({
 	contentScriptWhen: "ready",
     onAttach: function onAttach(worker) {// attaching the worker so as to do the communication with contentscript file
 		worker.port.on('getPrefs', function() {
-			var data = {
+			var dataJson = {
 				vLoc: ss.storage.vertical_location,
 				hLoc: ss.storage.horizontal_location,
 				scrSpeed: ss.storage.scrolling_speed,
@@ -131,23 +131,25 @@ pageMod.PageMod({
 			};
 			
 			// bypass settings if they are not required
-			if("1" == data.arrowType) {// send only single arrow settings
-				data.smartDirection = ss.storage.smart_direction_mode;
-				data.controlOption = ss.storage.control_options;
-				data.hideControls = ss.storage.hide_controls;
-				data.iconLib = ss.storage.icon_library;
-				if("myIcon" == data.iconLib) {
-					data.userIcon = ss.storage.user_saved_icon;
+			if("1" == dataJson.arrowType) {// send only single arrow settings
+				dataJson.smartDirection = ss.storage.smart_direction_mode;
+				dataJson.controlOption = ss.storage.control_options;
+				dataJson.hideControls = ss.storage.hide_controls;
+				dataJson.iconLib = ss.storage.icon_library;
+				if("myIcon" == dataJson.iconLib) {
+					dataJson.userIcon = ss.storage.user_saved_icon;
 				}
 			} else {// send only dual arrow settings
-				data.dArrang = ss.storage.d_arrangement;
-				data.dIconLib = ss.storage.d_icon_library;
-				if("myIcon" == data.dIconLib) {
-					data.dUserIcon = ss.storage.d_user_saved_icon;
+				dataJson.dArrang = ss.storage.d_arrangement;
+				dataJson.dIconLib = ss.storage.d_icon_library;
+				if("myIcon" == dataJson.dIconLib) {
+					dataJson.dUserIcon = ss.storage.d_user_saved_icon;
 				}
 			}
 			
-			worker.port.emit("prefsValue", data);
+			dataJson.iconFolderLocation = data.url("icons");
+			
+			worker.port.emit("prefsValue", dataJson);
 		});
 		
 		worker.port.on('optionPage', function() {
@@ -159,7 +161,9 @@ pageMod.PageMod({
 var openOptioinPage = function(updated) {
 	// don't open the option page if it is already open
 	var optionPageUrl = data.url("options/options.html");
-	for each (var openTab in tabs) {
+	var index;
+	for (index = 0; index < tabs.length; ++index) {
+		var openTab = tabs[index];
 		if(openTab.url.toLowerCase().indexOf(optionPageUrl.toLowerCase()) != -1) {
 			// page is already open
 			openTab.activate();
