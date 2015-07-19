@@ -121,7 +121,7 @@ var pratikabustt = {
 		$(".pratikabuSTTArrowUp").rotate({ animateTo: 0 });
 	},
 	
-	createAddonHtml: function() {
+	createAddonHtml: function(hloc) {
 		// create div tag
 		var divTag = '<div id="pratikabuSTTDiv" class="pratikabusttdiv-no-print"><img id="pratikabuSTTArrowUp" class="pratikabuSTTArrowUp" ';
 		if(pratikabu_stt_dualArrow) {
@@ -149,79 +149,21 @@ var pratikabustt = {
 			return false;
 		}
 		
-		pratikabustt.hoverEffect(".pratikabuSTTArrowUp");
-		if(pratikabu_stt_dualArrow) {
-			pratikabustt.hoverEffect(".pratikabuSTTArrowDown");
-		} else {
-			pratikabustt.hoverEffect(".pratikabuSTTClear");
-			pratikabustt.hoverEffect(".pratikabuSTTSettings");
-			pratikabustt.hoverEffect(".pratikabuSTTPageUp");
-			pratikabustt.hoverEffect(".pratikabuSTTPageDown");
-		}
 		// add the main div hover effects
 		$("#pratikabuSTTDiv").hover(
 			function() { pratikabustt.mainDivHover(true); },
 			function() { pratikabustt.mainDivHover(false); });
 		
-		// add the scroll up logic
-		$(".pratikabuSTTArrowUp").click(function() {
-			if(pratikabu_stt_flipScrolling) {
-				pratikabustt.scrollToBottom();
-			} else {
-				pratikabustt.scrollToTop();
-			}
-			return false;
-		});
-		if(pratikabu_stt_dualArrow) {
-			// add the scroll down logic
-			$(".pratikabuSTTArrowDown").click(function() {
-				pratikabustt.scrollToBottom();
-				return false;
-			});
-		} else {
-			// add the scroll down logic
-			$(".pratikabuSTTSettings").click(function() {
-				if(pratikabu_stt_pollabelIconSwitch) {
-					if(pratikabu_stt_flipScrolling) {
-						pratikabustt.scrollToTop();
-					} else {
-						pratikabustt.scrollToBottom();
-					}
-				} else {
-					pratikabustt_browser_impl.openOptionPage();
-				}
-				return false;
-			});
-			
-			// add rotation for scrolling down
-			$(".pratikabuSTTSettings").hover(
-				function() { if(!pratikabu_stt_pollabelIconSwitch) { $(this).rotate({ animateTo: 180 });} },
-				function() { if(!pratikabu_stt_pollabelIconSwitch) { $(this).rotate({ animateTo: 0 });} });
-			
-			// add the remove div logic
-			$(".pratikabuSTTClear").click(function() {
-				pratikabustt.removeCompleteAddonFromPage();
-			});
-			
-			// add page up and page down handlers
-			$(".pratikabuSTTPageUp").click(function() { pratikabustt.scrollPageScreen(1); });
-			$(".pratikabuSTTPageDown").click(function() { pratikabustt.scrollPageScreen(-1); });
-		}
+		pratikabustt.mapButtonHandlers();
 		
 		// populate from preferences
 		var vloc = pratikabu_stt_prefs.vLoc;
 		var vlocVal = pratikabu_stt_prefs.vOffset + "px";
-		var hloc = pratikabu_stt_prefs.hLoc;
 		var hlocVal = pratikabu_stt_prefs.hOffset + "px";
 		
 		if("middle" === vloc) {
 			vloc = "top";
 			vlocVal = "50%";
-		}
-		
-		if("middle" === hloc) {
-			hloc = "left";
-			hlocVal = "50%";
 		}
 		
 		$("#pratikabuSTTDiv").css(vloc, vlocVal);// set the vertical alignment of the image
@@ -293,6 +235,63 @@ var pratikabustt = {
 		return true;
 	},
 	
+	mapButtonHandlers: function() {
+		pratikabustt.hoverEffect(".pratikabuSTTArrowUp");
+		if(pratikabu_stt_dualArrow) {
+			pratikabustt.hoverEffect(".pratikabuSTTArrowDown");
+		} else {
+			pratikabustt.hoverEffect(".pratikabuSTTClear");
+			pratikabustt.hoverEffect(".pratikabuSTTSettings");
+			pratikabustt.hoverEffect(".pratikabuSTTPageUp");
+			pratikabustt.hoverEffect(".pratikabuSTTPageDown");
+		}
+		
+		// add the scroll up logic
+		$(".pratikabuSTTArrowUp").click(function() {
+			if(pratikabu_stt_flipScrolling) {
+				pratikabustt.scrollToBottom();
+			} else {
+				pratikabustt.scrollToTop();
+			}
+			return false;
+		});
+		if(pratikabu_stt_dualArrow) {
+			// add the scroll down logic
+			$(".pratikabuSTTArrowDown").click(function() {
+				pratikabustt.scrollToBottom();
+				return false;
+			});
+		} else {
+			// add the scroll down logic
+			$(".pratikabuSTTSettings").click(function() {
+				if(pratikabu_stt_pollabelIconSwitch) {
+					if(pratikabu_stt_flipScrolling) {
+						pratikabustt.scrollToTop();
+					} else {
+						pratikabustt.scrollToBottom();
+					}
+				} else {
+					pratikabustt_browser_impl.openOptionPage();
+				}
+				return false;
+			});
+			
+			// add rotation for scrolling down
+			$(".pratikabuSTTSettings").hover(
+				function() { if(!pratikabu_stt_pollabelIconSwitch) { $(this).rotate({ animateTo: 180 });} },
+				function() { if(!pratikabu_stt_pollabelIconSwitch) { $(this).rotate({ animateTo: 0 });} });
+			
+			// add the remove div logic
+			$(".pratikabuSTTClear").click(function() {
+				pratikabustt.removeCompleteAddonFromPage();
+			});
+			
+			// add page up and page down handlers
+			$(".pratikabuSTTPageUp").click(function() { pratikabustt.scrollPageScreen(1); });
+			$(".pratikabuSTTPageDown").click(function() { pratikabustt.scrollPageScreen(-1); });
+		}
+	},
+	
 	togglePollableIcon: function() {
 		var showPollable = pratikabustt.isPOICrossed() && !pratikabustt.isAtBottom();
 		if(showPollable === pratikabu_stt_pollabelIconSwitch) {
@@ -315,7 +314,7 @@ var pratikabustt = {
 	showHideAddon: function(boolShowAddon) {
 		if(boolShowAddon !== pratikabu_stt_bVisibility) {
 			if(boolShowAddon) {// show addon
-				if(pratikabustt.createAddonHtml()) {
+				if(pratikabustt.createAddonHtml("left") || pratikabustt.createAddonHtml("left")) {
 					$("#pratikabuSTTDiv").stop(true, true).fadeTo("slow", 1);
 				}
 			} else {// remove it
