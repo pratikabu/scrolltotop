@@ -29,12 +29,9 @@
 }
 
 .pratikabuSTTBlackAndWhite {
-	filter: grayscale(100%);
-	-webkit-filter: grayscale(100%); -moz-filter: grayscale(100%);
-	-ms-filter: grayscale(100%); -o-filter: grayscale(100%);
-	filter: url(#greyscale);
-	filter: gray;
-	-webkit-filter: grayscale(1);
+	filter: gray !important; /* IE6-9 */
+	filter: grayscale(1) !important; /* Firefox 35+ */
+	-webkit-filter: grayscale(1) !important; /* Google Chrome, Safari 6+ & Opera 15+ */
 }
 
 @media print {
