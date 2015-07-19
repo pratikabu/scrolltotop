@@ -1,4 +1,4 @@
-#pratikabuSTTDiv {
+.pratikabuSTTDiv {
 	background: none !important;
     z-index: 2147483647 !important;
 	position: fixed !important;
@@ -8,7 +8,7 @@
 	line-height: 0 !important;
 }
 
-#pratikabuSTTDiv2 {
+.pratikabuSTTDiv2 {
 	background: none !important;
     z-index: 2147483647 !important;
 	position: fixed !important;
