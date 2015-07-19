@@ -92,8 +92,8 @@ var pratikabustt = {
 	},
 	
 	rotateDown: function(animateRotation) {
-		if(pratikabu_stt_pollabelIconSwitch && 180 !== $("#pratikabuSTTSettings").getRotateAngle()) {
-			$("#pratikabuSTTSettings").rotate({ animateTo: 180 });
+		if(pratikabu_stt_pollabelIconSwitch && 180 !== $(".pratikabuSTTSettings").getRotateAngle()) {
+			$(".pratikabuSTTSettings").rotate({ animateTo: 180 });
 		}
 		
 		if(true === pratikabu_stt_flipScrolling) {
@@ -102,15 +102,15 @@ var pratikabustt = {
 		
 		pratikabu_stt_flipScrolling = true;
 		if(animateRotation) {
-			$("#pratikabuSTTArrowUp").rotate({ animateTo: 180 });
+			$(".pratikabuSTTArrowUp").rotate({ animateTo: 180 });
 		} else {
-			$("#pratikabuSTTArrowUp").rotate(180);
+			$(".pratikabuSTTArrowUp").rotate(180);
 		}
 	},
 	
 	rotateUp: function() {
-		if(pratikabu_stt_pollabelIconSwitch && 0 !== $("#pratikabuSTTSettings").getRotateAngle()) {
-			$("#pratikabuSTTSettings").rotate({ animateTo: 0 });
+		if(pratikabu_stt_pollabelIconSwitch && 0 !== $(".pratikabuSTTSettings").getRotateAngle()) {
+			$(".pratikabuSTTSettings").rotate({ animateTo: 0 });
 		}
 		
 		if(false === pratikabu_stt_flipScrolling) {
@@ -118,24 +118,24 @@ var pratikabustt = {
 		}
 		
 		pratikabu_stt_flipScrolling = false;
-		$("#pratikabuSTTArrowUp").rotate({ animateTo: 0 });
+		$(".pratikabuSTTArrowUp").rotate({ animateTo: 0 });
 	},
 	
 	createAddonHtml: function() {
 		// create div tag
-		var divTag = '<div id="pratikabuSTTDiv" class="pratikabusttdiv-no-print"><img id="pratikabuSTTArrowUp" ';
+		var divTag = '<div id="pratikabuSTTDiv" class="pratikabusttdiv-no-print"><img id="pratikabuSTTArrowUp" class="pratikabuSTTArrowUp" ';
 		if(pratikabu_stt_dualArrow) {
 			if("hr" === pratikabu_stt_prefs.dArrang) {
-				divTag = divTag + '/><img id="pratikabuSTTArrowDown" />';
+				divTag = divTag + '/><img id="pratikabuSTTArrowDown" class="pratikabuSTTArrowDown" />';
 			} else {// if("vr" === pratikabu_stt_prefs.dArrang) {
 				divTag = divTag + 'style="display: block !important;" />' +
-						'<img id="pratikabuSTTArrowDown" style="display: block !important;" />';
+						'<img id="pratikabuSTTArrowDown" class="pratikabuSTTArrowDown" style="display: block !important;" />';
 			}
 		} else {
 			divTag = divTag + 'style="float: left;" />' +
 					'<div id="pratikabuSTTDiv2" class="pratikabusttdiv-no-print">' +
-						'<img id="pratikabuSTTPageUp" /><img id="pratikabuSTTClear" />' +
-						'<img id="pratikabuSTTPageDown" /><img id="pratikabuSTTSettings" />' +
+						'<img id="pratikabuSTTPageUp" class="pratikabuSTTPageUp" /><img id="pratikabuSTTClear" class="pratikabuSTTClear" />' +
+						'<img id="pratikabuSTTPageDown" class="pratikabuSTTPageDown" /><img id="pratikabuSTTSettings" class="pratikabuSTTSettings" />' +
 					'</div>';
 		}
 		divTag = divTag + '</div>';
@@ -149,14 +149,14 @@ var pratikabustt = {
 			return false;
 		}
 		
-		pratikabustt.hoverEffect("#pratikabuSTTArrowUp");
+		pratikabustt.hoverEffect(".pratikabuSTTArrowUp");
 		if(pratikabu_stt_dualArrow) {
-			pratikabustt.hoverEffect("#pratikabuSTTArrowDown");
+			pratikabustt.hoverEffect(".pratikabuSTTArrowDown");
 		} else {
-			pratikabustt.hoverEffect("#pratikabuSTTClear");
-			pratikabustt.hoverEffect("#pratikabuSTTSettings");
-			pratikabustt.hoverEffect("#pratikabuSTTPageUp");
-			pratikabustt.hoverEffect("#pratikabuSTTPageDown");
+			pratikabustt.hoverEffect(".pratikabuSTTClear");
+			pratikabustt.hoverEffect(".pratikabuSTTSettings");
+			pratikabustt.hoverEffect(".pratikabuSTTPageUp");
+			pratikabustt.hoverEffect(".pratikabuSTTPageDown");
 		}
 		// add the main div hover effects
 		$("#pratikabuSTTDiv").hover(
@@ -164,7 +164,7 @@ var pratikabustt = {
 			function() { pratikabustt.mainDivHover(false); });
 		
 		// add the scroll up logic
-		$("#pratikabuSTTArrowUp").click(function() {
+		$(".pratikabuSTTArrowUp").click(function() {
 			if(pratikabu_stt_flipScrolling) {
 				pratikabustt.scrollToBottom();
 			} else {
@@ -174,13 +174,13 @@ var pratikabustt = {
 		});
 		if(pratikabu_stt_dualArrow) {
 			// add the scroll down logic
-			$("#pratikabuSTTArrowDown").click(function() {
+			$(".pratikabuSTTArrowDown").click(function() {
 				pratikabustt.scrollToBottom();
 				return false;
 			});
 		} else {
 			// add the scroll down logic
-			$("#pratikabuSTTSettings").click(function() {
+			$(".pratikabuSTTSettings").click(function() {
 				if(pratikabu_stt_pollabelIconSwitch) {
 					if(pratikabu_stt_flipScrolling) {
 						pratikabustt.scrollToTop();
@@ -194,18 +194,18 @@ var pratikabustt = {
 			});
 			
 			// add rotation for scrolling down
-			$("#pratikabuSTTSettings").hover(
+			$(".pratikabuSTTSettings").hover(
 				function() { if(!pratikabu_stt_pollabelIconSwitch) { $(this).rotate({ animateTo: 180 });} },
 				function() { if(!pratikabu_stt_pollabelIconSwitch) { $(this).rotate({ animateTo: 0 });} });
 			
 			// add the remove div logic
-			$("#pratikabuSTTClear").click(function() {
+			$(".pratikabuSTTClear").click(function() {
 				pratikabustt.removeCompleteAddonFromPage();
 			});
 			
 			// add page up and page down handlers
-			$("#pratikabuSTTPageUp").click(function() { pratikabustt.scrollPageScreen(1); });
-			$("#pratikabuSTTPageDown").click(function() { pratikabustt.scrollPageScreen(-1); });
+			$(".pratikabuSTTPageUp").click(function() { pratikabustt.scrollPageScreen(1); });
+			$(".pratikabuSTTPageDown").click(function() { pratikabustt.scrollPageScreen(-1); });
 		}
 		
 		// populate from preferences
@@ -259,27 +259,27 @@ var pratikabustt = {
 			if(showPagerButtons) {
 				pratikabustt_browser_impl.setImageForId("pratikabuSTTPageUp", "pageup-" + otherImagesSize + ".png");
 				pratikabustt_browser_impl.setImageForId("pratikabuSTTPageDown", "pageup-" + otherImagesSize + ".png");
-				$("#pratikabuSTTPageDown").rotate(180);
+				$(".pratikabuSTTPageDown").rotate(180);
 			} else {
-				$("#pratikabuSTTPageUp").remove();
-				$("#pratikabuSTTPageDown").remove();
+				$(".pratikabuSTTPageUp").remove();
+				$(".pratikabuSTTPageDown").remove();
 			}
 			
 			// change the location of the main image
 			var pratikabu_stt_float = pratikabu_stt_prefs.hLoc;
 			if("right" === pratikabu_stt_prefs.hLoc) {// replace the locations of the icons
 				if(showPagerButtons) {
-					$("#pratikabuSTTPageUp").before($("#pratikabuSTTClear"));
-					$("#pratikabuSTTPageDown").before($("#pratikabuSTTSettings"));
+					$(".pratikabuSTTPageUp").before($(".pratikabuSTTClear"));
+					$(".pratikabuSTTPageDown").before($(".pratikabuSTTSettings"));
 				}
 				$("#pratikabuSTTDiv2").css("marginLeft", 0 + "px");
 			} else {
 				$("#pratikabuSTTDiv2").css("marginLeft", pratikabu_stt_prefs.iconSize + "px");
 			}
 			
-			$("#pratikabuSTTArrowUp").css("float", pratikabu_stt_float);
-			$("#pratikabuSTTArrowUp").css("width", pratikabu_stt_prefs.iconSize + "px");
-			$("#pratikabuSTTArrowUp").css("height", pratikabu_stt_prefs.iconSize + "px");
+			$(".pratikabuSTTArrowUp").css("float", pratikabu_stt_float);
+			$(".pratikabuSTTArrowUp").css("width", pratikabu_stt_prefs.iconSize + "px");
+			$(".pratikabuSTTArrowUp").css("height", pratikabu_stt_prefs.iconSize + "px");
 			
 			if(!pratikabu_stt_prefs.hideControls) {
 				pratikabustt.showHideControlOptions(true);
@@ -308,7 +308,7 @@ var pratikabustt = {
 			pratikabustt_browser_impl.setImageForId("pratikabuSTTSettings", "bottom-" + pratikabustt.getOtherImageSize() + ".png");
 		} else {
 			pratikabustt_browser_impl.setImageForId("pratikabuSTTSettings", "settings-" + pratikabustt.getOtherImageSize() + ".png");
-			$("#pratikabuSTTSettings").rotate(0);
+			$(".pratikabuSTTSettings").rotate(0);
 		}
 	},
 	
@@ -406,7 +406,7 @@ var pratikabustt = {
 	},
 	
 	hoverEffect: function(varId) {
-		$(varId).attr("class", "pratikabuSTTImg");// add it for all the images we've
+		$(varId).addClass("pratikabuSTTImg");// add it for all the images we've
 		$(varId).hide();
 		$(varId).stop(true, true).fadeTo(pratikabu_stt_fadeSpeed, pratikabu_stt_prefs.iconTransparency);
 		$(varId).css("cursor", "pointer");
@@ -421,7 +421,7 @@ var pratikabustt = {
 	
 	showUpArrowImage: function() {
 		if("myIcon" === pratikabu_stt_prefs.iconLib) {
-			$("#pratikabuSTTArrowUp").attr("src", "data:image/png;base64," + pratikabu_stt_prefs.userIcon);
+			$(".pratikabuSTTArrowUp").attr("src", "data:image/png;base64," + pratikabu_stt_prefs.userIcon);
 		} else {
 			var suffixString = pratikabu_stt_prefs.iconSize + "-" + pratikabu_stt_prefs.iconLib;
 			pratikabustt_browser_impl.setImageForId("pratikabuSTTArrowUp", suffixString + ".png");
@@ -431,8 +431,8 @@ var pratikabustt = {
 	showDualArrowImage: function() {
 		if("myIcon" === pratikabu_stt_prefs.dIconLib) {
 			var base64url = "data:image/png;base64," + pratikabu_stt_prefs.dUserIcon;
-			$("#pratikabuSTTArrowUp").attr("src", base64url);
-			$("#pratikabuSTTArrowDown").attr("src", base64url);
+			$(".pratikabuSTTArrowUp").attr("src", base64url);
+			$(".pratikabuSTTArrowDown").attr("src", base64url);
 		} else {
 			var iconNumber = parseInt(pratikabu_stt_prefs.dIconLib);
 			var iconName = "dual-";
@@ -451,7 +451,7 @@ var pratikabustt = {
 			pratikabustt_browser_impl.setImageForId("pratikabuSTTArrowDown", suffixString + ".png");
 		}
 		
-		$("#pratikabuSTTArrowDown").rotate(180);
+		$(".pratikabuSTTArrowDown").rotate(180);
 	},
 	
 	mainDivHover: function(hoverIn) {
