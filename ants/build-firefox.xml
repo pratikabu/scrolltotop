@@ -49,4 +49,11 @@
 	</target>
 	
 	<target name="cleanAndBuild" depends="clean,build" description="Cleans the generated folder and rebuild it again." />
+	
+	<target name="testOnFirefox" depends="build">
+		<property name="execDir" value="${generateDir}/${browserName}" />
+		<exec dir="${execDir}" executable="cmd.exe">
+			<arg line="/c jpm run" />
+		</exec>
+	</target>
 </project>
