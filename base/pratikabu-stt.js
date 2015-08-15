@@ -247,8 +247,8 @@ var pratikabustt = {
 			}
 			
 			// change the location of the main image
-			var pratikabu_stt_float = pratikabu_stt_prefs.hLoc;
-			$(".pratikabuSTTArrowUp").css("float", pratikabu_stt_float);
+			$("#pratikabuSTTArrowUpLeft").css("float", "left");
+			$("#pratikabuSTTArrowUpRight").css("float", "right");
 			$(".pratikabuSTTArrowUp").css("width", pratikabu_stt_prefs.iconSize + "px");
 			$(".pratikabuSTTArrowUp").css("height", pratikabu_stt_prefs.iconSize + "px");
 			
@@ -267,19 +267,21 @@ var pratikabustt = {
 	createAddonHtml: function(location) {
 		// create div tag
 		var divTag = '<div id="pratikabuSTTDiv' + location +
-				'" class="pratikabuSTTDiv pratikabusttdiv-no-print"><img id="pratikabuSTTArrowUp" class="pratikabuSTTArrowUp" ';
+				'" class="pratikabuSTTDiv pratikabusttdiv-no-print"><img id="pratikabuSTTArrowUp' + location + '" class="pratikabuSTTArrowUp" ';
 		if(pratikabu_stt_dualArrow) {
 			if("hr" === pratikabu_stt_prefs.dArrang) {
-				divTag = divTag + '/><img id="pratikabuSTTArrowDown" class="pratikabuSTTArrowDown" />';
+				divTag = divTag + '/><img id="pratikabuSTTArrowDown' + location + '" class="pratikabuSTTArrowDown" />';
 			} else {// if("vr" === pratikabu_stt_prefs.dArrang) {
 				divTag = divTag + 'style="display: block !important;" />' +
-						'<img id="pratikabuSTTArrowDown" class="pratikabuSTTArrowDown" style="display: block !important;" />';
+						'<img id="pratikabuSTTArrowDown' + location + '" class="pratikabuSTTArrowDown" style="display: block !important;" />';
 			}
 		} else {
 			divTag = divTag + 'style="float: left;" />' +
 					'<div id="pratikabuSTTDiv2' + location + '" class="pratikabuSTTDiv2 pratikabusttdiv-no-print">' +
-						'<img id="pratikabuSTTPageUp" class="pratikabuSTTPageUp" /><img id="pratikabuSTTClear" class="pratikabuSTTClear" />' +
-						'<img id="pratikabuSTTPageDown" class="pratikabuSTTPageDown" /><img id="pratikabuSTTSettings" class="pratikabuSTTSettings" />' +
+						'<img id="pratikabuSTTPageUp' + location + '" class="pratikabuSTTPageUp" />' +
+						'<img id="pratikabuSTTClear' + location + '" class="pratikabuSTTClear" />' +
+						'<img id="pratikabuSTTPageDown' + location + '" class="pratikabuSTTPageDown" />' +
+						'<img id="pratikabuSTTSettings' + location + '" class="pratikabuSTTSettings" />' +
 					'</div>';
 		}
 		divTag = divTag + '</div>';
@@ -290,8 +292,8 @@ var pratikabustt = {
 		if("Right" === location) {// replace the locations of the icons
 			var showPagerButtons = "pager" === pratikabu_stt_prefs.controlOption;
 			if(showPagerButtons) {
-				$(".pratikabuSTTPageUp").before($(".pratikabuSTTClear"));
-				$(".pratikabuSTTPageDown").before($(".pratikabuSTTSettings"));
+				$("#pratikabuSTTPageUp" + location).before($("#pratikabuSTTClear" + location));
+				$("#pratikabuSTTPageDown" + location).before($("#pratikabuSTTSettings" + location));
 			}
 			$("#pratikabuSTTDiv2Right").css("marginLeft", 0 + "px");
 		} else {
@@ -322,7 +324,7 @@ var pratikabustt = {
 		if(boolShowAddon !== pratikabu_stt_bVisibility) {
 			if(boolShowAddon) {// show addon
 				if(pratikabustt.createAddon()) {
-					$("#pratikabuSTTDiv").stop(true, true).fadeTo("slow", 1);
+					$(".pratikabuSTTDiv").stop(true, true).fadeTo("slow", 1);
 				}
 			} else {// remove it
 				pratikabustt.removeAddonHtml();
