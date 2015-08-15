@@ -1,7 +1,7 @@
 var ignoreImgLoad = true;
 var dIgnoreImgLoad = true;
 var globalScrollSpeed, globalTransparency;
-var addonVersion = "4.5.5";
+var addonVersion = "1000.1.38";
 var globalDialogId;
 
 /*******************************************************************************
