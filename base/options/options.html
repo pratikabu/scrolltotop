@@ -18,6 +18,44 @@
 				<table id="commonSettings" class="tableClass">
 					<tr>
 						<td align="left" colSpan=2>
+							<div class="groupHeader">Profile Settings</div>
+						</td>
+					</tr>
+					<tr>
+						<td align="right" width="35%">Profile :</td>
+						<td width="65%">
+							<select id="profileSelectorId" class="mySelect" style="width: 85%;"></select>
+						</td>
+					</tr>
+					<tr>
+						<td align="right" width="35%">Profile Name :</td>
+						<td width="65%" id="profileNameId">
+							<div class="profile_def">Default Profile</div>
+							<div class="profile_cust" style="display: none;">
+								<input type="text" id="profile_nameId" class="mySelect" style="width: 85%;">
+							</div>
+						</td>
+					</tr>
+					<tr id="">
+						<td align="right" width="35%" id="profilePatternTDID">URL Pattern :</td>
+						<td width="65%">
+							<div id="urlPatternId" class="profile_cust" style="display: none;">
+								<textarea id="profile_url_patternId" class="siteTextArea" style="height: 50px;"></textarea>
+									<p align="justify" style="font-size: 12px;">
+										type domain names separated by ';' (semicolon). <a target="_blank" href="http://pratikabu.blogspot.com/2013/04/stt-how-to-fill-domain-names.html">Help</a><br/>
+										Ex: app.webpt.com;google.com/calendar;
+									</p>
+							</div>
+							<div id="defaultUrlPatternId" class="profile_def">
+								It applies on all URLs unless there is a profile created for it.
+							</div>
+						</td>
+					</tr>
+				</table>
+				
+				<table id="commonSettings" class="tableClass">
+					<tr>
+						<td align="left" colSpan=2>
 							<div class="groupHeader">Common Settings</div>
 						</td>
 					</tr>
@@ -278,7 +316,7 @@
 					<tr><td align="left" colSpan=2>
 							<textarea id="removedSites" class="siteTextArea"></textarea>
 							<p align="justify" style="font-size: 12px;">
-								type domain names separated by ';'. No special charaters please. <a target="_blank" href="http://pratikabu.blogspot.com/2013/04/stt-how-to-fill-domain-names.html">Help</a><br/>
+								type domain names separated by ';'. No special characters please. <a target="_blank" href="http://pratikabu.blogspot.com/2013/04/stt-how-to-fill-domain-names.html">Help</a><br/>
 								Ex: mail.google.com;google.com/calendar;
 							</p>
 					</td></tr>

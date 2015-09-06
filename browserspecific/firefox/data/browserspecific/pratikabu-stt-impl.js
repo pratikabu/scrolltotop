@@ -8,11 +8,24 @@ var pratikabustt_browser_impl = {
 	
 	fetchPreferences: function() {
 		// #BrowserSpecific method call
-		// prefsValue listner
+		// prefsValue listener
     	self.port.on("prefsValue", function(data) {
     		iconsFolderUrl = data.iconFolderLocation;
-			// load the css and image source from preference
-			pratikabustt_browser_impl.loadFromPreference(data);
+    		var urlToMatch = window.location.href;
+    		var profileFound = false;
+    		for(var i = 0; i < data.sttArray.length; i++) {
+    		    var sttData = data.sttArray[i];
+    			if(!sttData.default_setting && pratikabustt.mactchDomainAgainstDomainList(urlToMatch, sttData.profile_url_pattern)) {
+    				// load the css and image source from preference
+    				pratikabustt_browser_impl.loadFromPreference(sttData);
+    				profileFound = true;
+    				break;
+    			}
+    		}
+    		
+    		if(!profileFound) {
+    			pratikabustt_browser_impl.loadFromPreference(data.sttArray[0]);
+    		}
 		});
 		self.port.emit("getPrefs");// method to communicate to main.js
 	},

@@ -3,6 +3,7 @@ var dIgnoreImgLoad = true;
 var globalScrollSpeed, globalTransparency;
 var addonVersion = "1000.1.38";
 var globalDialogId;
+var globalSttData;
 
 /*******************************************************************************
  * Browser Independent code.
@@ -16,13 +17,50 @@ function updateBlackAndWhite() {
 	}
 }
 
+function errorToggle(inputId, errorText) {
+	if(errorText) {
+		// reset the error message
+		errorToggle(inputId);
+	}
+	
+	var inputObject = $("#" + inputId);
+	var errorTextId = inputId + "_ErrorText";
+	
+	if(!errorText) {
+		inputObject.removeClass("error");
+		$("#" + errorTextId).remove();
+	} else {
+		inputObject.addClass("error");
+		$('<div/>', {
+			id: errorTextId,
+			class: "errorText",
+			text: errorText
+		}).insertAfter("#" + inputId);
+	}
+}
+
+function populateProfileSelector(selectedValue) {
+	var selectObject = $("#profileSelectorId");
+	selectObject.find('option').remove();
+	for(var i = 0; i < globalSttData.sttArray.length; i++) {
+	    var sttData = globalSttData.sttArray[i];
+		var name = !sttData.profile_name ? "Default" : sttData.profile_name;
+		var value = name;
+		selectObject.append(new Option(name, value));
+	}
+	selectObject.append(new Option("Create New Profile...", "new"));
+	
+	selectObject.val(selectedValue);
+	return selectObject;
+}
+
 /**
  * Saves options to localStorage.
  * @param returnValue
  * @returns data optionally returns data json object
  */
 function save_options(returnValue) {
-	var data = {
+	var sttData = {
 		vLoc: $('input:radio[name=imgVerticalLocation]:checked').val(),
 		hLoc: $('input:radio[name=imgHorizontalLocation]:checked').val(),
 		scrSpeed: globalScrollSpeed,
@@ -45,25 +83,87 @@ function save_options(returnValue) {
 		
 		hOffset: $('#hOffset').val(),
 		vOffset: $('#vOffset').val(),
-		removedSites: $('#removedSites').val(),
-		
-		supportPrompt: $('#supportPromptCBId').is(':checked')
+		removedSites: $('#removedSites').val()
 	};
+	globalSttData.supportPrompt = $('#supportPromptCBId').is(':checked');
 	
-	if(!returnValue) {
-		bsSaveSettings(data);
+	var selectProfileValue = $("#profileSelectorId").val();
+	
+	if("default" === selectProfileValue.toLowerCase()) {
+		sttData.default_setting = true;
 	} else {
-		return data;
+		sttData.profile_name = $("#profile_nameId").val();
+		sttData.profile_url_pattern = $("#profile_url_patternId").val();
 	}
+	
+	var isNew = "new" === selectProfileValue.toLowerCase();
+	var isNewError = false;
+	var isDuplicate = false;
+	var isProfileNameUpdate = selectProfileValue.toLowerCase() != sttData.profile_name.toLowerCase();
+	var originalIndex = getProfileIndexForValue(selectProfileValue);
+	if("new" === sttData.profile_name.toLowerCase()) {
+		isNewError = true;
+	} else if(-1 != getProfileIndexForValue(sttData.profile_name) && (isNew || isProfileNameUpdate)) {
+		isDuplicate = true;
+	} else if(-1 == originalIndex) {
+		globalSttData.sttArray.push(sttData);
+	} else if(-1 != originalIndex) {
+		globalSttData.sttArray[originalIndex] = sttData;
+	}
+	
+	if(isNewError) {
+		errorToggle("profile_nameId", 'Profile name must not be "new".');
+	}
+	
+	if(isDuplicate) {
+		errorToggle("profile_nameId", 'Profile name must be unique.');
+	}
+	
+	if(!isNewError && !isDuplicate && !returnValue) {
+		errorToggle("profile_nameId");
+		bsSaveSettings(globalSttData);
+		
+		if(isNew || isProfileNameUpdate) {
+			populateProfileSelector(sttData.profile_name);
+		}
+	}
+	
+	return globalSttData;
+}
+
+function getProfileIndexForValue(value) {
+	var index = -1;
+	for(var i = 0; i < globalSttData.sttArray.length; i++) {
+	    var sttData = globalSttData.sttArray[i];
+	    if(value.toLowerCase() === sttData.profile_name.toLowerCase()) {
+	    	index = i;
+	    	break;
+	    }
+	}
+	return index;
 }
 
 /**
  * Restores select box state to saved value from localStorage.
  * @param data
  */
-function restore_options(data) {
+function restore_options(sttMainData) {
+	globalSttData = sttMainData;
+	var selectObject = populateProfileSelector("Default");
+	selectObject.change();
+}
+
+function restore_single_options(data) {
 	ignoreImgLoad = true;// ignore the image load method as it will reset myIcon in the radio button
 	dIgnoreImgLoad = true;// ignore the image load method as it will reset myIcon in the radio button
+	
+	if(data.default_setting) {
+		$("#profile_nameId").val("");
+		$("#profile_url_patternId").val("");
+	} else {
+		$("#profile_nameId").val(data.profile_name);
+		$("#profile_url_patternId").val(data.profile_url_pattern);
+	}
 	
 	$('input:radio[name=imgVerticalLocation]').filter('[value=' + data.vLoc + ']').attr('checked', true);
 	$('input:radio[name=imgHorizontalLocation]').filter('[value=' + data.hLoc + ']').attr('checked', true);
@@ -434,6 +534,47 @@ function psInitJavascriptFunctions() {
 	addIcons();
 	
 	// add all events
+	
+	$( "#profileSelectorId" ).change(function() {
+		errorToggle("profile_nameId");
+		var selectedProfile = $("#profileSelectorId").val();
+		if("new" === selectedProfile.toLowerCase()) {
+			$("#profile_nameId").val("");
+			$("#profile_url_patternId").val("");
+		} else {
+			for(var i = 0; i < globalSttData.sttArray.length; i++) {
+			    var sttData = globalSttData.sttArray[i];
+			    if(("default" === selectedProfile.toLowerCase() && sttData.default_setting) ||
+			    		selectedProfile.toLowerCase() === sttData.profile_name.toLowerCase()) {
+			    	restore_single_options(sttData);
+			    	break;
+			    }
+			}
+		}
+		
+		if("default" === selectedProfile.toLowerCase()) {
+			$('#profilePatternTDID').css("vertical-align", "middle");
+			$(".profile_def").show();
+			$(".profile_cust").hide();
+		} else {
+			$('#profilePatternTDID').css("vertical-align", "baseline");
+			$(".profile_cust").show();
+			$(".profile_def").hide();
+			$("#profile_nameId").focus();
+		}
+	});
+	
+	$( "#profile_nameId" ).focus(function() {
+		clearProfileNameError("profile_nameId");
+	});
+	
+	$( "#profile_nameId" ).change(function() {
+		save_options();
+	});
+	
+	$( "#profile_url_patternId" ).change(function() {
+		save_options();
+	});
 	
 	//document.querySelector('#saveSettings').addEventListener('click', save_options);
 	$("#defaultBut").click(function() { restore_settings(); });

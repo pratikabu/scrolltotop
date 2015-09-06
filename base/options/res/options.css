@@ -174,3 +174,12 @@ hr {
 	border: 0;
 	border-top: 1px SOLID #CBCBCB;
 }
+
+.error {
+	border: 2px SOLID RED;
+}
+
+.errorText {
+	color: RED;
+	margin-top: 5px;
+}

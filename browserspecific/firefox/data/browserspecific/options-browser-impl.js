@@ -8,7 +8,7 @@ function bsDefaultSettings() {
 }
 
 function bsInit() {
-	// prefsValue listner
+	// prefsValue listener
 	self.port.on("resetStatus", function(data) {
 		bsFetchSettings();
 		// Update status to let user know options were defaulted.
