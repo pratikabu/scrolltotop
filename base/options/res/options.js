@@ -91,6 +91,7 @@ function save_options(returnValue) {
 	
 	if("default" === selectProfileValue.toLowerCase()) {
 		sttData.default_setting = true;
+		sttData.profile_name = "Default";
 	} else {
 		sttData.profile_name = $("#profile_nameId").val();
 		sttData.profile_url_pattern = $("#profile_url_patternId").val();
