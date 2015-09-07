@@ -44,11 +44,14 @@ function populateProfileSelector(selectedValue) {
 	selectObject.find('option').remove();
 	for(var i = 0; i < globalSttData.sttArray.length; i++) {
 	    var sttData = globalSttData.sttArray[i];
-		var name = !sttData.profile_name ? "Default" : sttData.profile_name;
+		var name = sttData.profile_name;
 		var value = name;
 		selectObject.append(new Option(name, value));
 	}
-	selectObject.append(new Option("Create New Profile...", "new"));
+	
+	if(5 >= globalSttData.sttArray.length) {
+		selectObject.append(new Option("Create New Profile...", "new"));
+	}
 	
 	selectObject.val(selectedValue);
 	return selectObject;
@@ -100,9 +103,12 @@ function save_options(returnValue) {
 	var isNew = "new" === selectProfileValue.toLowerCase();
 	var isNewError = false;
 	var isDuplicate = false;
+	var isProfileEmptyError = false;
 	var isProfileNameUpdate = selectProfileValue.toLowerCase() != sttData.profile_name.toLowerCase();
 	var originalIndex = getProfileIndexForValue(selectProfileValue);
-	if("new" === sttData.profile_name.toLowerCase()) {
+	if(!sttData.profile_name) {
+		isProfileEmptyError = true;
+	} else if("new" === sttData.profile_name.toLowerCase()) {
 		isNewError = true;
 	} else if(-1 != getProfileIndexForValue(sttData.profile_name) && (isNew || isProfileNameUpdate)) {
 		isDuplicate = true;
@@ -110,6 +116,10 @@ function save_options(returnValue) {
 		globalSttData.sttArray.push(sttData);
 	} else if(-1 != originalIndex) {
 		globalSttData.sttArray[originalIndex] = sttData;
+	}
+	
+	if(isProfileEmptyError) {
+		errorToggle("profile_nameId", 'Profile name must not be empty.');
 	}
 	
 	if(isNewError) {
@@ -120,7 +130,7 @@ function save_options(returnValue) {
 		errorToggle("profile_nameId", 'Profile name must be unique.');
 	}
 	
-	if(!isNewError && !isDuplicate && !returnValue) {
+	if(!isNewError && !isDuplicate && !isProfileEmptyError && !returnValue) {
 		errorToggle("profile_nameId");
 		bsSaveSettings(globalSttData);
 		
@@ -566,15 +576,37 @@ function psInitJavascriptFunctions() {
 	});
 	
 	$( "#profile_nameId" ).focus(function() {
-		clearProfileNameError("profile_nameId");
+		errorToggle("profile_nameId");
 	});
 	
 	$( "#profile_nameId" ).change(function() {
+		$(this).val($(this).val().trim());
 		save_options();
 	});
 	
 	$( "#profile_url_patternId" ).change(function() {
 		save_options();
+	});
+	
+	$("#removeProfileId").click(function() {
+		var selectProfileValue = $("#profileSelectorId").val();
+		
+		var removeIndex = -1;
+		if("new" != selectProfileValue.toLowerCase()) {
+			if(!confirm('Do you want to remove "' + selectProfileValue + '" profile?')) {
+				return;
+			}
+			// remove the setting and save it
+			removeIndex = getProfileIndexForValue(selectProfileValue);
+			if(-1 != removeIndex) {
+				globalSttData.sttArray.splice(removeIndex, 1);
+			}
+		}
+		var selectObject = populateProfileSelector("Default");
+		selectObject.change();
+		if(-1 != removeIndex) {
+			save_options();
+		}
 	});
 	
 	//document.querySelector('#saveSettings').addEventListener('click', save_options);
