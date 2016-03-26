@@ -136,7 +136,7 @@ chrome.extension.onMessage.addListener(
 			
 			sendResponse(data);
 		} else if ("openOptionPage" === request.method) {
-			chrome.tabs.query({url: "chrome-extension://*/options/options.html"}, function(tabs) {// query with this pattern
+			chrome.tabs.query({url: "chrome-extension://*/options/options.html*"}, function(tabs) {// query with this pattern
 				if(0 === tabs.length) {// open a new options page
 					chrome.tabs.create({url: "options/options.html"});
 				} else {// open the existing one
