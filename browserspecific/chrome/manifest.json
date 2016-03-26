@@ -1,6 +1,6 @@
 {
 	"name":"Scroll To Top",
-	"version":"4.5",
+	"version":"4.5.1",
 	"manifest_version":2,
 	"description":"Scroll to top and vice versa in a window.",
 	"homepage_url":"http://pratikabu.users.sourceforge.net/extensions/scrolltotop",
@@ -11,6 +11,9 @@
 		],
 		"persistent":false
 	},
+	"permissions": [
+		"tabs"
+	],
 	"icons":{
 		"16":"icons/pratikabu-stt-16.png",
 		"48":"icons/pratikabu-stt-48-1.png",
