@@ -6,10 +6,7 @@
 	"dependencies": ["api-utils", "addon-kit"],
 	"description": "Scroll to top and vice versa in a window.",
 	"homepage": "http://pratikabu.users.sourceforge.net/extensions/scrolltotop",
-	"icon": {
-		"48": "icon.png",
-		"64": "icon64.png"
-	},
+	"icon": "icon.png",
 	"id": "jid0-gRmSxW9ByuHwGjLhtXJg27YnZRs@jetpack",
 	"name": "scroll-to-top",
 	"permissions": {"private-browsing": true},
