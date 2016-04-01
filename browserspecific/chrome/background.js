@@ -136,15 +136,15 @@ chrome.extension.onMessage.addListener(
 			
 			sendResponse(data);
 		} else if ("openOptionPage" === request.method) {
-			chrome.tabs.query({url: "chrome-extension://*/options/options.html*"}, function(tabs) {// query with this pattern
-				if(0 === tabs.length) {// open a new options page
+//			chrome.tabs.query({url: "chrome-extension://*/options/options.html*"}, function(tabs) {// query with this pattern
+//				if(0 === tabs.length) {// open a new options page
 					chrome.tabs.create({url: "options/options.html"});
-				} else {// open the existing one
-					chrome.tabs.highlight({tabs: [tabs[0].index], windowId: tabs[0].windowId}, function(win) {
-						chrome.windows.update(win.id, {focused: true}, function(win2) {});
-					});
-				}
-			});
+//				} else {// open the existing one
+//					chrome.tabs.highlight({tabs: [tabs[0].index], windowId: tabs[0].windowId}, function(win) {
+//						chrome.windows.update(win.id, {focused: true}, function(win2) {});
+//					});
+//				}
+//			});
 		} else if ("resetSettings" === request.method) {
 			forceInitializeSettings();
 			sendResponse({defaulted: true});
