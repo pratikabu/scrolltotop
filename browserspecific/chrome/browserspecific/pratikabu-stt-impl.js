@@ -13,7 +13,7 @@ var pratikabustt_browser_impl = {
 	loadFromPreference: function(data) {
 		// #BrowserSpecific call
 		// Asks background.html for [LocalStorage] settings from Options Page and assigns them to variables
-		chrome.extension.sendMessage({method: "getSettings"}, function(response_msg) {
+		chrome.runtime.sendMessage({method: "getSettings"}, function(response_msg) {
 			// #BrowserSpecific this method is somewhat browser specific
 			if(!response_msg) {
 				return;
@@ -24,7 +24,7 @@ var pratikabustt_browser_impl = {
 	
 	getBrowserSpecificUrl: function(imgUrl) {
 		// #BrowserSpecific method to get the resource
-		return chrome.extension.getURL(imgUrl);
+		return chrome.runtime.getURL(imgUrl);
 	},
 	
 	convertResponse: function(rawResponse) {
@@ -34,7 +34,7 @@ var pratikabustt_browser_impl = {
 	
 	openOptionPage: function() {
 		// #BrowserSpecific method to open the option page
-		chrome.extension.sendMessage({method: "openOptionPage"});
+		chrome.runtime.sendMessage({method: "openOptionPage"});
 	},
 	
 	setImageForId: function(imgId, imageName) {
