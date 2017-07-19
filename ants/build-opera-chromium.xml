@@ -26,9 +26,11 @@
 		<delete file="${browserDir}/icons/pratikabu-stt-64.png" />
 		
 		<java jar="${htmlModifierJarFile}" fork="true" failonerror="true">
-			<arg value="OCOJI" />
+			<arg value="REPLACE" />
 			<arg value="${baseBrowserSpecific}/${bsFolderName}/${bsOptionsImplName}" />
 			<arg value="${browserSpecific}/${bsOptionsImplName}" />
+			<arg value="${chromeReviewUrl}" />
+			<arg value="${browserSpeceficReviewUrl}" />
 		</java>
 		
 		<!-- create brwoser specific zip files -->
