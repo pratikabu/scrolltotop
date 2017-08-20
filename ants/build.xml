@@ -44,13 +44,6 @@
 			<param name="browserName" value="opera-chromium" />
 		</antcall>
 	</target>
-
-	<target name="buildOpera">
-		<antcall target="callTarget">
-			<param name="targetName" value="build" />
-			<param name="browserName" value="opera" />
-		</antcall>
-	</target>
 	
-	<target name="build" depends="clean,buildFirefox,buildChrome,buildSafari,buildOperChromium,buildOpera" />
+	<target name="build" depends="clean,buildFirefox,buildChrome,buildSafari,buildOperChromium" />
 </project>

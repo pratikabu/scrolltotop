@@ -1,1 +1,0 @@
-cfx run --profiledir="C:\Users\pratsoni.ST-IDC\AppData\Roaming\Mozilla\Firefox\Profiles\3bwmtkug.dev"
