@@ -28,6 +28,9 @@
 			]
 		}
 	],
+	"permissions": [
+		"storage"
+	],
 	"homepage_url": "http://pratikabu.users.sourceforge.net/extensions/scrolltotop",
 	"options_ui": {
 		"page": "options/options.html",
