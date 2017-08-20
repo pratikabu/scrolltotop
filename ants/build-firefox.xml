@@ -8,52 +8,36 @@
 	<target name="clean" description="clean up everything">
 		<delete dir="${browserDir}" />
 	</target>
-	
+
 	<target name="baseCall">
 		<ant antfile="${buildBrowserFileName}" target="${targetName}">
 			<property file="${buildBrowserPropFileName}" />
 			<property file="${browserName}specific.properties" />
 		</ant>
 	</target>
-	
+
 	<target name="build" description="generate executable folder">
 		<antcall target="baseCall">
 			<param name="targetName" value="build" />
 		</antcall>
-		
-		
+
+
 		<!-- do some browser specific stuffs -->
+		<delete file="${browserDir}/icons/pratikabu-stt-64.png" />
+		
 		<java jar="${htmlModifierJarFile}" fork="true" failonerror="true">
-			<arg value="MFO" />
-			<arg value="${options}/${optionHtmlFileName}" />
-			<arg value="${browserOptions}/${optionHtmlFileName}" />
+			<arg value="REPLACE" />
+			<arg value="${baseBrowserSpecific}/${bsFolderName}/${bsOptionsImplName}" />
+			<arg value="${browserSpecific}/${bsOptionsImplName}" />
+			<arg value="${chromeReviewUrl}" />
+			<arg value="${browserSpeceficReviewUrl}" />
 		</java>
-	</target>
-	
-	<target name="updateVersion">
-		<property name="srcXpi" value="${generateDir}/${browserName}/scroll-to-top.xpi" />
-		<property name="unzipFolder" value="${generatedZipDir}/${browserName}" />
-		<unzip dest="${unzipFolder}" src="${srcXpi}" />
-		<echo>Updating tags of install.rdf file</echo>
-		<java jar="${htmlModifierJarFile}" fork="true" failonerror="true">
-			<arg value="XMOD" />
-			<arg value="${unzipFolder}/install.rdf" />
-			<arg value="em:maxVersion" />
-			<arg value="${maxVersion}" />
-		</java>
+		
+		<!-- create brwoser specific zip files -->
 		<zip destfile="${generatedZipDir}/${browserName}-stt.${deployExtension}">
-			<zipfileset dir="${unzipFolder}" />
+			<zipfileset dir="${generateDir}/${browserName}" />
 		</zip>
-		<delete dir="${unzipFolder}" />
-		<!--<delete file="${srcXpi}" />-->
 	</target>
-	
+
 	<target name="cleanAndBuild" depends="clean,build" description="Cleans the generated folder and rebuild it again." />
-	
-	<target name="testOnFirefox" depends="build">
-		<property name="execDir" value="${generateDir}/${browserName}" />
-		<exec dir="${execDir}" executable="cmd.exe">
-			<arg line="/c jpm run" />
-		</exec>
-	</target>
 </project>
