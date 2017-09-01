@@ -513,7 +513,10 @@ function psInitJavascriptFunctions() {
 		}
 	});
 	
-	$("#useMyIconTextBox").change(function() { $('#previewIcon').attr('src', 'data:image/png;base64,' + $('#useMyIconTextBox').val()); });
+	$("#useMyIconTextBox").change(function() {
+		$('#useMyIconTextBox').val($('#useMyIconTextBox').val().trim());
+		$('#previewIcon').attr('src', getBase64Url($('#useMyIconTextBox').val()));
+	});
 	$("#useMyIconTextBox").focus(function() {
 		this.select();
 		
@@ -551,7 +554,10 @@ function psInitJavascriptFunctions() {
 		}
 	});
 	
-	$("#dUseMyIconTextBox").change(function() { $('#dPreviewIcon').attr('src', 'data:image/png;base64,' + $('#dUseMyIconTextBox').val()); });
+	$("#dUseMyIconTextBox").change(function() {
+		$('#dUseMyIconTextBox').val($('#dUseMyIconTextBox').val().trim());
+		$('#dPreviewIcon').attr('src', getBase64Url($('#dUseMyIconTextBox').val()));
+	});
 	$("#dUseMyIconTextBox").focus(function() {
 		this.select();
 		
@@ -600,4 +606,13 @@ function psInitJavascriptFunctions() {
 	$(".reviewId").append('<a class="mybutton small green mylink" target="_blank" style="font-size: 12px;" href="' + bsReviewPageUrl() + '" title="Love Scroll To Top, give it a 5 star and leave your feedback.">Give Review</a>');
 	
 	$(".donateId").append('<a target="_blank" title="Show your support." href="http://pratikabu.users.sourceforge.net/extensions/scrolltotop/donate.php"><span class="donateButton">&nbsp;</span></a>');
+}
+
+function getBase64Url(base64Url) {
+	if(base64Url.startsWith("data:")) {
+		// return the URL as is
+		return base64Url;
+	}
+	
+	return "data:image/png;base64," + base64Url;
 }

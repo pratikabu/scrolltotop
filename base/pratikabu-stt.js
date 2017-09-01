@@ -421,7 +421,7 @@ var pratikabustt = {
 	
 	showUpArrowImage: function() {
 		if("myIcon" === pratikabu_stt_prefs.iconLib) {
-			$("#pratikabuSTTArrowUp").attr("src", "data:image/png;base64," + pratikabu_stt_prefs.userIcon);
+			$("#pratikabuSTTArrowUp").attr("src", pratikabustt.getBase64Url(pratikabu_stt_prefs.userIcon));
 		} else {
 			var suffixString = pratikabu_stt_prefs.iconSize + "-" + pratikabu_stt_prefs.iconLib;
 			pratikabustt_browser_impl.setImageForId("pratikabuSTTArrowUp", suffixString + ".png");
@@ -430,7 +430,7 @@ var pratikabustt = {
 	
 	showDualArrowImage: function() {
 		if("myIcon" === pratikabu_stt_prefs.dIconLib) {
-			var base64url = "data:image/png;base64," + pratikabu_stt_prefs.dUserIcon;
+			var base64url = pratikabustt.getBase64Url(pratikabu_stt_prefs.dUserIcon);
 			$("#pratikabuSTTArrowUp").attr("src", base64url);
 			$("#pratikabuSTTArrowDown").attr("src", base64url);
 		} else {
@@ -452,6 +452,15 @@ var pratikabustt = {
 		}
 		
 		$("#pratikabuSTTArrowDown").rotate(180);
+	},
+	
+	getBase64Url: function(base64Url) {
+		if(base64Url.startsWith("data:")) {
+			// return the URL as is
+			return base64Url;
+		}
+		
+		return "data:image/png;base64," + base64Url;
 	},
 	
 	mainDivHover: function(hoverIn) {
