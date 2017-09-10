@@ -179,7 +179,7 @@ function loadValueInTransparencySlider(transparency) {
 function selectableRadioContent(id, name, value) {
 	$("#" + id).css("cursor", "default");
 	$("#" + id).click(function() {
-		$('input:radio[name=' + name + ']').filter('[value=' + value + ']').attr('checked', true);
+		$('input:radio[name=' + name + ']').filter('[value=' + value + ']').prop('checked', true);
 		$('input:radio[name=' + name + ']').change();
 	});
 }
@@ -193,7 +193,7 @@ function selectatbleCheckBoxContent(checkboxId, spanId) {
 	spanId = "#" + spanId;
 	$(spanId).css("cursor", "default");
 	$(spanId).click(function() {
-		$(checkboxId).attr('checked', !isChecked(checkboxId));
+		$(checkboxId).prop('checked', !isChecked(checkboxId));
 		$(checkboxId).change();
 	});
 }
@@ -418,7 +418,7 @@ function psInitJavascriptFunctions() {
 	// is updated then show update dialog
 	var updated = getParameterByName("updated");
 	if("true" === updated) {
-		$('#updateIframeId').load(function() {
+		$('#updateIframeId').on('load', function() {
 			$('#updateLoadingId').fadeOut(300, function() {
 				$('#updateLoadingId').remove();
 			});
@@ -528,7 +528,7 @@ function psInitJavascriptFunctions() {
 		});
 	});
 	
-	$("#previewIcon").load(function() {
+	$("#previewIcon").on('load', function() {
 		if(ignoreImgLoad) {
 			ignoreImgLoad = false;
 		} else {
@@ -536,7 +536,7 @@ function psInitJavascriptFunctions() {
 			$('input:radio[name=iconLib]').change();
 		}
 	});
-	$("#previewIcon").error(function() {
+	$("#previewIcon").on("error", function() {
 		show_error_message("Error loading uploaded image.");
 		$('input:radio[name=iconLib]').focus();
 	});
@@ -569,7 +569,7 @@ function psInitJavascriptFunctions() {
 		});
 	});
 	
-	$("#dPreviewIcon").load(function() {
+	$("#dPreviewIcon").on('load', function() {
 		if(dIgnoreImgLoad) {
 			dIgnoreImgLoad = false;
 		} else {
@@ -577,7 +577,7 @@ function psInitJavascriptFunctions() {
 			$('input:radio[name=dIconLib]').change();
 		}
 	});
-	$("#dPreviewIcon").error(function() {
+	$("#dPreviewIcon").on("error", function() {
 		show_error_message("Error loading uploaded image.");
 		$('input:radio[name=dIconLib]').focus();
 	});

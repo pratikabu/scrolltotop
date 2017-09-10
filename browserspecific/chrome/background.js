@@ -13,13 +13,13 @@ chrome.runtime.onMessage.addListener(
 			resetSettings(sendResponseFunction);
 			return true;
 		} else if("saveSettings" === request.method) {
-			saveSettings(request.sttData);
+			saveSettings(request.sttData, sendResponseFunction);
 			return true;
 		}
 	});
 
 function getStorage() {
-	return chrome.storage.local;
+	return chrome.storage.sync;
 }
 
 function saveSettings(sttData, sendResponseFunction) {
