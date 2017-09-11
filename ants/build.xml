@@ -19,28 +19,28 @@
 	<!-- normal builds -->
 	<target name="buildFirefox">
 		<antcall target="callTarget">
-			<param name="targetName" value="build" />
+			<param name="targetName" value="cleanAndBuild" />
 			<param name="browserName" value="firefox" />
 		</antcall>
 	</target>
 
 	<target name="buildChrome">
 		<antcall target="callTarget">
-			<param name="targetName" value="build" />
+			<param name="targetName" value="cleanAndBuild" />
 			<param name="browserName" value="chrome" />
 		</antcall>
 	</target>
 
 	<target name="buildSafari">
 		<antcall target="callTarget">
-			<param name="targetName" value="build" />
+			<param name="targetName" value="cleanAndBuild" />
 			<param name="browserName" value="safari.safariextension" />
 		</antcall>
 	</target>
 
 	<target name="buildOperChromium">
 		<antcall target="callTarget">
-			<param name="targetName" value="build" />
+			<param name="targetName" value="cleanAndBuild" />
 			<param name="browserName" value="opera-chromium" />
 		</antcall>
 	</target>
