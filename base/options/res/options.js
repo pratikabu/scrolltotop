@@ -594,7 +594,7 @@ function psInitJavascriptFunctions() {
 	
 	bsInit();
 	makeElementsSelactable();
-	bsFetchSettings(updated);
+	bsFetchSettings();
 	
 	// place the version
 	$(".addonVersionId").append(addonVersion);
