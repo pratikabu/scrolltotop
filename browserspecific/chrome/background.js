@@ -65,13 +65,10 @@ function resetSettings(sendResponseFunction) {
 
 // process the first time installs and updates to the extension
 chrome.runtime.onInstalled.addListener(function(details) {
-	if(chrome.runtime.OnInstalledReason.INSTALL == details.reason) {
+	if(chrome.runtime.OnInstalledReason.INSTALL == details.reason || chrome.runtime.OnInstalledReason.UPDATE == details.reason) {
 		// initialize the settings and open the update page
 		resetSettings(function openUpdatePage() {
 			chrome.tabs.create({url: "options/options.html?updated=true"});
 		});
-	} else if(chrome.runtime.OnInstalledReason.UPDATE == details.reason) {
-		// just open the update page
-		chrome.tabs.create({url: "options/options.html?updated=true"});
 	}
 });
