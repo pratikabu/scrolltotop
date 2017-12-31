@@ -43,6 +43,15 @@
 			<arg value="&quot;${replaceManifestLine}&quot;" />
 		</java>
 		
+		<!-- update the BROWSER_KEY in the background.js file -->
+		<java jar="${htmlModifierJarFile}" fork="true" failonerror="true">
+			<arg value="REPLACE" />
+			<arg value="${baseBrowserSpecific}/${backgroundFile}" />
+			<arg value="${browserMainDestJSLoc}" />
+			<arg value="&quot;${browserKey}&quot;" />
+			<arg value="&quot;${replaceBrowserKey}&quot;" />
+		</java>
+		
 		<!-- create brwoser specific zip files -->
 		<zip destfile="${generatedZipDir}/${browserName}-stt.${deployExtension}">
 			<zipfileset dir="${generateDir}/${browserName}" />

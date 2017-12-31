@@ -34,13 +34,22 @@
 			<arg value="${browserSpeceficReviewUrl}" />
 		</java>
 		
-		<!-- add the applications tag in the manifest.json file -->
+		<!-- update the storage in the background.js file -->
 		<java jar="${htmlModifierJarFile}" fork="true" failonerror="true">
 			<arg value="REPLACE" />
 			<arg value="${baseBrowserSpecific}/${backgroundFile}" />
 			<arg value="${browserMainDestJSLoc}" />
 			<arg value="${searchStorageLine}" />
 			<arg value="${replaceStorageLine}" />
+		</java>
+		
+		<!-- update the BROWSER_KEY in the background.js file -->
+		<java jar="${htmlModifierJarFile}" fork="true" failonerror="true">
+			<arg value="REPLACE" />
+			<arg value="${browserMainDestJSLoc}" />
+			<arg value="${browserMainDestJSLoc}" />
+			<arg value="&quot;${browserKey}&quot;" />
+			<arg value="&quot;${replaceBrowserKey}&quot;" />
 		</java>
 		
 		<!-- create brwoser specific zip files -->
