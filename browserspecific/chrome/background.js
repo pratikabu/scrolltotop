@@ -1,11 +1,11 @@
 var STT_PREF_KEY = "STT_PREF_KEY";
+var STT_PREF_LOCAL_KEY = "STT_PREF_LOCAL_KEY";
 var BROWSER_KEY = "chrome";
+var LOCAL_SETTINGS_LIST = "userIcon,dUserIcon,supportPrompt";
 
 chrome.runtime.onMessage.addListener(function(request, sender, sendResponseFunction) {
 	if ("fetchSettings" === request.method) {
-		getStorage().get(STT_PREF_KEY, function(sttData) {
-			sendResponseFunction(sttData[STT_PREF_KEY]);
-		});
+		fetchSettings(sendResponseFunction);
 		return true;// the message passing will wait until the storage has responded
 	} else if ("openOptionPage" === request.method) {
 		chrome.runtime.openOptionsPage();
@@ -19,11 +19,33 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponseFunct
 });
 
 /**
- * This method will return the type of storage used for the browser.
+ * 
  * @returns
  */
-function getStorage() {
+function getMainStorage() {
+	var syncTrue = true;
+	if(syncTrue) {
+		return getSyncStorage();
+	} else {
+		return getLocalStorage();
+	}
+}
+
+/**
+ * This storage will be synced to all the instances if the user is logged in.
+ * @returns
+ */
+function getSyncStorage() {
 	return chrome.storage.sync;
+}
+
+/**
+ * This storage will be used for any local settings.
+ * Also, it will be used to store any thing which will expand in size. Like: base64 string
+ * @returns
+ */
+function getLocalStorage() {
+	return chrome.storage.local;
 }
 
 /**
@@ -33,10 +55,64 @@ function getStorage() {
  * @returns
  */
 function saveSettings(sttData, sendResponseFunction) {
-	getStorage().set({STT_PREF_KEY: sttData}, function() {
-		if(sendResponseFunction)
-			sendResponseFunction("success");
+	var splitJsonData = splitJsonOnStorage(sttData);
+	getMainStorage().set({STT_PREF_KEY: splitJsonData.syncData}, function() {
+		getLocalStorage().set({STT_PREF_LOCAL_KEY: splitJsonData.localData}, function() {
+			if(sendResponseFunction)
+				sendResponseFunction("success");
+		});
 	});
+}
+
+function splitJsonOnStorage(sourceJson) {
+	var splitJson = {
+		syncData: {},
+		localData: {}
+	};
+	
+	for(var config in sourceJson) {
+		var isLclSetting = isLocalSetting(config);
+		if(isLclSetting) {
+			splitJson.localData[config] = sourceJson[config];
+		} else {
+			splitJson.syncData[config] = sourceJson[config];
+		}
+	}
+	
+	return splitJson;
+}
+
+function isLocalSetting(config) {
+	var keyword1 = config + ",";
+	var keyword2 = "," + config;
+	return LOCAL_SETTINGS_LIST.includes(keyword1) || LOCAL_SETTINGS_LIST.includes(keyword2);
+}
+
+/**
+ * Fetch both sync and local settings and merge them
+ * @param sendResponseFunction
+ * @returns
+ */
+function fetchSettings(sendResponseFunction) {
+	getMainStorage().get(STT_PREF_KEY, function(sttData) {
+		var syncData = sttData[STT_PREF_KEY];
+		getLocalStorage().get(STT_PREF_LOCAL_KEY, function(sttLocalData) {
+			var localData = sttLocalData[STT_PREF_LOCAL_KEY];
+			
+			// merge result
+			var finalData = {};
+			populateJson(syncData, finalData);
+			populateJson(localData, finalData);
+			
+			sendResponseFunction(finalData);
+		});
+	});
+}
+
+function populateJson(sourceJson, targetJson) {
+	for(var config in sourceJson) {
+		targetJson[config] = sourceJson[config];
+	}
 }
 
 /**
@@ -110,15 +186,15 @@ chrome.runtime.onInstalled.addListener(function(details) {
 });
 
 ////////////////////////////////////////
-//MIGRATION CODE for Chrome & Opera  //
-//I'll keep this code for next 1 year /
-//Can be removed in year Jan 2019    //
+// MIGRATION CODE for Chrome & Opera  //
+// I'll keep this code for next 1 year /
+// Can be removed in year Jan 2019    //
 ////////////////////////////////////////
 
 /**
-* This function will attempt to migrate the settings in Chrome & Opera browser
-* @returns
-*/
+ * This function will attempt to migrate the settings in Chrome & Opera browser
+ * @returns
+ */
 function attemptMigrateOldSettings() {
 	var oldData = fetchOldData();
 	if(null == oldData) {
@@ -139,10 +215,10 @@ function attemptMigrateOldSettings() {
 }
 
 /**
-* Fetch old data if present, else return null.
-* It may also return "invalid-data" depending upon the validation status.
-* @returns
-*/
+ * Fetch old data if present, else return null.
+ * It may also return "invalid-data" depending upon the validation status.
+ * @returns
+ */
 function fetchOldData() {
 	if (!localStorage["vertical_location"] || "firefox" == BROWSER_KEY) {
 		// no data to reset
@@ -177,11 +253,11 @@ function fetchOldData() {
 }
 
 /**
-* This function will validate the old data.
-* If it finds the data is not consistent then it returns with string.
-* @param data
-* @returns the passed data object or "invalid-data" string
-*/
+ * This function will validate the old data.
+ * If it finds the data is not consistent then it returns with string.
+ * @param data
+ * @returns the passed data object or "invalid-data" string
+ */
 function validateOldData(data) {
 	// nothing should be empty
 	for(var config in data) {
@@ -195,9 +271,9 @@ function validateOldData(data) {
 }
 
 /**
-* Remove old local storage data
-* @returns
-*/
+ * Remove old local storage data
+ * @returns
+ */
 function removeOldData() {
 	localStorage.clear();
 }
