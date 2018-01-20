@@ -109,29 +109,40 @@ chrome.runtime.onInstalled.addListener(function(details) {
 	}
 });
 
+////////////////////////////////////////
+//MIGRATION CODE for Chrome & Opera  //
+//I'll keep this code for next 1 year /
+//Can be removed in year Jan 2019    //
+////////////////////////////////////////
+
+/**
+* This function will attempt to migrate the settings in Chrome & Opera browser
+* @returns
+*/
 function attemptMigrateOldSettings() {
 	var oldData = fetchOldData();
-	if(null == fetchOldData) {
+	if(null == oldData) {
 		postUpdateAction();
+	} else if("invalid-data" == oldData) {
+		// reset the settings as old settings are in inconsistent state
+		resetSettings(function() {
+			removeOldData();// clear old settings
+			postUpdateAction();// post update action
+		});
 	} else {
 		// save the old settings and remove old data
-		saveSettings(data, function() {
-			removeOldData();
-			postUpdateAction();
+		saveSettings(oldData, function() {
+			removeOldData();// clear old settings
+			postUpdateAction();// post update action
 		});
 	}
 }
 
-////////////////////////////////////////
-// MIGRATION CODE for Chrome & Opera  //
-// I'll keep this code for next 1 year /
-// Can be removed in year Jan 2019    //
-////////////////////////////////////////
-
 /**
- * Fetch old data if present, else return null.
- * @returns
- */
+* Fetch old data if present, else return null.
+* It may also return "invalid-data" depending upon the validation status.
+* @returns
+*/
 function fetchOldData() {
 	if (!localStorage["vertical_location"] || "firefox" == BROWSER_KEY) {
 		// no data to reset
@@ -139,7 +150,7 @@ function fetchOldData() {
 		return null;
 	}
 	
-	// fetch the settings from local storage
+	// fetch the settings from localStorage
 	var data = {
 		vLoc: localStorage["vertical_location"],
 		hLoc: localStorage["horizontal_location"],
@@ -166,22 +177,27 @@ function fetchOldData() {
 }
 
 /**
- * This function will validate the old data
- * @param data
- * @returns
- */
+* This function will validate the old data.
+* If it finds the data is not consistent then it returns with string.
+* @param data
+* @returns the passed data object or "invalid-data" string
+*/
 function validateOldData(data) {
-	// validate old data
-	// if everything good return same data object
-	// TODO write validation logic
-	// else return null, so that nothing will be changed.
+	// nothing should be empty
+	for(var config in data) {
+		if(!data[config]) {
+			return "invalid-data";
+		}
+	}
+	
+	// if everything is good then return the data object
 	return data;
 }
 
 /**
- * Remove old local storage data
- * @returns
- */
+* Remove old local storage data
+* @returns
+*/
 function removeOldData() {
 	localStorage.clear();
 }
