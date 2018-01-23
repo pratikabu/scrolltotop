@@ -65,38 +65,38 @@ function restore_options(data) {
 	ignoreImgLoad = true;// ignore the image load method as it will reset myIcon in the radio button
 	dIgnoreImgLoad = true;// ignore the image load method as it will reset myIcon in the radio button
 	
-	$('input:radio[name=imgVerticalLocation]').filter('[value=' + data.vLoc + ']').attr('checked', true);
-	$('input:radio[name=imgHorizontalLocation]').filter('[value=' + data.hLoc + ']').attr('checked', true);
+	$('input:radio[name=imgVerticalLocation]').filter('[value=' + data.vLoc + ']').prop('checked', true);
+	$('input:radio[name=imgHorizontalLocation]').filter('[value=' + data.hLoc + ']').prop('checked', true);
 	
 	globalScrollSpeed = data.scrSpeed;// for future references
 	loadValueInSpeedSlider(data.scrSpeed);
-	$('input:radio[name=visbilityBehavior]').filter('[value=' + data.visibilityBehav + ']').attr('checked', true);
+	$('input:radio[name=visbilityBehavior]').filter('[value=' + data.visibilityBehav + ']').prop('checked', true);
 	globalTransparency = data.iconTransparency;
 	loadValueInTransparencySlider(data.iconTransparency);
-	$("#blackWhiteCBId").attr('checked', ("true" === data.blackAndWhite));
+	$("#blackWhiteCBId").prop('checked', ("true" === data.blackAndWhite));
 	updateBlackAndWhite();
 	
-	$('input:radio[name=arrowType]').filter('[value=' + data.arrowType + ']').attr('checked', true);
+	$('input:radio[name=arrowType]').filter('[value=' + data.arrowType + ']').prop('checked', true);
 	swapAdvancedOptions(data.arrowType);
 	
-	$('input:radio[name=smartDirection]').filter('[value=' + data.smartDirection + ']').attr('checked', true);
-	$('input:radio[name=controlOptions]').filter('[value=' + data.controlOption + ']').attr('checked', true);
-	$('input:radio[name=autoHideControls]').filter('[value=' + data.hideControls + ']').attr('checked', true);
-	$('input:radio[name=iconSize]').filter('[value=' + data.iconSize + ']').attr('checked', true);
-	$('input:radio[name=iconLib]').filter('[value=' + data.iconLib + ']').attr('checked', true);
+	$('input:radio[name=smartDirection]').filter('[value=' + data.smartDirection + ']').prop('checked', true);
+	$('input:radio[name=controlOptions]').filter('[value=' + data.controlOption + ']').prop('checked', true);
+	$('input:radio[name=autoHideControls]').filter('[value=' + data.hideControls + ']').prop('checked', true);
+	$('input:radio[name=iconSize]').filter('[value=' + data.iconSize + ']').prop('checked', true);
+	$('input:radio[name=iconLib]').filter('[value=' + data.iconLib + ']').prop('checked', true);
 	$('#useMyIconTextBox').val(data.userIcon);
 	$("#useMyIconTextBox").change();// load the image
 	
-	$('input:radio[name=dIconLib]').filter('[value=' + data.dIconLib + ']').attr('checked', true);
+	$('input:radio[name=dIconLib]').filter('[value=' + data.dIconLib + ']').prop('checked', true);
 	$('#dUseMyIconTextBox').val(data.dUserIcon);
 	$("#dUseMyIconTextBox").change();// load the image
-	$('input:radio[name=dIconArrangemnt]').filter('[value=' + data.dArrang + ']').attr('checked', true);
+	$('input:radio[name=dIconArrangemnt]').filter('[value=' + data.dArrang + ']').prop('checked', true);
 	
 	$('#hOffset').val(data.hOffset);
 	$('#vOffset').val(data.vOffset);
 	$('#removedSites').val(data.removedSites);
 	
-	$("#supportPromptCBId").attr('checked', "true" === data.supportPrompt ? true : false);
+	$("#supportPromptCBId").prop('checked', "true" === data.supportPrompt ? true : false);
 }
 
 function restore_settings() {
@@ -317,7 +317,7 @@ function exportImportSettingsInits() {
 		toggleDialog("exportImportDialog");
 		
 		// by default export should be selected
-		$('input:radio[name=eiRBG]').filter('[value=E]').attr('checked', true);
+		$('input:radio[name=eiRBG]').filter('[value=E]').prop('checked', true);
 		$('input:radio[name=eiRBG]').change();
 	});
 	$('#eiSave').click(function() {
@@ -487,12 +487,12 @@ function psInitJavascriptFunctions() {
 		if(isRightChangedEvent("arrowType", $(this).val(), true)) {// auto set location of the icon as per the selection
 			swapAdvancedOptions($(this).val());
 			
-			$('input:radio[name=visbilityBehavior]').filter('[value=alwaysshow]').attr('checked', true);
-			$('input:radio[name=imgHorizontalLocation]').filter('[value=right]').attr('checked', true);
+			$('input:radio[name=visbilityBehavior]').filter('[value=alwaysshow]').prop('checked', true);
+			$('input:radio[name=imgHorizontalLocation]').filter('[value=right]').prop('checked', true);
 			if("1" === $(this).val()) {
-				$('input:radio[name=imgVerticalLocation]').filter('[value=bottom]').attr('checked', true);
+				$('input:radio[name=imgVerticalLocation]').filter('[value=bottom]').prop('checked', true);
 			} else {
-				$('input:radio[name=imgVerticalLocation]').filter('[value=middle]').attr('checked', true);
+				$('input:radio[name=imgVerticalLocation]').filter('[value=middle]').prop('checked', true);
 			}
 			save_options();
 		}
@@ -507,7 +507,7 @@ function psInitJavascriptFunctions() {
 	$('input:radio[name=smartDirection]').change(function() {
 		if(isRightChangedEvent("smartDirection", $(this).val())) {
 			if("true" === $(this).val()) {// auto set to visibility to autohide
-				$('input:radio[name=visbilityBehavior]').filter('[value=autohide]').attr('checked', true);
+				$('input:radio[name=visbilityBehavior]').filter('[value=autohide]').prop('checked', true);
 				save_options();
 			}
 		}
@@ -532,7 +532,7 @@ function psInitJavascriptFunctions() {
 		if(ignoreImgLoad) {
 			ignoreImgLoad = false;
 		} else {
-			$('input:radio[name=iconLib]').filter('[value=myIcon]').attr('checked', true);
+			$('input:radio[name=iconLib]').filter('[value=myIcon]').prop('checked', true);
 			$('input:radio[name=iconLib]').change();
 		}
 	});
@@ -546,9 +546,9 @@ function psInitJavascriptFunctions() {
 	$('input:radio[name=dIconLib]').change(function() {
 		if(isRightChangedEvent("dIconLib", $(this).val(), true)) {
 			if(20 >= parseInt($(this).val())) {
-				$('input:radio[name=dIconArrangemnt]').filter('[value=hr]').attr('checked', true);
+				$('input:radio[name=dIconArrangemnt]').filter('[value=hr]').prop('checked', true);
 			} else if(40 >= parseInt($(this).val())) {
-				$('input:radio[name=dIconArrangemnt]').filter('[value=vr]').attr('checked', true);
+				$('input:radio[name=dIconArrangemnt]').filter('[value=vr]').prop('checked', true);
 			}
 			save_options();
 		}
@@ -573,7 +573,7 @@ function psInitJavascriptFunctions() {
 		if(dIgnoreImgLoad) {
 			dIgnoreImgLoad = false;
 		} else {
-			$('input:radio[name=dIconLib]').filter('[value=myIcon]').attr('checked', true);
+			$('input:radio[name=dIconLib]').filter('[value=myIcon]').prop('checked', true);
 			$('input:radio[name=dIconLib]').change();
 		}
 	});
