@@ -57,10 +57,12 @@ var pratikabustt = {
 		var animateRotation = pratikabu_stt_bVisibility;
 		pratikabustt.showHideAddon(true);
 		// handle the rotation for normal scenario, make it to behave like alwaysshow
-		if(pratikabu_stt_prefs.smartDirection) {
-			pratikabustt.smartDirectionLogic(animateRotation);
-		} else if(!pratikabu_stt_dualArrow && !pratikabu_stt_prefs.smartDirection) {
-			pratikabustt.scrollRotationHandler();
+		if(!pratikabu_stt_dualArrow) {
+			if(pratikabu_stt_prefs.smartDirection) {
+				pratikabustt.smartDirectionLogic(animateRotation);
+			} else {
+				pratikabustt.scrollRotationHandler();
+			}
 		}
 	},
 	
@@ -464,7 +466,7 @@ var pratikabustt = {
 	},
 	
 	mainDivHover: function(hoverIn) {
-		if("none" === pratikabu_stt_prefs.controlOption) {
+		if(pratikabu_stt_dualArrow || "none" === pratikabu_stt_prefs.controlOption) {
 			return;
 		}
 		
@@ -533,7 +535,8 @@ var pratikabustt = {
 	
 	addRemoveGlobalHandlers: function(booleanAdd) {
 		if(booleanAdd) {
-			if(pratikabu_stt_prefs.smartDirection && "hideattop" === pratikabu_stt_prefs.visibilityBehav) {
+			if(!pratikabu_stt_dualArrow &&
+					pratikabu_stt_prefs.smartDirection && "hideattop" === pratikabu_stt_prefs.visibilityBehav) {
 				pratikabu_stt_prefs.visibilityBehav = "autohide";// if hideattop is selected change it to autohide
 			}
 			
