@@ -247,7 +247,7 @@ function attemptMigrateOldSettings() {
  * @returns
  */
 function fetchOldData() {
-	if (!localStorage["vertical_location"] || "firefox" == BROWSER_KEY) {
+	if ("firefox" == BROWSER_KEY || !localStorage["vertical_location"]) {
 		// no data to reset
 		// or the browser is Firefox, don't do anything on Firefox
 		return null;

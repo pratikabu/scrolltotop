@@ -1,7 +1,7 @@
 var ignoreImgLoad = true;
 var dIgnoreImgLoad = true;
 var globalScrollSpeed, globalTransparency;
-var addonVersion = "4.7";
+var addonVersion = "4.7.5";
 var globalDialogId;
 
 /*******************************************************************************
@@ -423,7 +423,8 @@ function psInitJavascriptFunctions() {
 				$('#updateLoadingId').remove();
 			});
 		});
-		$('#updateIframeId').attr("src", 'http://pratikabu.users.sourceforge.net/extensions/scrolltotop/release-stt.html?v=' + addonVersion);
+		$('#updateIframeId').attr("src", 'http://pratikabu.users.sourceforge.net/extensions/scrolltotop/release-stt.html?v='
+				+ addonVersion + '&date=' + new Date().getTime());
 		
 		toggleDialog("updateDialog");
 	} else {
