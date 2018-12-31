@@ -125,17 +125,6 @@ function show_message(msg) {
 	statusVar.slideDown('fast').delay(5000).slideUp('fast');
 }
 
-function getParameterByName(name) {
-	name = name.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
-	var regexS = "[\\?&]" + name + "=([^&#]*)";
-	var regex = new RegExp(regexS);
-	var results = regex.exec(window.location.search);
-	if(results === null)
-		return "";
-	else
-		return decodeURIComponent(results[1].replace(/\+/g, " "));
-}
-
 function populateSliderSpeedOnText(scrollSpeed) {
 	var speed = 2400 - scrollSpeed;
 	
@@ -415,21 +404,7 @@ function toggleDialog(dialogId) {
 }
 
 function psInitJavascriptFunctions() {
-	// is updated then show update dialog
-	var updated = getParameterByName("updated");
-	if("true" === updated) {
-		$('#updateIframeId').on('load', function() {
-			$('#updateLoadingId').fadeOut(300, function() {
-				$('#updateLoadingId').remove();
-			});
-		});
-		$('#updateIframeId').attr("src", 'http://pratikabu.users.sourceforge.net/extensions/scrolltotop/release-stt.html?v='
-				+ addonVersion + '&date=' + new Date().getTime());
-		
-		toggleDialog("updateDialog");
-	} else {
-		randomOpenSupportDialog();
-	}
+	randomOpenSupportDialog();
 	
 	// add all icons
 	addIcons();
