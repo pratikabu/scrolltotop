@@ -187,8 +187,7 @@ chrome.runtime.onInstalled.addListener(function(details) {
 	if(chrome.runtime.OnInstalledReason.INSTALL == details.reason) {
 		checkSycnSettingsOrResetOnInstall();
 	} else if(chrome.runtime.OnInstalledReason.UPDATE == details.reason) {
-		// for chrome and opera, migrate to new storage
-		attemptMigrateOldSettings();
+		postUpdateAction();
 	}
 });
 
@@ -211,73 +210,6 @@ function checkSycnSettingsOrResetOnInstall() {
 			});
 		}
 	});
-}
-
-////////////////////////////////////////
-// MIGRATION CODE for Chrome & Opera  //
-// I'll keep this code for next 1 year /
-// Can be removed in year Jan 2019    //
-////////////////////////////////////////
-
-/**
- * This function will attempt to migrate the settings in Chrome & Opera browser
- * @returns
- */
-function attemptMigrateOldSettings() {
-	var oldData = fetchOldData();
-	if(null == oldData) {
-		postUpdateAction();
-	} else if("invalid-data" == oldData) {
-		// reset the settings as old settings are in inconsistent state
-		resetSettings(function() {
-			removeOldData();// clear old settings
-			postUpdateAction();// post update action
-		});
-	} else {
-		// save the old settings and remove old data
-		saveSettings(oldData, function() {
-			removeOldData();// clear old settings
-			postUpdateAction();// post update action
-		});
-	}
-}
-
-/**
- * Fetch old data if present, else return null.
- * It may also return "invalid-data" depending upon the validation status.
- * @returns
- */
-function fetchOldData() {
-	if ("firefox" == BROWSER_KEY || !localStorage["vertical_location"]) {
-		// no data to reset
-		// or the browser is Firefox, don't do anything on Firefox
-		return null;
-	}
-	
-	// fetch the settings from localStorage
-	var data = {
-		vLoc: localStorage["vertical_location"],
-		hLoc: localStorage["horizontal_location"],
-		scrSpeed: localStorage["scrolling_speed"],
-		visibilityBehav: localStorage["visibility_behavior"],
-		iconTransparency: localStorage["icon_transparency"],
-		blackAndWhite: localStorage["black_and_white"],
-		arrowType: localStorage["arrow_type"],
-		iconSize: localStorage["image_size"],
-		hOffset: localStorage["h_offset"],
-		vOffset: localStorage["v_offset"],
-		removedSites: localStorage["removed_sites"],
-		smartDirection: localStorage["smart_direction_mode"],
-		controlOption: localStorage["control_options"],
-		hideControls: localStorage["hide_controls"],
-		iconLib: localStorage["icon_library"],
-		userIcon: localStorage["user_saved_icon"],
-		dArrang: localStorage["d_arrangement"],
-		dIconLib: localStorage["d_icon_library"],
-		dUserIcon: localStorage["d_user_saved_icon"]
-	};
-	
-	return validateData(data);
 }
 
 /**
@@ -310,12 +242,4 @@ function validateData(data) {
 	
 	// if everything is good then return the data object
 	return data;
-}
-
-/**
- * Remove old local storage data
- * @returns
- */
-function removeOldData() {
-	localStorage.clear();
 }
