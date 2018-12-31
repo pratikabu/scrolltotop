@@ -1,7 +1,7 @@
 .myFonts, .mySelect {
 	color: black;
 	font-family: Arial,Helvetica,sans-serif;
-	font-size: 16px;
+	font-size: 12px;
 }
 
 .mySelect {
@@ -19,15 +19,12 @@
 	border-spacing: 15px;
 }
 
-.donateContainerDiv {
+.footerDiv {
+	background-color: #ffffffed;
 	position: fixed;
-	right: 0px;
-	top: 50%;
-	margin-top: -101px;
-	border: 1px SOLID rgb(207, 207, 207);
-	border-radius: 3px 0 0 3px;
-	border-right: 0px;
-	background: WHITE;
+	bottom: 0;
+	width: 100%;
+	border-top: 1px SOLID #CBCBCB;
 	padding: 10px;
 }
 
@@ -144,30 +141,12 @@ a.mylink {
 
 body {
 	background-color: rgba(155, 155, 155, 0.2);
+	margin: 0 0 106px 0; /* This margin is the height of the footer section */
 }
 
 .centerDiv {
 	width: 700px;
 	background-color: WHITE;
-	border-radius: 3px;
-	border: 1px SOLID rgb(207, 207, 207);
-}
-
-.withLove {
-	margin: 10px;
-}
-
-.withLove a:link {
-	color: #929292;
-	text-decoration: none;
-}
-.withLove a:visited {
-	color: #929292;
-	text-decoration: none;
-}
-.withLove a:hover {
-	color: #585858;
-	text-decoration: none;
 }
 
 hr {

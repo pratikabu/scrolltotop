@@ -1,7 +1,7 @@
 var ignoreImgLoad = true;
 var dIgnoreImgLoad = true;
 var globalScrollSpeed, globalTransparency;
-var addonVersion = "4.7.5";
+var addonVersion = "4.8";
 var globalDialogId;
 
 /*******************************************************************************
@@ -600,9 +600,7 @@ function psInitJavascriptFunctions() {
 	// place the version
 	$(".addonVersionId").append(addonVersion);
 	// what's new link
-	$("#whatsNewId").append('<a target="_blank" href="http://pratikabu.users.sourceforge.net/extensions/scrolltotop/release.html?v=' + addonVersion + '" style="font-size: 12px;" title="See what&#39;s new and exciting.">What&#39;s New</a>');
-	// latest version check
-	$("#latestVersionCheckId").append('<a target="_blank" href="http://pratikabu.users.sourceforge.net/extensions/scrolltotop/latest.html?v=' + addonVersion + '" style="font-size: 12px;" title="See if any new version available.">Check Updates</a>');
+	$("#whatsNewId").append('<a target="_blank" href="http://pratikabu.users.sourceforge.net/extensions/scrolltotop/release.html?v=' + addonVersion + '" style="font-size: 12px;" title="See what&#39;s new and exciting.">Release Notes</a>');
 	// give review link
 	$(".reviewId").append('<a class="mybutton small green mylink" target="_blank" style="font-size: 12px;" href="' + bsReviewPageUrl() + '" title="Love Scroll To Top, give it a 5 star and leave your feedback.">Give Review</a>');
 	

@@ -18,10 +18,6 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponseFunct
 	}
 });
 
-/**
- * 
- * @returns
- */
 function getMainStorage() {
 	var syncTrue = true;
 	if(syncTrue) {
@@ -163,14 +159,19 @@ function addLocalSettingsWithResetValue(data) {
 //	data.supportPrompt = "true";// this will be populated by user on options page
 }
 
+function openReleaseNotes(process)
+{
+	// open the release notes
+	chrome.tabs.create({url: "http://pratikabu.users.sourceforge.net/extensions/scrolltotop/release.html?process=" + process});
+}
+
 /**
  * Method which will be called once the update is completed.
  * Open options page, with updated as true.
  * @returns
  */
 function postUpdateAction(isError) {
-	// just open the update page
-	chrome.tabs.create({url: "options/options.html?updated=true"});
+	openReleaseNotes("Update");
 }
 
 /**
@@ -178,7 +179,7 @@ function postUpdateAction(isError) {
  * @returns
  */
 function postInstallAction(isError) {
-	postUpdateAction(isError);
+	openReleaseNotes("Install");
 }
 
 // process the first time installs and updates to the extension
