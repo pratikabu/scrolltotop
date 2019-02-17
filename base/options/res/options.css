@@ -135,7 +135,7 @@ a.mylink {
 
 body {
 	background-color: rgba(155, 155, 155, 0.2);
-	margin: 0 0 106px 0; /* This margin is the height of the footer section */
+	margin: 0 0 99px 0; /* This margin is the height of the footer section */
 }
 
 .centerDiv {
@@ -192,4 +192,9 @@ hr {
 .groupsubheading {
 	margin-top: 10px;
 	text-align: left;
+}
+
+.bottomIcon {
+	width: 16px;
+	height: 16px;
 }
