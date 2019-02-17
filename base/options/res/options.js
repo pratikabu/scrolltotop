@@ -188,9 +188,9 @@ function selectatbleCheckBoxContent(checkboxId, spanId) {
 }
 
 function addElement(tag, groupName, value, componentId, image) {
-	tag.append('<input type="radio" name="' + groupName + '" value="' + value + '" style="margin-left: 8px;">'
+	tag.append('<div class="iconselector"><input type="radio" name="' + groupName + '" value="' + value + '">'
 			+ '<img class="blackAndWhiteCSS" style="vertical-align: middle;" id="'+ componentId
-			+ '" src="../icons/pratikabu-stt-'+ image + '.png" />');
+			+ '" src="../icons/pratikabu-stt-'+ image + '.png" /></div>');
 	selectableRadioContent(componentId, groupName, "" + value);
 }
 
@@ -199,13 +199,6 @@ function addBatchOfIcons(tag, length, cidPrefix, cidStartNumber, groupName, imag
 		var value = cidStartNumber + i;
 		var componentId = cidPrefix + value;
 		addElement(tag, groupName, value, componentId, imageSuffix + i);
-		
-		if(0 == i % 9) {
-			tag.append("<div style='margin-bottom: 5px;' />");
-		}
-	}
-	if(0 != length % 9) {
-		tag.append("</div>");
 	}
 }
 
@@ -257,13 +250,15 @@ function makeElementsSelactable() {
 	selectableRadioContent("iconSizeOp2", "iconSize", "48");
 	
 	selectableRadioContent("useMyIcon", "iconLib", "myIcon");
+	selectableRadioContent("previewIcon", "iconLib", "myIcon");
 	
 	//dual arrow selectors
 	
 	selectableRadioContent("diarrHr", "dIconArrangemnt", "hr");
 	selectableRadioContent("diarrVr", "dIconArrangemnt", "vr");
 	
-	selectableRadioContent("dUseMyIcon", "dIconLib", "myIcon");
+	selectableRadioContent("dUseMyIcon", "dIconLib", "myIcon");	
+	selectableRadioContent("dPreviewIcon", "dIconLib", "myIcon");
 }
 
 function swapAdvancedOptions(selectedValue) {
