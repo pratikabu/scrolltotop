@@ -198,3 +198,70 @@ hr {
 	width: 16px;
 	height: 16px;
 }
+
+@media screen and (max-width: 750px) {
+	.centerDiv {
+		width: 600px;
+	}
+
+	.settinglabel {
+		width: 30%;
+	}
+
+	#scrollSpeedSliderId-slider {
+		width: 280px;
+	}
+
+	#currentSpeed {
+		margin-left: 0px !important;
+	}
+}
+
+@media screen and (max-width: 630px) {
+	.centerDiv {
+		width: 400px;
+	}
+
+	.settinglabel {
+	    display: inline-block;
+	    width: auto;
+	    text-align: left;
+	}
+
+	.settingoptions {
+	    display: inline-block;
+	    width: auto;
+	    text-align: left;
+	}
+
+	.mydialog {
+		width: 80% !important;
+		margin-left: -42% !important;
+	}
+
+	#exportImportBut {
+		margin-top: 10px;
+	}
+
+	#scrollSpeedSliderId-slider {
+		width: 140px;
+	}
+
+	#currentSpeed {
+		margin-left: 0px !important;
+	}
+
+	#transparencySliderId-slider {
+		width: 190px;
+	}
+
+	#transparencyImgId {
+		margin-left: 0px !important;
+	}
+
+	.mySelect, .siteTextArea {
+		width: 100% !important;
+		margin-bottom: 5px !important;
+		margin-top: 5px;
+	}
+}
