@@ -34,7 +34,7 @@
 	"homepage_url": "http://pratikabu.users.sourceforge.net/extensions/scrolltotop",
 	"options_ui": {
 		"page": "options/options.html",
-		"open_in_tab": false
+		"open_in_tab": true
 	},
 	"web_accessible_resources":[
 		"icons/pratikabu-stt-48-1.png",
