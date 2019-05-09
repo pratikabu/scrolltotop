@@ -11,12 +11,12 @@ Scroll To Top tries to minimize this effort by providing an intuitive icon at th
 
 ### Get Scroll To Top for your browser:
 
-Download for [Mozilla Firefox](http://addons.mozilla.org/en-US/firefox/addon/scroll-to-top?src=external-git)
+Download for [Mozilla Firefox](https://addons.mozilla.org/en-US/firefox/addon/scroll-to-top?src=external-git)
 
-Download for [Google Chrome](http://chrome.google.com/webstore/detail/scroll-to-top/hegiignepmecppikdlbohnnbfjdoaghj)
+Download for [Google Chrome](https://chrome.google.com/webstore/detail/scroll-to-top/hegiignepmecppikdlbohnnbfjdoaghj)
 
 Download for [Apple Safari](http://pratikabu.users.sourceforge.net/extensions/scrolltotop/safaridownload.php)
 
-Download for [Opera](http://addons.opera.com/en/extensions/details/scroll-to-top)
+Download for [Opera](https://addons.opera.com/en/extensions/details/scroll-to-top)
 
 See the full change log [here](pratikabu.users.sourceforge.net/extensions/scrolltotop/release.html).
