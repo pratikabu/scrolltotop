@@ -7,7 +7,7 @@ Everyday scrolling on long pages can be a tiring experience specially on those s
 
 Scroll To Top tries to minimize this effort by providing an intuitive icon at the bottom-right corner of each page so that with one click you will be at the top of the page with beautiful animation. No more searching for Home key on your keyboard and no more dragging of the scroll bar. It will be just fun and ergonomic to use it.
 
-[Official website](http://pratikabu.users.sourceforge.net/extensions/scrolltotop), [Donate Now](http://pratikabu.users.sourceforge.net/extensions/scrolltotop/donate.php)
+[Official website](https://pratikabu.github.io/extensions/scrolltotop), [Donate Now](https://pratikabu.github.io/extensions/scrolltotop/donate.html)
 
 ### Get Scroll To Top for your browser:
 
