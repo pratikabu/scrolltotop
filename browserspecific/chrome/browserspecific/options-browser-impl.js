@@ -36,6 +36,6 @@ function bsReviewPageUrl() {
 	return "https://chrome.google.com/webstore/detail/scroll-to-top/hegiignepmecppikdlbohnnbfjdoaghj/reviews";
 }
 
-document.addEventListener('DOMContentLoaded', function () {
+$( document ).ready(function() {
 	psInitJavascriptFunctions();
 });
