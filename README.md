@@ -19,4 +19,4 @@ Download for [Apple Safari](http://pratikabu.users.sourceforge.net/extensions/sc
 
 Download for [Opera](https://addons.opera.com/en/extensions/details/scroll-to-top)
 
-See the full change log [here](pratikabu.users.sourceforge.net/extensions/scrolltotop/release.html).
+See the full change log [here](https://pratikabu.github.io/extensions/scrolltotop/release.html).
