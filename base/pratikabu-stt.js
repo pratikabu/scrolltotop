@@ -253,6 +253,7 @@ var pratikabustt = {
 				divSize += otherImagesSize;// add pixels based on the settings
 			}
 			$("#pratikabuSTTDiv2").css("width", divSize + "px");
+			$("#pratikabuSTTDiv2").css({opacity: 0, display: 'block'});
 			
 			pratikabustt_browser_impl.setImageForId("pratikabuSTTClear", "clear-" + otherImagesSize + ".png");
 			pratikabustt.setSettingsIcon(pratikabu_stt_pollabelIconSwitch);
@@ -318,7 +319,7 @@ var pratikabustt = {
 		if(boolShowAddon !== pratikabu_stt_bVisibility) {
 			if(boolShowAddon) {// show addon
 				if(pratikabustt.createAddonHtml()) {
-					$("#pratikabuSTTDiv").stop(true, true).fadeTo("slow", 1);
+					$("#pratikabuSTTDiv").stop(true, true).css({opacity: 0, display: 'block'}).fadeTo("slow", 1);
 				}
 			} else {// remove it
 				pratikabustt.removeAddonHtml();
