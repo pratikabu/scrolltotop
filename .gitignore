@@ -1,1 +1,7 @@
 /generated
+*.iml
+.DS_Store
+.idea
+.externalToolBuilders
+.settings
+.project
