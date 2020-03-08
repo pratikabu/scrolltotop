@@ -1,7 +1,7 @@
 {
 	"manifest_version": 2,
 	"name": "Scroll To Top",
-	"version": "4.8.0.2",
+	"version": "4.8.1",
 	
 	"description": "Scroll to top and vice versa in a window.",
 	"icons": {
