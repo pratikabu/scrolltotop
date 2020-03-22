@@ -6,6 +6,8 @@
 	padding: 0px !important;
 	margin: 0px !important;
 	line-height: 0 !important;
+	min-width: 24px !important;
+	min-height: 24px !important;
 }
 
 #pratikabuSTTDiv2 {
@@ -20,6 +22,8 @@
 	margin-left: 0px;
 	line-height: 0 !important;
 	width: 48px;
+	min-width: 24px !important;
+	min-height: 24px !important;
 }
 
 .pratikabuSTTImg {
