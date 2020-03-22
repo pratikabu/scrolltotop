@@ -66,8 +66,8 @@
 		</dict>
 	</dict>
 	<key>Update Manifest URL</key>
-	<string>http://pratikabu.users.sourceforge.net/extensions/scrolltotop/res/scroll-to-top-safari-update.plist</string>
+	<string>https://pratikabu.github.io/extensions/scrolltotop/res/scroll-to-top-safari-update.plist</string>
 	<key>Website</key>
-	<string>http://pratikabu.users.sourceforge.net/extensions/scrolltotop</string>
+	<string>https://pratikabu.github.io/extensions/scrolltotop</string>
 </dict>
 </plist>
