@@ -1,7 +1,6 @@
 var ignoreImgLoad = true;
 var dIgnoreImgLoad = true;
 var globalScrollSpeed, globalTransparency;
-var addonVersion = "4.8";
 var globalDialogId;
 
 /*******************************************************************************
@@ -566,7 +565,8 @@ function psInitJavascriptFunctions() {
 	bsInit();
 	makeElementsSelactable();
 	bsFetchSettings();
-	
+
+	var addonVersion = getExtensionVersion();
 	// place the version
 	$(".addonVersionId").append(addonVersion);
 	// what's new link
