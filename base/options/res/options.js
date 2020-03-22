@@ -106,7 +106,7 @@ function restore_settings() {
 }
 
 function post_save_success() {
-	show_message("<b>Saved!</b> <a target='_blank' href='http://pratikabu.users.sourceforge.net/extensions/scrolltotop/release.html'>Preview</a>");
+	show_message("<b>Saved!</b> <a target='_blank' href='https://pratikabu.github.io/extensions/scrolltotop/release.html'>Preview</a>");
 }
 
 function post_restore_success() {
@@ -570,11 +570,11 @@ function psInitJavascriptFunctions() {
 	// place the version
 	$(".addonVersionId").append(addonVersion);
 	// what's new link
-	$("#whatsNewId").append('<a target="_blank" href="http://pratikabu.users.sourceforge.net/extensions/scrolltotop/release.html?v=' + addonVersion + '" style="font-size: 12px;" title="See what&#39;s new and exciting.">Release Notes</a>');
+	$("#whatsNewId").append('<a target="_blank" href="https://pratikabu.github.io/extensions/scrolltotop/release.html?v=' + addonVersion + '" style="font-size: 12px;" title="See what&#39;s new and exciting.">Release Notes</a>');
 	// give review link
 	$(".reviewId").append('<a class="mybutton small green mylink" target="_blank" style="font-size: 12px;" href="' + bsReviewPageUrl() + '" title="Love Scroll To Top, give it a 5 star and leave your feedback.">Give Review</a>');
 	
-	$(".donateId").append('<a target="_blank" title="Show your support." href="http://pratikabu.users.sourceforge.net/extensions/scrolltotop/donate.php"><span class="donateButton">&nbsp;</span></a>');
+	$(".donateId").append('<a target="_blank" title="Show your support." href="https://pratikabu.github.io/extensions/scrolltotop/donate.html"><span class="donateButton">&nbsp;</span></a>');
 }
 
 function getBase64Url(base64Url) {
