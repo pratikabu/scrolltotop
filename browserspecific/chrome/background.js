@@ -243,3 +243,6 @@ function validateData(data) {
 	// if everything is good then return the data object
 	return data;
 }
+
+// set uninstall page
+chrome.runtime.setUninstallURL("https://pratikabu.github.io/extensions/scrolltotop/uninstall.html");
