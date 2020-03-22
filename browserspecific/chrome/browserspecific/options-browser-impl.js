@@ -39,3 +39,7 @@ function bsReviewPageUrl() {
 $( document ).ready(function() {
 	psInitJavascriptFunctions();
 });
+
+function getExtensionVersion() {
+	return chrome.runtime.getManifest().version;
+}
