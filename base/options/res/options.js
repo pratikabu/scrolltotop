@@ -568,13 +568,11 @@ function psInitJavascriptFunctions() {
 
 	var addonVersion = getExtensionVersion();
 	// place the version
-	$(".addonVersionId").append(addonVersion);
-	// what's new link
-	$("#whatsNewId").append('<a target="_blank" href="https://pratikabu.github.io/extensions/scrolltotop/release.html?v=' + addonVersion + '" style="font-size: 12px;" title="See what&#39;s new and exciting.">Release Notes</a>');
+	$(".addonVersionId").append('<a target="_blank" href="https://pratikabu.github.io/extensions/scrolltotop/release.html?v=' + addonVersion + '" title="See what&#39;s new in this version.">' + addonVersion + '</a>');
 	// give review link
-	$(".reviewId").append('<a class="mybutton small green mylink" target="_blank" style="font-size: 12px;" href="' + bsReviewPageUrl() + '" title="Love Scroll To Top, give it a 5 star and leave your feedback.">Give Review</a>');
+	$(".reviewId").append('<a target="_blank" title="Love Scroll To Top, give it a 5 star and leave your feedback." href="' + bsReviewPageUrl() + '">Review</a>');
 	
-	$(".donateId").append('<a target="_blank" title="Show your support." href="https://pratikabu.github.io/extensions/scrolltotop/donate.html"><span class="donateButton">&nbsp;</span></a>');
+	$(".donateId").append('<a target="_blank" title="Show your support." href="https://pratikabu.github.io/extensions/scrolltotop/donate.html">Donate</a>');
 }
 
 function getBase64Url(base64Url) {
