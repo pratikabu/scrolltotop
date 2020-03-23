@@ -146,7 +146,7 @@ a.mylink {
 
 body {
 	background-color: rgba(155, 155, 155, 0.2);
-	margin: 81px 0 0 0; /* This margin is the height of the footer section */
+	margin: 81px 0 0 0; /* This margin is the height of the header section */
 	padding-bottom: 10px;
 }
 
