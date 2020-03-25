@@ -147,7 +147,6 @@ a.mylink {
 body {
 	background-color: rgba(155, 155, 155, 0.2);
 	margin: 81px 0 0 0; /* This margin is the height of the header section */
-	padding-bottom: 10px;
 }
 
 .mainContentWidth {
@@ -212,6 +211,22 @@ hr {
 .bottomIcon {
 	width: 20px;
 	height: 20px;
+}
+
+.withLove {
+	margin: 10px;
+	font-size: 20px;
+	text-shadow: 0px 1px 0 #ffffff;
+}
+
+.withLove a:link {
+	color: #c3c3c3;
+	text-decoration: none;
+}
+
+.withLove a:hover {
+	color: #989898;
+	text-decoration: none;
 }
 
 @media screen and (max-width: 750px) {
