@@ -318,14 +318,18 @@ hr {
 	vertical-align: middle;
 }
 
+input[type="radio"], input[type="radio"] + div, input[type="radio"] + img, input[type="radio"] + span {
+	cursor: pointer;
+}
+
 input[type="radio"]:checked + div, input[type="radio"]:checked + img {
     opacity: 1;
 }
 
-input[type="radio"] + div,  input[type="radio"] + img {
+input[type="radio"] + div, input[type="radio"] + img {
     opacity: .6;
 }
 
-input[type="radio"]:hover + div,  input[type="radio"]:hover + img, input[type="radio"] + div:hover, input[type="radio"] + img:hover {
+input[type="radio"]:hover + div, input[type="radio"]:hover + img, input[type="radio"] + div:hover, input[type="radio"] + img:hover {
 	opacity: 1;
 }

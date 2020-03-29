@@ -165,7 +165,6 @@ function loadValueInTransparencySlider(transparency) {
 }
 
 function selectableRadioContent(id, name, value) {
-	$("#" + id).css("cursor", "default");
 	$("#" + id).click(function() {
 		$('input:radio[name=' + name + ']').filter('[value=' + value + ']').prop('checked', true);
 		$('input:radio[name=' + name + ']').change();
