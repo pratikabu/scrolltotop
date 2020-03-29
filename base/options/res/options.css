@@ -315,13 +315,16 @@ hr {
 .controlsec-div {
 	display: inline-block;
 	vertical-align: middle;
-	opacity: .5;
 }
 
-.controlsec-div:hover {
-	opacity: 1;
-}
-
-input[name="controlOptions"]:checked + div {
+input[type="radio"]:checked + div, input[type="radio"]:checked + img {
     opacity: 1;
+}
+
+input[type="radio"] + div,  input[type="radio"] + img {
+    opacity: .6;
+}
+
+input[type="radio"]:hover + div,  input[type="radio"]:hover + img, input[type="radio"] + div:hover, input[type="radio"] + img:hover {
+	opacity: 1;
 }
