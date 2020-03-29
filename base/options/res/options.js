@@ -240,6 +240,7 @@ function makeElementsSelactable() {
 	
 	selectableRadioContent("coNone", "controlOptions", "none");
 	selectableRadioContent("coSimple", "controlOptions", "simple");
+	selectableRadioContent("coPagerOnly", "controlOptions", "pagerOnly");
 	selectableRadioContent("coPager", "controlOptions", "pager");
 	
 	selectableRadioContent("ahcYes", "autoHideControls", "true");
