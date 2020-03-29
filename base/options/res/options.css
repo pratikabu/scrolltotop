@@ -28,7 +28,7 @@
 	width: 100%;
 	border-bottom: 1px SOLID #CBCBCB;
 	padding: 5px 0;
-	z-index: 99999999;
+	z-index: 1;
 }
 
 .branding {
