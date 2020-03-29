@@ -303,3 +303,25 @@ hr {
     	margin-right: 0;
     }
 }
+
+.floatl {
+	float: left;
+}
+
+.floatr {
+	float: right;
+}
+
+.controlsec-div {
+	display: inline-block;
+	vertical-align: middle;
+	opacity: .5;
+}
+
+.controlsec-div:hover {
+	opacity: 1;
+}
+
+input[name="controlOptions"]:checked + div {
+    opacity: 1;
+}
