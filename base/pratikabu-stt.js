@@ -236,7 +236,9 @@ var pratikabustt = {
 			pratikabustt.showUpArrowImage();
 		}
 		
-		if(!pratikabu_stt_dualArrow) {
+		if(!pratikabu_stt_dualArrow && "none" === pratikabu_stt_prefs.controlOption) {
+			$("#pratikabuSTTDiv2").remove();
+		} else if(!pratikabu_stt_dualArrow) {
 			var otherImagesSize = pratikabustt.getOtherImageSize();
 			
 			var showPagerButtons = false;
