@@ -1,7 +1,7 @@
 .myFonts, .mySelect {
 	color: black;
 	font-family: Arial,Helvetica,sans-serif;
-	font-size: 12px;
+	font-size: 14px;
 }
 
 .mySelect {
@@ -21,13 +21,25 @@
 	font-size: medium;
 }
 
-.footerDiv {
+.headerDiv {
 	background-color: #ffffffed;
 	position: fixed;
-	bottom: 0;
+	top: 0;
 	width: 100%;
-	border-top: 1px SOLID #CBCBCB;
-	padding: 10px;
+	border-bottom: 1px SOLID #CBCBCB;
+	padding: 5px 0;
+	z-index: 1;
+}
+
+.branding {
+	float: left;
+	margin-left: -20px;
+}
+
+.versionInfo {
+	float: right;
+	margin: 3px -10px 0 0;
+	text-align: right;
 }
 
 .statusMsgDiv {
@@ -135,13 +147,16 @@ a.mylink {
 
 body {
 	background-color: rgba(155, 155, 155, 0.2);
-	margin: 0 0 99px 0; /* This margin is the height of the footer section */
+	margin: 81px 0 0 0; /* This margin is the height of the header section */
+}
+
+.mainContentWidth {
+	width: 700px;
 }
 
 .centerDiv {
-	width: 700px;
 	background-color: WHITE;
-	padding: 10px 10px 0;
+	padding: 10px;
 }
 
 hr {
@@ -195,12 +210,28 @@ hr {
 }
 
 .bottomIcon {
-	width: 16px;
-	height: 16px;
+	width: 20px;
+	height: 20px;
+}
+
+.withLove {
+	margin: 10px;
+	font-size: 20px;
+	text-shadow: 0px 1px 0 #ffffff;
+}
+
+.withLove a:link, .withLove a:visited  {
+	color: #c3c3c3;
+	text-decoration: none;
+}
+
+.withLove a:hover {
+	color: #989898;
+	text-decoration: none;
 }
 
 @media screen and (max-width: 750px) {
-	.centerDiv {
+	.mainContentWidth {
 		width: 600px;
 	}
 
@@ -218,7 +249,7 @@ hr {
 }
 
 @media screen and (max-width: 630px) {
-	.centerDiv {
+	.mainContentWidth {
 		width: 400px;
 	}
 
@@ -264,4 +295,41 @@ hr {
 		margin-bottom: 5px !important;
 		margin-top: 5px;
 	}
+
+	.branding {
+    	margin-left: -10px;
+    }
+
+    .versionInfo {
+    	margin-right: 0;
+    }
+}
+
+.floatl {
+	float: left;
+}
+
+.floatr {
+	float: right;
+}
+
+.controlsec-div {
+	display: inline-block;
+	vertical-align: middle;
+}
+
+input[type="radio"], input[type="radio"] + div, input[type="radio"] + img, input[type="radio"] + span {
+	cursor: pointer;
+}
+
+input[type="radio"]:checked + div, input[type="radio"]:checked + img {
+    opacity: 1;
+}
+
+input[type="radio"] + div, input[type="radio"] + img {
+    opacity: .6;
+}
+
+input[type="radio"]:hover + div, input[type="radio"]:hover + img, input[type="radio"] + div:hover, input[type="radio"] + img:hover {
+	opacity: 1;
 }

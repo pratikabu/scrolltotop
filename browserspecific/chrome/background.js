@@ -162,7 +162,7 @@ function addLocalSettingsWithResetValue(data) {
 function openReleaseNotes(process)
 {
 	// open the release notes
-	chrome.tabs.create({url: "http://pratikabu.users.sourceforge.net/extensions/scrolltotop/release.html?process=" + process});
+	chrome.tabs.create({url: "https://pratikabu.github.io/extensions/scrolltotop/release.html?process=" + process});
 }
 
 /**
@@ -243,3 +243,6 @@ function validateData(data) {
 	// if everything is good then return the data object
 	return data;
 }
+
+// set uninstall page
+chrome.runtime.setUninstallURL("https://pratikabu.github.io/extensions/scrolltotop/uninstall.html");

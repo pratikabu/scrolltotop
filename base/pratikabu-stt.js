@@ -236,15 +236,15 @@ var pratikabustt = {
 			pratikabustt.showUpArrowImage();
 		}
 		
-		if(!pratikabu_stt_dualArrow) {
+		if(!pratikabu_stt_dualArrow && "none" === pratikabu_stt_prefs.controlOption) {
+			$("#pratikabuSTTDiv2").remove();
+		} else if(!pratikabu_stt_dualArrow) {
 			var otherImagesSize = pratikabustt.getOtherImageSize();
 			
 			var showPagerButtons = false;
 			if("pager" === pratikabu_stt_prefs.controlOption) {
 				if($(document).height() !== pratikabustt.getWindowHeight()) {
 					showPagerButtons = true;
-				} else {
-					pratikabu_stt_prefs.controlOption = "simple";// set the control option to simple
 				}
 			}
 			
@@ -259,13 +259,17 @@ var pratikabustt = {
 			pratikabustt.setSettingsIcon(pratikabu_stt_pollabelIconSwitch);
 			
 			// show/remove page up and page down buttons from settings
-			if(showPagerButtons) {
+			if("simple" === pratikabu_stt_prefs.controlOption) {
+				$("#pratikabuSTTPageUp").remove();
+				$("#pratikabuSTTPageDown").remove();
+			} else {
 				pratikabustt_browser_impl.setImageForId("pratikabuSTTPageUp", "pageup-" + otherImagesSize + ".png");
 				pratikabustt_browser_impl.setImageForId("pratikabuSTTPageDown", "pageup-" + otherImagesSize + ".png");
 				$("#pratikabuSTTPageDown").rotate(180);
-			} else {
-				$("#pratikabuSTTPageUp").remove();
-				$("#pratikabuSTTPageDown").remove();
+				if("pagerOnly" === pratikabu_stt_prefs.controlOption) {
+					$("#pratikabuSTTClear").remove();
+					$("#pratikabuSTTSettings").remove();
+				}
 			}
 			
 			// change the location of the main image

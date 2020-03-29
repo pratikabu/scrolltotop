@@ -1,7 +1,7 @@
 {
 	"manifest_version": 2,
 	"name": "Scroll To Top",
-	"version": "4.8.1",
+	"version": "4.8.5",
 
 	"description": "Scroll to top and vice versa in a window.",
 	"icons": {
@@ -29,7 +29,7 @@
 		}
 	],
 	"permissions": [ "storage" ],
-	"homepage_url": "http://pratikabu.users.sourceforge.net/extensions/scrolltotop",
+	"homepage_url": "https://pratikabu.github.io/extensions/scrolltotop",
 	"options_ui": {
 		"page": "options/options.html",
 		"open_in_tab": true

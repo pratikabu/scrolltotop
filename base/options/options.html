@@ -13,9 +13,27 @@
 	</head>
 	<body>
 		<form name="myForm"><div align="center" class="myFonts" style="width: 100%;">
-			<div align="center" class="myFonts centerDiv">
-
-				<a target="_blank" href="http://pratikabu.users.sourceforge.net/extensions/scrolltotop"><span class="myHeader" title="Scroll To Top - Home page">Scroll To Top</span></a>
+			<div class="headerDiv">
+				<div class="mainContentWidth">
+					<div class="branding">
+						<a target="_blank" href="https://pratikabu.github.io/extensions/scrolltotop"><span class="myHeader" title="Scroll To Top - Home page">Scroll To Top</span></a>
+					</div>
+					<div class="versionInfo">
+						<div class="donateContainerDiv myFonts">
+							<span>Version: <span class="addonVersionId"></span></span><br/>
+							<div style="margin: 5px 0;">
+								<div class="donateId" style="display: inline-block;"></div> |
+								<div class="reviewId" style="display: inline-block;"></div>
+							</div>
+						</div>
+						<span>
+							<a target="_blank" href="https://github.com/pratikabu/scrolltotop" style="vertical-align: middle; display: inline-block;" title="Scroll To Top on GitHub"><img src="res/github-32.png" alt="GitHub" class="bottomIcon" /></a>
+							<a target="_blank" href="https://twitter.com/scrolltotop" style="vertical-align: middle; display: inline-block;" title="Scroll To Top on Twitter"><img src="res/social-tw.png" alt="Twitter" class="bottomIcon" /></a>
+						</span>
+					</div>
+				</div>
+			</div>
+			<div align="center" class="myFonts centerDiv mainContentWidth">
 				<div id="commonSettings" class="tableClass">
 					<div class="groupHeader">Common Settings</div>
 					<div class="settinggroup">
@@ -85,15 +103,30 @@
 							<div class="settingoptions">
 								<input type="radio" name="smartDirection" value="true"><span id="sdOn">On</span>
 								<input type="radio" name="smartDirection" value="false"><span id="sdOff">Off</span>
-								<a target="_blank" href="http://pratikabu.blogspot.com/2013/04/stt-smart-direction-mode.html" title="Learn more about Smart Direction Mode" style="margin-left: 7px;">What is this?</a>
+								<a target="_blank" href="https://pratikabu.blogspot.com/2013/04/stt-smart-direction-mode.html" title="Learn more about Smart Direction Mode" style="margin-left: 7px;">What is this?</a>
 							</div>
 						</div>
 						<div class="settinggroup">
 							<div class="settinglabel">Control Options :</div>
 							<div class="settingoptions">
 								<input type="radio" name="controlOptions" value="none"><span id="coNone">None</span>
-								<input type="radio" name="controlOptions" value="simple"><span id="coSimple">Simple</span>
-								<input type="radio" name="controlOptions" value="pager"><span id="coPager">With Pager</span>
+								<input type="radio" name="controlOptions" value="simple">
+								<div id="coSimple" class="controlsec-div" style="width: 24px;">
+									<img class="blackAndWhiteCSS" src="../icons/pratikabu-stt-clear-24.png">
+									<img class="blackAndWhiteCSS" src="../icons/pratikabu-stt-settings-24.png">
+								</div>
+								<input type="radio" name="controlOptions" value="pagerOnly">
+								<div id="coPagerOnly" class="controlsec-div" style="width: 24px;">
+									<img class="blackAndWhiteCSS" src="../icons/pratikabu-stt-pageup-24.png">
+									<img class="blackAndWhiteCSS" src="../icons/pratikabu-stt-pageup-24.png" style="transform: rotate(180deg);">
+								</div>
+								<input type="radio" name="controlOptions" value="pager">
+								<div id="coPager" class="controlsec-div" style="width: 48px;">
+									<img class="pratikabuSTTImg blackAndWhiteCSS floatl" src="../icons/pratikabu-stt-clear-24.png">
+									<img class="pratikabuSTTImg blackAndWhiteCSS floatr" src="../icons/pratikabu-stt-pageup-24.png">
+									<img class="pratikabuSTTImg blackAndWhiteCSS floatl" src="../icons/pratikabu-stt-settings-24.png">
+									<img class="pratikabuSTTImg blackAndWhiteCSS floatr" src="../icons/pratikabu-stt-pageup-24.png" style="transform: rotate(180deg);">
+								</div>
 							</div>
 						</div>
 						<div class="advancedProp settinggroup">
@@ -127,10 +160,10 @@
 								<br/>
 								Follow these steps to upload your own icon:
 								<ol>
-									<li>Get base64 encoded string of your image. <a href="http://www.base64-image.de/step-1.php" target="_blank">Click here</a> and follow the steps.</li>
+									<li>Get base64 encoded string of your image. <a href="https://www.base64-image.de" target="_blank">Click here</a> and follow the steps.</li>
 									<li>Paste the base64 encoded string in the above text box.</li>
 									<li>That's it!! Your image should appear in the preview box above.</li>
-									<li>Still confused? <a target="_blank" href="http://pratikabu.users.sourceforge.net/extensions/scrolltotop/base64help.html">Click here</a> for detailed explanation with pictures.</li>
+									<li>Still confused? <a target="_blank" href="https://pratikabu.github.io/extensions/scrolltotop/base64help.html">Click here</a> for detailed explanation with pictures.</li>
 								</ol>
 								You can try on these sites to get amazing icons <a target="_blank" href="https://findicons.com">findicons.com</a>, <a target="_blank" href="http://www.iconarchive.com">iconarchive.com</a>, <a target="_blank" href="https://icons8.com">icons8.com</a>.
 							</div>
@@ -174,10 +207,10 @@
 								<br/>
 								Follow these steps to upload your own icon:
 								<ol>
-									<li>Get base64 encoded string of your image. <a href="http://www.base64-image.de/step-1.php" target="_blank">Click here</a> and follow the steps.</li>
+									<li>Get base64 encoded string of your image. <a href="https://www.base64-image.de" target="_blank">Click here</a> and follow the steps.</li>
 									<li>Paste the base64 encoded string in the above text box.</li>
 									<li>That's it!! Your image should appear in the preview box above.</li>
-									<li>Still confused? <a target="_blank" href="http://pratikabu.users.sourceforge.net/extensions/scrolltotop/base64help.html">Click here</a> for detailed explanation with pictures.</li>
+									<li>Still confused? <a target="_blank" href="https://pratikabu.github.io/extensions/scrolltotop/base64help.html">Click here</a> for detailed explanation with pictures.</li>
 								</ol>
 								You can try on these sites to get amazing icons <a target="_blank" href="https://findicons.com">findicons.com</a>, <a target="_blank" href="http://www.iconarchive.com">iconarchive.com</a>, <a target="_blank" href="https://icons8.com">icons8.com</a>.
 							</div>
@@ -210,7 +243,7 @@
 						<div class="settingoptions verticalTop">
 							<textarea id="removedSites" class="siteTextArea"></textarea>
 							<p align="justify" style="font-size: 12px;">
-								type domain names separated by ';'. No special charaters please. <a target="_blank" href="http://pratikabu.blogspot.com/2013/04/stt-how-to-fill-domain-names.html">Help?</a><br/>
+								type domain names separated by ';'. No special charaters please. <a target="_blank" href="https://pratikabu.blogspot.com/2013/04/stt-how-to-fill-domain-names.html">Help?</a><br/>
 								Ex: mail.google.com;google.com/calendar;
 							</p>
 						</div>
@@ -220,32 +253,13 @@
 				<input type="button" id="advSettingsBut" value="Show More Settings" class="mybutton small red" title="Choose different icons, configure advanced settings and more..." />
 				<input type="button" id="defaultBut" value="Restore to Defaults" class="mybutton small green" title="Restore all settings to original values." />
 				<input type="button" id="exportImportBut" value="Export / Import" class="mybutton small blue" title="Export/Import settings cross browser." />
-				<input type="button" id="donateReviewBut" value="Support Me" class="mybutton small orange" /><br/><br/>
+				<input type="button" id="donateReviewBut" value="Support Me" class="mybutton small orange" />
 
 			</div>
-			<div class="footerDiv">
-				<div align="center" class="donateContainerDiv myFonts">
-					<span style="font-weight: bold;">Version: <span class="addonVersionId"></span></span>, <span id="whatsNewId"></span><br/>
-					<a target="_blank" href="http://pratikabu.users.sourceforge.net/extensions/scrolltotop" title="Scroll To Top Home Page">Home</a>
-					|
-					<a target="_blank" href="https://github.com/pratikabu/scrolltotop/issues" title="Suggest a Feature">Suggest a Feature</a>
-					|
-					<a target="_blank" href="https://github.com/pratikabu/scrolltotop/issues" title="Report an Issue">Report an Issue</a>
-					|
-					<a target="_blank" href="https://github.com/pratikabu/scrolltotop" style="vertical-align: middle; display: inline-block;" title="Scroll To Top on GitHub"><img src="res/github-32.png" alt="GitHub" class="bottomIcon" /></a>
-					|
-					<a target="_blank" href="https://twitter.com/scrolltotop" style="vertical-align: middle; display: inline-block;" title="Scroll To Top on Twitter"><img src="res/social-tw.png" alt="Twitter" class="bottomIcon" /></a>
-					<br/>
-					<div style="margin: 5px;">
-						<div class="donateId" style="display: inline-block;">&nbsp;</div>
-						<div class="reviewId" style="display: inline-block;"></div>
-					</div>
-				</div>
-				<span style="font-size: 14px;">With love from <a target="_blank" href="http://en.wikipedia.org/wiki/India" style="vertical-align: middle; display: inline-block;" title="Read more about India"><img src="res/india.png" alt="India" class="bottomIcon" /></a></span>
-			</div>
+			<div class="withLove"><a target="_blank" href="http://en.wikipedia.org/wiki/India" title="Read more about India">With &hearts; from India</a></div>
 		</div></form>
 
-		<div style="position: fixed; left: 50%; top: 0;">
+		<div style="position: fixed; left: 50%; top: 0; z-index: 10;">
 			<div id="status" align="center" class="statusMsgDiv myFonts" title="All statuses will appear here."></div>
 		</div>
 		
@@ -278,8 +292,8 @@
 				<p align="justify">Show your support by either donating few bucks for its development, or leave a review so that it can reach to a bigger audience, even both.</p>
 				<div style="text-align: center;">
 					<div>
-						<span class="donateId" style="margin-right: 10px; vertical-align: middle;"></span>
-						<span class="reviewId" style="display: inline-block; vertical-align: middle;"></span>
+						<span class="donateId"></span> |
+						<span class="reviewId"></span>
 						<p>Your small step makes a difference.<br/>&nbsp;</p>
 					</div>
 					
