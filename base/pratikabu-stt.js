@@ -167,11 +167,7 @@ var pratikabustt = {
 		
 		// add the scroll up logic
 		$("#pratikabuSTTArrowUp").click(function() {
-			if(pratikabu_stt_flipScrolling) {
-				pratikabustt.scrollToBottom();
-			} else {
-				pratikabustt.scrollToTop();
-			}
+			pratikabustt.scrollIntelligently();
 			return false;
 		});
 		if(pratikabu_stt_dualArrow) {
@@ -352,6 +348,14 @@ var pratikabustt = {
 		$("#pratikabuSTTDiv").stop(true, true).fadeTo("slow", 0, function() {
 			$("#pratikabuSTTDiv").remove();
 		});
+	},
+
+	scrollIntelligently: function() {
+		if(pratikabu_stt_flipScrolling) {
+			pratikabustt.scrollToBottom();
+		} else {
+			pratikabustt.scrollToTop();
+		}
 	},
 	
 	scrollToTop: function() {

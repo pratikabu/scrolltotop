@@ -28,11 +28,12 @@
 			]
 		}
 	],
-	"permissions": [ "storage" ],
+	"permissions": [ "storage", "activeTab" ],
 	"homepage_url": "https://pratikabu.github.io/extensions/scrolltotop",
 	"options_ui": {
 		"page": "options/options.html",
 		"open_in_tab": true
 	},
-	"web_accessible_resources":[ "icons/*.png" ]
+	"web_accessible_resources":[ "icons/*.png" ],
+	"browser_action": {}
 }
