@@ -51,6 +51,10 @@
 			<arg value="&quot;${browserKey}&quot;" />
 			<arg value="&quot;${replaceBrowserKey}&quot;" />
 		</java>
+
+		<!-- remove the Options menu for browser action in toolbar-cx-menu.js file -->
+		<replace file="${browserDir}/toolbar-cx-menu.js" summary="Yes" failOnNoReplacements="true"
+				 token=", &quot;browser_action&quot;" />
 		
 		<!-- create brwoser specific zip files -->
 		<zip destfile="${generatedZipDir}/${browserName}-stt.${deployExtension}">
