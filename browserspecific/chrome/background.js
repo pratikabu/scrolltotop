@@ -256,11 +256,3 @@ function validateData(data) {
 
 // set uninstall page
 chrome.runtime.setUninstallURL("https://pratikabu.github.io/extensions/scrolltotop/uninstall.html");
-
-chrome.browserAction.onClicked.addListener(function(tab) {
-	fetchSettings(function(data) {
-		chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-			chrome.tabs.sendMessage(tabs[0].id, {pratikabusttaction: data.toolbarClickAction});
-		});
-	});
-});

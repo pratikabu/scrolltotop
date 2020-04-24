@@ -12,7 +12,7 @@
 
 	"author": "Pratik Soni",
 	"background": {
-		"scripts": [ "background.js" ],
+		"scripts": [ "background.js", "toolbar-cx-menu.js" ],
 		"persistent": false
 	},
 
@@ -28,7 +28,7 @@
 			]
 		}
 	],
-	"permissions": [ "storage", "activeTab" ],
+	"permissions": [ "storage", "activeTab", "contextMenus" ],
 	"homepage_url": "https://pratikabu.github.io/extensions/scrolltotop",
 	"options_ui": {
 		"page": "options/options.html",
