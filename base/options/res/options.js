@@ -46,7 +46,9 @@ function save_options(returnValue) {
 		vOffset: $('#vOffset').val(),
 		removedSites: $('#removedSites').val(),
 		
-		supportPrompt: $('#supportPromptCBId').is(':checked')
+		supportPrompt: $('#supportPromptCBId').is(':checked'),
+
+		toolbarClickAction: $('input:radio[name=toolbarClickAction]:checked').val()
 	};
 	
 	if(!returnValue) {
@@ -63,7 +65,9 @@ function save_options(returnValue) {
 function restore_options(data) {
 	ignoreImgLoad = true;// ignore the image load method as it will reset myIcon in the radio button
 	dIgnoreImgLoad = true;// ignore the image load method as it will reset myIcon in the radio button
-	
+
+	$('input:radio[name=toolbarClickAction]').filter('[value=' + data.toolbarClickAction + ']').prop('checked', true);
+
 	$('input:radio[name=imgVerticalLocation]').filter('[value=' + data.vLoc + ']').prop('checked', true);
 	$('input:radio[name=imgHorizontalLocation]').filter('[value=' + data.hLoc + ']').prop('checked', true);
 	
@@ -218,6 +222,9 @@ function addIcons() {
 	for all radio button's content to be selectable
 */
 function makeElementsSelactable() {
+	selectableRadioContent("tcaUp", "toolbarClickAction", "top");
+	selectableRadioContent("tcaIntelligent", "toolbarClickAction", "intelligentflip");
+
 	selectableRadioContent("vlTop", "imgVerticalLocation", "top");
 	selectableRadioContent("vlMiddle", "imgVerticalLocation", "middle");
 	selectableRadioContent("vlBottom", "imgVerticalLocation", "bottom");
@@ -410,6 +417,10 @@ function psInitJavascriptFunctions() {
 	$("#advSettingsBut").click(function() { activateAdvancedSettings(); });
 	exportImportSettingsInits();
 	donateReviewInits();
+
+	// toolbar settings starts
+	$('input:radio[name=toolbarClickAction]').change(function() { isRightChangedEvent("toolbarClickAction", $(this).val()); });
+	// toolbar settings ends
 	
 	// common settings starts
 	$('input:radio[name=imgVerticalLocation]').change(function() { isRightChangedEvent("imgVerticalLocation", $(this).val()); });

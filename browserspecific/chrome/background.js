@@ -99,10 +99,18 @@ function fetchSettings(sendResponseFunction) {
 			var finalData = {};
 			populateJson(syncData, finalData);
 			populateJson(localData, finalData);
+
+			populateNewDefaults(finalData);
 			
 			sendResponseFunction(finalData);
 		});
 	});
+}
+
+function populateNewDefaults(finalData) {
+	if(!finalData.toolbarClickAction) {
+		finalData.toolbarClickAction = 'top';
+	}
 }
 
 function populateJson(sourceJson, targetJson) {
@@ -141,7 +149,7 @@ function resetSettings(sendResponseFunction) {
 			vOffset: "20",
 			removedSites: "mail.google.com/mail;google.com/calendar;",
 
-			browserActionClick: "up"
+			toolbarClickAction: "top"
 		};
 	
 	addLocalSettingsWithResetValue(data);
@@ -251,9 +259,8 @@ chrome.runtime.setUninstallURL("https://pratikabu.github.io/extensions/scrolltot
 
 chrome.browserAction.onClicked.addListener(function(tab) {
 	fetchSettings(function(data) {
-		var browserActionClick = !data.browserActionClick ? 'up' : data.browserActionClick;
 		chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-			chrome.tabs.sendMessage(tabs[0].id, {pratikabusttaction: browserActionClick});
+			chrome.tabs.sendMessage(tabs[0].id, {pratikabusttaction: data.toolbarClickAction});
 		});
 	});
 });
