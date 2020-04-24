@@ -1,6 +1,6 @@
 chrome.browserAction.onClicked.addListener(function(tab) {
 	fetchSettings(function(data) {
-		scrollToDirection(data.toolbarClickAction);
+		scrollToDirection(data.toolbarClickAction, tab);
 	});
 });
 
@@ -34,19 +34,16 @@ chrome.runtime.onInstalled.addListener(function() {
 
 chrome.contextMenus.onClicked.addListener(function(info, tab) {
 	if (info.menuItemId == "pratikabustt-cxm-top") {
-		scrollToDirection('top');
+		scrollToDirection('top', tab);
 	} else if (info.menuItemId == "pratikabustt-cxm-bottom") {
-		scrollToDirection('bottom');
+		scrollToDirection('bottom', tab);
 	} else if (info.menuItemId == "pratikabustt-cxm-option") {
 		chrome.runtime.openOptionsPage();
 	}
 });
 
-function scrollToDirection(direction) {
+function scrollToDirection(direction, currentTab) {
 	if(!direction)
 		return;
-
-	chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-		chrome.tabs.sendMessage(tabs[0].id, {pratikabusttaction: direction});
-	});
+	chrome.tabs.sendMessage(currentTab.id, {pratikabusttaction: direction});
 }
