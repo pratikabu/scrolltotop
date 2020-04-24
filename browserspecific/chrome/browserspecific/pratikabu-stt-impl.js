@@ -33,10 +33,10 @@ var pratikabustt_browser_impl = {
 };
 
 chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
-	if(request.pratikabusttaction == "up")
+	if(request.pratikabusttaction == "top")
 		pratikabustt.scrollToTop();
-	else if (request.pratikabusttaction == "intelligentscroll")
+	else if (request.pratikabusttaction == "intelligentflip")
 		pratikabustt.scrollIntelligently();
-	else if(request.pratikabusttaction == "down")
+	else if(request.pratikabusttaction == "bottom")
 		pratikabustt.scrollToBottom();
 });
