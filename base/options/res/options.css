@@ -123,6 +123,10 @@ a.mylink {
 	text-align: left;
 }
 
+.groupHeader span {
+	font-weight: normal;
+}
+
 .siteTextArea {
 	width: 85%;
 	height: 70px;
