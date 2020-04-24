@@ -139,7 +139,9 @@ function resetSettings(sendResponseFunction) {
 			
 			hOffset: "20",
 			vOffset: "20",
-			removedSites: "mail.google.com/mail;google.com/calendar;"
+			removedSites: "mail.google.com/mail;google.com/calendar;",
+
+			browserActionClick: "up"
 		};
 	
 	addLocalSettingsWithResetValue(data);
@@ -246,3 +248,12 @@ function validateData(data) {
 
 // set uninstall page
 chrome.runtime.setUninstallURL("https://pratikabu.github.io/extensions/scrolltotop/uninstall.html");
+
+chrome.browserAction.onClicked.addListener(function(tab) {
+	fetchSettings(function(data) {
+		var browserActionClick = !data.browserActionClick ? 'up' : data.browserActionClick;
+		chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+			chrome.tabs.sendMessage(tabs[0].id, {pratikabusttaction: browserActionClick});
+		});
+	});
+});
