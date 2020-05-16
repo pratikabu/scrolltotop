@@ -31,7 +31,7 @@ function bsSaveSettings(data) {
 }
 
 function bsReviewPageUrl() {
-	return "https://pratikabu.blogspot.com/2013/02/scroll-to-top-review-from-safari-users.html";
+	return "https://blog.pratikabu.com/2013/02/scroll-to-top-review-from-safari-users.html";
 }
 
 document.addEventListener('DOMContentLoaded', function () {

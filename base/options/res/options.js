@@ -110,7 +110,7 @@ function restore_settings() {
 }
 
 function post_save_success() {
-	show_message("<b>Saved!</b> <a target='_blank' href='https://pratikabu.github.io/extensions/scrolltotop/release.html'>Preview</a>");
+	show_message("<b>Saved!</b> <a target='_blank' href='https://scrolltotop.pratikabu.com/release'>Preview</a>");
 }
 
 function post_restore_success() {
@@ -579,11 +579,11 @@ function psInitJavascriptFunctions() {
 
 	var addonVersion = getExtensionVersion();
 	// place the version
-	$(".addonVersionId").append('<a target="_blank" href="https://pratikabu.github.io/extensions/scrolltotop/release.html?v=' + addonVersion + '" title="See what&#39;s new in this version.">' + addonVersion + '</a>');
+	$(".addonVersionId").append('<a target="_blank" href="https://scrolltotop.pratikabu.com/release?v=' + addonVersion + '" title="See what&#39;s new in this version.">' + addonVersion + '</a>');
 	// give review link
 	$(".reviewId").append('<a target="_blank" title="Love Scroll To Top, give it a 5 star and leave your feedback." href="' + bsReviewPageUrl() + '">Review</a>');
 	
-	$(".donateId").append('<a target="_blank" title="Show your support." href="https://pratikabu.github.io/extensions/scrolltotop/donate.html">Donate</a>');
+	$(".donateId").append('<a target="_blank" title="Show your support." href="https://scrolltotop.pratikabu.com/donate">Donate</a>');
 }
 
 function getBase64Url(base64Url) {

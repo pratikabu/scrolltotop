@@ -29,7 +29,7 @@
 		}
 	],
 	"permissions": [ "storage", "activeTab", "contextMenus" ],
-	"homepage_url": "https://pratikabu.github.io/extensions/scrolltotop",
+	"homepage_url": "https://scrolltotop.pratikabu.com",
 	"options_ui": {
 		"page": "options/options.html",
 		"open_in_tab": true
