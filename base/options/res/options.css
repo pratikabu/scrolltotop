@@ -72,11 +72,7 @@
 	margin: 10px 0;
 }
 
-a:link {
-	color: blue;
-	text-decoration: none;
-}
-a:visited {
+a:link, a:visited {
 	color: blue;
 	text-decoration: none;
 }
@@ -334,4 +330,44 @@ input[type="radio"]:hover + div, input[type="radio"]:hover + img, input[type="ra
 
 .pageIconSettings {
 	display: none;
+}
+
+@media (prefers-color-scheme: dark) {
+	body, input[type="text"], textarea {
+		background-color: #4a4a4a;
+	}
+
+	.myFonts, input[type="text"], textarea {
+		color: #dcdcdc;
+	}
+
+	.myHeader {
+		color: #e6e6e6;
+	}
+
+	.headerDiv, .tableClass {
+		background-color: #3b3e43;
+		border-color: #8c8c8c;
+	}
+
+	a:link, a:visited {
+		color: #e8de57;
+	}
+
+	a:hover {
+		color: #00ff2d;
+	}
+
+	.withLove a:link, .withLove a:visited {
+		color: #757575;
+		text-shadow: 0px 1px 0 #292929;
+	}
+
+	.withLove a:hover {
+		color: #8e8e8e;
+	}
+
+	.statusMsgDiv {
+		background-color: #5a5a5a;
+	}
 }
