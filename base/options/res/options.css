@@ -370,4 +370,8 @@ input[type="radio"]:hover + div, input[type="radio"]:hover + img, input[type="ra
 	.statusMsgDiv {
 		background-color: #5a5a5a;
 	}
+
+	#maskDiv {
+		background-color: rgba(25, 25, 25, 0.87) !important;
+	}
 }
