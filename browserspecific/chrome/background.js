@@ -111,6 +111,10 @@ function populateNewDefaults(finalData) {
 	if(!finalData.toolbarClickAction) {
 		finalData.toolbarClickAction = 'top';
 	}
+
+	if(!finalData.showIconsOnPage) {
+		finalData.showIconsOnPage = 'true';
+	}
 }
 
 function populateJson(sourceJson, targetJson) {

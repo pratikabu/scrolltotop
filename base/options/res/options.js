@@ -48,7 +48,8 @@ function save_options(returnValue) {
 		
 		supportPrompt: $('#supportPromptCBId').is(':checked'),
 
-		toolbarClickAction: $('input:radio[name=toolbarClickAction]:checked').val()
+		toolbarClickAction: $('input:radio[name=toolbarClickAction]:checked').val(),
+		showIconsOnPage: $('input:radio[name=showIconsOnPage]:checked').val()
 	};
 	
 	if(!returnValue) {
@@ -67,6 +68,8 @@ function restore_options(data) {
 	dIgnoreImgLoad = true;// ignore the image load method as it will reset myIcon in the radio button
 
 	$('input:radio[name=toolbarClickAction]').filter('[value=' + data.toolbarClickAction + ']').prop('checked', true);
+	$('input:radio[name=showIconsOnPage]').filter('[value=' + data.showIconsOnPage + ']').prop('checked', true);
+	showHidePageIconCustomizations();
 
 	$('input:radio[name=imgVerticalLocation]').filter('[value=' + data.vLoc + ']').prop('checked', true);
 	$('input:radio[name=imgHorizontalLocation]').filter('[value=' + data.hLoc + ']').prop('checked', true);
@@ -224,6 +227,9 @@ function addIcons() {
 function makeElementsSelactable() {
 	selectableRadioContent("tcaUp", "toolbarClickAction", "top");
 	selectableRadioContent("tcaIntelligent", "toolbarClickAction", "intelligentflip");
+
+	selectableRadioContent("siopYes", "showIconsOnPage", "true");
+	selectableRadioContent("siopNo", "showIconsOnPage", "false");
 
 	selectableRadioContent("vlTop", "imgVerticalLocation", "top");
 	selectableRadioContent("vlMiddle", "imgVerticalLocation", "middle");
@@ -404,6 +410,18 @@ function toggleDialog(dialogId) {
 	$(globalDialogId).fadeToggle("slow");
 }
 
+/**
+It shows or hide the page icon customization area based on what value is selected for the radio button.
+*/
+function showHidePageIconCustomizations() {
+	var allSelectedElements = $(".pageIconSettings");
+	if("true" == $('input:radio[name=showIconsOnPage]:checked').val()) {
+		allSelectedElements.show();
+	} else {
+		allSelectedElements.hide();
+	}
+}
+
 function psInitJavascriptFunctions() {
 	randomOpenSupportDialog();
 	
@@ -421,6 +439,15 @@ function psInitJavascriptFunctions() {
 	// toolbar settings starts
 	$('input:radio[name=toolbarClickAction]').change(function() { isRightChangedEvent("toolbarClickAction", $(this).val()); });
 	// toolbar settings ends
+
+	// show icons on page starts
+	$('input:radio[name=showIconsOnPage]').change(function() {
+		var valueChanged = isRightChangedEvent("showIconsOnPage", $(this).val());
+		if(valueChanged) {
+			showHidePageIconCustomizations();
+		}
+	});
+	// show icons on page ends
 	
 	// common settings starts
 	$('input:radio[name=imgVerticalLocation]').change(function() { isRightChangedEvent("imgVerticalLocation", $(this).val()); });

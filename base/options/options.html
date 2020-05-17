@@ -34,7 +34,16 @@
 				</div>
 			</div>
 			<div align="center" class="myFonts centerDiv mainContentWidth">
-				<div id="toolbarSettings" class="tableClass">
+				<div id="showIconsSetting" class="tableClass">
+					<div class="settinggroup" style="text-align: center;">
+						<div class="settingoptions">
+							<input type="radio" name="showIconsOnPage" value="true"><span id="siopYes">Show Icons on Page</span>
+							<input type="radio" name="showIconsOnPage" value="false"><span id="siopNo">Don&#39;t Show Icons</span>
+						</div>
+					</div>
+				</div>
+
+				<div id="toolbarSettings" class="tableClass" style="display: none;">
 					<div class="groupHeader">Toolbar Button <span>(<a href="FIX_ME">Read more</a>)</span></div>
 					<div class="settinggroup">
 						<div class="settinglabel">Click Action :</div>
@@ -45,6 +54,7 @@
 					</div>
 				</div>
 
+				<div class="pageIconSettings">
 				<div id="commonSettings" class="tableClass">
 					<div class="groupHeader">Common Settings</div>
 					<div class="settinggroup">
@@ -96,7 +106,7 @@
 					</div>
 				</div>
 				
-				<div id="arrowTypeSelector" class="tableClass" style="margin-bottom: 0;">
+				<div id="arrowTypeSelector" class="tableClass">
 					<div class="groupHeader">Choose Arrow Type</div>
 					<div class="settinggroup" style="text-align: center;">
 						<div class="settingoptions">
@@ -260,8 +270,9 @@
 						</div>
 					</div>
 				</div>
-				
-				<input type="button" id="advSettingsBut" value="Show More Settings" class="mybutton small red" title="Choose different icons, configure advanced settings and more..." />
+				</div>
+
+				<input type="button" id="advSettingsBut" value="Show More Settings" class="mybutton small red pageIconSettings" title="Choose different icons, configure advanced settings and more..." />
 				<input type="button" id="defaultBut" value="Restore to Defaults" class="mybutton small green" title="Restore all settings to original values." />
 				<input type="button" id="exportImportBut" value="Export / Import" class="mybutton small blue" title="Export/Import settings cross browser." />
 				<input type="button" id="donateReviewBut" value="Support Me" class="mybutton small orange" />

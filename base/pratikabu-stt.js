@@ -603,8 +603,9 @@ var pratikabustt = {
 	*/
 	isValidPageForAddon: function() {
 		var validPage = false;
-		
-		validPage = !pratikabustt.mactchDomainAgainstDomainList(window.location.href, pratikabu_stt_prefs.removedSites);// check for removed sites
+
+		validPage = "false" !== pratikabu_stt_prefs.showIconsOnPage;
+		validPage = validPage && !pratikabustt.mactchDomainAgainstDomainList(window.location.href, pratikabu_stt_prefs.removedSites);// check for removed sites
 		validPage = validPage && window === window.top;// check top window. As of now removing the support for internal frames
 		/** if(validPage && window !== window.top) { // internal frame identified
 			validPage = pratikabustt.mactchDomainAgainstDomainList(document.referrer, pratikabu_stt_prefs.frameSupportedSites);// check if the parent's domain is supported
