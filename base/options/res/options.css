@@ -103,8 +103,6 @@ form {
 .mybutton.blue { background-color: #4699DA; }
 .mybutton.orange { background-color: #FF510D; }
 .mybutton.small { font-size: 16px; padding: 3px 7px; }
-.mybutton.small:hover { background-position: 0 -50px; }
-.mybutton.small:active {background-position: 0 top; }
 
 a.mylink {
 	text-decoration: none;
@@ -373,5 +371,21 @@ input[type="radio"]:hover + div, input[type="radio"]:hover + img, input[type="ra
 
 	#maskDiv {
 		background-color: rgba(25, 25, 25, 0.87) !important;
+	}
+
+	.mybutton.green {
+		background-color: #407b01;
+	}
+
+	.mybutton.blue {
+		background-color: #1f80cc;
+	}
+
+	.mybutton.orange {
+		background-color: #d2420a;
+	}
+
+	.mybutton.red {
+		background-color: #bb0000;
 	}
 }
