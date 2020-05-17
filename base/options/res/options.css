@@ -347,7 +347,7 @@ input[type="radio"]:hover + div, input[type="radio"]:hover + img, input[type="ra
 
 	.headerDiv, .tableClass {
 		background-color: #3b3e43;
-		border-color: #8c8c8c;
+		border-color: #717171;
 	}
 
 	a:link, a:visited {
