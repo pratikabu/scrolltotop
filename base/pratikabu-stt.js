@@ -14,6 +14,7 @@ var pratikabu_stt_lastDocumentTop = 0;// this variable will hold the document to
 var pratikabu_stt_autoHide = false;
 var pratikabu_stt_ahRequestCount = 0;// counter to handle autohide in seconds
 var pratikabu_stt_pollabelIconSwitch = false;// maintains whether or not the pollable downward icon is visible or not
+var pratikabu_stt_ROTATE_180_CLASS = "pratikabuSTTRotate180";
 
 var pratikabustt = {
 	scrollHandlerOneTime: function() {
@@ -94,8 +95,8 @@ var pratikabustt = {
 	},
 	
 	rotateDown: function(animateRotation) {
-		if(pratikabu_stt_pollabelIconSwitch && 180 !== $("#pratikabuSTTSettings").getRotateAngle()) {
-			$("#pratikabuSTTSettings").rotate({ animateTo: 180 });
+		if(pratikabu_stt_pollabelIconSwitch) {
+			$("#pratikabuSTTSettings").addClass(pratikabu_stt_ROTATE_180_CLASS);
 		}
 		
 		if(true === pratikabu_stt_flipScrolling) {
@@ -104,15 +105,15 @@ var pratikabustt = {
 		
 		pratikabu_stt_flipScrolling = true;
 		if(animateRotation) {
-			$("#pratikabuSTTArrowUp").rotate({ animateTo: 180 });
+			$("#pratikabuSTTArrowUp").addClass(pratikabu_stt_ROTATE_180_CLASS);
 		} else {
-			$("#pratikabuSTTArrowUp").rotate(180);
+			$("#pratikabuSTTArrowUp").addClass(pratikabu_stt_ROTATE_180_CLASS);
 		}
 	},
 	
 	rotateUp: function() {
-		if(pratikabu_stt_pollabelIconSwitch && 0 !== $("#pratikabuSTTSettings").getRotateAngle()) {
-			$("#pratikabuSTTSettings").rotate({ animateTo: 0 });
+		if(pratikabu_stt_pollabelIconSwitch) {
+			$("#pratikabuSTTSettings").removeClass(pratikabu_stt_ROTATE_180_CLASS);
 		}
 		
 		if(false === pratikabu_stt_flipScrolling) {
@@ -120,7 +121,7 @@ var pratikabustt = {
 		}
 		
 		pratikabu_stt_flipScrolling = false;
-		$("#pratikabuSTTArrowUp").rotate({ animateTo: 0 });
+		$("#pratikabuSTTArrowUp").removeClass(pratikabu_stt_ROTATE_180_CLASS);
 	},
 	
 	createAddonHtml: function() {
@@ -193,8 +194,8 @@ var pratikabustt = {
 			
 			// add rotation for scrolling down
 			$("#pratikabuSTTSettings").hover(
-				function() { if(!pratikabu_stt_pollabelIconSwitch) { $(this).rotate({ animateTo: 180 });} },
-				function() { if(!pratikabu_stt_pollabelIconSwitch) { $(this).rotate({ animateTo: 0 });} });
+				function() { if(!pratikabu_stt_pollabelIconSwitch) { $(this).addClass(pratikabu_stt_ROTATE_180_CLASS);} },
+				function() { if(!pratikabu_stt_pollabelIconSwitch) { $(this).removeClass(pratikabu_stt_ROTATE_180_CLASS);} });
 			
 			// add the remove div logic
 			$("#pratikabuSTTClear").click(function() {
@@ -261,7 +262,7 @@ var pratikabustt = {
 			} else {
 				pratikabustt_browser_impl.setImageForId("pratikabuSTTPageUp", "pageup-" + otherImagesSize + ".png");
 				pratikabustt_browser_impl.setImageForId("pratikabuSTTPageDown", "pageup-" + otherImagesSize + ".png");
-				$("#pratikabuSTTPageDown").rotate(180);
+				$("#pratikabuSTTPageDown").addClass(pratikabu_stt_ROTATE_180_CLASS);
 				if("pagerOnly" === pratikabu_stt_prefs.controlOption) {
 					$("#pratikabuSTTClear").remove();
 					$("#pratikabuSTTSettings").remove();
@@ -311,7 +312,7 @@ var pratikabustt = {
 			pratikabustt_browser_impl.setImageForId("pratikabuSTTSettings", "bottom-" + pratikabustt.getOtherImageSize() + ".png");
 		} else {
 			pratikabustt_browser_impl.setImageForId("pratikabuSTTSettings", "settings-" + pratikabustt.getOtherImageSize() + ".png");
-			$("#pratikabuSTTSettings").rotate(0);
+			$("#pratikabuSTTSettings").removeClass(pratikabu_stt_ROTATE_180_CLASS);
 		}
 	},
 	
@@ -462,7 +463,7 @@ var pratikabustt = {
 			pratikabustt_browser_impl.setImageForId("pratikabuSTTArrowDown", suffixString + ".png");
 		}
 		
-		$("#pratikabuSTTArrowDown").rotate(180);
+		$("#pratikabuSTTArrowDown").addClass(pratikabu_stt_ROTATE_180_CLASS);
 	},
 	
 	getBase64Url: function(base64Url) {
