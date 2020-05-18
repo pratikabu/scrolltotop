@@ -134,7 +134,7 @@ function resetSettings(sendResponseFunction) {
 			vLoc: "bottom",
 			hLoc: "right",
 			visibilityBehav: "alwaysshow",
-			scrSpeed: "1200",
+			scrSpeed: "400",
 			iconTransparency: "0.5",
 			blackAndWhite: "false",
 			

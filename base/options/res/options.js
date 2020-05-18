@@ -2,6 +2,9 @@ var ignoreImgLoad = true;
 var dIgnoreImgLoad = true;
 var globalScrollSpeed, globalTransparency;
 var globalDialogId;
+var MAX_SPEED = 2700;
+var MIN_SPEED = 100;
+var MED_SPEED = (MAX_SPEED - MIN_SPEED) / 2;
 
 /*******************************************************************************
  * Browser Independent code.
@@ -132,20 +135,21 @@ function show_message(msg) {
 }
 
 function populateSliderSpeedOnText(scrollSpeed) {
-	var speed = 2400 - scrollSpeed;
+	var speed = MAX_SPEED - scrollSpeed;
+
 	
-	var multiplicity = (1200 - speed) / 100;
+	var multiplicity = (MED_SPEED - speed) / 100;
 	if(0 > multiplicity) multiplicity = multiplicity * -1;
 	multiplicity = multiplicity + " X ";
 	
-	var displayText = multiplicity + "FASTER";
-	if(2000 === speed) {
+	var displayText = multiplicity + "FAST";
+	if((MAX_SPEED - MIN_SPEED) === speed) {
 		displayText = "SLOWEST";
-	} else if(1200 < speed) {
-		displayText = multiplicity + "SLOWER";
-	} else if(1200 === speed) {
-		displayText = "NORMAL";
-	} else if(400 === speed) {
+	} else if(MED_SPEED < speed) {
+		displayText = multiplicity + "SLOW";
+	} else if(MED_SPEED === speed) {
+		displayText = "MEDIUM";
+	} else if(MIN_SPEED === speed) {
 		displayText = "IMMEDIATE";
 	}
 	
@@ -154,9 +158,9 @@ function populateSliderSpeedOnText(scrollSpeed) {
 
 function loadValueInSpeedSlider(initialValue) {
 	if(0 === initialValue) {
-		initialValue = 400;
+		initialValue = MIN_SPEED;
 	}
-	initialValue = 2400 - initialValue;
+	initialValue = MAX_SPEED - initialValue;
 	populateSliderSpeedOnText(initialValue);
 	$("#scrollSpeedSliderId").simpleSlider("setValue", initialValue);
 }
@@ -457,8 +461,8 @@ function psInitJavascriptFunctions() {
 	$('input:radio[name=imgHorizontalLocation]').change(function() { isRightChangedEvent("imgHorizontalLocation", $(this).val()); });
 	$("#scrollSpeedSliderId").bind("slider:changed", function(event, data) {
 		populateSliderSpeedOnText(data.value);
-		var speedVal = 2400 - data.value;
-		if(400 === speedVal) {
+		var speedVal = MAX_SPEED - data.value;
+		if(MIN_SPEED === speedVal) {
 			speedVal = 0;
 		}
 		globalScrollSpeed = speedVal;
