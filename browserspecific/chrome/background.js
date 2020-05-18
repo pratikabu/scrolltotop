@@ -115,6 +115,10 @@ function populateNewDefaults(finalData) {
 	if(!finalData.showIconsOnPage) {
 		finalData.showIconsOnPage = 'true';
 	}
+
+	if(!finalData.toolbarIcon) {
+		finalData.toolbarIcon = "1";
+	}
 }
 
 function populateJson(sourceJson, targetJson) {

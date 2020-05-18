@@ -330,6 +330,15 @@ input[type="radio"]:hover + div, input[type="radio"]:hover + img, input[type="ra
 	display: none;
 }
 
+.vertmidd {
+	vertical-align: middle;
+}
+
+.toolbarIcon {
+	width: 22px;
+	height: 22px;
+}
+
 @media (prefers-color-scheme: dark) {
 	body, input[type="text"], textarea {
 		background-color: #4a4a4a;

@@ -50,20 +50,39 @@
 					</div>
 				</div>
 
-				<div id="toolbarSettings" class="tableClass" style="display: none;">
-					<div class="groupHeader">Toolbar Button <span>(<a href="FIX_ME">Read more</a>)</span></div>
-					<div class="settinggroup">
+				<div id="toolbarSettings" class="tableClass">
+					<div class="groupHeader">Toolbar &amp; Scrolling</div>
+					<div class="settinggroup" style="display: none;">
 						<div class="settinglabel">Click Action :</div>
 						<div class="settingoptions">
 							<input type="radio" name="toolbarClickAction" value="top"><span id="tcaUp">Scroll To Top</span>
 							<input type="radio" name="toolbarClickAction" value="intelligentflip"><span id="tcaIntelligent">Flip Intelligently</span>
 						</div>
 					</div>
+					<div class="settinggroup">
+						<div class="settinglabel vertmidd">Toolbar Icon :</div>
+						<div class="settingoptions vertmidd">
+							<span>
+								<img class="toolbarIcon vertmidd iconChooserImg" src="../icons/pratikabu-stt-32-1.png">
+								<input type="hidden" class="iconChooserValue" name="toolbarIcon">
+								<a class="iconChooser vertmidd" href="#">Choose Other Icon</a>
+							</span>
+						</div>
+						<div class="settinggroup">
+							<div class="settinglabel">Scrolling Speed :</div>
+							<div class="settingoptions">
+								<input type="text" id="scrollSpeedSliderId"
+									   data-slider="true" data-slider-range="100,2600" data-slider-step="100"
+									   data-slider-highlight="true" data-slider-snap="true" />
+								<span id="currentSpeed" style="font-size: 11px; margin-left: 10px; vertical-align: middle;"></span>
+							</div>
+						</div>
+					</div>
 				</div>
 
 				<div class="pageIconSettings">
 				<div id="commonSettings" class="tableClass">
-					<div class="groupHeader">Common Settings</div>
+					<div class="groupHeader">Location Settings</div>
 					<div class="settinggroup">
 						<div class="settinglabel">Vertical Location :</div>
 						<div class="settingoptions">
@@ -78,15 +97,6 @@
 							<input type="radio" name="imgHorizontalLocation" value="left"><span id="hlLeft">Left</span>
 							<input type="radio" name="imgHorizontalLocation" value="middle"><span id="hlMiddle">Middle</span>
 							<input type="radio" name="imgHorizontalLocation" value="right"><span id="hlRight">Right</span>
-						</div>
-					</div>
-					<div class="settinggroup">
-						<div class="settinglabel">Scrolling Speed :</div>
-						<div class="settingoptions">
-							<input type="text" id="scrollSpeedSliderId"
-									data-slider="true" data-slider-range="100,2600" data-slider-step="100"
-									data-slider-highlight="true" data-slider-snap="true" />
-							<span id="currentSpeed" style="font-size: 11px; margin-left: 10px; vertical-align: middle;"></span>
 						</div>
 					</div>
 					<div class="settinggroup">
@@ -330,6 +340,19 @@
 						<span style="float: left;"><input id="supportPromptCBId" type="checkbox" /><span id="supportPromptId">I've supported. Don't prompt.</span></span>
 						<input type="button" id="drClose" value="Close" class="mybutton small blue dialogCloseButton" style="float: right;" />
 					</div>
+				</div>
+			</div>
+		</div>
+
+		<div id="iconChooserDialog" class="mydialog tableClass myFonts" style="width: 520px; padding: 10px; z-index: 40; position: fixed; top: 50%; left: 50%; margin-left: -272px; margin-top: -180px; display: none; border: 2px SOLID #507C9E; border-radius: 3px;">
+			<div class="groupHeader">Choose Icon</div>
+			<div style="text-align: center;">
+				<div style="text-align: center;">
+					<div id="iconSelectorId" class="iconcontainer"></div>
+				</div>
+				<div style="margin-top: 5px;">
+					<input type="button" id="icSelect" value="Select" class="mybutton small blue" />
+					<input type="button" id="icCancel" value="Cancel" class="mybutton small green dialogCloseButton" />
 				</div>
 			</div>
 		</div>

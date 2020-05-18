@@ -5,6 +5,7 @@ var globalDialogId;
 var MAX_SPEED = 2700;
 var MIN_SPEED = 100;
 var MED_SPEED = (MAX_SPEED - MIN_SPEED) / 2;
+var lastSelectedIconChooserInput;// holds the input element of the last selected icon chooser
 
 /*******************************************************************************
  * Browser Independent code.
@@ -52,6 +53,7 @@ function save_options(returnValue) {
 		supportPrompt: $('#supportPromptCBId').is(':checked'),
 
 		toolbarClickAction: $('input:radio[name=toolbarClickAction]:checked').val(),
+		toolbarIcon: $("input:hidden[name=toolbarIcon]").val(),
 		showIconsOnPage: $('input:radio[name=showIconsOnPage]:checked').val()
 	};
 	
@@ -71,6 +73,7 @@ function restore_options(data) {
 	dIgnoreImgLoad = true;// ignore the image load method as it will reset myIcon in the radio button
 
 	$('input:radio[name=toolbarClickAction]').filter('[value=' + data.toolbarClickAction + ']').prop('checked', true);
+	updateIconInputValue("toolbarIcon", data.toolbarIcon);
 	$('input:radio[name=showIconsOnPage]').filter('[value=' + data.showIconsOnPage + ']').prop('checked', true);
 	showHidePageIconCustomizations();
 
@@ -223,6 +226,9 @@ function addIcons() {
 	
 	// dual single icon
 	addBatchOfIcons($('#dualNornalTD'), 35, 'dIconGal', 40, 'dIconLib', '48-');
+
+	// icon chooser icon
+	addBatchOfIcons($('#iconSelectorId'), 35, 'iconChooserIconId-', 0, 'iconChooserRadioName', '48-');
 }
 
 /*
@@ -410,8 +416,8 @@ function toggleDialog(dialogId) {
 	if(dialogId) {
 		globalDialogId = '#' + dialogId;
 	}
-	$('#maskDiv').fadeToggle("slow");
-	$(globalDialogId).fadeToggle("slow");
+	$('#maskDiv').fadeToggle("fast");
+	$(globalDialogId).fadeToggle("fast");
 }
 
 /**
@@ -429,6 +435,45 @@ function showHidePageIconCustomizations() {
 	}
 }
 
+function openIconChooser(clickObj) {
+	// save the hidden input item as last selected item
+	lastSelectedIconChooserInput = clickObj.siblings("input:hidden[class=iconChooserValue]");
+
+	// select the icon on the popup
+	$('input:radio[name=iconChooserRadioName]').filter('[value=' + lastSelectedIconChooserInput.val() + ']').prop('checked', true);
+
+	// now show the icon chooser dialog
+	toggleDialog("iconChooserDialog");
+}
+
+function iconChooserInits() {
+	// bind the dialog open event
+	$(".iconChooser").click(function(e) {
+		openIconChooser($(this));
+		e.preventDefault();
+	});
+
+	// bind the value change event on hidden input field
+	$("input:hidden[class=iconChooserValue]").change(function(e) {
+		$(this).siblings(".iconChooserImg").attr("src",
+			"../icons/pratikabu-stt-32-" + $(this).val() + ".png");
+	});
+
+	// bind the select event
+	$("#icSelect").click(function(e) {
+		var selectedIcon = $('input:radio[name=iconChooserRadioName]:checked').val();
+		if(selectedIcon && lastSelectedIconChooserInput) {
+			updateIconInputValue(lastSelectedIconChooserInput.attr("name"), selectedIcon);
+			save_options();
+			toggleDialog();
+		}
+	});
+}
+
+function updateIconInputValue(iconInputName, iconValue) {
+	$("input:hidden[name=" + iconInputName + "]").val(iconValue).trigger("change");
+}
+
 function psInitJavascriptFunctions() {
 	randomOpenSupportDialog();
 	
@@ -442,6 +487,7 @@ function psInitJavascriptFunctions() {
 	$("#advSettingsBut").click(function() { activateAdvancedSettings(); });
 	exportImportSettingsInits();
 	donateReviewInits();
+	iconChooserInits();
 
 	// toolbar settings starts
 	$('input:radio[name=toolbarClickAction]').change(function() { isRightChangedEvent("toolbarClickAction", $(this).val()); });
