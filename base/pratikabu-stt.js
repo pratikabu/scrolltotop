@@ -523,6 +523,18 @@ var pratikabustt = {
 		
 		return otherImagesSize;
 	},
+
+	videoFullScreenChangeEvent: function() {
+		var elem = $("#pratikabuSTTDiv");
+		!document.fullscreenElement ? elem.show() : elem.hide();
+	},
+
+	registerFullScreenListener: function() {
+		document.addEventListener("fullscreenchange", pratikabustt.videoFullScreenChangeEvent, false);
+		document.addEventListener("msfullscreenchange", pratikabustt.videoFullScreenChangeEvent, false);
+		document.addEventListener("mozfullscreenchange", pratikabustt.videoFullScreenChangeEvent, false);
+		document.addEventListener("webkitfullscreenchange", pratikabustt.videoFullScreenChangeEvent, false);
+	},
 	
 	loadFromResponse: function(response) {// load the images, css, include/remove elements
 		pratikabu_stt_prefs = response;
@@ -579,6 +591,8 @@ var pratikabustt = {
 				pratikabu_stt_autoHide = true;
 				$(window).scroll(pratikabustt.scrollHandlerAutoHide);
 			}
+
+			pratikabustt.registerFullScreenListener();
 		} else {
 			if("hideattop" === pratikabu_stt_prefs.visibilityBehav) {
 				$(window).unbind('scroll', pratikabustt.scrollHandlerHideAtTop);
