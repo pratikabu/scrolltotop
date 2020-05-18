@@ -415,10 +415,13 @@ It shows or hide the page icon customization area based on what value is selecte
 */
 function showHidePageIconCustomizations() {
 	var allSelectedElements = $(".pageIconSettings");
+	var noShowTextDiv = $("#noIconShowTextId");
 	if("true" == $('input:radio[name=showIconsOnPage]:checked').val()) {
 		allSelectedElements.show();
+		noShowTextDiv.hide();
 	} else {
 		allSelectedElements.hide();
+		noShowTextDiv.show();
 	}
 }
 
