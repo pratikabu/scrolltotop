@@ -6,6 +6,7 @@ var MAX_SPEED = 2700;
 var MIN_SPEED = 100;
 var MED_SPEED = (MAX_SPEED - MIN_SPEED) / 2;
 var lastSelectedIconChooserInput;// holds the input element of the last selected icon chooser
+var hasToolbarIconUpdated = false;// indicator to determine whether to update toolbar icon or not
 
 /*******************************************************************************
  * Browser Independent code.
@@ -118,7 +119,15 @@ function restore_settings() {
 	bsDefaultSettings();
 }
 
+function updateToolbarIcon() {
+	if(hasToolbarIconUpdated) {
+		hasToolbarIconUpdated = false;
+		bsResetToolbarIcon();
+	}
+}
+
 function post_save_success() {
+	updateToolbarIcon();
 	show_message("<b>Saved!</b> <a target='_blank' href='https://scrolltotop.pratikabu.com/release'>Preview</a>");
 }
 
@@ -463,6 +472,7 @@ function iconChooserInits() {
 	$("#icSelect").click(function(e) {
 		var selectedIcon = $('input:radio[name=iconChooserRadioName]:checked').val();
 		if(selectedIcon && lastSelectedIconChooserInput) {
+			hasToolbarIconUpdated = true;
 			updateIconInputValue(lastSelectedIconChooserInput.attr("name"), selectedIcon);
 			save_options();
 			toggleDialog();

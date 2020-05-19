@@ -30,6 +30,8 @@ chrome.runtime.onInstalled.addListener(function() {
 			, "browser_action"
 			]
 	});
+
+	resetToolbarIcon();
 });
 
 chrome.contextMenus.onClicked.addListener(function(info, tab) {
@@ -47,3 +49,24 @@ function scrollToDirection(direction, currentTab) {
 		return;
 	chrome.tabs.sendMessage(currentTab.id, {pratikabusttaction: direction});
 }
+
+function setToolbarIcon(selectedIconId) {
+	iconData = {
+		32: "icons/pratikabu-stt-32-" + selectedIconId + ".png",
+		48: "icons/pratikabu-stt-48-" + selectedIconId + ".png"
+	}
+	chrome.browserAction.setIcon({path : iconData});
+}
+
+function resetToolbarIcon() {
+	// set toolbar icon from settings
+	fetchSettings(function(data) {
+		setToolbarIcon(data.toolbarIcon);
+	});
+}
+
+chrome.runtime.onMessage.addListener(function(request, sender, sendResponseFunction) {
+	if ("resetToolbarIcon" === request.method) {
+		resetToolbarIcon();
+	}
+});
