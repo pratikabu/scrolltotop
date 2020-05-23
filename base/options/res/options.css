@@ -318,12 +318,8 @@ input[type="radio"]:checked + div, input[type="radio"]:checked + img {
     opacity: 1;
 }
 
-input[type="radio"] + div, input[type="radio"] + img {
-    opacity: .6;
-}
-
 input[type="radio"]:hover + div, input[type="radio"]:hover + img, input[type="radio"] + div:hover, input[type="radio"] + img:hover {
-	opacity: 1;
+	opacity: .8;
 }
 
 .pageIconSettings {
@@ -341,7 +337,7 @@ input[type="radio"]:hover + div, input[type="radio"]:hover + img, input[type="ra
 
 @media (prefers-color-scheme: dark) {
 	body, input[type="text"], textarea {
-		background-color: #4a4a4a;
+		background-color: #2a2c2f;
 	}
 
 	.myFonts, input[type="text"], textarea {
