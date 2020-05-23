@@ -180,7 +180,8 @@ function addLocalSettingsWithResetValue(data) {
 function openReleaseNotes(process)
 {
 	// open the release notes
-	chrome.tabs.create({url: "https://scrolltotop.pratikabu.com/release?process=" + process});
+	chrome.tabs.create({url: "https://scrolltotop.pratikabu.com/release?process=" + process
+		+ "&v=" + chrome.runtime.getManifest().version});
 }
 
 /**
