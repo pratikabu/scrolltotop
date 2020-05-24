@@ -31,3 +31,12 @@ var pratikabustt_browser_impl = {
 	removeCompleteAddOnCode: function() {
 	}
 };
+
+chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
+	if(request.pratikabusttaction == "top")
+		pratikabustt.scrollToTop();
+	else if (request.pratikabusttaction == "intelligentflip")
+		pratikabustt.scrollIntelligently();
+	else if(request.pratikabusttaction == "bottom")
+		pratikabustt.scrollToBottom();
+});

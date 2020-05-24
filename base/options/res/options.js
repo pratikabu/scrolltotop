@@ -2,6 +2,11 @@ var ignoreImgLoad = true;
 var dIgnoreImgLoad = true;
 var globalScrollSpeed, globalTransparency;
 var globalDialogId;
+var MAX_SPEED = 2700;
+var MIN_SPEED = 100;
+var MED_SPEED = (MAX_SPEED - MIN_SPEED) / 2;
+var lastSelectedIconChooserInput;// holds the input element of the last selected icon chooser
+var hasToolbarIconUpdated = false;// indicator to determine whether to update toolbar icon or not
 
 /*******************************************************************************
  * Browser Independent code.
@@ -46,7 +51,11 @@ function save_options(returnValue) {
 		vOffset: $('#vOffset').val(),
 		removedSites: $('#removedSites').val(),
 		
-		supportPrompt: $('#supportPromptCBId').is(':checked')
+		supportPrompt: $('#supportPromptCBId').is(':checked'),
+
+		toolbarClickAction: $('input:radio[name=toolbarClickAction]:checked').val(),
+		toolbarIcon: $("input:hidden[name=toolbarIcon]").val(),
+		showIconsOnPage: $('input:radio[name=showIconsOnPage]:checked').val()
 	};
 	
 	if(!returnValue) {
@@ -63,7 +72,12 @@ function save_options(returnValue) {
 function restore_options(data) {
 	ignoreImgLoad = true;// ignore the image load method as it will reset myIcon in the radio button
 	dIgnoreImgLoad = true;// ignore the image load method as it will reset myIcon in the radio button
-	
+
+	$('input:radio[name=toolbarClickAction]').filter('[value=' + data.toolbarClickAction + ']').prop('checked', true);
+	updateIconInputValue("toolbarIcon", data.toolbarIcon);
+	$('input:radio[name=showIconsOnPage]').filter('[value=' + data.showIconsOnPage + ']').prop('checked', true);
+	showHidePageIconCustomizations();
+
 	$('input:radio[name=imgVerticalLocation]').filter('[value=' + data.vLoc + ']').prop('checked', true);
 	$('input:radio[name=imgHorizontalLocation]').filter('[value=' + data.hLoc + ']').prop('checked', true);
 	
@@ -105,8 +119,16 @@ function restore_settings() {
 	bsDefaultSettings();
 }
 
+function updateToolbarIcon() {
+	if(hasToolbarIconUpdated) {
+		hasToolbarIconUpdated = false;
+		bsResetToolbarIcon();
+	}
+}
+
 function post_save_success() {
-	show_message("<b>Saved!</b> <a target='_blank' href='https://pratikabu.github.io/extensions/scrolltotop/release.html'>Preview</a>");
+	updateToolbarIcon();
+	show_message("<b>Saved!</b> <a target='_blank' href='https://scrolltotop.pratikabu.com/release'>Preview</a>");
 }
 
 function post_restore_success() {
@@ -125,20 +147,21 @@ function show_message(msg) {
 }
 
 function populateSliderSpeedOnText(scrollSpeed) {
-	var speed = 2400 - scrollSpeed;
+	var speed = MAX_SPEED - scrollSpeed;
+
 	
-	var multiplicity = (1200 - speed) / 100;
+	var multiplicity = (MED_SPEED - speed) / 100;
 	if(0 > multiplicity) multiplicity = multiplicity * -1;
 	multiplicity = multiplicity + " X ";
 	
-	var displayText = multiplicity + "FASTER";
-	if(2000 === speed) {
+	var displayText = multiplicity + "FAST";
+	if((MAX_SPEED - MIN_SPEED) === speed) {
 		displayText = "SLOWEST";
-	} else if(1200 < speed) {
-		displayText = multiplicity + "SLOWER";
-	} else if(1200 === speed) {
-		displayText = "NORMAL";
-	} else if(400 === speed) {
+	} else if(MED_SPEED < speed) {
+		displayText = multiplicity + "SLOW";
+	} else if(MED_SPEED === speed) {
+		displayText = "MEDIUM";
+	} else if(MIN_SPEED === speed) {
 		displayText = "IMMEDIATE";
 	}
 	
@@ -147,9 +170,9 @@ function populateSliderSpeedOnText(scrollSpeed) {
 
 function loadValueInSpeedSlider(initialValue) {
 	if(0 === initialValue) {
-		initialValue = 400;
+		initialValue = MIN_SPEED;
 	}
-	initialValue = 2400 - initialValue;
+	initialValue = MAX_SPEED - initialValue;
 	populateSliderSpeedOnText(initialValue);
 	$("#scrollSpeedSliderId").simpleSlider("setValue", initialValue);
 }
@@ -212,12 +235,21 @@ function addIcons() {
 	
 	// dual single icon
 	addBatchOfIcons($('#dualNornalTD'), 35, 'dIconGal', 40, 'dIconLib', '48-');
+
+	// icon chooser icon
+	addBatchOfIcons($('#iconSelectorId'), 35, 'iconChooserIconId-', 0, 'iconChooserRadioName', '48-');
 }
 
 /*
 	for all radio button's content to be selectable
 */
 function makeElementsSelactable() {
+	selectableRadioContent("tcaUp", "toolbarClickAction", "top");
+	selectableRadioContent("tcaIntelligent", "toolbarClickAction", "intelligentflip");
+
+	selectableRadioContent("siopYes", "showIconsOnPage", "true");
+	selectableRadioContent("siopNo", "showIconsOnPage", "false");
+
 	selectableRadioContent("vlTop", "imgVerticalLocation", "top");
 	selectableRadioContent("vlMiddle", "imgVerticalLocation", "middle");
 	selectableRadioContent("vlBottom", "imgVerticalLocation", "bottom");
@@ -393,8 +425,63 @@ function toggleDialog(dialogId) {
 	if(dialogId) {
 		globalDialogId = '#' + dialogId;
 	}
-	$('#maskDiv').fadeToggle("slow");
-	$(globalDialogId).fadeToggle("slow");
+	$('#maskDiv').fadeToggle("fast");
+	$(globalDialogId).fadeToggle("fast");
+}
+
+/**
+It shows or hide the page icon customization area based on what value is selected for the radio button.
+*/
+function showHidePageIconCustomizations() {
+	var allSelectedElements = $(".pageIconSettings");
+	var noShowTextDiv = $("#noIconShowTextId");
+	if("true" == $('input:radio[name=showIconsOnPage]:checked').val()) {
+		allSelectedElements.show();
+		noShowTextDiv.hide();
+	} else {
+		allSelectedElements.hide();
+		noShowTextDiv.show();
+	}
+}
+
+function openIconChooser(clickObj) {
+	// save the hidden input item as last selected item
+	lastSelectedIconChooserInput = clickObj.siblings("input:hidden[class=iconChooserValue]");
+
+	// select the icon on the popup
+	$('input:radio[name=iconChooserRadioName]').filter('[value=' + lastSelectedIconChooserInput.val() + ']').prop('checked', true);
+
+	// now show the icon chooser dialog
+	toggleDialog("iconChooserDialog");
+}
+
+function iconChooserInits() {
+	// bind the dialog open event
+	$(".iconChooser").click(function(e) {
+		openIconChooser($(this));
+		e.preventDefault();
+	});
+
+	// bind the value change event on hidden input field
+	$("input:hidden[class=iconChooserValue]").change(function(e) {
+		$(this).siblings(".iconChooserImg").attr("src",
+			"../icons/pratikabu-stt-32-" + $(this).val() + ".png");
+	});
+
+	// bind the select event
+	$("#icSelect").click(function(e) {
+		var selectedIcon = $('input:radio[name=iconChooserRadioName]:checked').val();
+		if(selectedIcon && lastSelectedIconChooserInput) {
+			hasToolbarIconUpdated = true;
+			updateIconInputValue(lastSelectedIconChooserInput.attr("name"), selectedIcon);
+			save_options();
+			toggleDialog();
+		}
+	});
+}
+
+function updateIconInputValue(iconInputName, iconValue) {
+	$("input:hidden[name=" + iconInputName + "]").val(iconValue).trigger("change");
 }
 
 function psInitJavascriptFunctions() {
@@ -410,14 +497,28 @@ function psInitJavascriptFunctions() {
 	$("#advSettingsBut").click(function() { activateAdvancedSettings(); });
 	exportImportSettingsInits();
 	donateReviewInits();
+	iconChooserInits();
+
+	// toolbar settings starts
+	$('input:radio[name=toolbarClickAction]').change(function() { isRightChangedEvent("toolbarClickAction", $(this).val()); });
+	// toolbar settings ends
+
+	// show icons on page starts
+	$('input:radio[name=showIconsOnPage]').change(function() {
+		var valueChanged = isRightChangedEvent("showIconsOnPage", $(this).val());
+		if(valueChanged) {
+			showHidePageIconCustomizations();
+		}
+	});
+	// show icons on page ends
 	
 	// common settings starts
 	$('input:radio[name=imgVerticalLocation]').change(function() { isRightChangedEvent("imgVerticalLocation", $(this).val()); });
 	$('input:radio[name=imgHorizontalLocation]').change(function() { isRightChangedEvent("imgHorizontalLocation", $(this).val()); });
 	$("#scrollSpeedSliderId").bind("slider:changed", function(event, data) {
 		populateSliderSpeedOnText(data.value);
-		var speedVal = 2400 - data.value;
-		if(400 === speedVal) {
+		var speedVal = MAX_SPEED - data.value;
+		if(MIN_SPEED === speedVal) {
 			speedVal = 0;
 		}
 		globalScrollSpeed = speedVal;
@@ -568,11 +669,11 @@ function psInitJavascriptFunctions() {
 
 	var addonVersion = getExtensionVersion();
 	// place the version
-	$(".addonVersionId").append('<a target="_blank" href="https://pratikabu.github.io/extensions/scrolltotop/release.html?v=' + addonVersion + '" title="See what&#39;s new in this version.">' + addonVersion + '</a>');
+	$(".addonVersionId").append('<a target="_blank" href="https://scrolltotop.pratikabu.com/release?v=' + addonVersion + '" title="See what&#39;s new in this version.">' + addonVersion + '</a>');
 	// give review link
 	$(".reviewId").append('<a target="_blank" title="Love Scroll To Top, give it a 5 star and leave your feedback." href="' + bsReviewPageUrl() + '">Review</a>');
 	
-	$(".donateId").append('<a target="_blank" title="Show your support." href="https://pratikabu.github.io/extensions/scrolltotop/donate.html">Donate</a>');
+	$(".donateId").append('<a target="_blank" title="Show your support." href="https://scrolltotop.pratikabu.com/donate">Donate</a>');
 }
 
 function getBase64Url(base64Url) {

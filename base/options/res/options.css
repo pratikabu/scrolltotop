@@ -12,13 +12,16 @@
 
 .tableClass {
 	width: auto;
-	margin-bottom: 20px;
+	margin-bottom: 10px;
 	
 /* 	to give the cellSpacing */
 	border-collapse:separate;
 	border-spacing: 15px;
 	
 	font-size: medium;
+
+	background-color: WHITE;
+	padding: 10px;
 }
 
 .headerDiv {
@@ -33,12 +36,12 @@
 
 .branding {
 	float: left;
-	margin-left: -20px;
+	/**margin-left: -20px;*/
 }
 
 .versionInfo {
 	float: right;
-	margin: 3px -10px 0 0;
+	margin: 3px 0 0 0;
 	text-align: right;
 }
 
@@ -56,7 +59,8 @@
 }
 
 .myHeader {
-	background: url(../../icons/pratikabu-stt-48-1.png) no-repeat;
+	background: url(../../icons/pratikabu-stt-128.png) no-repeat;
+	background-size: 48px 48px;
 	text-indent: 60px;
 	display: inline-block;
 	line-height: 50px;
@@ -65,14 +69,10 @@
 	font-weight: bold;
 	font-size: 28px;
 	color: #0070C0;
-	margin: 10px;
+	margin: 10px 0;
 }
 
-a:link {
-	color: blue;
-	text-decoration: none;
-}
-a:visited {
+a:link, a:visited {
 	color: blue;
 	text-decoration: none;
 }
@@ -88,13 +88,9 @@ form {
 .mybutton {
 	padding: 5px 10px;
 	display: inline;
-	background: #777 url(button.png) repeat-x bottom;
 	border: none;
 	color: #fff;
 	cursor: pointer;
-	border-radius: 5px;
-	-webkit-border-radius: 5px;
-	text-shadow: 1px 1px #666;
 	text-decoration: none;
 }
 
@@ -107,8 +103,6 @@ form {
 .mybutton.blue { background-color: #4699DA; }
 .mybutton.orange { background-color: #FF510D; }
 .mybutton.small { font-size: 16px; padding: 3px 7px; }
-.mybutton.small:hover { background-position: 0 -50px; }
-.mybutton.small:active {background-position: 0 top; }
 
 a.mylink {
 	text-decoration: none;
@@ -118,9 +112,12 @@ a.mylink {
 .groupHeader {
 	font-weight: bold;
 	width: auto;
-	border-bottom: 1px SOLID #CBCBCB;
 	padding-bottom: 5px;
 	text-align: left;
+}
+
+.groupHeader span {
+	font-weight: normal;
 }
 
 .siteTextArea {
@@ -155,8 +152,7 @@ body {
 }
 
 .centerDiv {
-	background-color: WHITE;
-	padding: 10px;
+	padding-top: 10px;
 }
 
 hr {
@@ -165,7 +161,7 @@ hr {
 }
 
 .settinggroup {
-    margin: 20px;
+    margin: 20px 5px;
     text-align: left;
 }
 
@@ -296,10 +292,6 @@ hr {
 		margin-top: 5px;
 	}
 
-	.branding {
-    	margin-left: -10px;
-    }
-
     .versionInfo {
     	margin-right: 0;
     }
@@ -326,10 +318,79 @@ input[type="radio"]:checked + div, input[type="radio"]:checked + img {
     opacity: 1;
 }
 
-input[type="radio"] + div, input[type="radio"] + img {
-    opacity: .6;
+input[type="radio"]:hover + div, input[type="radio"]:hover + img, input[type="radio"] + div:hover, input[type="radio"] + img:hover {
+	opacity: .8;
 }
 
-input[type="radio"]:hover + div, input[type="radio"]:hover + img, input[type="radio"] + div:hover, input[type="radio"] + img:hover {
-	opacity: 1;
+.pageIconSettings {
+	display: none;
+}
+
+.vertmidd {
+	vertical-align: middle;
+}
+
+.toolbarIcon {
+	width: 22px;
+	height: 22px;
+}
+
+@media (prefers-color-scheme: dark) {
+	body, input[type="text"], textarea {
+		background-color: #2a2c2f;
+	}
+
+	.myFonts, input[type="text"], textarea {
+		color: #dcdcdc;
+	}
+
+	.myHeader {
+		color: #e6e6e6;
+	}
+
+	.headerDiv, .tableClass {
+		background-color: #3b3e43;
+		border-color: #717171;
+	}
+
+	a:link, a:visited {
+		color: #e8de57;
+	}
+
+	a:hover {
+		color: #00ff2d;
+	}
+
+	.withLove a:link, .withLove a:visited {
+		color: #757575;
+		text-shadow: 0px 1px 0 #292929;
+	}
+
+	.withLove a:hover {
+		color: #8e8e8e;
+	}
+
+	.statusMsgDiv {
+		background-color: #5a5a5a;
+	}
+
+	#maskDiv {
+		background-color: rgba(25, 25, 25, 0.87) !important;
+	}
+
+	.mybutton.green {
+		background-color: #407b01;
+	}
+
+	.mybutton.blue {
+		background-color: #1f80cc;
+	}
+
+	.mybutton.orange {
+		background-color: #d2420a;
+	}
+
+	.mybutton.red {
+		background-color: #bb0000;
+	}
 }

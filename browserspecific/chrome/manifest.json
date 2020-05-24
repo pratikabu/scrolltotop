@@ -1,7 +1,7 @@
 {
 	"manifest_version": 2,
 	"name": "Scroll To Top",
-	"version": "4.8.5",
+	"version": "4.9",
 
 	"description": "Scroll to top and vice versa in a window.",
 	"icons": {
@@ -12,7 +12,7 @@
 
 	"author": "Pratik Soni",
 	"background": {
-		"scripts": [ "background.js" ],
+		"scripts": [ "background.js", "toolbar-cx-menu.js" ],
 		"persistent": false
 	},
 
@@ -21,18 +21,18 @@
 			"css":[ "pratikabu-stt.css" ],
 			"matches":[ "<all_urls>" ],
 			"js":[
-				"thirdparty/pratikabu-jquery-3.2.1.min.js",
-				"thirdparty/pratikabu-jquery-rotate.js",
+				"thirdparty/pratikabu-jquery-3.5.1.min.js",
 				"browserspecific/pratikabu-stt-impl.js",
 				"pratikabu-stt.js"
 			]
 		}
 	],
-	"permissions": [ "storage" ],
-	"homepage_url": "https://pratikabu.github.io/extensions/scrolltotop",
+	"permissions": [ "storage", "activeTab", "contextMenus" ],
+	"homepage_url": "https://scrolltotop.pratikabu.com",
 	"options_ui": {
 		"page": "options/options.html",
 		"open_in_tab": true
 	},
-	"web_accessible_resources":[ "icons/*.png" ]
+	"web_accessible_resources":[ "icons/*.png" ],
+	"browser_action": {}
 }

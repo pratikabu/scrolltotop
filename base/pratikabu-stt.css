@@ -44,3 +44,11 @@
 		display: none !important;
 	}
 }
+
+.pratikabuSTTRotate180 {
+	transform: rotate(180deg) !important;
+}
+
+#pratikabuSTTSettings, #pratikabuSTTArrowUp {
+	transition: transform 1s !important;
+}

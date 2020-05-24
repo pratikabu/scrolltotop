@@ -99,10 +99,26 @@ function fetchSettings(sendResponseFunction) {
 			var finalData = {};
 			populateJson(syncData, finalData);
 			populateJson(localData, finalData);
+
+			populateNewDefaults(finalData);
 			
 			sendResponseFunction(finalData);
 		});
 	});
+}
+
+function populateNewDefaults(finalData) {
+	if(!finalData.toolbarClickAction) {
+		finalData.toolbarClickAction = 'top';
+	}
+
+	if(!finalData.showIconsOnPage) {
+		finalData.showIconsOnPage = 'true';
+	}
+
+	if(!finalData.toolbarIcon) {
+		finalData.toolbarIcon = "1";
+	}
 }
 
 function populateJson(sourceJson, targetJson) {
@@ -122,7 +138,7 @@ function resetSettings(sendResponseFunction) {
 			vLoc: "bottom",
 			hLoc: "right",
 			visibilityBehav: "alwaysshow",
-			scrSpeed: "1200",
+			scrSpeed: "400",
 			iconTransparency: "0.5",
 			blackAndWhite: "false",
 			
@@ -139,7 +155,9 @@ function resetSettings(sendResponseFunction) {
 			
 			hOffset: "20",
 			vOffset: "20",
-			removedSites: "mail.google.com/mail;google.com/calendar;"
+			removedSites: "mail.google.com/mail;google.com/calendar;",
+
+			toolbarClickAction: "top"
 		};
 	
 	addLocalSettingsWithResetValue(data);
@@ -162,7 +180,8 @@ function addLocalSettingsWithResetValue(data) {
 function openReleaseNotes(process)
 {
 	// open the release notes
-	chrome.tabs.create({url: "https://pratikabu.github.io/extensions/scrolltotop/release.html?process=" + process});
+	chrome.tabs.create({url: "https://scrolltotop.pratikabu.com/release?process=" + process
+		+ "&v=" + chrome.runtime.getManifest().version});
 }
 
 /**
@@ -245,4 +264,4 @@ function validateData(data) {
 }
 
 // set uninstall page
-chrome.runtime.setUninstallURL("https://pratikabu.github.io/extensions/scrolltotop/uninstall.html");
+chrome.runtime.setUninstallURL("https://scrolltotop.pratikabu.com/uninstall");

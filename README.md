@@ -7,7 +7,7 @@ Everyday scrolling on long pages can be a tiring experience specially on those s
 
 Scroll To Top tries to minimize this effort by providing an intuitive icon at the bottom-right corner of each page so that with one click you will be at the top of the page with beautiful animation. No more searching for Home key on your keyboard and no more dragging of the scroll bar. It will be just fun and ergonomic to use it.
 
-[Official website](https://pratikabu.github.io/extensions/scrolltotop), [Donate Now](https://pratikabu.github.io/extensions/scrolltotop/donate.html)
+[Official website](https://scrolltotop.pratikabu.com), [Donate Now](https://scrolltotop.pratikabu.com/donate)
 
 ## Install:
 
@@ -19,4 +19,4 @@ Scroll To Top tries to minimize this effort by providing an intuitive icon at th
 - Download for [Opera](https://addons.opera.com/en/extensions/details/scroll-to-top)
 - Download for [Apple Safari](http://pratikabu.users.sourceforge.net/extensions/scrolltotop/safaridownload.php)
 
-See the full change log [here](https://pratikabu.github.io/extensions/scrolltotop/release.html).
+See the full change log [here](https://scrolltotop.pratikabu.com/release).

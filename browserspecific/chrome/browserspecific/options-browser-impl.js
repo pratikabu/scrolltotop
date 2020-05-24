@@ -8,6 +8,8 @@ function bsDefaultSettings() {
 		if("success" === status) {
 			// Update status to let user know options were defaulted.
 			bsFetchSettings(post_restore_success);
+
+			bsResetToolbarIcon();
 		}
 	});
 }
@@ -42,4 +44,8 @@ $( document ).ready(function() {
 
 function getExtensionVersion() {
 	return chrome.runtime.getManifest().version;
+}
+
+function bsResetToolbarIcon() {
+	chrome.runtime.sendMessage({method: "resetToolbarIcon"});
 }
