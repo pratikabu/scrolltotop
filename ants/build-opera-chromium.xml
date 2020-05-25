@@ -48,8 +48,8 @@
 			<arg value="REPLACE" />
 			<arg value="${browserMainDestJSLoc}" />
 			<arg value="${browserMainDestJSLoc}" />
-			<arg value="&quot;${browserKey}&quot;" />
-			<arg value="&quot;${replaceBrowserKey}&quot;" />
+			<arg value="${browserKey}" />
+			<arg value="${replaceBrowserKey}" />
 		</java>
 
 		<!-- remove the Options menu for browser action in toolbar-cx-menu.js file -->

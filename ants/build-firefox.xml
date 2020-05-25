@@ -39,8 +39,8 @@
 			<arg value="REPLACE" />
 			<arg value="${baseBrowserSpecific}/${manifestFile}" />
 			<arg value="${browserDir}/${manifestFile}" />
-			<arg value="&quot;${searchManifestLine}&quot;" />
-			<arg value="&quot;${replaceManifestLine}&quot;" />
+			<arg value="${searchManifestLine}" />
+			<arg value="${replaceManifestLine}" />
 		</java>
 		
 		<!-- update the BROWSER_KEY in the background.js file -->
@@ -48,8 +48,8 @@
 			<arg value="REPLACE" />
 			<arg value="${baseBrowserSpecific}/${backgroundFile}" />
 			<arg value="${browserMainDestJSLoc}" />
-			<arg value="&quot;${browserKey}&quot;" />
-			<arg value="&quot;${replaceBrowserKey}&quot;" />
+			<arg value="${browserKey}" />
+			<arg value="${replaceBrowserKey}" />
 		</java>
 		
 		<!-- create brwoser specific zip files -->
