@@ -421,8 +421,19 @@ function validateOffsetDataAndFix(textId) {
 	save_options();// save these settings
 }
 
+/**
+When a dialog box is already open and if support dialog opens up randomly.
+System should not allow this to happen. See #130 on GitHub for more details.
+This method checks if it is safe to open the new dialog.
+*/
+function isSafeToOpenDialog() {
+	return 0 == $(".mydialog:visible").length;
+}
+
 function toggleDialog(dialogId) {
 	if(dialogId) {
+		if(!isSafeToOpenDialog())
+			return;
 		globalDialogId = '#' + dialogId;
 	}
 	$('#maskDiv').fadeToggle("fast");
