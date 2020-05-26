@@ -24,10 +24,6 @@
 
 		<!-- do some browser specific stuffs -->
 		<delete file="${browserDir}/icons/pratikabu-stt-64.png" />
-
-		<!-- remove the Options menu for browser action in toolbar-cx-menu.js file -->
-		<replace file="${browserDir}/toolbar-cx-menu.js" summary="Yes" failOnNoReplacements="true"
-				 token=", &quot;browser_action&quot;" />
 		
 		<!-- create brwoser specific zip files -->
 		<zip destfile="${generatedZipDir}/${browserName}-stt.${deployExtension}">
