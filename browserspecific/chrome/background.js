@@ -119,6 +119,10 @@ function populateNewDefaults(finalData) {
 	if(!finalData.toolbarIcon) {
 		finalData.toolbarIcon = "1";
 	}
+
+	if(!finalData.showContextMenu) {
+		finalData.showContextMenu = "true";
+	}
 }
 
 function populateJson(sourceJson, targetJson) {

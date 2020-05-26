@@ -6,7 +6,7 @@ chrome.browserAction.onClicked.addListener(function(tab) {
 
 function resetContextMenuAndToolbarIcon() {
 	fetchSettings(function(settings) {
-		resetContextMenu(true);
+		resetContextMenu("true" == settings.showContextMenu);
 		setToolbarIcon(settings.toolbarIcon);
 	});
 }
@@ -74,5 +74,7 @@ function resetToolbarIcon() {
 chrome.runtime.onMessage.addListener(function(request, sender, sendResponseFunction) {
 	if ("resetToolbarIcon" === request.method) {
 		resetToolbarIcon();
+	} else if ("resetContextMenu" === request.method) {
+		resetContextMenu(request.showContextMenu);
 	}
 });
