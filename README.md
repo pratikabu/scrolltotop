@@ -1,10 +1,8 @@
 Scroll To Top
 =============
 
-A browser extension available for Chrome, Firefox, Opera and Safari.
-
 ## Brief:
-Scroll to top and vice versa in a window.
+Scroll to top and vice versa in a window. It is a browser extension.
 
 - See [Release Notes](https://scrolltotop.pratikabu.com/release)
 - Report an [Issue](https://github.com/pratikabu/scrolltotop/issues)
