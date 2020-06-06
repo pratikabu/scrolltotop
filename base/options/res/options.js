@@ -55,7 +55,8 @@ function save_options(returnValue) {
 
 		toolbarClickAction: $('input:radio[name=toolbarClickAction]:checked').val(),
 		toolbarIcon: $("input:hidden[name=toolbarIcon]").val(),
-		showIconsOnPage: $('input:radio[name=showIconsOnPage]:checked').val()
+		showIconsOnPage: $('input:radio[name=showIconsOnPage]:checked').val(),
+		showContextMenu: $('input:radio[name=showContextMenu]:checked').val(),
 	};
 	
 	if(!returnValue) {
@@ -77,6 +78,7 @@ function restore_options(data) {
 	updateIconInputValue("toolbarIcon", data.toolbarIcon);
 	$('input:radio[name=showIconsOnPage]').filter('[value=' + data.showIconsOnPage + ']').prop('checked', true);
 	showHidePageIconCustomizations();
+	$('input:radio[name=showContextMenu]').filter('[value=' + data.showContextMenu + ']').prop('checked', true);
 
 	$('input:radio[name=imgVerticalLocation]').filter('[value=' + data.vLoc + ']').prop('checked', true);
 	$('input:radio[name=imgHorizontalLocation]').filter('[value=' + data.hLoc + ']').prop('checked', true);
@@ -250,6 +252,9 @@ function makeElementsSelactable() {
 	selectableRadioContent("siopYes", "showIconsOnPage", "true");
 	selectableRadioContent("siopNo", "showIconsOnPage", "false");
 
+	selectableRadioContent("scmYes", "showContextMenu", "true");
+    selectableRadioContent("scmNo", "showContextMenu", "false");
+
 	selectableRadioContent("vlTop", "imgVerticalLocation", "top");
 	selectableRadioContent("vlMiddle", "imgVerticalLocation", "middle");
 	selectableRadioContent("vlBottom", "imgVerticalLocation", "bottom");
@@ -421,8 +426,19 @@ function validateOffsetDataAndFix(textId) {
 	save_options();// save these settings
 }
 
+/**
+When a dialog box is already open and if support dialog opens up randomly.
+System should not allow this to happen. See #130 on GitHub for more details.
+This method checks if it is safe to open the new dialog.
+*/
+function isSafeToOpenDialog() {
+	return 0 == $(".mydialog:visible").length;
+}
+
 function toggleDialog(dialogId) {
 	if(dialogId) {
+		if(!isSafeToOpenDialog())
+			return;
 		globalDialogId = '#' + dialogId;
 	}
 	$('#maskDiv').fadeToggle("fast");
@@ -511,6 +527,14 @@ function psInitJavascriptFunctions() {
 		}
 	});
 	// show icons on page ends
+
+	// context menu starts
+	$('input:radio[name=showContextMenu]').change(function() {
+		if(isRightChangedEvent("showContextMenu", $(this).val())) {
+			bsResetContextMenu("true" == $(this).val());
+		}
+	});
+	// context menu ends
 	
 	// common settings starts
 	$('input:radio[name=imgVerticalLocation]').change(function() { isRightChangedEvent("imgVerticalLocation", $(this).val()); });

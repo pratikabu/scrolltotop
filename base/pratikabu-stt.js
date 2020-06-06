@@ -352,7 +352,7 @@ var pratikabustt = {
 	},
 
 	scrollIntelligently: function() {
-		if(pratikabu_stt_flipScrolling) {
+		if(!pratikabustt.isPOICrossed()) {
 			pratikabustt.scrollToBottom();
 		} else {
 			pratikabustt.scrollToTop();

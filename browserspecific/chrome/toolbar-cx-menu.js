@@ -4,35 +4,41 @@ chrome.browserAction.onClicked.addListener(function(tab) {
 	});
 });
 
-chrome.runtime.onInstalled.addListener(function() {
-	chrome.contextMenus.create({
-		id: "pratikabustt-cxm-top",
-		title: "Scroll To Top",
-		contexts:["page"]
+function resetContextMenuAndToolbarIcon() {
+	fetchSettings(function(settings) {
+		resetContextMenu("true" == settings.showContextMenu);
+		setToolbarIcon(settings.toolbarIcon);
 	});
+}
 
-	chrome.contextMenus.create({
-		id: "pratikabustt-cxm-bottom",
-		title: "Scroll To Bottom",
-		contexts:["page"]
+function resetContextMenu(showContextMenu) {
+	chrome.contextMenus.removeAll(function() {
+		if(showContextMenu) {
+			createContextMenu();// create only if required
+		}
 	});
+}
 
-	chrome.contextMenus.create({
-		id: "pratikabustt-cxm-sep1",
-		type: "separator",
-		contexts:["page"]
-	});
+function createContextMenu() {
+	var cxContexts = ["page", "frame", "selection", "link", "editable", "image", "video", "audio"];
+	var cxTypeNormal = "normal";
 
-	chrome.contextMenus.create({
-		id: "pratikabustt-cxm-option",
-		title: "Options",
-		contexts:["page"
-			, "browser_action"
-			]
-	});
+	createContextMenuItem("pratikabustt-cxm-top", cxTypeNormal, "Scroll To Top", cxContexts);
+	createContextMenuItem("pratikabustt-cxm-bottom", cxTypeNormal, "Scroll To Bottom", cxContexts);
+	createContextMenuItem("pratikabustt-cxm-sep1", "separator", "", cxContexts);
 
-	resetToolbarIcon();
-});
+	if("firefox" == BROWSER_KEY) {
+		// since firefox doesn't show the "Options" menu when someone right click on the toolbar icon
+		cxContexts.push("browser_action");
+	}
+	createContextMenuItem("pratikabustt-cxm-option", cxTypeNormal, "Options", cxContexts);
+}
+
+function createContextMenuItem(cxId, cxType, cxTitle, cxContexts) {
+	chrome.contextMenus.create({ id: cxId, type: cxType, title: cxTitle, contexts: cxContexts });
+}
+
+resetContextMenuAndToolbarIcon();
 
 chrome.contextMenus.onClicked.addListener(function(info, tab) {
 	if (info.menuItemId == "pratikabustt-cxm-top") {
@@ -68,5 +74,7 @@ function resetToolbarIcon() {
 chrome.runtime.onMessage.addListener(function(request, sender, sendResponseFunction) {
 	if ("resetToolbarIcon" === request.method) {
 		resetToolbarIcon();
+	} else if ("resetContextMenu" === request.method) {
+		resetContextMenu(request.showContextMenu);
 	}
 });

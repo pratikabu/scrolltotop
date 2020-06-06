@@ -49,3 +49,7 @@ function getExtensionVersion() {
 function bsResetToolbarIcon() {
 	chrome.runtime.sendMessage({method: "resetToolbarIcon"});
 }
+
+function bsResetContextMenu(showContextMenu) {
+	chrome.runtime.sendMessage({method: "resetContextMenu", showContextMenu: showContextMenu});
+}
