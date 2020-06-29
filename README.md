@@ -25,4 +25,12 @@ Scroll to top and vice versa in a window. It is a browser extension.
 - Support development by [Donating](https://scrolltotop.pratikabu.com/donate).
 - Help me translate the addon.
 
+## How to Build:
+Currently the build system is based on Apache Ant.
+- Load the ants/build.xml file in the Ant view.
+- Execute the respective browser task.
+- You can also run ant on ants/build.xml directly, in this case it will generate the deployment code for all browsers.
+- This can then be used in respective browsers to load as a temporary extension.
+<img width="250px" src="https://i.ibb.co/Cv3R33j/scrolltotop-generated-folders.png">
+
 Read more about the [author](https://pratikabu.com).
