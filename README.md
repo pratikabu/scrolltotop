@@ -1,4 +1,4 @@
-<img align="left" src="base/icons/pratikabu-stt-128.png" width="48px">
+<img align="left" valign="middle" src="base/icons/pratikabu-stt-128.png" width="48px">
 
 # Scroll To Top
 
