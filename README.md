@@ -1,10 +1,10 @@
 # Scroll To Top
 
-## Brief:
-Scroll to top and vice versa in a window. It is a browser extension.
+Scroll to top and vice versa in a desktop browser.
 
-- See [Release Notes](https://scrolltotop.pratikabu.com/release)
+- See [Release Notes](https://github.com/pratikabu/scrolltotop/releases)
 - Report an [Issue](https://github.com/pratikabu/scrolltotop/issues)
+- Follow [@scrolltotop](https://twitter.com/scrolltotop)
 
 ## Download:
 
