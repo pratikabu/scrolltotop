@@ -1,8 +1,8 @@
 # Scroll To Top
 
-Scroll to top and vice versa in a desktop browser.
+Scroll to top and vice versa in a desktop browser. A browser extension for Chrome, Firefox, Safari, Opera.
 
-[Release Notes](https://github.com/pratikabu/scrolltotop/releases) | [Create Issue](https://github.com/pratikabu/scrolltotop/issues) | [@scrolltotop](https://twitter.com/scrolltotop)
+[Release Notes](https://github.com/pratikabu/scrolltotop/releases) | [Create Issue](https://github.com/pratikabu/scrolltotop/issues) | [@scrolltotop](https://twitter.com/scrolltotop) | [Donate](https://scrolltotop.pratikabu.com/donate)
 
 ## Download:
 
