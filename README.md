@@ -17,7 +17,7 @@ Scroll to top and vice versa in a desktop browser. A browser extension for Chrom
 - Download for [Apple Safari](http://pratikabu.users.sourceforge.net/extensions/scrolltotop/safaridownload.php) (Obsolete)
 
 ## Contribute:
-- Spread the word by sharing [this](https://scrolltotop.pratikabu.com) website.
+- Spread the word by sharing this page.
 - Rate the extension on [Chrome][link-chrome-review], [Firefox][link-firefox], [Opera][link-opera-review] galleries.
 - Support development by [Donating](https://pratikabu.com/donate).
 - Help me translate the addon.
