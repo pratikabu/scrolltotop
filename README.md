@@ -29,6 +29,6 @@ Currently the build system is based on Apache Ant.
 - You can also run ant on ants/build.xml directly, in this case it will generate the deployment code for all browsers.
 - This can then be used in respective browsers to load as a temporary extension.
 
-<img width="250px" src="https://i.ibb.co/Cv3R33j/scrolltotop-generated-folders.png">
+<img width="250px" src="rdmd-res/generated-folder-structure.png">
 
 Read more about the [author](https://pratikabu.com).
