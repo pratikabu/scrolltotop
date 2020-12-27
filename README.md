@@ -1,8 +1,8 @@
-# Scroll To Top
+# <img valign="middle" style="vertical-align: middle;" src="rdmd-res/pratikabu-stt-256.png" width="36px"> Scroll To Top
 
 Scroll to top and vice versa in a desktop browser. A browser extension for Chrome, Firefox, Safari, Opera.
 
-[Release Notes](https://github.com/pratikabu/scrolltotop/releases) | [Create Issue](https://github.com/pratikabu/scrolltotop/issues) | [@scrolltotop](https://twitter.com/scrolltotop) | [Donate](https://scrolltotop.pratikabu.com/donate)
+[Release Notes](https://github.com/pratikabu/scrolltotop/releases) | [@scrolltotop](https://twitter.com/scrolltotop) | [Donate](https://pratikabu.com/donate)
 
 ## Download:
 
@@ -19,7 +19,7 @@ Scroll to top and vice versa in a desktop browser. A browser extension for Chrom
 ## Contribute:
 - Spread the word by sharing [this](https://scrolltotop.pratikabu.com) website.
 - Rate the extension on [Chrome][link-chrome-review], [Firefox][link-firefox], [Opera][link-opera-review] galleries.
-- Support development by [Donating](https://scrolltotop.pratikabu.com/donate).
+- Support development by [Donating](https://pratikabu.com/donate).
 - Help me translate the addon.
 
 ## How to Build:
@@ -29,6 +29,6 @@ Currently the build system is based on Apache Ant.
 - You can also run ant on ants/build.xml directly, in this case it will generate the deployment code for all browsers.
 - This can then be used in respective browsers to load as a temporary extension.
 
-<img width="250px" src="https://i.ibb.co/Cv3R33j/scrolltotop-generated-folders.png">
+<img width="250px" src="rdmd-res/generated-folder-structure.png">
 
 Read more about the [author](https://pratikabu.com).
