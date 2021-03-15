@@ -38,7 +38,7 @@ This bookmarklet will scroll up or down based on the location of your screen.
 
 **Bookmark Name:** ↑↓
 ```javascript
-javascript:if(window.scrollY > 300 || 300 >= window.scrollMaxY && window.scrollY != 0) window.scroll({top: 0, behavior: 'smooth'}); else window.scroll({top: window.scrollMaxY, behavior: 'smooth'});
+javascript:var maxY = document.body.scrollHeight - window.innerHeight; var breakPoint = 300; if(window.scrollY > breakPoint || breakPoint >= maxY && window.scrollY != 0) window.scroll({top: 0, behavior: 'smooth'}); else window.scroll({top: maxY, behavior: 'smooth'});
 ```
 
 Read more about the [author](https://pratikabu.com).
