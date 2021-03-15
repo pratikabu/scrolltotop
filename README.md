@@ -31,4 +31,14 @@ Currently the build system is based on Apache Ant.
 
 <img width="250px" src="rdmd-res/generated-folder-structure.png">
 
+## Bookmarklet
+If someone does not like installing an extension. Then you can create this Bookmark in your bookmark toolbar.
+
+This bookmarklet will scroll up or down based on the location of your screen.
+
+**Bookmark Name:** ↑↓
+```javascript
+javascript:if(window.scrollY > 300 || 300 >= window.scrollMaxY && window.scrollY != 0) window.scroll({top: 0, behavior: 'smooth'}); else window.scroll({top: window.scrollMaxY, behavior: 'smooth'});
+```
+
 Read more about the [author](https://pratikabu.com).
