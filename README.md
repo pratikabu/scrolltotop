@@ -38,7 +38,7 @@ This bookmarklet will scroll up or down based on the location of your screen.
 
 **Bookmark Name:** ↑↓
 ```javascript
-javascript:var maxY = document.body.scrollHeight - window.innerHeight; var breakPoint = 300; if(window.scrollY > breakPoint || breakPoint >= maxY && window.scrollY != 0) window.scroll({top: 0, behavior: 'smooth'}); else window.scroll({top: maxY, behavior: 'smooth'});
+javascript:var pratikabuBodyXazd4n = document.body, pratikabuHtmlXazd4n = document.documentElement, pratikabuMaxYXazd4n = Math.max(pratikabuBodyXazd4n.scrollHeight, pratikabuBodyXazd4n.offsetHeight, pratikabuHtmlXazd4n.clientHeight, pratikabuHtmlXazd4n.scrollHeight, pratikabuHtmlXazd4n.offsetHeight) - window.innerHeight, pratikabuBreakPointXazd4n = 300; if(window.scrollY > pratikabuBreakPointXazd4n || pratikabuBreakPointXazd4n >= pratikabuMaxYXazd4n && window.scrollY != 0) window.scroll({top: 0, behavior: 'smooth'}); else window.scroll({top: pratikabuMaxYXazd4n, behavior: 'smooth'});
 ```
 
 Read more about the [author](https://pratikabu.com).
