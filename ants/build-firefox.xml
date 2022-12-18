@@ -25,15 +25,6 @@
 		<!-- do some browser specific stuffs -->
 		<delete file="${browserDir}/icons/pratikabu-stt-64.png" />
 		
-		<!-- update the review URL -->
-		<java jar="${htmlModifierJarFile}" fork="true" failonerror="true">
-			<arg value="REPLACE" />
-			<arg value="${baseBrowserSpecific}/${bsFolderName}/${bsOptionsImplName}" />
-			<arg value="${browserSpecific}/${bsOptionsImplName}" />
-			<arg value="${chromeReviewUrl}" />
-			<arg value="${browserSpeceficReviewUrl}" />
-		</java>
-		
 		<!-- add the applications tag in the manifest.json file -->
 		<java jar="${htmlModifierJarFile}" fork="true" failonerror="true">
 			<arg value="REPLACE" />

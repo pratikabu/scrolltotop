@@ -379,29 +379,6 @@ function exportImportSettingsInits() {
 	selectableRadioContent("eiImportLb", "eiRBG", "I");
 }
 
-function openSupportDialog() {
-	toggleDialog("donateReviewDialog");
-}
-
-function donateReviewInits() {
-	$("#donateReviewBut").click(function() {
-		openSupportDialog();
-	});
-	
-	$("#supportPromptCBId").change(function() {
-		save_options();
-	});
-	selectatbleCheckBoxContent("supportPromptCBId", "supportPromptId");
-}
-
-function randomOpenSupportDialog() {
-	setTimeout(function() {
-		if(!$('#supportPromptCBId').is(':checked') && 0 === new Date().getTime() % 7) {
-			openSupportDialog();
-		}
-	}, 10 * 1000);// 10 seconds delay
-}
-
 function validateDomainDataAndFix(textareaId) {
 	var ta = $('#' + textareaId);
 	var domains = ta.val();
@@ -501,8 +478,6 @@ function updateIconInputValue(iconInputName, iconValue) {
 }
 
 function psInitJavascriptFunctions() {
-	randomOpenSupportDialog();
-	
 	// add all icons
 	addIcons();
 	
@@ -512,7 +487,6 @@ function psInitJavascriptFunctions() {
 	$("#defaultBut").click(function() { restore_settings(); });
 	// $("#advSettingsBut").click(function() { activateAdvancedSettings(); });
 	exportImportSettingsInits();
-	donateReviewInits();
 	iconChooserInits();
 
 	// toolbar settings starts
@@ -694,10 +668,6 @@ function psInitJavascriptFunctions() {
 	var addonVersion = getExtensionVersion();
 	// place the version
 	$(".addonVersionId").append('<a target="_blank" href="https://github.com/pratikabu/scrolltotop/releases/tag/v' + addonVersion + '" title="See what&#39;s new in this version.">' + addonVersion + '</a>');
-	// give review link
-	$(".reviewId").append('<a target="_blank" title="Love Scroll To Top, give it a 5 star and leave your feedback." href="' + bsReviewPageUrl() + '">Review</a>');
-	
-	$(".donateId").append('<a target="_blank" title="Show your support." href="https://scrolltotop.pratikabu.com/donate">Donate</a>');
 }
 
 function getBase64Url(base64Url) {

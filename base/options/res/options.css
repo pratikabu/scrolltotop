@@ -12,7 +12,7 @@
 
 .tableClass {
 	width: auto;
-	margin-bottom: 10px;
+	margin-bottom: 2px;
 	
 /* 	to give the cellSpacing */
 	border-collapse:separate;
@@ -36,12 +36,10 @@
 
 .branding {
 	float: left;
-	/**margin-left: -20px;*/
 }
 
 .versionInfo {
 	float: right;
-	margin: 3px 0 0 0;
 	text-align: right;
 }
 
@@ -60,16 +58,16 @@
 
 .myHeader {
 	background: url(../../icons/pratikabu-stt-128.png) no-repeat;
-	background-size: 48px 48px;
-	text-indent: 60px;
+	background-size: 32px;
+	text-indent: 42px;
 	display: inline-block;
-	line-height: 50px;
+	line-height: 32px;
 	letter-spacing: -1.5px;
 	font-family: Arial,Helvetica,sans-serif;
 	font-weight: bold;
 	font-size: 28px;
 	color: #0070C0;
-	margin: 10px 0;
+	margin: 5px 0;
 }
 
 a:link, a:visited {
@@ -130,13 +128,6 @@ a.mylink {
 	display: none;
 } */
 
-.donateButton {
-	background: url(donate.gif) no-repeat;
-	text-indent: 74px;
-	display: inline-block;
-	line-height: 21px;
-}
-
 [class^=slider] {
 	display: inline-block;
 	vertical-align: middle;
@@ -144,15 +135,11 @@ a.mylink {
 
 body {
 	background-color: rgba(155, 155, 155, 0.2);
-	margin: 81px 0 0 0; /* This margin is the height of the header section */
+	margin: 79.5px 0 0 0; /* This margin is the height of the header section */
 }
 
 .mainContentWidth {
 	width: 700px;
-}
-
-.centerDiv {
-	padding-top: 10px;
 }
 
 hr {
@@ -161,7 +148,7 @@ hr {
 }
 
 .settinggroup {
-    margin: 20px 5px;
+    margin: 10px 5px;
     text-align: left;
 }
 
