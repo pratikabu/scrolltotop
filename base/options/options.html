@@ -20,17 +20,19 @@
 					</div>
 					<div class="versionInfo">
 						<div class="donateContainerDiv myFonts">
-							<span>Version: <span class="addonVersionId"></span></span><br/>
+							<span>Version: <span class="addonVersionId"></span></span>
 							<div style="margin: 5px 0;">
-								<div class="donateId" style="display: inline-block;"></div> |
-								<div class="reviewId" style="display: inline-block;"></div>
+								<a target="_blank" title="Show your support" href="https://scrolltotop.pratikabu.com/donate">Donate</a> |
+								<a target="_blank" title="Scroll To Top on GitHub" href="https://github.com/pratikabu/scrolltotop">GitHub</a> |
+								<a target="_blank" title="Scroll To Top on Twitter" href="https://twitter.com/scrolltotop">Twitter</a>
 							</div>
 						</div>
-						<span>
-							<a target="_blank" href="https://github.com/pratikabu/scrolltotop" style="vertical-align: middle; display: inline-block;" title="Scroll To Top on GitHub"><img src="res/github-32.png" alt="GitHub" class="bottomIcon" /></a>
-							<a target="_blank" href="https://twitter.com/scrolltotop" style="vertical-align: middle; display: inline-block;" title="Scroll To Top on Twitter"><img src="res/social-tw.png" alt="Twitter" class="bottomIcon" /></a>
-						</span>
 					</div>
+					<div class="spacer" style="clear: both;"></div>
+				</div>
+				<div class="settings-button">
+					<input type="button" id="defaultBut" value="Restore to Defaults" class="mybutton small green" title="Restore all settings to original values." />
+					<input type="button" id="exportImportBut" value="Export / Import" class="mybutton small blue" title="Export/Import settings cross browser." />
 				</div>
 			</div>
 			<div align="center" class="myFonts centerDiv mainContentWidth">
@@ -288,12 +290,6 @@
 					</div>
 				</div>
 				</div>
-
-				<!-- <input type="button" id="advSettingsBut" value="Show More Settings" class="mybutton small red pageIconSettings" title="Choose different icons, configure advanced settings and more..." /> -->
-				<input type="button" id="defaultBut" value="Restore to Defaults" class="mybutton small green" title="Restore all settings to original values." />
-				<input type="button" id="exportImportBut" value="Export / Import" class="mybutton small blue" title="Export/Import settings cross browser." />
-				<input type="button" id="donateReviewBut" value="Support Me" class="mybutton small orange" />
-
 			</div>
 			<div class="withLove"><a target="_blank" href="https://en.wikipedia.org/wiki/India" title="Read more about India">With &hearts; from India</a></div>
 		</div></form>
@@ -322,24 +318,6 @@
 				<div style="margin-top: 5px;">
 					<input type="button" id="eiSave" value="Save" class="mybutton small blue eiImport" />
 					<input type="button" id="eiClose" value="Close" class="mybutton small green dialogCloseButton" />
-				</div>
-			</div>
-		</div>
-		<div id="donateReviewDialog" class="mydialog tableClass myFonts" style="width: 500px; padding: 10px; z-index: 40; position: fixed; top: 50%; left: 50%; margin-left: -266px; margin-top: -120px; display: none; border: 2px SOLID #507C9E; border-radius: 3px;">
-			<div id="header" class="groupHeader">Show your support</div>
-			<div id="content">
-				<p align="justify">Show your support by either donating few bucks for its development, or leave a review so that it can reach to a bigger audience, even both.</p>
-				<div style="text-align: center;">
-					<div>
-						<span class="donateId"></span> |
-						<span class="reviewId"></span>
-						<p>Your small step makes a difference.<br/>&nbsp;</p>
-					</div>
-					
-					<div>
-						<span style="float: left;"><input id="supportPromptCBId" type="checkbox" /><span id="supportPromptId">I've supported. Don't prompt.</span></span>
-						<input type="button" id="drClose" value="Close" class="mybutton small blue dialogCloseButton" style="float: right;" />
-					</div>
 				</div>
 			</div>
 		</div>
