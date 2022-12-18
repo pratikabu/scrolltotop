@@ -184,8 +184,7 @@ function addLocalSettingsWithResetValue(data) {
 function openReleaseNotes(process)
 {
 	// open the release notes
-	chrome.tabs.create({url: "https://scrolltotop.pratikabu.com/release?process=" + process
-		+ "&v=" + chrome.runtime.getManifest().version});
+	// chrome.tabs.create({url: "https://github.com/pratikabu/scrolltotop/releases/tag/v" + chrome.runtime.getManifest().version});
 }
 
 /**
@@ -266,9 +265,6 @@ function validateData(data) {
 	// if everything is good then return the data object
 	return data;
 }
-
-// set uninstall page
-chrome.runtime.setUninstallURL("https://scrolltotop.pratikabu.com/uninstall");
 
 // *********************************
 // ******* Context Menu Code ******* Starts
