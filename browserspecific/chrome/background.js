@@ -109,7 +109,7 @@ function fetchSettings(sendResponseFunction) {
 
 function populateNewDefaults(finalData) {
 	if(!finalData.toolbarClickAction) {
-		finalData.toolbarClickAction = 'top';
+		finalData.toolbarClickAction = 'intelligentflip';
 	}
 
 	if(!finalData.showIconsOnPage) {
@@ -121,7 +121,7 @@ function populateNewDefaults(finalData) {
 	}
 
 	if(!finalData.showContextMenu) {
-		finalData.showContextMenu = "true";
+		finalData.showContextMenu = "false";
 	}
 }
 
@@ -161,7 +161,7 @@ function resetSettings(sendResponseFunction) {
 			vOffset: "20",
 			removedSites: "mail.google.com/mail;google.com/calendar;",
 
-			toolbarClickAction: "top"
+			toolbarClickAction: "intelligentflip"
 		};
 	
 	addLocalSettingsWithResetValue(data);
