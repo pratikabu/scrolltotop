@@ -130,7 +130,7 @@ function updateToolbarIcon() {
 
 function post_save_success() {
 	updateToolbarIcon();
-	show_message("<b>Saved!</b> <a target='_blank' href='https://scrolltotop.pratikabu.com/release'>Preview</a>");
+	show_message("<b>Successfully Saved!</b>");
 }
 
 function post_restore_success() {
@@ -693,7 +693,7 @@ function psInitJavascriptFunctions() {
 
 	var addonVersion = getExtensionVersion();
 	// place the version
-	$(".addonVersionId").append('<a target="_blank" href="https://scrolltotop.pratikabu.com/release?v=' + addonVersion + '" title="See what&#39;s new in this version.">' + addonVersion + '</a>');
+	$(".addonVersionId").append('<a target="_blank" href="https://github.com/pratikabu/scrolltotop/releases/tag/v' + addonVersion + '" title="See what&#39;s new in this version.">' + addonVersion + '</a>');
 	// give review link
 	$(".reviewId").append('<a target="_blank" title="Love Scroll To Top, give it a 5 star and leave your feedback." href="' + bsReviewPageUrl() + '">Review</a>');
 	
