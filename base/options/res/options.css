@@ -126,9 +126,9 @@ a.mylink {
 	border: 1px solid #2094F0;
 }
 
-.advancedProp {
+/* .advancedProp {
 	display: none;
-}
+} */
 
 .donateButton {
 	background: url(donate.gif) no-repeat;

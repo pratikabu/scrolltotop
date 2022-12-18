@@ -510,7 +510,7 @@ function psInitJavascriptFunctions() {
 	
 	//document.querySelector('#saveSettings').addEventListener('click', save_options);
 	$("#defaultBut").click(function() { restore_settings(); });
-	$("#advSettingsBut").click(function() { activateAdvancedSettings(); });
+	// $("#advSettingsBut").click(function() { activateAdvancedSettings(); });
 	exportImportSettingsInits();
 	donateReviewInits();
 	iconChooserInits();
