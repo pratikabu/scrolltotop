@@ -130,7 +130,7 @@ function updateToolbarIcon() {
 
 function post_save_success() {
 	updateToolbarIcon();
-	show_message("<b>Saved!</b> <a target='_blank' href='https://scrolltotop.pratikabu.com/release'>Preview</a>");
+	show_message("<b>Successfully Saved!</b>");
 }
 
 function post_restore_success() {
@@ -379,29 +379,6 @@ function exportImportSettingsInits() {
 	selectableRadioContent("eiImportLb", "eiRBG", "I");
 }
 
-function openSupportDialog() {
-	toggleDialog("donateReviewDialog");
-}
-
-function donateReviewInits() {
-	$("#donateReviewBut").click(function() {
-		openSupportDialog();
-	});
-	
-	$("#supportPromptCBId").change(function() {
-		save_options();
-	});
-	selectatbleCheckBoxContent("supportPromptCBId", "supportPromptId");
-}
-
-function randomOpenSupportDialog() {
-	setTimeout(function() {
-		if(!$('#supportPromptCBId').is(':checked') && 0 === new Date().getTime() % 7) {
-			openSupportDialog();
-		}
-	}, 10 * 1000);// 10 seconds delay
-}
-
 function validateDomainDataAndFix(textareaId) {
 	var ta = $('#' + textareaId);
 	var domains = ta.val();
@@ -501,8 +478,6 @@ function updateIconInputValue(iconInputName, iconValue) {
 }
 
 function psInitJavascriptFunctions() {
-	randomOpenSupportDialog();
-	
 	// add all icons
 	addIcons();
 	
@@ -510,9 +485,8 @@ function psInitJavascriptFunctions() {
 	
 	//document.querySelector('#saveSettings').addEventListener('click', save_options);
 	$("#defaultBut").click(function() { restore_settings(); });
-	$("#advSettingsBut").click(function() { activateAdvancedSettings(); });
+	// $("#advSettingsBut").click(function() { activateAdvancedSettings(); });
 	exportImportSettingsInits();
-	donateReviewInits();
 	iconChooserInits();
 
 	// toolbar settings starts
@@ -600,11 +574,15 @@ function psInitJavascriptFunctions() {
 	$('input:radio[name=iconSize]').change(function() { isRightChangedEvent("iconSize", $(this).val()); });
 	$('input:radio[name=iconLib]').change(function() { isRightChangedEvent("iconLib", $(this).val()); });
 	$('input:radio[name=smartDirection]').change(function() {
-		if(isRightChangedEvent("smartDirection", $(this).val())) {
-			if("true" === $(this).val()) {// auto set to visibility to autohide
-				$('input:radio[name=visbilityBehavior]').filter('[value=autohide]').prop('checked', true);
-				save_options();
+		var ignoreSaveInRightChange = true;
+		// auto set visibility
+		if(isRightChangedEvent("smartDirection", $(this).val(), ignoreSaveInRightChange)) {
+			var selectedVal = "alwaysshow";
+			if("true" === $(this).val()) {
+				selectedVal = "autohide";
 			}
+			$('input:radio[name=visbilityBehavior]').filter('[value=' + selectedVal + ']').prop('checked', true);
+			save_options();
 		}
 	});
 	
@@ -693,11 +671,7 @@ function psInitJavascriptFunctions() {
 
 	var addonVersion = getExtensionVersion();
 	// place the version
-	$(".addonVersionId").append('<a target="_blank" href="https://scrolltotop.pratikabu.com/release?v=' + addonVersion + '" title="See what&#39;s new in this version.">' + addonVersion + '</a>');
-	// give review link
-	$(".reviewId").append('<a target="_blank" title="Love Scroll To Top, give it a 5 star and leave your feedback." href="' + bsReviewPageUrl() + '">Review</a>');
-	
-	$(".donateId").append('<a target="_blank" title="Show your support." href="https://scrolltotop.pratikabu.com/donate">Donate</a>');
+	$(".addonVersionId").append('<a target="_blank" href="https://github.com/pratikabu/scrolltotop/releases/tag/v' + addonVersion + '" title="See what&#39;s new in this version.">' + addonVersion + '</a>');
 }
 
 function getBase64Url(base64Url) {
