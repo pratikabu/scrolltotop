@@ -168,7 +168,11 @@ var pratikabustt = {
 		
 		// add the scroll up logic
 		$("#pratikabuSTTArrowUp").click(function() {
-			pratikabustt.scrollIntelligently();
+			if(pratikabu_stt_flipScrolling) {
+				pratikabustt.scrollToBottom();
+			} else {
+				pratikabustt.scrollToTop();
+			}
 			return false;
 		});
 		if(pratikabu_stt_dualArrow) {

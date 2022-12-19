@@ -574,11 +574,15 @@ function psInitJavascriptFunctions() {
 	$('input:radio[name=iconSize]').change(function() { isRightChangedEvent("iconSize", $(this).val()); });
 	$('input:radio[name=iconLib]').change(function() { isRightChangedEvent("iconLib", $(this).val()); });
 	$('input:radio[name=smartDirection]').change(function() {
-		if(isRightChangedEvent("smartDirection", $(this).val())) {
-			if("true" === $(this).val()) {// auto set to visibility to autohide
-				$('input:radio[name=visbilityBehavior]').filter('[value=autohide]').prop('checked', true);
-				save_options();
+		var ignoreSaveInRightChange = true;
+		// auto set visibility
+		if(isRightChangedEvent("smartDirection", $(this).val(), ignoreSaveInRightChange)) {
+			var selectedVal = "alwaysshow";
+			if("true" === $(this).val()) {
+				selectedVal = "autohide";
 			}
+			$('input:radio[name=visbilityBehavior]').filter('[value=' + selectedVal + ']').prop('checked', true);
+			save_options();
 		}
 	});
 	
