@@ -45,5 +45,5 @@
 		</antcall>
 	</target>
 	
-	<target name="build" depends="clean,buildFirefox,buildChrome,buildSafari,buildOperChromium" />
+	<target name="build" depends="clean,buildFirefox,buildChrome" />
 </project>
