@@ -12,9 +12,8 @@ Scroll to top and vice versa in a desktop browser. A browser extension for Chrom
 [link-opera-review]: https://addons.opera.com/en/extensions/details/scroll-to-top#feedback-container "Opera Extension Review"
 
 - Download for [Google Chrome][link-chrome] [<img valign="middle" src="https://img.shields.io/chrome-web-store/v/hegiignepmecppikdlbohnnbfjdoaghj?label=%20">][link-chrome]
+  - Can be used for other Chromium browsers as well. Like: _Microsoft Edge, Brave, Opera, etc_.
 - Download for [Mozilla Firefox][link-firefox] [<img valign="middle" src="https://img.shields.io/amo/v/scroll-to-top?label=%20">][link-firefox]
-- Download for [Opera](https://addons.opera.com/en/extensions/details/scroll-to-top)
-- Download for [Apple Safari](http://pratikabu.users.sourceforge.net/extensions/scrolltotop/safaridownload.php) (Obsolete)
 
 ## Contribute:
 - Spread the word by sharing this page.
