@@ -1,6 +1,5 @@
 var STT_PREF_KEY = "STT_PREF_KEY";
 var STT_PREF_LOCAL_KEY = "STT_PREF_LOCAL_KEY";
-var BROWSER_KEY = "chrome";
 var LOCAL_SETTINGS_LIST = "userIcon,dUserIcon,supportPrompt";
 
 chrome.runtime.onMessage.addListener(function(request, sender, sendResponseFunction) {
@@ -293,10 +292,6 @@ function createContextMenu() {
 	createContextMenuItem("pratikabustt-cxm-bottom", cxTypeNormal, "Scroll To Bottom", cxContexts);
 	createContextMenuItem("pratikabustt-cxm-sep1", "separator", "", cxContexts);
 
-	if("firefox" == BROWSER_KEY) {
-		// since firefox doesn't show the "Options" menu when someone right click on the toolbar icon
-		cxContexts.push("browser_action");
-	}
 	createContextMenuItem("pratikabustt-cxm-option", cxTypeNormal, "Options", cxContexts);
 }
 
