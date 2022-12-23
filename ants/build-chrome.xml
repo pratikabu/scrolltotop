@@ -24,6 +24,7 @@
 
 		<!-- do some browser specific stuffs -->
 		<delete file="${browserDir}/icons/pratikabu-stt-64.png" />
+		<delete file="${browserDir}/manifest-ff-v2.json" />
 		
 		<!-- create brwoser specific zip files -->
 		<zip destfile="${generatedZipDir}/${browserName}-stt.${deployExtension}">
