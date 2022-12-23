@@ -17,7 +17,7 @@ Scroll to top and vice versa in a desktop browser. A browser extension for Chrom
 
 ## Contribute:
 - Spread the word by sharing this page.
-- Rate the extension on [Chrome][link-chrome-review], [Firefox][link-firefox], [Opera][link-opera-review] galleries.
+- Rate the extension on [Chrome][link-chrome-review], [Firefox][link-firefox] galleries.
 - Support development by [Donating](https://pratikabu.com/donate).
 - Help me translate the addon.
 
