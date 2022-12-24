@@ -37,7 +37,7 @@
 			<zipfileset dir="${genFirefoxDir}" />
 		</zip>
 
-		<delete dir="${genFirefoxDir}" />
+		<!-- <delete dir="${genFirefoxDir}" /> -->
 	</target>
 
 	<target name="buildChrome">
