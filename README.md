@@ -1,6 +1,6 @@
 # <img valign="middle" style="vertical-align: middle;" src="src/icons/pratikabu-stt-128.png" width="36px"> Scroll To Top
 
-Scroll to top and vice versa in a desktop browser. A browser extension for Chrome, Firefox, Safari, Opera.
+Scroll to top and vice versa in a desktop browser. A browser extension for Chrome, Firefox.
 
 [Release Notes](https://github.com/pratikabu/scrolltotop/releases) | [@scrolltotop](https://twitter.com/scrolltotop) | [Discuss](https://github.com/pratikabu/scrolltotop/discussions)
 
