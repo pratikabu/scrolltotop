@@ -1,0 +1,56 @@
+<project name="ScrollToTop" default="build">
+	<property name="generateDir"  value="generated"/>
+	<property name="srcDir"  value="src"/>
+	<property name="htmlModifierJarFile" value="htmlModifier-2.1.jar" />
+	<property name="genFirefoxDir"  value="${generateDir}/firefox"/>
+	<property name="genChromeDir"  value="${generateDir}/chrome"/>
+
+	<target name="clean">
+		<delete dir="${generateDir}" />
+	</target>
+
+	<!-- normal builds -->
+	<target name="buildFirefox">
+		<copy overwrite="true" todir="${genFirefoxDir}">
+			<fileset dir="${srcDir}" />
+		</copy>
+
+		<delete file="${genFirefoxDir}/icons/pratikabu-stt-64.png" />
+		<delete file="${browserDir}/manifest.json" />
+
+		<move todir="${genFirefoxDir}" includeemptydirs="false">
+			<fileset dir="${genFirefoxDir}"/>
+			<mapper type="glob" from="manifest-ff-v2.json" to="manifest.json"/>
+		</move>
+
+		<!-- update chrome.action to chrome.browserAction in the background.js file -->
+		<java jar="${htmlModifierJarFile}" fork="true" failonerror="true">
+			<arg value="REPLACE" />
+			<arg value="${genFirefoxDir}/background.js" />
+			<arg value="${genFirefoxDir}/background.js" />
+			<arg value="chrome.action." />
+			<arg value="chrome.browserAction." />
+		</java>
+
+		<!-- create deploy zip -->
+		<zip destfile="${generateDir}/zip/firefox-stt.zip">
+			<zipfileset dir="${genFirefoxDir}" />
+		</zip>
+	</target>
+
+	<target name="buildChrome">
+		<copy overwrite="true" todir="${genChromeDir}">
+			<fileset dir="${srcDir}" />
+		</copy>
+
+		<delete file="${genChromeDir}/icons/pratikabu-stt-64.png" />
+		<delete file="${genChromeDir}/manifest-ff-v2.json" />
+
+		<!-- create deploy zip -->
+		<zip destfile="${generateDir}/zip/chrome-stt.zip">
+			<zipfileset dir="${genChromeDir}" />
+		</zip>
+	</target>
+	
+	<target name="build" depends="clean,buildFirefox,buildChrome" />
+</project>
