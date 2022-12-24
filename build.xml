@@ -33,9 +33,11 @@
 		</java>
 
 		<!-- create deploy zip -->
-		<zip destfile="${generateDir}/zip/firefox-stt.zip">
+		<zip destfile="${generateDir}/firefox-stt.zip">
 			<zipfileset dir="${genFirefoxDir}" />
 		</zip>
+
+		<delete dir="${genFirefoxDir}" />
 	</target>
 
 	<target name="buildChrome">
@@ -47,9 +49,11 @@
 		<delete file="${genChromeDir}/manifest-ff-v2.json" />
 
 		<!-- create deploy zip -->
-		<zip destfile="${generateDir}/zip/chrome-stt.zip">
+		<zip destfile="${generateDir}/chrome-stt.zip">
 			<zipfileset dir="${genChromeDir}" />
 		</zip>
+
+		<delete dir="${genChromeDir}" />
 	</target>
 	
 	<target name="build" depends="clean,buildFirefox,buildChrome" />
