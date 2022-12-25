@@ -15,7 +15,6 @@
 			<fileset dir="${srcDir}" />
 		</copy>
 
-		<delete file="${genFirefoxDir}/icons/pratikabu-stt-64.png" />
 		<delete file="${browserDir}/manifest.json" />
 
 		<move todir="${genFirefoxDir}" includeemptydirs="false">
@@ -41,19 +40,12 @@
 	</target>
 
 	<target name="buildChrome">
-		<copy overwrite="true" todir="${genChromeDir}">
-			<fileset dir="${srcDir}" />
-		</copy>
-
-		<delete file="${genChromeDir}/icons/pratikabu-stt-64.png" />
-		<delete file="${genChromeDir}/manifest-ff-v2.json" />
-
 		<!-- create deploy zip -->
 		<zip destfile="${generateDir}/chrome-stt.zip">
-			<zipfileset dir="${genChromeDir}" />
+			<zipfileset dir="${srcDir}">
+				<exclude name="manifest-ff-v2.json"/>
+			</zipfileset>
 		</zip>
-
-		<delete dir="${genChromeDir}" />
 	</target>
 	
 	<target name="build" depends="clean,buildFirefox,buildChrome" />
