@@ -13,7 +13,7 @@ Release notes: https://github.com/pratikabu/scrolltotop/releases
 
 | Icon | Comment |
 | ---- | ------ |
-| <img valign="middle" src="src/icons/pratikabu-stt-32-1.png" width="16px"> | NA |
+| <img valign="middle" src="src/icons/pratikabu-stt-32-1.png" width="16px"> | https://www.softicons.com/toolbar-icons/vista-arrow-icons-by-icons-land/up-blue-icon |
 | <img valign="middle" src="src/icons/pratikabu-stt-32-2.png" width="16px"> | NA |
 | <img valign="middle" src="src/icons/pratikabu-stt-32-3.png" width="16px"> | NA |
 | <img valign="middle" src="src/icons/pratikabu-stt-32-4.png" width="16px"> | NA |
