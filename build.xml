@@ -1,7 +1,7 @@
 <project name="ScrollToTop" default="build">
 	<property name="generateDir"  value="generated"/>
 	<property name="srcDir"  value="src"/>
-	<property name="htmlModifierJarFile" value="htmlModifier-2.1.jar" />
+	<property name="htmlModifierJarFile" value="resources/htmlModifier-2.1.jar" />
 	<property name="genFirefoxDir"  value="${generateDir}/firefox"/>
 	<property name="genChromeDir"  value="${generateDir}/chrome"/>
 
