@@ -6,12 +6,11 @@ Scroll to top and vice versa in a desktop browser. A browser extension for Chrom
 
 ## Download:
 
-[link-chrome]: https://chrome.google.com/webstore/detail/scroll-to-top/hegiignepmecppikdlbohnnbfjdoaghj "Chrome Extension"
 [link-firefox]: https://addons.mozilla.org/en-US/firefox/addon/scroll-to-top/ "Mozilla Add-on"
 [link-chrome-review]: https://chrome.google.com/webstore/detail/scroll-to-top/hegiignepmecppikdlbohnnbfjdoaghj/reviews "Chrome Extension Review"
 [link-opera-review]: https://addons.opera.com/en/extensions/details/scroll-to-top#feedback-container "Opera Extension Review"
 
-- Download for [Google Chrome][link-chrome] <img valign="middle" style="vertical-align: middle;" src="https://img.shields.io/chrome-web-store/v/hegiignepmecppikdlbohnnbfjdoaghj?label=%20" width="35px">
+- Download for [Google Chrome](https://chrome.google.com/webstore/detail/scroll-to-top/hegiignepmecppikdlbohnnbfjdoaghj) <img valign="middle" style="vertical-align: middle;" src="https://img.shields.io/chrome-web-store/v/hegiignepmecppikdlbohnnbfjdoaghj?label=%20" width="35px">
   - Can be used for other Chromium browsers as well. Like: _Microsoft Edge, Brave, Opera, etc_.
 - Download for [Mozilla Firefox][link-firefox] <img valign="middle" style="vertical-align: middle;" src="https://img.shields.io/amo/v/scroll-to-top?label=%20" width="35px">
 
