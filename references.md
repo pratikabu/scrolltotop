@@ -22,10 +22,10 @@ Release notes: https://github.com/pratikabu/scrolltotop/releases
 | <img valign="middle" src="src/icons/pratikabu-stt-32-7.png" width="16px"> | NA |
 | <img valign="middle" src="src/icons/pratikabu-stt-32-8.png" width="16px"> | NA |
 | <img valign="middle" src="src/icons/pratikabu-stt-32-9.png" width="16px"> | NA |
-| <img valign="middle" src="src/icons/pratikabu-stt-32-10.png" width="16px"> | NA |
-| <img valign="middle" src="src/icons/pratikabu-stt-32-11.png" width="16px"> | NA |
+| <img valign="middle" src="src/icons/pratikabu-stt-32-10.png" width="16px"> | https://iconarchive.com/show/comic-3-icons-by-fasticon/up-icon.html |
+| <img valign="middle" src="src/icons/pratikabu-stt-32-11.png" width="16px"> | https://iconarchive.com/show/oxygen-icons-by-oxygen-icons.org/Actions-arrow-up-double-icon.html |
 | <img valign="middle" src="src/icons/pratikabu-stt-32-12.png" width="16px"> | NA |
-| <img valign="middle" src="src/icons/pratikabu-stt-32-13.png" width="16px"> | NA |
+| <img valign="middle" src="src/icons/pratikabu-stt-32-13.png" width="16px"> | https://iconarchive.com/show/blue-bits-icons-by-icojam/arrow-up-icon.html |
 | <img valign="middle" src="src/icons/pratikabu-stt-32-14.png" width="16px"> | NA |
 | <img valign="middle" src="src/icons/pratikabu-stt-32-15.png" width="16px"> | NA |
 | <img valign="middle" src="src/icons/pratikabu-stt-32-16.png" width="16px"> | NA |
@@ -48,7 +48,7 @@ Release notes: https://github.com/pratikabu/scrolltotop/releases
 | <img valign="middle" src="src/icons/pratikabu-stt-32-33.png" width="16px"> | https://iconarchive.com/show/100-flat-2-icons-by-graphicloads/arrow-up-icon.html |
 | <img valign="middle" src="src/icons/pratikabu-stt-32-34.png" width="16px"> | https://iconarchive.com/show/colorful-long-shadow-icons-by-graphicloads/Arrow-up-icon.html |
 | <img valign="middle" src="src/icons/pratikabu-stt-32-35.png" width="16px"> | https://iconarchive.com/show/colorful-long-shadow-icons-by-graphicloads/Arrow-upload-2-icon.html |
-| <img valign="middle" src="src/icons/pratikabu-stt-dual-hr-1.png" width="16px"> | NA |
+| <img valign="middle" src="src/icons/pratikabu-stt-dual-hr-1.png" width="16px"> | https://iconarchive.com/show/basic-2-icons-by-pixelmixer/arrow-up-icon.html |
 | <img valign="middle" src="src/icons/pratikabu-stt-dual-hr-2.png" width="16px"> | NA |
 | <img valign="middle" src="src/icons/pratikabu-stt-dual-hr-3.png" width="16px"> | NA |
 | <img valign="middle" src="src/icons/pratikabu-stt-dual-hr-4.png" width="16px"> | NA |
@@ -56,7 +56,7 @@ Release notes: https://github.com/pratikabu/scrolltotop/releases
 | <img valign="middle" src="src/icons/pratikabu-stt-dual-hr-6.png" width="16px"> | NA |
 | <img valign="middle" src="src/icons/pratikabu-stt-dual-vr-1.png" width="16px"> | NA |
 | <img valign="middle" src="src/icons/pratikabu-stt-dual-vr-2.png" width="16px"> | NA |
-| <img valign="middle" src="src/icons/pratikabu-stt-dual-vr-3.png" width="16px"> | NA |
+| <img valign="middle" src="src/icons/pratikabu-stt-dual-vr-3.png" width="16px"> | https://iconarchive.com/show/oxygen-icons-by-oxygen-icons.org/Actions-arrow-up-icon.html |
 | <img valign="middle" src="src/icons/pratikabu-stt-bottom-24.png" width="16px"> | NA |
 | <img valign="middle" src="src/icons/pratikabu-stt-clear-24.png" width="16px"> | NA |
 | <img valign="middle" src="src/icons/pratikabu-stt-pageup-24.png" width="16px"> | NA |
