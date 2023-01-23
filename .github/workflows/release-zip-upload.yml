@@ -24,8 +24,8 @@ jobs:
         run: ant -noinput -buildfile build.xml
       - name: rename zips with version
         run: |
-          mv -- generated/zip-deploy/chrome-stt.zip generated/zip-deploy/chrome-stt-${{ github.ref_name }}.zip
-          mv -- generated/zip-deploy/firefox-stt.zip generated/zip-deploy/firefox-stt-${{ github.ref_name }}.zip
+          mv -- generated/chrome-stt.zip generated/chrome-stt-${{ github.ref_name }}.zip
+          mv -- generated/firefox-stt.zip generated/firefox-stt-${{ github.ref_name }}.zip
       - name: Upload generated Zip file
         uses: softprops/action-gh-release@v1
         env:
@@ -33,5 +33,5 @@ jobs:
         with:
           fail_on_unmatched_files: true
           files: |
-            generated/zip-deploy/chrome-stt-${{ github.ref_name }}.zip
-            generated/zip-deploy/firefox-stt-${{ github.ref_name }}.zip
+            generated/chrome-stt-${{ github.ref_name }}.zip
+            generated/firefox-stt-${{ github.ref_name }}.zip
