@@ -22,7 +22,6 @@
 			"matches":[ "<all_urls>" ],
 			"js":[
 				"thirdparty/pratikabu-jquery-3.2.1.min.js",
-				"browserspecific/pratikabu-stt-impl.js",
 				"pratikabu-stt.js"
 			]
 		}

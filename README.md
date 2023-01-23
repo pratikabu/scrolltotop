@@ -1,6 +1,6 @@
-# <img valign="middle" style="vertical-align: middle;" src="rdmd-res/pratikabu-stt-256.png" width="36px"> Scroll To Top
+# <img valign="middle" style="vertical-align: middle;" src="src/icons/pratikabu-stt-128.png" width="36px"> Scroll To Top
 
-Scroll to top and vice versa in a desktop browser. A browser extension for Chrome, Firefox, Safari, Opera.
+Scroll to top and vice versa in a desktop browser. A browser extension for Chrome, Firefox.
 
 [Release Notes](https://github.com/pratikabu/scrolltotop/releases) | [@scrolltotop](https://twitter.com/scrolltotop) | [Discuss](https://github.com/pratikabu/scrolltotop/discussions)
 
@@ -21,14 +21,10 @@ Scroll to top and vice versa in a desktop browser. A browser extension for Chrom
 - Support development by [Donating](https://pratikabu.com/donate).
 - Help me translate the addon.
 
-## How to Build:
-Currently the build system is based on Apache Ant.
-- Load the ants/build.xml file in the Ant view.
-- Execute the respective browser task.
-- You can also run ant on ants/build.xml directly, in this case it will generate the deployment code for all browsers.
-- This can then be used in respective browsers to load as a temporary extension.
-
-<img width="250px" src="rdmd-res/generated-folder-structure.png">
+## How to Run:
+- The `src` folder contains all the code to be used in any Chromium browsers to load as a temporary extension.
+- To debug for Firefox, use the `firefox` folder in the `generated` folder.
+  - You'll have to run `ant` to generate the `generated` folder.
 
 ## Bookmarklet
 If someone does not like installing an extension. Then you can create this Bookmark in your bookmark toolbar.
