@@ -21,7 +21,7 @@ jobs:
           java-version: '11'
           distribution: 'temurin'
       - name: Build with Ant
-        run: ant -noinput -buildfile ants/build.xml
+        run: ant -noinput -buildfile build.xml
       - name: rename zips with version
         run: |
           mv -- generated/zip-deploy/chrome-stt.zip generated/zip-deploy/chrome-stt-${{ github.ref_name }}.zip
