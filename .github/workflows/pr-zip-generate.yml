@@ -28,4 +28,4 @@ jobs:
       name: Uploading generated zip files
       with:
         name: pr-zips-${{ env.date-time-env }}
-        path: generated/zip-deploy/*.zip
+        path: generated/*.zip
