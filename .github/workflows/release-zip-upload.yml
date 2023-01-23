@@ -1,0 +1,37 @@
+name: Auto zip Upload on Release Creation
+
+on:
+  release:
+    types:
+      - created
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    name: Upload Release Asset
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Set up JDK 11
+        uses: actions/setup-java@v3
+        with:
+          java-version: '11'
+          distribution: 'temurin'
+      - name: Build with Ant
+        run: ant -noinput -buildfile ants/build.xml
+      - name: rename zips with version
+        run: |
+          mv -- generated/zip-deploy/chrome-stt.zip generated/zip-deploy/chrome-stt-${{ github.ref_name }}.zip
+          mv -- generated/zip-deploy/firefox-stt.zip generated/zip-deploy/firefox-stt-${{ github.ref_name }}.zip
+      - name: Upload generated Zip file
+        uses: softprops/action-gh-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          fail_on_unmatched_files: true
+          files: |
+            generated/zip-deploy/chrome-stt-${{ github.ref_name }}.zip
+            generated/zip-deploy/firefox-stt-${{ github.ref_name }}.zip
