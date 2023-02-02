@@ -7,6 +7,7 @@
 
 	<target name="clean">
 		<delete dir="${generateDir}" />
+		
 	</target>
 
 	<!-- normal builds -->
