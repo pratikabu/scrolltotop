@@ -4,9 +4,9 @@ on:
   pull_request:
     branches: [ "main", "development" ]
     paths: 
-    - 'ants/**'
     - 'base/**'
-    - 'browserspecific/**'
+    - 'src/**'
+    - 'build.xml'
 
 jobs:
   pr-generate-zips:
