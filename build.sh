@@ -13,7 +13,7 @@ echo "Building for Firefox"
 FIREFOX=$GENERATED/firefox
 mkdir -p $FIREFOX
 echo "Copying src to $FIREFOX folder"
-cp -r src/ $FIREFOX/
+cp -r src/. $FIREFOX/
 
 echo "Manipulating files"
 cd $FIREFOX
