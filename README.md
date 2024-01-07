@@ -24,7 +24,7 @@ Scroll to top and vice versa in a desktop browser. A browser extension for Chrom
 ## How to Run:
 - The `src` folder contains all the code to be used in any Chromium browsers to load as a temporary extension.
 - To debug for Firefox, use the `firefox` folder in the `generated` folder.
-  - You'll have to run `ant` to generate the `generated` folder.
+  - You'll have to run `./build.sh` to generate the `generated` folder.
 
 ## Bookmarklet
 If someone does not like installing an extension. Then you can create this Bookmark in your bookmark toolbar.
