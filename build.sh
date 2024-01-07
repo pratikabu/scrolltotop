@@ -6,7 +6,7 @@ mkdir -p $GENERATED
 
 echo "Building for Chrome"
 cd src
-zip -rq ../$GENERATED/chrome-stt.zip * -x "*.DS_Store" "manifest-ff-v2.json"
+zip -rq ../$GENERATED/chrome-stt.zip * -x "*.DS_Store"
 cd ..
 
 echo "Building for Firefox"
@@ -18,7 +18,7 @@ cp -r src/ $FIREFOX/
 echo "Manipulating files"
 cd $FIREFOX
 rm -f manifest.json
-mv manifest-ff-v2.json manifest.json
+cp ../../resources/manifest-ff-v2.json manifest.json
 sed -i '' -e 's/chrome.action./chrome.browserAction./g' background.js
 
 zip -rq ../firefox-stt.zip * -x "*.DS_Store"
