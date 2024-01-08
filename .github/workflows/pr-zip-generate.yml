@@ -2,7 +2,7 @@ name: PR to main branch zip generate
 
 on:
   pull_request:
-    branches: [ "main", "development" ]
+    branches: [ "main" ]
     paths: 
     - 'base/**'
     - 'src/**'
