@@ -6,9 +6,9 @@ Scroll to top and vice versa in a desktop browser. A browser extension for Chrom
 
 ## Download:
 
-[link-chrome]: https://chrome.google.com/webstore/detail/scroll-to-top/hegiignepmecppikdlbohnnbfjdoaghj "Chrome Extension"
+[link-chrome]: https://chromewebstore.google.com/detail/scroll-to-top/hegiignepmecppikdlbohnnbfjdoaghj "Chrome Extension"
 [link-firefox]: https://addons.mozilla.org/en-US/firefox/addon/scroll-to-top/ "Mozilla Add-on"
-[link-chrome-review]: https://chrome.google.com/webstore/detail/scroll-to-top/hegiignepmecppikdlbohnnbfjdoaghj/reviews "Chrome Extension Review"
+[link-chrome-review]: https://chromewebstore.google.com/detail/scroll-to-top/hegiignepmecppikdlbohnnbfjdoaghj/reviews "Chrome Extension Review"
 [link-opera-review]: https://addons.opera.com/en/extensions/details/scroll-to-top#feedback-container "Opera Extension Review"
 
 - Download for [Google Chrome][link-chrome] [<img valign="middle" src="https://img.shields.io/chrome-web-store/v/hegiignepmecppikdlbohnnbfjdoaghj?label=%20">][link-chrome]
