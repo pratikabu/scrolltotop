@@ -1,0 +1,26 @@
+name: PR to main branch zip generate
+
+on:
+  pull_request:
+    branches: [ "main" ]
+    paths: 
+    - 'base/**'
+    - 'src/**'
+    - 'build.xml'
+
+jobs:
+  pr-generate-zips:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Build with build.sh
+      run: ./build.sh
+    - name: Setting date and time in env variable
+      run: echo "date-time-env=$(date '+%Y%m%d-%H%M%S')" >> $GITHUB_ENV
+    - uses: actions/upload-artifact@v4
+      name: Uploading generated zip files
+      with:
+        name: pr-zips-${{ env.date-time-env }}
+        path: generated/*.zip
