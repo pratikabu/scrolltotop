@@ -1,4 +1,4 @@
-# <img valign="middle" style="vertical-align: middle;" src="src/icons/pratikabu-stt-128.png" width="36px"> Scroll To Top
+# <img valign="middle" style="vertical-align: middle;" src="src/icons/pratikabu-stt-128.png" width="36px"> Scroll To Topsdfsf
 
 Scroll to top and vice versa in a desktop browser. A browser extension for Chrome, Firefox.
 
