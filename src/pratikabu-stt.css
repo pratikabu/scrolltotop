@@ -5,7 +5,7 @@
 	display: none;
 	padding: 0px !important;
 	margin: 0px !important;
-	line-height: 0 !important;
+	line-height: 1 !important;
 	min-width: 24px !important;
 	min-height: 24px !important;
 }
