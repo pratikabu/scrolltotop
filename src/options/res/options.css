@@ -128,11 +128,6 @@ a.mylink {
 	display: none;
 } */
 
-[class^=slider] {
-	display: inline-block;
-	vertical-align: middle;
-}
-
 body {
 	background-color: rgba(155, 155, 155, 0.2);
 	margin: 79.5px 0 0 0; /* This margin is the height of the header section */
@@ -213,6 +208,13 @@ hr {
 	text-decoration: none;
 }
 
+.slider {
+	width: 300px;
+	display: inline-block;
+	vertical-align: middle;
+}
+
+
 @media screen and (max-width: 750px) {
 	.mainContentWidth {
 		width: 600px;
@@ -222,7 +224,7 @@ hr {
 		width: 30%;
 	}
 
-	#scrollSpeedSliderId-slider {
+	.slider {
 		width: 280px;
 	}
 
@@ -257,16 +259,12 @@ hr {
 		margin-top: 10px;
 	}
 
-	#scrollSpeedSliderId-slider {
+	.slider {
 		width: 140px;
 	}
 
 	#currentSpeed {
 		margin-left: 0px !important;
-	}
-
-	#transparencySliderId-slider {
-		width: 190px;
 	}
 
 	#transparencyImgId {
