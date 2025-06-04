@@ -176,7 +176,7 @@ function loadValueInSpeedSlider(initialValue) {
 	}
 	initialValue = MAX_SPEED - initialValue;
 	populateSliderSpeedOnText(initialValue);
-	$("#scrollSpeedSliderId").simpleSlider("setValue", initialValue);
+	$("#scrollSpeedSliderId").val(initialValue);
 }
 
 
@@ -186,7 +186,7 @@ function updateTransparency(transparency) {
 
 function loadValueInTransparencySlider(transparency) {
 	updateTransparency(transparency);
-	$("#transparencySliderId").simpleSlider("setValue", transparency);
+	$("#transparencySliderId").val(transparency);
 }
 
 function selectableRadioContent(id, name, value) {
@@ -513,23 +513,25 @@ function psInitJavascriptFunctions() {
 	// common settings starts
 	$('input:radio[name=imgVerticalLocation]').change(function() { isRightChangedEvent("imgVerticalLocation", $(this).val()); });
 	$('input:radio[name=imgHorizontalLocation]').change(function() { isRightChangedEvent("imgHorizontalLocation", $(this).val()); });
-	$("#scrollSpeedSliderId").bind("slider:changed", function(event, data) {
-		populateSliderSpeedOnText(data.value);
-		var speedVal = MAX_SPEED - data.value;
-		if(MIN_SPEED === speedVal) {
+	$("#scrollSpeedSliderId").on("input change", function() {
+		var value = parseInt($(this).val(), 10);
+		populateSliderSpeedOnText(value);
+		var speedVal = MAX_SPEED - value;
+		if (MIN_SPEED === speedVal) {
 			speedVal = 0;
 		}
 		globalScrollSpeed = speedVal;
 	});
-	$("#scrollSpeedSliderId").bind("slider:postChangeComplete", function(event) {
+	$("#scrollSpeedSliderId").on("change", function() {
 		save_options();
 	});
 	$('input:radio[name=visbilityBehavior]').change(function() { isRightChangedEvent("visbilityBehavior", $(this).val()); });
-	$("#transparencySliderId").bind("slider:changed", function(event, data) {
-		updateTransparency(data.value);
-		globalTransparency = data.value;
+	$("#transparencySliderId").on("input change", function() {
+		var value = parseFloat($(this).val());
+		updateTransparency(value);
+		globalTransparency = value;
 	});
-	$("#transparencySliderId").bind("slider:postChangeComplete", function(event) {
+	$("#transparencySliderId").on("change", function() {
 		save_options();
 	});
 	$("#transparencyImgId").hover(
