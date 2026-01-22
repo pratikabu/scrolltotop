@@ -24,14 +24,17 @@
 	padding: 10px;
 }
 
-.headerDiv {
-	background-color: #ffffffed;
-	position: fixed;
+#page-header {
+	position: sticky;
 	top: 0;
-	width: 100%;
+	z-index: 10;
+    background-color: #ffffffed;
 	border-bottom: 1px SOLID #CBCBCB;
 	padding: 5px 0;
-	z-index: 1;
+}
+
+.main-block {
+	text-align: center;
 }
 
 .branding {
@@ -134,11 +137,12 @@ a.mylink {
 
 body {
 	background-color: rgba(155, 155, 155, 0.2);
-	margin: 79.5px 0 0 0; /* This margin is the height of the header section */
+	margin: 0;
 }
 
 .mainContentWidth {
 	width: 700px;
+	display: inline-block;
 }
 
 hr {
@@ -221,7 +225,7 @@ hr {
 
 @media screen and (max-width: 750px) {
 	.mainContentWidth {
-		width: 600px;
+		width: 80%;
 	}
 
 	.settinglabel {
@@ -238,9 +242,6 @@ hr {
 }
 
 @media screen and (max-width: 630px) {
-	.mainContentWidth {
-		width: 400px;
-	}
 
 	.settinglabel {
 	    display: inline-block;
