@@ -124,6 +124,10 @@ a.mylink {
 	border: 1px solid #2094F0;
 }
 
+.textareaDiv {
+	min-width: 60%;
+}
+
 /* .advancedProp {
 	display: none;
 } */
@@ -275,6 +279,10 @@ hr {
 		width: 100% !important;
 		margin-bottom: 5px !important;
 		margin-top: 5px;
+	}
+
+	.textareaDiv {
+		display: block;
 	}
 
     .versionInfo {
