@@ -21,7 +21,7 @@
 			"css":[ "pratikabu-stt.css" ],
 			"matches":[ "<all_urls>" ],
 			"js":[
-				"thirdparty/jquery-3.7.1.min.js",
+				"thirdparty/jquery-4.0.0.min.js",
 				"pratikabu-stt.js"
 			]
 		}
