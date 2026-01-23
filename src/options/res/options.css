@@ -12,7 +12,7 @@
 
 .tableClass {
 	width: auto;
-	margin-bottom: 2px;
+	margin-bottom: 3px;
 	
 /* 	to give the cellSpacing */
 	border-collapse:separate;
@@ -31,6 +31,11 @@
     background-color: #ffffffed;
 	border-bottom: 1px SOLID #CBCBCB;
 	padding: 5px 0;
+	margin-bottom: 3px;
+}
+
+#page-footer {
+	margin: 10px 0;
 }
 
 .main-block {
@@ -201,19 +206,20 @@ hr {
 }
 
 .withLove {
-	margin: 10px;
-	font-size: 20px;
+	font-size: 30px;
 	text-shadow: 0px 1px 0 #ffffff;
-}
-
-.withLove a:link, .withLove a:visited  {
+	cursor: default;
 	color: #c3c3c3;
-	text-decoration: none;
+	transition: background-color 0.5s ease-in-out
 }
 
-.withLove a:hover {
-	color: #989898;
-	text-decoration: none;
+@keyframes pulse-color {
+	0% { color: #989898; }
+	100% { color: #e74c3c; }
+}
+
+.withLove:hover {
+	animation: pulse-color 1s infinite alternate;
 }
 
 .slider {
@@ -225,7 +231,8 @@ hr {
 
 @media screen and (max-width: 750px) {
 	.mainContentWidth {
-		width: 80%;
+		width: 90%;
+		min-width: 600px;
 	}
 
 	.settinglabel {
@@ -242,6 +249,20 @@ hr {
 }
 
 @media screen and (max-width: 630px) {
+	#page-header {
+		position: relative;
+		top: unset;
+		z-index: unset;
+	}
+
+	#page-header .mainContentWidth {
+		width: 95%;
+	}
+
+	.mainContentWidth {
+		width: 100%;
+		min-width: 360px;
+	}
 
 	.settinglabel {
 	    display: inline-block;
@@ -262,10 +283,6 @@ hr {
 
 	#exportImportBut {
 		margin-top: 10px;
-	}
-
-	.slider {
-		width: 140px;
 	}
 
 	#currentSpeed {
@@ -289,6 +306,12 @@ hr {
     .versionInfo {
     	margin-right: 0;
     }
+}
+
+@media screen and (max-width: 510px) {
+	.slider {
+		width: 140px;
+	}
 }
 
 .floatl {
@@ -342,8 +365,8 @@ input[type="radio"]:hover + div, input[type="radio"]:hover + img, input[type="ra
 		color: #e6e6e6;
 	}
 
-	.headerDiv, .tableClass {
-		background-color: #3b3e43;
+	#page-header, .tableClass {
+		background-color: #3b3e43ed;
 		border-color: #717171;
 	}
 
@@ -355,13 +378,14 @@ input[type="radio"]:hover + div, input[type="radio"]:hover + img, input[type="ra
 		color: #00ff2d;
 	}
 
-	.withLove a:link, .withLove a:visited {
+	.withLove {
 		color: #757575;
 		text-shadow: 0px 1px 0 #292929;
 	}
 
-	.withLove a:hover {
-		color: #8e8e8e;
+	@keyframes pulse-color {
+		0% { color: #8e8e8e; }
+		100% { color: #e74c3c; }
 	}
 
 	.statusMsgDiv {
