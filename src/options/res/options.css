@@ -62,6 +62,7 @@
 	padding: 3px 20px 3px 20px;
 	display: none;
 	font-size: 14px;
+	text-align: center;
 }
 
 .myHeader {
@@ -210,7 +211,6 @@ hr {
 	text-shadow: 0px 1px 0 #ffffff;
 	cursor: default;
 	color: #c3c3c3;
-	transition: background-color 0.5s ease-in-out
 }
 
 @keyframes pulse-color {
@@ -228,6 +228,10 @@ hr {
 	vertical-align: middle;
 }
 
+.help-tip {
+	font-size: 12px;
+	text-align: justify;
+}
 
 @media screen and (max-width: 750px) {
 	.mainContentWidth {
@@ -262,6 +266,7 @@ hr {
 	.mainContentWidth {
 		width: 100%;
 		min-width: 360px;
+		max-width: 450px;
 	}
 
 	.settinglabel {
@@ -285,6 +290,10 @@ hr {
 		margin-top: 10px;
 	}
 
+	.slider {
+		width: 140px;
+	}
+
 	#currentSpeed {
 		margin-left: 0px !important;
 	}
@@ -306,12 +315,6 @@ hr {
     .versionInfo {
     	margin-right: 0;
     }
-}
-
-@media screen and (max-width: 510px) {
-	.slider {
-		width: 140px;
-	}
 }
 
 .floatl {
