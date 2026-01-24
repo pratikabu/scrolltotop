@@ -77,6 +77,7 @@
 	font-size: 28px;
 	color: #0070C0;
 	margin: 5px 0;
+	cursor: default;
 }
 
 a:link, a:visited {
@@ -233,6 +234,19 @@ hr {
 	text-align: justify;
 }
 
+.mydialog {
+	width: 550px;
+	padding: 10px;
+	z-index: 40;
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translateX(-50%) translateY(-50%);
+	display: none;
+	border: 2px SOLID #507C9E;
+	border-radius: 3px;
+}
+
 @media screen and (max-width: 750px) {
 	.mainContentWidth {
 		width: 90%;
@@ -253,19 +267,13 @@ hr {
 }
 
 @media screen and (max-width: 630px) {
-	#page-header {
-		position: relative;
-		top: unset;
-		z-index: unset;
-	}
-
 	#page-header .mainContentWidth {
 		width: 95%;
 	}
 
 	.mainContentWidth {
 		width: 100%;
-		min-width: 360px;
+		min-width: 350px;
 		max-width: 450px;
 	}
 
@@ -283,7 +291,6 @@ hr {
 
 	.mydialog {
 		width: 80% !important;
-		margin-left: -42% !important;
 	}
 
 	#exportImportBut {
@@ -315,6 +322,12 @@ hr {
     .versionInfo {
     	margin-right: 0;
     }
+}
+
+@media screen and (max-width: 400px) {
+	.mydialog {
+		width: 87% !important;
+	}
 }
 
 .floatl {
