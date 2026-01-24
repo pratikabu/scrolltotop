@@ -253,7 +253,7 @@ hr {
 
 #iconSelectorId {
 	display: grid;
-	grid-template-columns: repeat(auto-fill, minmax(75px, 1fr));
+	grid-template-columns: repeat(auto-fill, minmax(77px, 1fr));
 }
 
 @media screen and (max-width: 750px) {
