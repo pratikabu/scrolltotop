@@ -247,6 +247,11 @@ hr {
 	border-radius: 3px;
 }
 
+.mydialog-footer, .mydialog-body {
+	margin-top: 5px;
+	text-align: center;
+}
+
 @media screen and (max-width: 750px) {
 	.mainContentWidth {
 		width: 90%;

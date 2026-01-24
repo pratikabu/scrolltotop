@@ -290,9 +290,9 @@
 		<div id="maskDiv" style="background: rgba(128, 128, 128, 0.5); display: none; z-index: 38; position: fixed; top: 0; bottom: 0; left: 0; right: 0;"></div>
 
 		<div id="exportImportDialog" class="mydialog tableClass myFonts">
-			<div id="header" class="groupHeader">Export/Import Settings</div>
-			<div id="content" style="text-align: center;">
-				<div style="margin-top: 5px;">
+			<div class="groupHeader">Export/Import Settings</div>
+			<div class="mydialog-body">
+				<div>
 					<input type="radio" name="eiRBG" value="E"><span id="eiExportLb">Export Settings</span>
 					<input type="radio" name="eiRBG" value="I"><span id="eiImportLb">Import Settings</span>
 				</div>
@@ -302,25 +302,23 @@
 				</div>
 				<div style="margin-top: 5px;">
 					<span class="eiExport">Copy the above code and save it in a file.</span>
-					<span class="eiImport">Paste the code you copied from other browser. Don't play :)</span>
+					<span class="eiImport">Paste the code you copied from other browser.</span>
 				</div>
-				<div style="margin-top: 5px;">
-					<input type="button" id="eiSave" value="Save" class="mybutton small blue eiImport" />
-					<input type="button" id="eiClose" value="Close" class="mybutton small green dialogCloseButton" />
-				</div>
+			</div>
+			<div class="mydialog-footer">
+				<input type="button" id="eiSave" value="Save" class="mybutton small blue eiImport" />
+				<input type="button" id="eiClose" value="Close" class="mybutton small green dialogCloseButton" />
 			</div>
 		</div>
 
 		<div id="iconChooserDialog" class="mydialog tableClass myFonts">
 			<div class="groupHeader">Choose Icon</div>
-			<div style="text-align: center;">
-				<div style="text-align: center;">
-					<div id="iconSelectorId" class="iconcontainer"></div>
-				</div>
-				<div style="margin-top: 5px;">
-					<input type="button" id="icSelect" value="Select" class="mybutton small blue" />
-					<input type="button" id="icCancel" value="Cancel" class="mybutton small green dialogCloseButton" />
-				</div>
+			<div class="mydialog-body" style="text-align: center;">
+				<div id="iconSelectorId" class="iconcontainer"></div>
+			</div>
+			<div class="mydialog-footer">
+				<input type="button" id="icSelect" value="Select" class="mybutton small blue" />
+				<input type="button" id="icCancel" value="Cancel" class="mybutton small green dialogCloseButton" />
 			</div>
 		</div>
 	</body>
