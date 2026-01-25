@@ -4,26 +4,22 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<link rel="stylesheet" href="res/options.css" type="text/css">
-		<link rel="stylesheet" href="../thirdparty/pratikabu-simple-slider.css" type="text/css">
 		<link rel="stylesheet" href="../pratikabu-stt.css" type="text/css">
-		<script type="text/javascript" src="../thirdparty/jquery-3.7.1.min.js"></script>
-		<script type="text/javascript" src="../thirdparty/pratikabu-simple-slider.js"></script>
+		<script type="text/javascript" src="../thirdparty/jquery-4.0.0.min.js"></script>
 		<script type="text/javascript" src="res/options.js"></script>
 	</head>
 	<body>
-		<form name="myForm"><div align="center" class="myFonts" style="width: 100%;">
-			<div class="headerDiv">
+		<div id="page-header" class="myFonts main-block">
 				<div class="mainContentWidth">
 					<div class="branding">
-						<a target="_blank" href="https://github.com/pratikabu/scrolltotop"><span class="myHeader" title="Scroll To Top - Home page">Scroll To Top</span></a>
+						<span class="myHeader" title="Scroll To Top - Home page">Scroll To Top</span>
 					</div>
 					<div class="versionInfo">
 						<div class="donateContainerDiv myFonts">
 							<span>Version: <span class="addonVersionId"></span></span>
 							<div style="margin: 5px 0;">
 								<a target="_blank" title="Show your support" href="https://scrolltotop.pratikabu.com/donate">Donate</a> |
-								<a target="_blank" title="Scroll To Top on GitHub" href="https://github.com/pratikabu/scrolltotop">GitHub</a> |
-								<a target="_blank" title="Scroll To Top on Twitter" href="https://twitter.com/scrolltotop">Twitter</a>
+								<a target="_blank" title="Scroll To Top on GitHub" href="https://github.com/pratikabu/scrolltotop">GitHub</a>
 							</div>
 						</div>
 					</div>
@@ -33,8 +29,10 @@
 					<input type="button" id="defaultBut" value="Restore to Defaults" class="mybutton small green" title="Restore all settings to original values." />
 					<input type="button" id="exportImportBut" value="Export / Import" class="mybutton small blue" title="Export/Import settings cross browser." />
 				</div>
-			</div>
-			<div align="center" class="myFonts centerDiv mainContentWidth">
+		</div>
+			
+		<div id="page-body" class="main-block">
+			<div class="myFonts centerDiv mainContentWidth">
 				<div id="showIconsSetting" class="tableClass">
 					<div class="settinggroup" style="text-align: center;">
 						<div class="settingoptions">
@@ -66,16 +64,14 @@
 								<a class="iconChooser vertmidd" href="#">Choose Other Icon</a>
 							</span>
 						</div>
-						<div class="settinggroup">
+					</div>
+					<div class="settinggroup">
 							<div class="settinglabel">Scrolling Speed :</div>
 							<div class="settingoptions">
-								<input type="text" id="scrollSpeedSliderId"
-									   data-slider="true" data-slider-range="100,2600" data-slider-step="100"
-									   data-slider-highlight="true" data-slider-snap="true" />
+								<input type="range" id="scrollSpeedSliderId" class="slider" min="100" max="2600" step="100" />
 								<span id="currentSpeed" style="font-size: 11px; margin-left: 10px; vertical-align: middle;"></span>
 							</div>
 						</div>
-					</div>
 					<div class="advancedProp settinggroup">
 						<div class="settinglabel">Show Context Menu :</div>
 						<div class="settingoptions">
@@ -86,223 +82,217 @@
 				</div>
 
 				<div class="pageIconSettings">
-				<div id="commonSettings" class="tableClass">
-					<div class="groupHeader">Page Icon Settings</div>
-					<div class="settinggroup">
-						<div class="settinglabel">Vertical Location :</div>
-						<div class="settingoptions">
-							<input type="radio" name="imgVerticalLocation" value="top"><span id="vlTop">Top</span>
-							<input type="radio" name="imgVerticalLocation" value="middle"><span id="vlMiddle">Middle</span>
-							<input type="radio" name="imgVerticalLocation" value="bottom"><span id="vlBottom">Bottom</span>
-						</div>
-					</div>
-					<div class="settinggroup">
-						<div class="settinglabel">Horizontal Location :</div>
-						<div class="settingoptions">
-							<input type="radio" name="imgHorizontalLocation" value="left"><span id="hlLeft">Left</span>
-							<input type="radio" name="imgHorizontalLocation" value="middle"><span id="hlMiddle">Middle</span>
-							<input type="radio" name="imgHorizontalLocation" value="right"><span id="hlRight">Right</span>
-						</div>
-					</div>
-					<div class="settinggroup">
-						<div class="settinglabel">Visibility Behavior :</div>
-						<div class="settingoptions">
-							<input type="radio" name="visbilityBehavior" value="hideattop"><span id="vbHideAtTop">Hide at Top</span>
-							<input type="radio" name="visbilityBehavior" value="alwaysshow"><span id="vbAlwaysShow">Always Show</span>
-							<input type="radio" name="visbilityBehavior" value="autohide"><span id="vbAutoHide">Auto Hide (5 sec)</span>
-						</div>
-					</div>
-					<div class="advancedProp settinggroup">
-						<div class="settinglabel">Transparency :</div>
-						<div class="settingoptions">
-							<input type="text" id="transparencySliderId"
-									data-slider="true" data-slider-range="0.1,0.9" data-slider-highlight="true" />
-							<img class="blackAndWhiteCSS" style="vertical-align: middle; margin-left: 20px;" id="transparencyImgId" src="../icons/pratikabu-stt-32-1.png" />
-						</div>
-					</div>
-					<div class="advancedProp settinggroup">
-						<div class="settinglabel"></div>
-						<div class="settingoptions">
-							<input id="blackWhiteCBId" type="checkbox" /><span id="blackWhiteId">Use Black &amp; White Icons</span>
-						</div>
-					</div>
-				</div>
-				
-				<div id="arrowTypeSelector" class="tableClass">
-					<div class="groupHeader">Choose Arrow Type</div>
-					<div class="settinggroup" style="text-align: center;">
-						<div class="settingoptions">
-							<input type="radio" name="arrowType" value="1"><span id="atSingle">Single Arrow</span>
-							<input type="radio" name="arrowType" value="2"><span id="atDual">Dual Arrow</span>
-						</div>
-					</div>
-				</div>
-				
-				<div id="singleArrowSettings">
-					<div class="tableClass">
-						<div class="groupHeader">Basic Settings</div>
-						<div class="advancedProp settinggroup">
-							<div class="settinglabel">Smart Direction Mode :</div>
+					<div id="commonSettings" class="tableClass">
+						<div class="groupHeader">Page Icon Settings</div>
+						<div class="settinggroup">
+							<div class="settinglabel">Vertical Location :</div>
 							<div class="settingoptions">
-								<input type="radio" name="smartDirection" value="true"><span id="sdOn">On</span>
-								<input type="radio" name="smartDirection" value="false"><span id="sdOff">Off</span>
-								<a target="_blank" href="https://blog.pratikabu.com/2013/04/stt-smart-direction-mode.html" title="Learn more about Smart Direction Mode" style="margin-left: 7px;">What is this?</a>
+								<input type="radio" name="imgVerticalLocation" value="top"><span id="vlTop">Top</span>
+								<input type="radio" name="imgVerticalLocation" value="middle"><span id="vlMiddle">Middle</span>
+								<input type="radio" name="imgVerticalLocation" value="bottom"><span id="vlBottom">Bottom</span>
 							</div>
 						</div>
 						<div class="settinggroup">
-							<div class="settinglabel">Control Options :</div>
+							<div class="settinglabel">Horizontal Location :</div>
 							<div class="settingoptions">
-								<input type="radio" name="controlOptions" value="none"><span id="coNone">None</span>
-								<input type="radio" name="controlOptions" value="simple">
-								<div id="coSimple" class="controlsec-div" style="width: 24px;">
-									<img class="blackAndWhiteCSS" src="../icons/pratikabu-stt-clear-24.png">
-									<img class="blackAndWhiteCSS" src="../icons/pratikabu-stt-settings-24.png">
-								</div>
-								<input type="radio" name="controlOptions" value="pagerOnly">
-								<div id="coPagerOnly" class="controlsec-div" style="width: 24px;">
-									<img class="blackAndWhiteCSS" src="../icons/pratikabu-stt-pageup-24.png">
-									<img class="blackAndWhiteCSS pratikabuSTTRotate180" src="../icons/pratikabu-stt-pageup-24.png">
-								</div>
-								<input type="radio" name="controlOptions" value="pager">
-								<div id="coPager" class="controlsec-div" style="width: 48px;">
-									<img class="pratikabuSTTImg blackAndWhiteCSS floatl" src="../icons/pratikabu-stt-clear-24.png">
-									<img class="pratikabuSTTImg blackAndWhiteCSS floatr" src="../icons/pratikabu-stt-pageup-24.png">
-									<img class="pratikabuSTTImg blackAndWhiteCSS floatl" src="../icons/pratikabu-stt-settings-24.png">
-									<img class="pratikabuSTTImg blackAndWhiteCSS floatr pratikabuSTTRotate180" src="../icons/pratikabu-stt-pageup-24.png">
-								</div>
+								<input type="radio" name="imgHorizontalLocation" value="left"><span id="hlLeft">Left</span>
+								<input type="radio" name="imgHorizontalLocation" value="middle"><span id="hlMiddle">Middle</span>
+								<input type="radio" name="imgHorizontalLocation" value="right"><span id="hlRight">Right</span>
+							</div>
+						</div>
+						<div class="settinggroup">
+							<div class="settinglabel">Visibility Behavior :</div>
+							<div class="settingoptions">
+								<input type="radio" name="visbilityBehavior" value="hideattop"><span id="vbHideAtTop">Hide at Top</span>
+								<input type="radio" name="visbilityBehavior" value="alwaysshow"><span id="vbAlwaysShow">Always Show</span>
+								<input type="radio" name="visbilityBehavior" value="autohide"><span id="vbAutoHide">Auto Hide (5 sec)</span>
 							</div>
 						</div>
 						<div class="advancedProp settinggroup">
-							<div class="settinglabel">Auto Hide Controls :</div>
+							<div class="settinglabel">Transparency :</div>
 							<div class="settingoptions">
-								<input type="radio" name="autoHideControls" value="true"><span id="ahcYes">Yes</span>
-								<input type="radio" name="autoHideControls" value="false"><span id="ahcNo">No</span>
+								<input type="range" id="transparencySliderId" class="slider" min="0.1" max="0.9" step="0.01" />
+								<img class="blackAndWhiteCSS" style="vertical-align: middle; margin-left: 20px;" id="transparencyImgId" src="../icons/pratikabu-stt-32-1.png" />
+							</div>
+						</div>
+						<div class="advancedProp settinggroup">
+							<div class="settinglabel"></div>
+							<div class="settingoptions">
+								<input id="blackWhiteCBId" type="checkbox" /><span id="blackWhiteId">Use Black &amp; White Icons</span>
+							</div>
+						</div>
+					</div>
+				
+					<div id="arrowTypeSelector" class="tableClass">
+						<div class="groupHeader">Choose Arrow Type</div>
+						<div class="settinggroup" style="text-align: center;">
+							<div class="settingoptions">
+								<input type="radio" name="arrowType" value="1"><span id="atSingle">Single Arrow</span>
+								<input type="radio" name="arrowType" value="2"><span id="atDual">Dual Arrow</span>
+							</div>
+						</div>
+					</div>
+				
+					<div id="singleArrowSettings">
+						<div class="tableClass">
+							<div class="groupHeader">Basic Settings</div>
+							<div class="advancedProp settinggroup">
+								<div class="settinglabel">Smart Direction Mode :</div>
+								<div class="settingoptions">
+									<input type="radio" name="smartDirection" value="true"><span id="sdOn">On</span>
+									<input type="radio" name="smartDirection" value="false"><span id="sdOff">Off</span>
+									<a target="_blank" href="https://github.com/pratikabu/scrolltotop/wiki#what-is-smart-direction-mode" title="Learn more about Smart Direction Mode" style="margin-left: 7px;">What is this?</a>
+								</div>
+							</div>
+							<div class="settinggroup">
+								<div class="settinglabel">Control Options :</div>
+								<div class="settingoptions">
+									<input type="radio" name="controlOptions" value="none"><span id="coNone">None</span>
+									<input type="radio" name="controlOptions" value="simple">
+									<div id="coSimple" class="controlsec-div" style="width: 24px;">
+										<img class="blackAndWhiteCSS" src="../icons/pratikabu-stt-clear-24.png">
+										<img class="blackAndWhiteCSS" src="../icons/pratikabu-stt-settings-24.png">
+									</div>
+									<input type="radio" name="controlOptions" value="pagerOnly">
+									<div id="coPagerOnly" class="controlsec-div" style="width: 24px;">
+										<img class="blackAndWhiteCSS" src="../icons/pratikabu-stt-pageup-24.png">
+										<img class="blackAndWhiteCSS pratikabuSTTRotate180" src="../icons/pratikabu-stt-pageup-24.png">
+									</div>
+									<input type="radio" name="controlOptions" value="pager">
+									<div id="coPager" class="controlsec-div" style="width: 48px;">
+										<img class="pratikabuSTTImg blackAndWhiteCSS floatl" src="../icons/pratikabu-stt-clear-24.png">
+										<img class="pratikabuSTTImg blackAndWhiteCSS floatr" src="../icons/pratikabu-stt-pageup-24.png">
+										<img class="pratikabuSTTImg blackAndWhiteCSS floatl" src="../icons/pratikabu-stt-settings-24.png">
+										<img class="pratikabuSTTImg blackAndWhiteCSS floatr pratikabuSTTRotate180" src="../icons/pratikabu-stt-pageup-24.png">
+									</div>
+								</div>
+							</div>
+							<div class="advancedProp settinggroup">
+								<div class="settinglabel">Auto Hide Controls :</div>
+								<div class="settingoptions">
+									<input type="radio" name="autoHideControls" value="true"><span id="ahcYes">Yes</span>
+									<input type="radio" name="autoHideControls" value="false"><span id="ahcNo">No</span>
+								</div>
+							</div>
+							<div class="settinggroup">
+								<div class="settinglabel">Icon Size :</div>
+								<div class="settingoptions">
+									<input type="radio" name="iconSize" value="32"><img class="blackAndWhiteCSS" style="vertical-align: middle;" id="iconSizeOp1" src="../icons/pratikabu-stt-32-1.png" title="Small Icon (32px)" />
+									<input type="radio" name="iconSize" value="48"><img class="blackAndWhiteCSS" style="vertical-align: middle;" id="iconSizeOp2" src="../icons/pratikabu-stt-48-1.png" title="Large Icon (48px)" />
+								</div>
+							</div>
+						</div>
+						
+						<div class="tableClass advancedProp">
+							<div class="groupHeader">Icons &amp; Library Settings</div>
+							<div id="singleIconTD" class="iconcontainer"></div>
+							<div class="useMyIcon">
+								<div class="iconselector">
+									<input type="radio" name="iconLib" value="myIcon">
+									<img class="blackAndWhiteCSS" style="vertical-align: middle; width: 48px; height: 48px;" id="previewIcon" alt="Preview" title="Preview of your uploaded icon." />
+									<span id="useMyIcon">Use custom icon</span>
+								</div>
+								<input type="text" id="useMyIconTextBox" class="mySelect" style="width: 60%;">
+								<div class="help-tip">
+									Note: If you enable Use My Icon, then icon size will be restricted to either 32 or 48 pixels as per the selection.
+									<br/>
+									Follow these steps to upload your own icon:
+									<ol>
+										<li>Get base64 encoded string of your image. You can use online sites to generate this.</li>
+										<li>Paste the base64 encoded string in the above text box.</li>
+										<li>That's it!! Your image should appear in the preview box above.</li>
+									</ol>
+								</div>
+							</div>
+						</div>
+					</div>
+				
+					<div id="dualArrowSettings">
+						<div class="tableClass">
+							<div class="groupHeader">Basic Settings</div>
+							<div class="settinggroup">
+								<div class="settinglabel">Icons Arrangement :</div>
+								<div class="settingoptions">
+									<input type="radio" name="dIconArrangemnt" value="hr"><span id="diarrHr">Horizontal</span>
+									<input type="radio" name="dIconArrangemnt" value="vr"><span id="diarrVr">Vertical</span>
+								</div>
+							</div>
+						</div>
+						
+						<div class="tableClass advancedProp">
+							<div class="groupHeader">Icons &amp; Library Settings</div>
+							
+							<div class="groupsubheading">Horizontal Arrangement (recommended) :</div>
+							<div id="dualHRTD" class="iconcontainer"></div>
+							
+							<div class="groupsubheading">Vertical Arrangement (recommended) :</div>
+							<div id="dualVRTD" class="iconcontainer"></div>
+							
+							<div class="groupsubheading">Single Arrow Icons :</div>
+							<div id="dualNornalTD" class="iconcontainer"></div>
+							
+							<div class="useMyIcon">
+								<div class="iconselector">
+									<input type="radio" name="dIconLib" value="myIcon">
+									<img class="blackAndWhiteCSS" style="vertical-align: middle; width: 48px; height: 48px;" id="dPreviewIcon" alt="Preview" title="Preview of your uploaded icon." />
+									<span id="dUseMyIcon">Use custom icon</span>
+								</div>
+								<input type="text" id="dUseMyIconTextBox" class="mySelect" style="width: 60%;">
+								<div class="help-tip">
+									Note: You can use icon of any size, the same icon will be used for downward arrow.
+									<br/>
+									Follow these steps to upload your own icon:
+									<ol>
+										<li>Get base64 encoded string of your image. You can use online sites to generate this.</li>
+										<li>Paste the base64 encoded string in the above text box.</li>
+										<li>That's it!! Your image should appear in the preview box above.</li>
+									</ol>
+								</div>
+							</div>
+						</div>
+					</div>
+				
+					<div id="advancedSettings" class="tableClass advancedProp">
+						<div class="groupHeader">Advanced Settings</div>
+						<div class="settinggroup">
+							<div class="settinglabel">Horizontal Offset :</div>
+							<div class="settingoptions">
+								<input type="text" id="hOffset" class="mySelect" style="width: 50px;" />
+								<span class="help-tip">For Horizontal Location offset. Only Numbers are allowed.</span>
 							</div>
 						</div>
 						<div class="settinggroup">
-							<div class="settinglabel">Icon Size :</div>
+							<div class="settinglabel">Vertical Offset :</div>
 							<div class="settingoptions">
-								<input type="radio" name="iconSize" value="32"><img class="blackAndWhiteCSS" style="vertical-align: middle;" id="iconSizeOp1" src="../icons/pratikabu-stt-32-1.png" title="Small Icon (32px)" />
-								<input type="radio" name="iconSize" value="48"><img class="blackAndWhiteCSS" style="vertical-align: middle;" id="iconSizeOp2" src="../icons/pratikabu-stt-48-1.png" title="Large Icon (48px)" />
+								<input type="text" id="vOffset" class="mySelect" style="width: 50px;" />
+								<span class="help-tip">For Vertical Location offset. Only Numbers are allowed.</span>
+							</div>
+						</div>
+						<div class="settinggroup verticalTop">
+							<div class="settinglabel verticalTop">Ignored Patterns :</div>
+							<div class="settingoptions verticalTop textareaDiv">
+								<textarea id="removedSites" class="siteTextArea"></textarea>
+								<p class="help-tip">type domain names separated by ';'.</p>
 							</div>
 						</div>
 					</div>
-					
-					<div class="tableClass advancedProp">
-						<div class="groupHeader">Icons &amp; Library Settings</div>
-						<div id="singleIconTD" class="iconcontainer"></div>
-						<div class="useMyIcon">
-							<div class="iconselector">
-								<input type="radio" name="iconLib" value="myIcon">
-								<img class="blackAndWhiteCSS" style="vertical-align: middle; width: 48px; height: 48px;" id="previewIcon" alt="Preview" title="Preview of your uploaded icon." />
-								<span id="useMyIcon">Use custom icon</span>
-							</div>
-							<input type="text" id="useMyIconTextBox" class="mySelect" style="width: 60%;">
-							<div align="justify" style="font-size: 12px;">
-								Note: If you enable Use My Icon, then icon size will be restricted to either 32 or 48 pixels as per the selection.
-								<br/>
-								Follow these steps to upload your own icon:
-								<ol>
-									<li>Get base64 encoded string of your image. You can use online sites to generate this.</li>
-									<li>Paste the base64 encoded string in the above text box.</li>
-									<li>That's it!! Your image should appear in the preview box above.</li>
-								</ol>
-							</div>
-						</div>
-					</div>
-				</div>
-				
-				<div id="dualArrowSettings">
-					<div class="tableClass">
-						<div class="groupHeader">Basic Settings</div>
-						<div class="settinggroup">
-							<div class="settinglabel">Icons Arrangement :</div>
-							<div class="settingoptions">
-								<input type="radio" name="dIconArrangemnt" value="hr"><span id="diarrHr">Horizontal</span>
-								<input type="radio" name="dIconArrangemnt" value="vr"><span id="diarrVr">Vertical</span>
-							</div>
-						</div>
-					</div>
-					
-					<div class="tableClass advancedProp">
-						<div class="groupHeader">Icons &amp; Library Settings</div>
-						
-						<div class="groupsubheading">Horizontal Arrangement (recommended) :</div>
-						<div id="dualHRTD" class="iconcontainer"></div>
-						
-						<div class="groupsubheading">Vertical Arrangement (recommended) :</div>
-						<div id="dualVRTD" class="iconcontainer"></div>
-						
-						<div class="groupsubheading">Single Arrow Icons :</div>
-						<div id="dualNornalTD" class="iconcontainer"></div>
-						
-						<div class="useMyIcon">
-							<div class="iconselector">
-								<input type="radio" name="dIconLib" value="myIcon">
-								<img class="blackAndWhiteCSS" style="vertical-align: middle; width: 48px; height: 48px;" id="dPreviewIcon" alt="Preview" title="Preview of your uploaded icon." />
-								<span id="dUseMyIcon">Use custom icon</span>
-							</div>
-							<input type="text" id="dUseMyIconTextBox" class="mySelect" style="width: 60%;">
-							<div align="justify" style="font-size: 12px;">
-								Note: You can use icon of any size, the same icon will be used for downward arrow.
-								<br/>
-								Follow these steps to upload your own icon:
-								<ol>
-									<li>Get base64 encoded string of your image. You can use online sites to generate this.</li>
-									<li>Paste the base64 encoded string in the above text box.</li>
-									<li>That's it!! Your image should appear in the preview box above.</li>
-								</ol>
-							</div>
-						</div>
-					</div>
-				</div>
-				
-				<div id="advancedSettings" class="tableClass advancedProp">
-					<div class="groupHeader">Advanced Settings</div>
-					<div class="settinggroup">
-						<div class="settinglabel">Horizontal Offset :</div>
-						<div class="settingoptions">
-							<input type="text" id="hOffset" class="mySelect" style="width: 50px;" />
-							<p align="justify" style="display: inline; font-size: 12px;">
-								For Horizontal Location offset. Only Numbers are allowed.
-							</p>
-						</div>
-					</div>
-					<div class="settinggroup">
-						<div class="settinglabel">Vertical Offset :</div>
-						<div class="settingoptions">
-							<input type="text" id="vOffset" class="mySelect" style="width: 50px;" />
-							<p align="justify" style="display: inline; font-size: 12px;">
-								For Vertical Location offset. Only Numbers are allowed.
-							</p>
-						</div>
-					</div>
-					<div class="settinggroup verticalTop">
-						<div class="settinglabel verticalTop">Ignored Patterns :</div>
-						<div class="settingoptions verticalTop">
-							<textarea id="removedSites" class="siteTextArea"></textarea>
-							<p align="justify" style="font-size: 12px;">
-								type domain names separated by ';'. No special charaters please. <a target="_blank" href="https://blog.pratikabu.com/2013/04/stt-how-to-fill-domain-names.html">Help?</a><br/>
-								Ex: mail.google.com;google.com/calendar;
-							</p>
-						</div>
-					</div>
-				</div>
 				</div>
 			</div>
-			<div class="withLove"><a target="_blank" href="https://en.wikipedia.org/wiki/India" title="Read more about India">With &hearts; from India</a></div>
-		</div></form>
+		</div>
+
+		<div id="page-footer" class="main-block"><span class="withLove">&hearts;</span></div>
 
 		<div style="position: fixed; left: 50%; top: 0; z-index: 10;">
-			<div id="status" align="center" class="statusMsgDiv myFonts" title="All statuses will appear here."></div>
+			<div id="status" class="statusMsgDiv myFonts" title="All statuses will appear here."></div>
 		</div>
 		
 		<!-- DialogBox -->
 		<div id="maskDiv" style="background: rgba(128, 128, 128, 0.5); display: none; z-index: 38; position: fixed; top: 0; bottom: 0; left: 0; right: 0;"></div>
-		<div id="exportImportDialog" class="mydialog tableClass myFonts" style="width: 600px; padding: 10px; z-index: 40; position: fixed; top: 50%; left: 50%; margin-left: -316px; margin-top: -120px; display: none; border: 2px SOLID #507C9E; border-radius: 3px;">
-			<div id="header" class="groupHeader">Export/Import Settings</div>
-			<div id="content" style="text-align: center;">
-				<div style="margin-top: 5px;">
+
+		<div id="exportImportDialog" class="mydialog tableClass myFonts">
+			<div class="groupHeader">Export/Import Settings</div>
+			<div class="mydialog-body">
+				<div>
 					<input type="radio" name="eiRBG" value="E"><span id="eiExportLb">Export Settings</span>
 					<input type="radio" name="eiRBG" value="I"><span id="eiImportLb">Import Settings</span>
 				</div>
@@ -312,25 +302,21 @@
 				</div>
 				<div style="margin-top: 5px;">
 					<span class="eiExport">Copy the above code and save it in a file.</span>
-					<span class="eiImport">Paste the code you copied from other browser. Don't play :)</span>
+					<span class="eiImport">Paste the code you copied from other browser.</span>
 				</div>
-				<div style="margin-top: 5px;">
-					<input type="button" id="eiSave" value="Save" class="mybutton small blue eiImport" />
-					<input type="button" id="eiClose" value="Close" class="mybutton small green dialogCloseButton" />
-				</div>
+			</div>
+			<div class="mydialog-footer">
+				<input type="button" id="eiSave" value="Save" class="mybutton small blue eiImport" />
+				<input type="button" id="eiClose" value="Close" class="mybutton small green dialogCloseButton" />
 			</div>
 		</div>
 
-		<div id="iconChooserDialog" class="mydialog tableClass myFonts" style="width: 520px; padding: 10px; z-index: 40; position: fixed; top: 50%; left: 50%; margin-left: -272px; margin-top: -180px; display: none; border: 2px SOLID #507C9E; border-radius: 3px;">
+		<div id="iconChooserDialog" class="mydialog tableClass myFonts">
 			<div class="groupHeader">Choose Icon</div>
-			<div style="text-align: center;">
-				<div style="text-align: center;">
-					<div id="iconSelectorId" class="iconcontainer"></div>
-				</div>
-				<div style="margin-top: 5px;">
-					<input type="button" id="icSelect" value="Select" class="mybutton small blue" />
-					<input type="button" id="icCancel" value="Cancel" class="mybutton small green dialogCloseButton" />
-				</div>
+			<div id="iconSelectorId" class="mydialog-body iconcontainer" style="text-align: center;"></div>
+			<div class="mydialog-footer">
+				<input type="button" id="icSelect" value="Select" class="mybutton small blue" />
+				<input type="button" id="icCancel" value="Cancel" class="mybutton small green dialogCloseButton" />
 			</div>
 		</div>
 	</body>

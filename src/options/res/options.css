@@ -12,7 +12,7 @@
 
 .tableClass {
 	width: auto;
-	margin-bottom: 2px;
+	margin-bottom: 3px;
 	
 /* 	to give the cellSpacing */
 	border-collapse:separate;
@@ -24,14 +24,22 @@
 	padding: 10px;
 }
 
-.headerDiv {
-	background-color: #ffffffed;
-	position: fixed;
+#page-header {
+	position: sticky;
 	top: 0;
-	width: 100%;
+	z-index: 10;
+    background-color: #ffffffed;
 	border-bottom: 1px SOLID #CBCBCB;
 	padding: 5px 0;
-	z-index: 1;
+	margin-bottom: 3px;
+}
+
+#page-footer {
+	margin: 10px 0;
+}
+
+.main-block {
+	text-align: center;
 }
 
 .branding {
@@ -54,6 +62,7 @@
 	padding: 3px 20px 3px 20px;
 	display: none;
 	font-size: 14px;
+	text-align: center;
 }
 
 .myHeader {
@@ -68,6 +77,7 @@
 	font-size: 28px;
 	color: #0070C0;
 	margin: 5px 0;
+	cursor: default;
 }
 
 a:link, a:visited {
@@ -124,22 +134,22 @@ a.mylink {
 	border: 1px solid #2094F0;
 }
 
+.textareaDiv {
+	min-width: 60%;
+}
+
 /* .advancedProp {
 	display: none;
 } */
 
-[class^=slider] {
-	display: inline-block;
-	vertical-align: middle;
-}
-
 body {
 	background-color: rgba(155, 155, 155, 0.2);
-	margin: 79.5px 0 0 0; /* This margin is the height of the header section */
+	margin: 0;
 }
 
 .mainContentWidth {
 	width: 700px;
+	display: inline-block;
 }
 
 hr {
@@ -166,7 +176,6 @@ hr {
 
 .iconcontainer {
 	text-align: left;
-	padding-left: 5px;
 }
 
 .iconselector {
@@ -198,31 +207,66 @@ hr {
 }
 
 .withLove {
-	margin: 10px;
-	font-size: 20px;
+	font-size: 30px;
 	text-shadow: 0px 1px 0 #ffffff;
-}
-
-.withLove a:link, .withLove a:visited  {
+	cursor: default;
 	color: #c3c3c3;
-	text-decoration: none;
 }
 
-.withLove a:hover {
-	color: #989898;
-	text-decoration: none;
+@keyframes pulse-color {
+	0% { color: #989898; }
+	100% { color: #e74c3c; }
+}
+
+.withLove:hover {
+	animation: pulse-color 1s infinite alternate;
+}
+
+.slider {
+	width: 300px;
+	display: inline-block;
+	vertical-align: middle;
+}
+
+.help-tip {
+	font-size: 12px;
+	text-align: justify;
+}
+
+.mydialog {
+	width: 550px;
+	padding: 10px;
+	z-index: 40;
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translateX(-50%) translateY(-50%);
+	display: none;
+	border: 2px SOLID #507C9E;
+	border-radius: 3px;
+}
+
+.mydialog-footer, .mydialog-body {
+	margin-top: 5px;
+	text-align: center;
+}
+
+#iconSelectorId {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(77px, 1fr));
 }
 
 @media screen and (max-width: 750px) {
 	.mainContentWidth {
-		width: 600px;
+		width: 90%;
+		min-width: 600px;
 	}
 
 	.settinglabel {
 		width: 30%;
 	}
 
-	#scrollSpeedSliderId-slider {
+	.slider {
 		width: 280px;
 	}
 
@@ -232,8 +276,14 @@ hr {
 }
 
 @media screen and (max-width: 630px) {
+	#page-header .mainContentWidth {
+		width: 95%;
+	}
+
 	.mainContentWidth {
-		width: 400px;
+		width: 100%;
+		min-width: 350px;
+		max-width: 450px;
 	}
 
 	.settinglabel {
@@ -250,23 +300,18 @@ hr {
 
 	.mydialog {
 		width: 80% !important;
-		margin-left: -42% !important;
 	}
 
 	#exportImportBut {
 		margin-top: 10px;
 	}
 
-	#scrollSpeedSliderId-slider {
+	.slider {
 		width: 140px;
 	}
 
 	#currentSpeed {
 		margin-left: 0px !important;
-	}
-
-	#transparencySliderId-slider {
-		width: 190px;
 	}
 
 	#transparencyImgId {
@@ -279,9 +324,19 @@ hr {
 		margin-top: 5px;
 	}
 
+	.textareaDiv {
+		display: block;
+	}
+
     .versionInfo {
     	margin-right: 0;
     }
+}
+
+@media screen and (max-width: 400px) {
+	.mydialog {
+		width: 87% !important;
+	}
 }
 
 .floatl {
@@ -335,8 +390,8 @@ input[type="radio"]:hover + div, input[type="radio"]:hover + img, input[type="ra
 		color: #e6e6e6;
 	}
 
-	.headerDiv, .tableClass {
-		background-color: #3b3e43;
+	#page-header, .tableClass {
+		background-color: #3b3e43ed;
 		border-color: #717171;
 	}
 
@@ -348,13 +403,14 @@ input[type="radio"]:hover + div, input[type="radio"]:hover + img, input[type="ra
 		color: #00ff2d;
 	}
 
-	.withLove a:link, .withLove a:visited {
+	.withLove {
 		color: #757575;
 		text-shadow: 0px 1px 0 #292929;
 	}
 
-	.withLove a:hover {
-		color: #8e8e8e;
+	@keyframes pulse-color {
+		0% { color: #8e8e8e; }
+		100% { color: #e74c3c; }
 	}
 
 	.statusMsgDiv {

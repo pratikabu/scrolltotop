@@ -1,7 +1,7 @@
 {
 	"manifest_version": 2,
 	"name": "Scroll To Top",
-	"version": "5.1",
+	"version": "5.2",
 
 	"description": "Scroll to top and vice versa in a window.",
 	"icons": {
@@ -11,7 +11,12 @@
 	},
 
 	"author": "Pratik Soni",
-    "applications": {"gecko": {"id": "jid0-gRmSxW9ByuHwGjLhtXJg27YnZRs@jetpack"}},
+    "browser_specific_settings": {
+		"gecko": {
+			"id": "jid0-gRmSxW9ByuHwGjLhtXJg27YnZRs@jetpack",
+			"data_collection_permissions": { "required": ["none"] }
+		}
+	},
 	"background": {
 		"scripts": [ "background.js" ]
 	},
@@ -21,7 +26,7 @@
 			"css":[ "pratikabu-stt.css" ],
 			"matches":[ "<all_urls>" ],
 			"js":[
-				"thirdparty/jquery-3.7.1.min.js",
+				"thirdparty/jquery-4.0.0.min.js",
 				"pratikabu-stt.js"
 			]
 		}

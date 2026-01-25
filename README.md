@@ -2,7 +2,7 @@
 
 Scroll to top and vice versa in a desktop browser. A browser extension for Chrome, Firefox.
 
-[Release Notes](https://github.com/pratikabu/scrolltotop/releases) | [@scrolltotop](https://twitter.com/scrolltotop) | [Discuss](https://github.com/pratikabu/scrolltotop/discussions)
+[Release Notes](https://github.com/pratikabu/scrolltotop/releases) | [Discuss](https://github.com/pratikabu/scrolltotop/discussions)
 
 ## Download:
 
@@ -40,3 +40,4 @@ There is a no-permission version of this extension, if someone is concerned abou
 https://github.com/pratikabu/scrolltotop-lite
 
 Read more about the [author](https://pratikabu.com).
+
