@@ -30,7 +30,7 @@
 		"open_in_tab": true
 	},
 	"web_accessible_resources":[ {
-		"resources": ["icons/*.png"],
+		"resources": ["icons/*.png", "icons/*.svg"],
 		"matches": [ "<all_urls>" ]
 	} ],
 	"action": {}
