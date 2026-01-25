@@ -57,7 +57,7 @@ Release notes: https://github.com/pratikabu/scrolltotop/releases
 | <img valign="middle" src="../src/icons/pratikabu-stt-dual-vr-1.png" width="16px"> | NA |
 | <img valign="middle" src="../src/icons/pratikabu-stt-dual-vr-2.png" width="16px"> | NA |
 | <img valign="middle" src="../src/icons/pratikabu-stt-dual-vr-3.png" width="16px"> | https://iconarchive.com/show/oxygen-icons-by-oxygen-icons.org/Actions-arrow-up-icon.html |
-| <img valign="middle" src="../src/icons/pratikabu-stt-bottom-24.png" width="16px"> | NA |
-| <img valign="middle" src="../src/icons/pratikabu-stt-clear-24.png" width="16px"> | NA |
-| <img valign="middle" src="../src/icons/pratikabu-stt-pageup-24.png" width="16px"> | NA |
-| <img valign="middle" src="../src/icons/pratikabu-stt-settings-24.png" width="16px"> | NA |
+| <img valign="middle" src="../src/icons/pratikabu-stt-bottom.svg" width="16px"> | https://www.iconpacks.net/free-icon/arrow-236.html |
+| <img valign="middle" src="../src/icons/pratikabu-stt-clear.svg" width="16px"> | https://www.iconpacks.net/free-icon/red-close-circle-20545.html |
+| <img valign="middle" src="../src/icons/pratikabu-stt-pageup.svg" width="16px"> | https://www.iconpacks.net/free-icon/double-arrow-up-14229.html |
+| <img valign="middle" src="../src/icons/pratikabu-stt-settings.svg" width="16px"> | https://www.iconpacks.net/free-icon/settings-778.html |
