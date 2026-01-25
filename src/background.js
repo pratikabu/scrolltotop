@@ -333,7 +333,7 @@ function scrollToDirection(direction, currentTab) {
 
 function setToolbarIcon(selectedIconId) {
 	iconData = {
-		128: "icons/pratikabu-stt-48-" + selectedIconId + ".png"
+		128: "icons/pratikabu-stt-single-" + selectedIconId + ".png"
 	}
 	chrome.action.setIcon({path : iconData});
 }

@@ -490,7 +490,7 @@ var pratikabustt = {
 		if("myIcon" === pratikabu_stt_prefs.iconLib) {
 			$("#pratikabuSTTArrowUp").attr("src", pratikabustt.getBase64Url(pratikabu_stt_prefs.userIcon));
 		} else {
-			var suffixString = pratikabu_stt_prefs.iconSize + "-" + pratikabu_stt_prefs.iconLib;
+			var suffixString = "single-" + pratikabu_stt_prefs.iconLib;
 			pratikabustt_browser_impl.setImageForId("pratikabuSTTArrowUp", suffixString + ".png");
 		}
 	},
