@@ -458,7 +458,7 @@ function iconChooserInits() {
 	// bind the value change event on hidden input field
 	$("input:hidden[class=iconChooserValue]").change(function(e) {
 		$(this).siblings(".iconChooserImg").attr("src",
-			"../icons/pratikabu-stt-32-" + $(this).val() + ".png");
+			"../icons/pratikabu-stt-48-" + $(this).val() + ".png");
 	});
 
 	// bind the select event
