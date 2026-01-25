@@ -353,6 +353,11 @@ hr {
 	vertical-align: middle;
 }
 
+.controlsec-div img {
+	width: 24px;
+	height: 24px;
+}
+
 input[type="radio"], input[type="radio"] + div, input[type="radio"] + img, input[type="radio"] + span {
 	cursor: pointer;
 }
