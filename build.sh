@@ -10,6 +10,9 @@ JQUERY_URL="https://code.jquery.com/$JQUERY_FILE_NAME"
 JQUERY_FILE="src/thirdparty/ad$JQUERY_FILE_NAME"
 EXPECTED_SHA256="OaVG6prZf4v69dPg6PhVattBXkcOWQB62pdZ3ORyrao="
 
+# Ensure file is present to make sure no version mismatch
+[ -f "$JQUERY_FILE" ] || exit 1
+
 # Verify jQuery hash
 CURRENT_SHA256=$(openssl dgst -sha256 -binary "$JQUERY_FILE" | base64)
 
