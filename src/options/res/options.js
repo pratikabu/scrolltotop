@@ -227,7 +227,7 @@ function addBatchOfIcons(tag, length, cidPrefix, cidStartNumber, groupName, imag
 
 function addIcons() {
 	// single icons
-	addBatchOfIcons($('#singleIconTD'), 35, 'iconGal', 0, 'iconLib', '48-');
+	addBatchOfIcons($('#singleIconTD'), 35, 'iconGal', 0, 'iconLib', 'single-');
 	
 	// horizontal icons
 	addBatchOfIcons($('#dualHRTD'), 6, 'dIconGal', 0, 'dIconLib', 'dual-hr-');
@@ -236,10 +236,10 @@ function addIcons() {
 	addBatchOfIcons($('#dualVRTD'), 3, 'dIconGal', 20, 'dIconLib', 'dual-vr-');
 	
 	// dual single icon
-	addBatchOfIcons($('#dualNornalTD'), 35, 'dIconGal', 40, 'dIconLib', '48-');
+	addBatchOfIcons($('#dualNornalTD'), 35, 'dIconGal', 40, 'dIconLib', 'single-');
 
 	// icon chooser icon
-	addBatchOfIcons($('#iconSelectorId'), 35, 'iconChooserIconId-', 0, 'iconChooserRadioName', '48-');
+	addBatchOfIcons($('#iconSelectorId'), 35, 'iconChooserIconId-', 0, 'iconChooserRadioName', 'single-');
 }
 
 /*
@@ -350,6 +350,7 @@ function exportImportSettingsInits() {
 		}
 		// save the content
 		var data = JSON.parse(jsonSTR);
+		hasToolbarIconUpdated = true;// as settings are being imported, toolbar icon should be updated
 		bsSaveSettings(data);
 		restore_options(data);
 		$("#txtImportSettings").val("");
@@ -458,7 +459,7 @@ function iconChooserInits() {
 	// bind the value change event on hidden input field
 	$("input:hidden[class=iconChooserValue]").change(function(e) {
 		$(this).siblings(".iconChooserImg").attr("src",
-			"../icons/pratikabu-stt-32-" + $(this).val() + ".png");
+			"../icons/pratikabu-stt-single-" + $(this).val() + ".png");
 	});
 
 	// bind the select event

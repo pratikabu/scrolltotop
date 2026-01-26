@@ -5,9 +5,7 @@
 
 	"description": "Scroll to top and vice versa in a window.",
 	"icons": {
-		"16": "icons/pratikabu-stt-16.png",
-		"48": "icons/pratikabu-stt-48-1.png",
-		"128": "icons/pratikabu-stt-128.png"
+		"128": "icons/pratikabu-stt-single-1.png"
 	},
 
 	"author": "Pratik Soni",
@@ -37,6 +35,6 @@
 		"page": "options/options.html",
 		"open_in_tab": true
 	},
-	"web_accessible_resources":[ "icons/*.png" ],
+	"web_accessible_resources":[ "icons/*.png", "icons/*.svg" ],
 	"browser_action": {}
 }

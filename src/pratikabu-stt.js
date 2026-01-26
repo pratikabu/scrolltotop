@@ -266,6 +266,7 @@ var pratikabustt = {
 		if("middle" === vloc) {
 			vloc = "top";
 			vlocVal = "50%";
+			$("#pratikabuSTTDiv").css("transform", "translateY(-50%)");
 		}
 		
 		if("middle" === hloc) {
@@ -301,8 +302,13 @@ var pratikabustt = {
 			}
 			$("#pratikabuSTTDiv2").css("width", divSize + "px");
 			$("#pratikabuSTTDiv2").css({opacity: 0, display: 'block'});
+
+			$("#pratikabuSTTSettings").css("width", otherImagesSize + "px");
+			$("#pratikabuSTTClear").css("width", otherImagesSize + "px");
+			$("#pratikabuSTTPageUp").css("width", otherImagesSize + "px");
+			$("#pratikabuSTTPageDown").css("width", otherImagesSize + "px");
 			
-			pratikabustt_browser_impl.setImageForId("pratikabuSTTClear", "clear-" + otherImagesSize + ".png");
+			pratikabustt_browser_impl.setImageForId("pratikabuSTTClear", "clear.svg");
 			pratikabustt.setSettingsIcon(pratikabu_stt_pollabelIconSwitch);
 			
 			// show/remove page up and page down buttons from settings
@@ -310,8 +316,8 @@ var pratikabustt = {
 				$("#pratikabuSTTPageUp").remove();
 				$("#pratikabuSTTPageDown").remove();
 			} else {
-				pratikabustt_browser_impl.setImageForId("pratikabuSTTPageUp", "pageup-" + otherImagesSize + ".png");
-				pratikabustt_browser_impl.setImageForId("pratikabuSTTPageDown", "pageup-" + otherImagesSize + ".png");
+				pratikabustt_browser_impl.setImageForId("pratikabuSTTPageUp", "pageup.svg");
+				pratikabustt_browser_impl.setImageForId("pratikabuSTTPageDown", "pageup.svg");
 				$("#pratikabuSTTPageDown").addClass(pratikabu_stt_ROTATE_180_CLASS);
 				if("pagerOnly" === pratikabu_stt_prefs.controlOption) {
 					$("#pratikabuSTTClear").remove();
@@ -359,9 +365,9 @@ var pratikabustt = {
 	
 	setSettingsIcon: function(showPollable) {
 		if(showPollable) {
-			pratikabustt_browser_impl.setImageForId("pratikabuSTTSettings", "bottom-" + pratikabustt.getOtherImageSize() + ".png");
+			pratikabustt_browser_impl.setImageForId("pratikabuSTTSettings", "bottom.svg");
 		} else {
-			pratikabustt_browser_impl.setImageForId("pratikabuSTTSettings", "settings-" + pratikabustt.getOtherImageSize() + ".png");
+			pratikabustt_browser_impl.setImageForId("pratikabuSTTSettings", "settings.svg");
 			$("#pratikabuSTTSettings").removeClass(pratikabu_stt_ROTATE_180_CLASS);
 		}
 	},
@@ -485,12 +491,14 @@ var pratikabustt = {
 		if("myIcon" === pratikabu_stt_prefs.iconLib) {
 			$("#pratikabuSTTArrowUp").attr("src", pratikabustt.getBase64Url(pratikabu_stt_prefs.userIcon));
 		} else {
-			var suffixString = pratikabu_stt_prefs.iconSize + "-" + pratikabu_stt_prefs.iconLib;
+			var suffixString = "single-" + pratikabu_stt_prefs.iconLib;
 			pratikabustt_browser_impl.setImageForId("pratikabuSTTArrowUp", suffixString + ".png");
 		}
 	},
 	
 	showDualArrowImage: function() {
+		$("#pratikabuSTTArrowUp").css("width", "32px");
+		$("#pratikabuSTTArrowDown").css("width", "32px");
 		if("myIcon" === pratikabu_stt_prefs.dIconLib) {
 			var base64url = pratikabustt.getBase64Url(pratikabu_stt_prefs.dUserIcon);
 			$("#pratikabuSTTArrowUp").attr("src", base64url);
@@ -505,7 +513,7 @@ var pratikabustt = {
 				iconName += "vr-";
 			} else {
 				iconNumber -= 40;
-				iconName = pratikabu_stt_prefs.iconSize + "-";
+				iconName = "single-";
 			}
 			
 			var suffixString = iconName + iconNumber;
