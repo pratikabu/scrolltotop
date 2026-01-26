@@ -266,6 +266,7 @@ var pratikabustt = {
 		if("middle" === vloc) {
 			vloc = "top";
 			vlocVal = "50%";
+			$("#pratikabuSTTDiv").css("transform", "translateY(-50%)");
 		}
 		
 		if("middle" === hloc) {
@@ -510,7 +511,7 @@ var pratikabustt = {
 				iconName += "vr-";
 			} else {
 				iconNumber -= 40;
-				iconName = pratikabu_stt_prefs.iconSize + "-";
+				iconName = "single-";
 			}
 			
 			var suffixString = iconName + iconNumber;
