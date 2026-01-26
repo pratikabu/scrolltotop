@@ -7,7 +7,7 @@ mkdir -p $GENERATED
 echo "Validate and download jQuery if needed"
 JQUERY_FILE_NAME="jquery-4.0.0.min.js"
 JQUERY_URL="https://code.jquery.com/$JQUERY_FILE_NAME"
-JQUERY_FILE="src/thirdparty/ad$JQUERY_FILE_NAME"
+JQUERY_FILE="src/thirdparty/$JQUERY_FILE_NAME"
 EXPECTED_SHA256="OaVG6prZf4v69dPg6PhVattBXkcOWQB62pdZ3ORyrao="
 
 # Ensure file is present to make sure no version mismatch
