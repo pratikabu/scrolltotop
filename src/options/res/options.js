@@ -350,6 +350,7 @@ function exportImportSettingsInits() {
 		}
 		// save the content
 		var data = JSON.parse(jsonSTR);
+		hasToolbarIconUpdated = true;// as settings are being imported, toolbar icon should be updated
 		bsSaveSettings(data);
 		restore_options(data);
 		$("#txtImportSettings").val("");
