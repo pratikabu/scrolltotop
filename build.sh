@@ -4,6 +4,7 @@ echo "Cleaning $GENERATED folder"
 rm -rf $GENERATED
 mkdir -p $GENERATED
 
+## Jquery SHA256 Check and new download Starts
 echo "Validate and download jQuery if needed"
 JQUERY_FILE_NAME="jquery-4.0.0.min.js"
 JQUERY_URL="https://code.jquery.com/$JQUERY_FILE_NAME"
@@ -33,6 +34,7 @@ else
         echo "Failed to download jQuery, using existing file"
     fi
 fi
+## Jquery SHA256 Check and new download Ends
 
 echo "Building for Chrome"
 cd src
