@@ -39,4 +39,4 @@ javascript:(function () {var paBody = document.body, paHtml = document.documentE
 
 - There is a no-permission version of this extension, if someone is concerned about the permissions that this extension requires, meet [Scroll To Top - Lite](https://github.com/pratikabu/scrolltotop-lite).
 - Read more about the [author](https://pratikabu.com).
-- Icon refrerence [here](resources/README.md#icon-sources).
+- Icon refrerence [here](resources#icon-sources).
