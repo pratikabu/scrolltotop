@@ -106,6 +106,7 @@ function restore_options(data) {
 	$('input:radio[name=dIconLib]').filter('[value=' + data.dIconLib + ']').prop('checked', true);
 	$('#dUseMyIconTextBox').val(data.dUserIcon);
 	$("#dUseMyIconTextBox").change();// load the image
+	updateDualIconSizeImage();
 	$('input:radio[name=dIconArrangemnt]').filter('[value=' + data.dArrang + ']').prop('checked', true);
 	$('#dualIconSize').val(data.dualIconSize);
 	updateDualIconSizeWidth(data.dualIconSize);
@@ -194,6 +195,10 @@ function loadValueInTransparencySlider(transparency) {
 
 function updateDualIconSizeWidth(imageWidth) {
 	$("#dualIconSizeImgId").css("width", imageWidth + "px");
+}
+
+function updateDualIconSizeImage() {
+	$("#dualIconSizeImgId").attr('src', $("input:radio[name=dIconLib]:checked").next('img').attr('src'));
 }
 
 function selectableRadioContent(id, name, value) {
@@ -646,6 +651,7 @@ function psInitJavascriptFunctions() {
 				$('input:radio[name=dIconArrangemnt]').filter('[value=vr]').prop('checked', true);
 			}
 			save_options();
+			updateDualIconSizeImage();
 		}
 	});
 	
