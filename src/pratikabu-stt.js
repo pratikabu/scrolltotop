@@ -497,6 +497,8 @@ var pratikabustt = {
 	},
 	
 	showDualArrowImage: function() {
+		$("#pratikabuSTTArrowUp").css("width", "32px");
+		$("#pratikabuSTTArrowDown").css("width", "32px");
 		if("myIcon" === pratikabu_stt_prefs.dIconLib) {
 			var base64url = pratikabustt.getBase64Url(pratikabu_stt_prefs.dUserIcon);
 			$("#pratikabuSTTArrowUp").attr("src", base64url);
