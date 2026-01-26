@@ -122,6 +122,10 @@ function populateNewDefaults(finalData) {
 	if(!finalData.showContextMenu) {
 		finalData.showContextMenu = "false";
 	}
+
+	if(!finalData.dualIconSize) {
+		finalData.dualIconSize = "32";
+	}
 }
 
 function populateJson(sourceJson, targetJson) {
@@ -155,6 +159,7 @@ function resetSettings(sendResponseFunction) {
 			
 			dArrang: "hr",
 			dIconLib: "1",
+			dualIconSize: "32",
 			
 			hOffset: "20",
 			vOffset: "20",
@@ -333,8 +338,7 @@ function scrollToDirection(direction, currentTab) {
 
 function setToolbarIcon(selectedIconId) {
 	iconData = {
-		32: "icons/pratikabu-stt-32-" + selectedIconId + ".png",
-		48: "icons/pratikabu-stt-48-" + selectedIconId + ".png"
+		128: "icons/pratikabu-stt-single-" + selectedIconId + ".png"
 	}
 	chrome.action.setIcon({path : iconData});
 }

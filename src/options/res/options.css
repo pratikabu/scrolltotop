@@ -66,7 +66,7 @@
 }
 
 .myHeader {
-	background: url(../../icons/pratikabu-stt-128.png) no-repeat;
+	background: url(../../icons/pratikabu-stt-single-1.png) no-repeat;
 	background-size: 32px;
 	text-indent: 42px;
 	display: inline-block;
@@ -185,6 +185,7 @@ hr {
 
 .iconselector img {
 	margin-left: 3px;
+	max-width: 48px;
 }
 
 .useMyIcon {
@@ -352,6 +353,11 @@ hr {
 	vertical-align: middle;
 }
 
+.controlsec-div img {
+	width: 24px;
+	height: 24px;
+}
+
 input[type="radio"], input[type="radio"] + div, input[type="radio"] + img, input[type="radio"] + span {
 	cursor: pointer;
 }
@@ -378,11 +384,11 @@ input[type="radio"]:hover + div, input[type="radio"]:hover + img, input[type="ra
 }
 
 @media (prefers-color-scheme: dark) {
-	body, input[type="text"], textarea {
+	body, input[type="text"], input[type="number"], textarea {
 		background-color: #2a2c2f;
 	}
 
-	.myFonts, input[type="text"], textarea {
+	.myFonts, input[type="text"], input[type="number"], textarea {
 		color: #dcdcdc;
 	}
 

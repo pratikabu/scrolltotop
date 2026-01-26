@@ -1,4 +1,4 @@
-# <img valign="middle" style="vertical-align: middle;" src="src/icons/pratikabu-stt-128.png" width="36px"> Scroll To Top
+# <img valign="middle" style="vertical-align: middle;" src="src/icons/pratikabu-stt-single-1.png" width="36px"> Scroll To Top
 
 Scroll to top and vice versa in a desktop browser. A browser extension for Chrome, Firefox.
 
@@ -35,9 +35,8 @@ This bookmarklet will scroll up or down based on the location of your screen.
 ```javascript
 javascript:(function () {var paBody = document.body, paHtml = document.documentElement, paMaxY = Math.max(paBody.scrollHeight, paBody.offsetHeight, paHtml.clientHeight, paHtml.scrollHeight, paHtml.offsetHeight) - window.innerHeight, paBreakPoint = 300; if(window.scrollY > paBreakPoint || paBreakPoint >= paMaxY && window.scrollY != 0) window.scroll({top: 0, behavior: 'smooth'}); else window.scroll({top: paMaxY, behavior: 'smooth'});})();
 ```
+## Other Info
 
-There is a no-permission version of this extension, if someone is concerned about the permissions that this extension requires.
-https://github.com/pratikabu/scrolltotop-lite
-
-Read more about the [author](https://pratikabu.com).
-
+- There is a no-permission version of this extension, if someone is concerned about the permissions that this extension requires, meet [Scroll To Top - Lite](https://github.com/pratikabu/scrolltotop-lite).
+- Read more about the [author](https://pratikabu.com).
+- Icon refrerence [here](resources#icon-sources).
