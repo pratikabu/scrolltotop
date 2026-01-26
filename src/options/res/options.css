@@ -384,11 +384,11 @@ input[type="radio"]:hover + div, input[type="radio"]:hover + img, input[type="ra
 }
 
 @media (prefers-color-scheme: dark) {
-	body, input[type="text"], textarea {
+	body, input[type="text"], input[type="number"], textarea {
 		background-color: #2a2c2f;
 	}
 
-	.myFonts, input[type="text"], textarea {
+	.myFonts, input[type="text"], input[type="number"], textarea {
 		color: #dcdcdc;
 	}
 

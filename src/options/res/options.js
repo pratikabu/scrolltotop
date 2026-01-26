@@ -46,6 +46,7 @@ function save_options(returnValue) {
 		dArrang: $('input:radio[name=dIconArrangemnt]:checked').val(),
 		dIconLib: $('input:radio[name=dIconLib]:checked').val(),
 		dUserIcon: $('#dUseMyIconTextBox').val(),
+		dualIconSize: $('#dualIconSize').val(),
 		
 		hOffset: $('#hOffset').val(),
 		vOffset: $('#vOffset').val(),
@@ -105,7 +106,10 @@ function restore_options(data) {
 	$('input:radio[name=dIconLib]').filter('[value=' + data.dIconLib + ']').prop('checked', true);
 	$('#dUseMyIconTextBox').val(data.dUserIcon);
 	$("#dUseMyIconTextBox").change();// load the image
+	updateDualIconSizeImage();
 	$('input:radio[name=dIconArrangemnt]').filter('[value=' + data.dArrang + ']').prop('checked', true);
+	$('#dualIconSize').val(data.dualIconSize);
+	updateDualIconSizeWidth(data.dualIconSize);
 	
 	$('#hOffset').val(data.hOffset);
 	$('#vOffset').val(data.vOffset);
@@ -187,6 +191,14 @@ function updateTransparency(transparency) {
 function loadValueInTransparencySlider(transparency) {
 	updateTransparency(transparency);
 	$("#transparencySliderId").val(transparency);
+}
+
+function updateDualIconSizeWidth(imageWidth) {
+	$("#dualIconSizeImgId").css("width", imageWidth + "px");
+}
+
+function updateDualIconSizeImage() {
+	$("#dualIconSizeImgId").attr('src', $("input:radio[name=dIconLib]:checked").next('img').attr('src'));
 }
 
 function selectableRadioContent(id, name, value) {
@@ -402,6 +414,18 @@ function validateOffsetDataAndFix(textId) {
 	t.val(intVal + "");// reset the value in the textbox
 	
 	save_options();// save these settings
+}
+
+function validatePositiveNumberAndSave(textId, defaultValue, callback) {
+	var t = $('#' + textId);
+	var value = t.val();
+	var intVal = isNaN(value) || 0 == value.length || value <= 0 ? defaultValue : parseInt(value);
+	t.val(intVal);
+	save_options();
+	
+	if(callback) {
+		callback();
+	}
 }
 
 /**
@@ -627,6 +651,7 @@ function psInitJavascriptFunctions() {
 				$('input:radio[name=dIconArrangemnt]').filter('[value=vr]').prop('checked', true);
 			}
 			save_options();
+			updateDualIconSizeImage();
 		}
 	});
 	
@@ -659,6 +684,7 @@ function psInitJavascriptFunctions() {
 	});
 	
 	$('input:radio[name=dIconArrangemnt]').change(function() { isRightChangedEvent("dIconArrangemnt", $(this).val()); });
+	$("#dualIconSize").change(() => validatePositiveNumberAndSave('dualIconSize', 32, () => updateDualIconSizeWidth($("#dualIconSize").val())));
 	// dual arrow settings ends
 	
 	// advanced settings starts
