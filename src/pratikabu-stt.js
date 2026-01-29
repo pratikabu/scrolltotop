@@ -338,12 +338,15 @@ var pratikabustt = {
 			}
 			
 			$("#pratikabuSTTArrowUp").css("float", pratikabu_stt_float);
-			$("#pratikabuSTTArrowUp").css("width", pratikabu_stt_prefs.iconSize + "px");
-			$("#pratikabuSTTArrowUp").css("height", pratikabu_stt_prefs.iconSize + "px");
 			
 			if(!pratikabu_stt_prefs.hideControls) {
 				pratikabustt.showHideControlOptions(true);
 			}
+		}
+
+		if(!pratikabu_stt_dualArrow) {
+			$("#pratikabuSTTArrowUp").css("width", pratikabu_stt_prefs.iconSize + "px");
+			$("#pratikabuSTTArrowUp").css("height", pratikabu_stt_prefs.iconSize + "px");
 		}
 		
 		if(pratikabu_stt_prefs.blackAndWhite) {
