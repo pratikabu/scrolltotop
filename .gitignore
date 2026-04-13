@@ -6,4 +6,5 @@
 .settings
 .project
 node_modules/
+coverage/
 

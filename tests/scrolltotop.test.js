@@ -101,7 +101,6 @@ const mockJQueryObj = {
     siblings: jest.fn().mockReturnThis(),
     ready: jest.fn().mockReturnThis(),
     append: jest.fn().mockReturnThis(),
-    on: jest.fn().mockReturnThis(),
     focus: jest.fn().mockReturnThis(),
     mouseup: jest.fn().mockReturnThis(),
 };
@@ -421,5 +420,69 @@ describe("options.js – getBase64Url", () => {
     
     test("returns unchanged if already data:", () => {
         expect(options.getBase64Url("data:xyz")).toBe("data:xyz");
+    });
+});
+
+// ---------------------------------------------------------------------------
+// 14. background.js – storage tests
+// ---------------------------------------------------------------------------
+
+describe("background.js – storage", () => {
+    test("saveSettings correctly calls chrome.storage.set for sync and local", (done) => {
+        chrome.storage.sync.set.mockImplementation((data, cb) => {
+            expect(data).toHaveProperty(background.STT_PREF_KEY);
+            cb();
+        });
+        chrome.storage.local.set.mockImplementation((data, cb) => {
+            expect(data).toHaveProperty(background.STT_PREF_LOCAL_KEY);
+            cb();
+        });
+
+        background.saveSettings({ vLoc: "top", userIcon: "b64" }, (resp) => {
+            expect(resp).toBe("success");
+            expect(chrome.storage.sync.set).toHaveBeenCalled();
+            expect(chrome.storage.local.set).toHaveBeenCalled();
+            done();
+        });
+    });
+
+    test("fetchSettings merges sync and local data", (done) => {
+        chrome.storage.sync.get.mockImplementation((key, cb) => {
+            cb({ [background.STT_PREF_KEY]: { vLoc: "top" } });
+        });
+        chrome.storage.local.get.mockImplementation((key, cb) => {
+            cb({ [background.STT_PREF_LOCAL_KEY]: { userIcon: "b64" } });
+        });
+
+        background.fetchSettings((data) => {
+            expect(data.vLoc).toBe("top");
+            expect(data.userIcon).toBe("b64");
+            expect(data.toolbarClickAction).toBe("intelligentflip"); // Default filled
+            done();
+        });
+    });
+});
+
+// ---------------------------------------------------------------------------
+// 15. options.js – slider tests
+// ---------------------------------------------------------------------------
+
+describe("options.js – sliders", () => {
+    test("populateSliderSpeedOnText sets HTML based on speed", () => {
+        // MAX_SPEED = 2700, MIN_SPEED = 100
+        // speed = MAX_SPEED - scrollSpeed
+        // If scrollSpeed = 0 (IMMEDIATE), speed = 2700. Wait, options.js: speed = MAX_SPEED - scrollSpeed
+        // If we call with 2600: speed = 2700 - 2600 = 100. (MIN_SPEED) -> IMMEDIATE
+        
+        options.populateSliderSpeedOnText(2600); // 2700 - 2600 = 100 (MIN_SPEED)
+        expect(mockJQueryObj.html).toHaveBeenCalledWith("IMMEDIATE");
+        
+        options.populateSliderSpeedOnText(100); // 2700 - 100 = 2600 (MAX_SPEED - MIN_SPEED) -> SLOWEST
+        expect(mockJQueryObj.html).toHaveBeenCalledWith("SLOWEST");
+    });
+
+    test("updateTransparency calls fadeTo", () => {
+        options.updateTransparency(0.5);
+        expect(mockJQueryObj.fadeTo).toHaveBeenCalledWith(300, 0.5);
     });
 });
