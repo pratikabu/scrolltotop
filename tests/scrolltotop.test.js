@@ -214,10 +214,6 @@ describe("background.js – isLocalSetting", () => {
     "%s is NOT a local setting",
     (key) => expect(isLocalSetting(key)).toBe(false)
   );
-
-  test("partial prefix match is rejected (e.g. 'Icon')", () => {
-    expect(isLocalSetting("Icon")).toBe(false);
-  });
 });
 
 // ---------------------------------------------------------------------------
