@@ -1,0 +1,58 @@
+name: Run Tests
+
+on:
+  pull_request:
+    branches: [ "main" ]
+  push:
+    branches: [ "main" ]
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: "20"
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run tests with coverage
+        run: npm test -- --coverage --json --outputFile=test-results.json
+
+      - name: Generate Summary
+        if: always()
+        run: |
+          # Extract test results
+          TOTAL_TESTS=$(jq '.numTotalTests' test-results.json)
+          PASSED_TESTS=$(jq '.numPassedTests' test-results.json)
+          FAILED_TESTS=$(jq '.numFailedTests' test-results.json)
+          
+          # Extract coverage results from json-summary
+          LINES_PCT=$(jq '.total.lines.pct' coverage/coverage-summary.json)
+          STATEMENTS_PCT=$(jq '.total.statements.pct' coverage/coverage-summary.json)
+          FUNCTIONS_PCT=$(jq '.total.functions.pct' coverage/coverage-summary.json)
+          BRANCHES_PCT=$(jq '.total.branches.pct' coverage/coverage-summary.json)
+
+          echo "## Test & Coverage Summary" >> $GITHUB_STEP_SUMMARY
+          echo "### Test Results" >> $GITHUB_STEP_SUMMARY
+          echo "| Metric | Value |" >> $GITHUB_STEP_SUMMARY
+          echo "| --- | --- |" >> $GITHUB_STEP_SUMMARY
+          echo "| Total Tests | $TOTAL_TESTS |" >> $GITHUB_STEP_SUMMARY
+          echo "| Passed | $PASSED_TESTS |" >> $GITHUB_STEP_SUMMARY
+          echo "| Failed | $FAILED_TESTS |" >> $GITHUB_STEP_SUMMARY
+          
+          echo "### Coverage Results" >> $GITHUB_STEP_SUMMARY
+          echo "| Type | Percentage |" >> $GITHUB_STEP_SUMMARY
+          echo "| --- | --- |" >> $GITHUB_STEP_SUMMARY
+          echo "| Lines | $LINES_PCT% |" >> $GITHUB_STEP_SUMMARY
+          echo "| Statements | $STATEMENTS_PCT% |" >> $GITHUB_STEP_SUMMARY
+          echo "| Functions | $FUNCTIONS_PCT% |" >> $GITHUB_STEP_SUMMARY
+          echo "| Branches | $BRANCHES_PCT% |" >> $GITHUB_STEP_SUMMARY
