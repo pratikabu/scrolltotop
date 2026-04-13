@@ -723,3 +723,16 @@ var pratikabustt = {
 */
 pratikabustt_browser_impl.fetchPreferences();
 
+
+if (typeof module !== 'undefined') {
+  module.exports = {
+    pratikabustt,
+    pratikabu_stt_inversionPoint,
+    get pratikabu_stt_prefs() { return pratikabu_stt_prefs; },
+    set pratikabu_stt_prefs(v) { pratikabu_stt_prefs = v; },
+    get pratikabu_stt_bVisibility() { return pratikabu_stt_bVisibility; },
+    set pratikabu_stt_bVisibility(v) { pratikabu_stt_bVisibility = v; },
+    get pratikabu_stt_dualArrow() { return pratikabu_stt_dualArrow; },
+    set pratikabu_stt_dualArrow(v) { pratikabu_stt_dualArrow = v; }
+  };
+}

@@ -5,3 +5,5 @@
 .externalToolBuilders
 .settings
 .project
+node_modules/
+

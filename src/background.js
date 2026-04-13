@@ -361,3 +361,20 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponseFunct
 // ***********************************
 // ******* Toolbar Button Code ******* Ends
 // ***********************************
+
+if (typeof module !== 'undefined') {
+  module.exports = {
+    splitJsonOnStorage,
+    isLocalSetting,
+    validateData,
+    populateNewDefaults,
+    resetSettings,
+    saveSettings,
+    fetchSettings,
+    scrollToDirection,
+    setToolbarIcon,
+    LOCAL_SETTINGS_LIST,
+    STT_PREF_KEY,
+    STT_PREF_LOCAL_KEY
+  };
+}
