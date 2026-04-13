@@ -88,7 +88,22 @@ const mockJQueryObj = {
     filter: jest.fn().mockReturnThis(),
     toggle: jest.fn().mockReturnThis(),
     appendTo: jest.fn().mockReturnThis(),
-    val: jest.fn().mockReturnThis(),
+    val: jest.fn().mockReturnValue("48"),
+    prop: jest.fn().mockReturnThis(),
+    is: jest.fn().mockReturnValue(false),
+    html: jest.fn().mockReturnThis(),
+    slideDown: jest.fn().mockReturnThis(),
+    delay: jest.fn().mockReturnThis(),
+    slideUp: jest.fn().mockReturnThis(),
+    on: jest.fn().mockReturnThis(),
+    trigger: jest.fn().mockReturnThis(),
+    next: jest.fn().mockReturnThis(),
+    siblings: jest.fn().mockReturnThis(),
+    ready: jest.fn().mockReturnThis(),
+    append: jest.fn().mockReturnThis(),
+    on: jest.fn().mockReturnThis(),
+    focus: jest.fn().mockReturnThis(),
+    mouseup: jest.fn().mockReturnThis(),
 };
 
 global.$ = jest.fn((selector) => mockJQueryObj);
@@ -119,6 +134,7 @@ try {
 // Import the actual files
 const background = require('../src/background.js');
 const stt = require('../src/pratikabu-stt.js');
+const options = require('../src/options/res/options.js');
 
 // ---------------------------------------------------------------------------
 // Helper: Reset STT state for each test
@@ -363,5 +379,47 @@ describe("pratikabu-stt.js – BW mode", () => {
         const imgCall = global.$.mock.calls.find(call => call[0] === ".pratikabuSTTImg");
         expect(imgCall).toBeDefined();
         expect(mockJQueryObj.addClass).toHaveBeenCalledWith(expect.stringContaining("pratikabuSTTBlackAndWhite"));
+    });
+});
+
+// ---------------------------------------------------------------------------
+// 13. options.js tests
+// ---------------------------------------------------------------------------
+
+describe("options.js – updateBlackAndWhite", () => {
+    test("adds class when checked", () => {
+        mockJQueryObj.is.mockReturnValue(true);
+        options.updateBlackAndWhite();
+        expect(mockJQueryObj.addClass).toHaveBeenCalledWith("pratikabuSTTBlackAndWhite");
+    });
+
+    test("removes class when unchecked", () => {
+        mockJQueryObj.is.mockReturnValue(false);
+        options.updateBlackAndWhite();
+        expect(mockJQueryObj.removeClass).toHaveBeenCalledWith("pratikabuSTTBlackAndWhite");
+    });
+});
+
+describe("options.js – save_options", () => {
+    test("returns a data object with all fields", () => {
+        // Mock all the jQuery calls save_options makes
+        mockJQueryObj.val.mockReturnValue("test-value");
+        mockJQueryObj.is.mockReturnValue(true);
+        
+        const data = options.save_options(true);
+        expect(data).toHaveProperty("vLoc");
+        expect(data).toHaveProperty("hLoc");
+        expect(data).toHaveProperty("blackAndWhite", "true");
+        expect(data).toHaveProperty("showContextMenu", "test-value");
+    });
+});
+
+describe("options.js – getBase64Url", () => {
+    test("prefixes raw base64", () => {
+        expect(options.getBase64Url("abc")).toBe("data:image/png;base64,abc");
+    });
+    
+    test("returns unchanged if already data:", () => {
+        expect(options.getBase64Url("data:xyz")).toBe("data:xyz");
     });
 });

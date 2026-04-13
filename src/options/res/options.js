@@ -763,3 +763,39 @@ function bsResetToolbarIcon() {
 function bsResetContextMenu(showContextMenu) {
 	chrome.runtime.sendMessage({method: "resetContextMenu", showContextMenu: showContextMenu});
 }
+
+if (typeof module !== 'undefined') {
+  module.exports = {
+    updateBlackAndWhite,
+    save_options,
+    restore_options,
+    restore_settings,
+    updateToolbarIcon,
+    populateSliderSpeedOnText,
+    loadValueInSpeedSlider,
+    updateTransparency,
+    loadValueInTransparencySlider,
+    updateDualIconSizeWidth,
+    updateDualIconSizeImage,
+    swapAdvancedOptions,
+    isRightChangedEvent,
+    validateDomainDataAndFix,
+    validateOffsetDataAndFix,
+    validatePositiveNumberAndSave,
+    isSafeToOpenDialog,
+    toggleDialog,
+    showHidePageIconCustomizations,
+    openIconChooser,
+    iconChooserInits,
+    updateIconInputValue,
+    psInitJavascriptFunctions,
+    getBase64Url,
+    bsDefaultSettings,
+    bsInit,
+    bsFetchSettings,
+    bsSaveSettings,
+    getExtensionVersion,
+    bsResetToolbarIcon,
+    bsResetContextMenu
+  };
+}
